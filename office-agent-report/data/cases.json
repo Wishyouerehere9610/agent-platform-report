@@ -1,0 +1,59 @@
+{
+  "updatedAt": "2026-08-25T23:40:00+08:00",
+  "industryScale": {"0":"未见明确证据","1":"能力可推断","2":"官方场景覆盖","3":"有命名客户/高密度场景"},
+  "industries": [
+    {"name":"制造","doubao":2,"workbuddy":3,"qwen":1,"notes":"飞书官网提供制造行业方案；WorkBuddy 有美的等命名客户；千问当前仅有通用能力。"},
+    {"name":"汽车与硬件","doubao":2,"workbuddy":3,"qwen":1,"notes":"WorkBuddy 官方含奔驰、小米、荣耀、OPPO、Insta360。"},
+    {"name":"零售与电商","doubao":2,"workbuddy":3,"qwen":2,"notes":"飞书有零售/消费品方案；WorkBuddy 含唯品会；千问官方明确电商场景。"},
+    {"name":"金融","doubao":2,"workbuddy":3,"qwen":2,"notes":"豆包有股票分析师；WorkBuddy 有银行、证券、基金、保险客户；千问官方列金融用例。"},
+    {"name":"医疗健康","doubao":2,"workbuddy":2,"qwen":1,"notes":"飞书有医疗行业方案；WorkBuddy 含腾讯健康；受监管数据边界需单列。"},
+    {"name":"企业软件与 SaaS","doubao":2,"workbuddy":2,"qwen":2,"notes":"三家均具备连接器/Skill/网页或代码交付，适合软件型企业内部生产力。"},
+    {"name":"专业服务与法务","doubao":1,"workbuddy":2,"qwen":2,"notes":"WorkBuddy 官方专家覆盖法务、投研；千问开放 Skill 适合沉淀专业流程。"},
+    {"name":"教育","doubao":3,"workbuddy":2,"qwen":2,"notes":"豆包有教师、备课、出题批改等密集模板；WorkBuddy 有上海教软；千问官方列教育场景。"},
+    {"name":"营销与媒体","doubao":3,"workbuddy":3,"qwen":2,"notes":"豆包模板最密集；WorkBuddy 有麦芽传媒并支持设计创意；千问官方列营销与多媒体。"},
+    {"name":"游戏与互联网","doubao":2,"workbuddy":3,"qwen":1,"notes":"WorkBuddy 企业页列王者荣耀、和平精英、微信、QQ。"},
+    {"name":"物流","doubao":1,"workbuddy":3,"qwen":1,"notes":"WorkBuddy 企业页列圆通、德邦。"},
+    {"name":"政务与电信","doubao":1,"workbuddy":2,"qwen":1,"notes":"WorkBuddy 私有化交付与中国联通案例提高适配度；需要更强合规证据。"}
+  ],
+  "cases": [
+    {"product":"workbuddy","company":"奔驰公司","industry":"汽车","caseType":"公开用户反馈","summary":"公开反馈提到 CodeBuddy/WorkBuddy 与手机远程连接，并可通过微信/企业微信下达指令。","evidence":["OFF-WB-004"],"strength":"官方命名，缺少量化方法"},
+    {"product":"workbuddy","company":"捷顺科技","industry":"企业服务/园区","caseType":"公开用户反馈","summary":"公开反馈称已向 15 个部门推广，并使用小程序端降低部署门槛。","evidence":["OFF-WB-004"],"strength":"官方命名，单方陈述"},
+    {"product":"workbuddy","company":"麦芽传媒","industry":"营销与媒体","caseType":"公开用户反馈","summary":"公开反馈称 PPT、文档分析、图片设计环节提效，同时披露偶发报错、重试和卡顿。","evidence":["OFF-WB-004"],"strength":"同时包含收益与痛点"},
+    {"product":"workbuddy","company":"上海教软","industry":"教育软件","caseType":"公开用户反馈","summary":"非开发人员借助内置专家在一周内完成 Web 应用。","evidence":["OFF-WB-004"],"strength":"官方命名，缺少基线对照"},
+    {"product":"workbuddy","company":"招商银行等金融客户群","industry":"金融","caseType":"客户名录","summary":"企业版官网列出招商银行、招商证券、微众银行、易方达、中国太平等。","evidence":["OFF-WB-005"],"strength":"命名客户，未逐项说明使用范围"},
+    {"product":"workbuddy","company":"美的/小米/荣耀/OPPO/Insta360","industry":"制造与硬件","caseType":"客户名录","summary":"企业版官网列出多家制造与消费电子客户。","evidence":["OFF-WB-005"],"strength":"命名客户，未逐项说明成效"},
+    {"product":"workbuddy","company":"唯品会","industry":"零售电商","caseType":"客户名录","summary":"企业版官网客户名录包含唯品会。","evidence":["OFF-WB-005"],"strength":"命名客户，未披露成效"},
+    {"product":"workbuddy","company":"圆通/德邦","industry":"物流","caseType":"客户名录","summary":"企业版官网客户名录包含圆通快递和德邦快递。","evidence":["OFF-WB-005"],"strength":"命名客户，未披露成效"},
+    {"product":"doubao","company":"教育场景模板群","industry":"教育","caseType":"官方场景目录","summary":"教师教学、备课、出题批改等 Agent 模板密集；外部客户成效尚待公开证据。","evidence":["OFF-DB-004"],"strength":"官方场景证据"},
+    {"product":"doubao","company":"金融研究与内容营销模板群","industry":"金融/营销","caseType":"官方场景目录","summary":"股票分析、短视频脚本、直播与营销等模板展示了行业意图；实际企业采用情况尚待公开证据。","evidence":["OFF-DB-004"],"strength":"官方场景证据"},
+    {"product":"qwen","company":"官方资料未列出命名外部客户","industry":"多行业","caseType":"证据缺口","summary":"官方资料列出电商、教育、营销、金融等场景，但未见可核验的千问办公命名企业客户与量化效果。","evidence":["OFF-QW-001"],"strength":"明确证据缺口"}
+  ],
+  "enterpriseLandscape": {
+    "summary": "WorkBuddy Enterprise 官网客户案例区公开列出 25 个客户或业务品牌，覆盖 9 个行业组；其中包含腾讯内部产品品牌，外部付费客户数量仍需单独核验。豆包工作与千问办公的官方资料未提供同等级的命名企业客户清单，因此仅按场景覆盖记录。",
+    "rows": [
+      {"industry":"金融","count":6,"entities":["招商银行","招商证券","WeBank 微众银行","易方达基金","中国太平保险","腾讯金融科技"],"evidence":["OFF-WB-005"]},
+      {"industry":"消费电子与制造","count":5,"entities":["小米","荣耀","OPPO","Insta360","Midea 美的"],"evidence":["OFF-WB-005"]},
+      {"industry":"协同办公与互联网","count":5,"entities":["腾讯文档","腾讯会议","微信","QQ","企业微信"],"evidence":["OFF-WB-005"]},
+      {"industry":"游戏","count":2,"entities":["王者荣耀","和平精英"],"evidence":["OFF-WB-005"]},
+      {"industry":"零售与汽车服务","count":2,"entities":["唯品会","易车"],"evidence":["OFF-WB-005"]},
+      {"industry":"物流","count":2,"entities":["圆通快递","德邦快递"],"evidence":["OFF-WB-005"]},
+      {"industry":"医疗健康","count":1,"entities":["腾讯健康"],"evidence":["OFF-WB-005"]},
+      {"industry":"半导体与算力","count":1,"entities":["曦智科技"],"evidence":["OFF-WB-005"]},
+      {"industry":"电信","count":1,"entities":["中国联通"],"evidence":["OFF-WB-005"]}
+    ],
+    "evidenceGap": [
+      {"product":"doubao","finding":"官方场景目录覆盖教育、金融研究、营销和内容生产，但未见可核验的命名外部企业清单或量化成效。","evidence":["OFF-DB-004"]},
+      {"product":"qwen","finding":"官方资料覆盖电商、教育、营销、金融等场景，但未见可核验的命名企业客户与量化成效。","evidence":["OFF-QW-001"]}
+    ]
+  },
+  "opportunities": [
+    {"name":"遗留系统 GUI 自动化服务","value":"在无 API 的 ERP、CRM、财务与行业客户端上，以 Computer Use 快速做 FDE 试点。","whyNow":"三家都在补浏览器/桌面操控，但可靠性与权限边界仍是空白。","buyer":"CIO、共享服务中心、业务运营","risk":"界面变动、权限、不可逆操作"},
+    {"name":"跨生态连接器与编排层","value":"把飞书、企业微信、钉钉与行业系统连接，降低单一生态锁定。","whyNow":"企业选型高度依赖现有 IM，跨生态迁移成本正在上升。","buyer":"集团 IT、数字化部门","risk":"平台接口与商业合作限制"},
+    {"name":"Agent 可观测与评测平台","value":"记录步骤、证据、重试、人工接管、时间、Credits 与交付质量。","whyNow":"产品普遍展示“做完”，企业真正缺少的是稳定性和可追责证据。","buyer":"AI CoE、内审、平台工程","risk":"需适配多产品日志格式"},
+    {"name":"高风险操作审批中台","value":"在发送、删除、付款、审批、权限变更前统一做人审与策略控制。","whyNow":"电脑操控把对话模型升级为可以代表企业执行操作的系统。","buyer":"信息安全、法务、业务风控","risk":"流程摩擦与责任划分"},
+    {"name":"行业 Skill 与 FDE 交付包","value":"将行业知识、数据连接、验收标准和 SOP 封装为可复制交付包。","whyNow":"三家都有 Skill/专家体系，但真实行业深度差异大。","buyer":"行业事业部、咨询公司、软件厂商","risk":"需要持续维护与领域责任"},
+    {"name":"技能与记忆可迁移层","value":"导出提示、Skill、数据映射、评测集和操作日志，支持换平台。","whyNow":"社区已开始讨论数据、流程和技能的平台锁定。","buyer":"大型企业架构与采购","risk":"各平台格式不统一"},
+    {"name":"Computer Use 成本优化与路由","value":"优先 API/连接器，只有无接口时才走 GUI；按任务动态选择模型和执行环境。","whyNow":"桌面操控慢且资源重，Credits 与本地资源成本将成为规模化瓶颈。","buyer":"平台运营、FinOps、AI CoE","risk":"需要精细任务分类"},
+    {"name":"私有化浏览器/桌面执行节点","value":"在 VPC 或本地安全域运行浏览器与 GUI 执行，数据不出域。","whyNow":"金融、政务、医疗采用取决于数据驻留、审计和权限隔离。","buyer":"受监管行业 CIO/CISO","risk":"部署与运维成本高"}
+  ]
+}

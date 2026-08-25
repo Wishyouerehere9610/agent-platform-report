@@ -1,0 +1,33 @@
+{
+  "benchmark_id": "fde-commercialization-2026-08-25",
+  "files": [
+    {
+      "name": "company-brief.md",
+      "sha256": "F503B50E2FBF73E6F910C0FA74696A1A7262109F43CFE3DD7BA1F40F18830328"
+    },
+    {
+      "name": "deliverable-spec.md",
+      "sha256": "82E95AD916A9B482C2E2EB01F2B0D36BB69CDF50C3D0A48AD4B060C40761E8C6"
+    },
+    {
+      "name": "financial-assumptions.xlsx",
+      "sha256": "D88BA7987901F9A028FB9F53466883FCC4BCCCE450F9AF8E134C840C2C3439A1"
+    },
+    {
+      "name": "doubao-prompt.md",
+      "sha256": "BCF99AE3CAAA9F4145FAE769EACE336AA053A8D64BA428EFD9B15E2F28F30316"
+    },
+    {
+      "name": "workbuddy-prompt.md",
+      "sha256": "D786314E26DD93DAFB028DC2DE08C9B6DB8F4B36C6EF8020E01296578AC9BD7C"
+    },
+    {
+      "name": "qwen-prompt.md",
+      "sha256": "5D3D4D4A4DEF75B2C3BEB456F3F5B34CF97BD58F2C1097B989382D349A43BFE9"
+    },
+    {
+      "name": "evaluation-rubric.md",
+      "sha256": "35B55B0969B49420BCD5E8B36CCB054AE8EE7B46F2E538D95164D6E0947CF54D"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Authentication and account material
+**/*qrcode*.png
+**/*auth*.log
+**/*oauth*
+**/agents.db*
+**/Cookies*
+**/Local Storage/**
+**/IndexedDB/**
+
+# Secrets and local configuration
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local/editor files
+Thumbs.db
+.DS_Store
+.idea/
+.vscode/
+node_modules/
+__pycache__/
+*.pyc

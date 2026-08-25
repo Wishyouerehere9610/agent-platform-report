@@ -1,0 +1,26 @@
+{
+  "benchmarkId": "fde-commercialization-2026-08-25",
+  "protocol": {
+    "samePrompt": true,
+    "sameFiles": true,
+    "maxMinutes": 45,
+    "runsPerProduct": 1,
+    "communicationScope": "仅个人空间、个人待办、个人日程和自我消息入口",
+    "files": ["company-brief.md", "financial-assumptions.xlsx", "deliverable-spec.md"],
+    "requiredOutputs": ["00-run-log.md", "01-industry-prioritization.xlsx", "02-target-accounts.csv", "03-fde-commercialization-plan.pptx", "04-source-log.md", "05-communication-check.md"]
+  },
+  "metrics": [
+    {"id":"delivery","name":"交付完整性与格式","weight":20,"definition":"4 个核心文件与 2 个日志齐全，格式正确且可打开"},
+    {"id":"quality","name":"分析质量与可用性","weight":20,"definition":"行业选择、财务模型、目标企业和管理层材料可直接使用"},
+    {"id":"sources","name":"事实与来源","weight":10,"definition":"不少于 8 个公开来源，日期、用途与不确定性完整"},
+    {"id":"time","name":"时效","weight":10,"definition":"首个可见结果、总耗时和 45 分钟截止是否清晰"},
+    {"id":"stability","name":"单次运行稳定性","weight":10,"definition":"错误、重试、卡顿、恢复和人工接管；不外推长期稳定性"},
+    {"id":"resources","name":"资源与可观测性","weight":5,"definition":"Credits、文件大小、工具使用和不可观测项均有记录"},
+    {"id":"ecosystem","name":"通信应用连通性","weight":25,"definition":"自我消息、个人待办、个人日历、个人文件空间和连通日志"}
+  ],
+  "runs": [
+    {"product":"doubao","version":"147.0.7727.149","configuration":"输入与评分标准已固定；电脑操控需完成组件初始化","status":"prompt_ready_permission_blocked","start":null,"end":null,"results":{},"notes":["权限初始化受阻时计为环境限制，不据此推断其他能力。"]},
+    {"product":"workbuddy","version":"5.3.14","configuration":"浏览器与电脑控制已通过产品内连接测试，等待独立复核","status":"ready_for_submission","start":null,"end":null,"results":{},"notes":["浏览器曾因本地代理 URL 尾部斜杠失败，清理后通过。"]},
+    {"product":"qwen","version":"1.0.0.26082211","configuration":"浏览器与电脑操控连接正常，等待独立运行","status":"ready_for_submission","start":null,"end":null,"results":{},"notes":[]}
+  ]
+}

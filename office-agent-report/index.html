@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>中国办公 Agent 三强：功能、实测与商业机会</title>
+  <style>
+    :root {
+      --bg: #f2efe8;
+      --paper: #fffdf8;
+      --ink: #17202a;
+      --muted: #68727d;
+      --line: #d9d4ca;
+      --line-strong: #b9b2a7;
+      --db: #2468d8;
+      --wb: #11855b;
+      --qw: #d65d0e;
+      --good: #0d7a54;
+      --warn: #9a6300;
+      --bad: #a23a35;
+      --soft-blue: #eaf1fd;
+      --soft-green: #e9f4ef;
+      --soft-orange: #fff0e5;
+      --soft-gray: #efede8;
+      --shadow: 0 14px 40px rgba(35, 42, 49, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.58;
+    }
+    button, input, select { font: inherit; }
+    a { color: inherit; }
+    .shell { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; }
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 30px 22px;
+      background: #1c242b;
+      color: #f6f3ec;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      z-index: 20;
+    }
+    .brand-mark { display: grid; gap: 7px; }
+    .brand-mark strong { font-size: 18px; letter-spacing: -.02em; }
+    .brand-mark span { color: #aeb7be; font-size: 12px; }
+    .nav { display: grid; gap: 4px; }
+    .nav a {
+      color: #c8d0d5;
+      text-decoration: none;
+      padding: 9px 11px;
+      border-left: 2px solid transparent;
+      font-size: 14px;
+    }
+    .nav a:hover, .nav a.active { color: #fff; border-left-color: #f2b544; background: rgba(255,255,255,.05); }
+    .sidebar-meta { margin-top: auto; color: #aeb7be; font-size: 12px; display: grid; gap: 10px; }
+    .print-btn {
+      border: 1px solid rgba(255,255,255,.28);
+      color: #fff;
+      background: transparent;
+      padding: 8px 10px;
+      cursor: pointer;
+      text-align: left;
+    }
+    .content { min-width: 0; }
+    .hero {
+      padding: 68px clamp(28px, 5vw, 74px) 54px;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .hero-inner, .section-inner { max-width: 1280px; margin: 0 auto; }
+    .eyebrow { color: var(--muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 980px; margin: 18px 0 22px; font-size: clamp(38px, 5vw, 72px); line-height: 1.04; letter-spacing: -.055em; font-weight: 650; }
+    .hero-lead { max-width: 920px; color: #46515b; font-size: 19px; }
+    .hero-meta { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 30px; color: var(--muted); font-size: 13px; }
+    .stage-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin-top: 34px; background: var(--line); border: 1px solid var(--line); }
+    .stage-item { background: #fff; padding: 18px; min-height: 126px; }
+    .stage-item .company { font-size: 12px; color: var(--muted); }
+    .stage-item h3 { margin: 5px 0 10px; font-size: 18px; }
+    .stage-state { font-size: 13px; color: #46515b; }
+    .stage-item.db { border-top: 4px solid var(--db); }
+    .stage-item.wb { border-top: 4px solid var(--wb); }
+    .stage-item.qw { border-top: 4px solid var(--qw); }
+    section { padding: 62px clamp(24px, 5vw, 72px); border-bottom: 1px solid var(--line); }
+    section:nth-of-type(even) { background: rgba(255,253,248,.58); }
+    .section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 430px); gap: 40px; align-items: end; margin-bottom: 30px; }
+    h2 { font-size: clamp(28px, 3vw, 42px); line-height: 1.15; letter-spacing: -.035em; margin-bottom: 8px; }
+    .section-intro { color: var(--muted); margin-bottom: 0; }
+    .note { border-left: 3px solid var(--line-strong); padding: 10px 14px; color: #4f5962; font-size: 13px; background: rgba(255,255,255,.45); }
+    .summary-grid, .leaders-grid, .profile-grid, .run-grid, .opportunity-grid { display: grid; gap: 16px; }
+    .summary-grid { grid-template-columns: 1.1fr .9fr .9fr; }
+    .leaders-grid, .profile-grid, .run-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .opportunity-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card { background: var(--paper); border: 1px solid var(--line); padding: 22px; box-shadow: 0 1px 0 rgba(35,42,49,.02); }
+    .card h3 { margin-bottom: 9px; font-size: 18px; }
+    .card p { color: #4e5962; }
+    .card-kicker { color: var(--muted); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 13px; }
+    .leader { position: relative; padding-top: 26px; }
+    .leader::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--line-strong); }
+    .leader.db::before { background: var(--db); }
+    .leader.wb::before { background: var(--wb); }
+    .leader.qw::before { background: var(--qw); }
+    .leader ul, .profile ul { padding-left: 18px; color: #4e5962; }
+    .metric-line { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); padding: 9px 0; font-size: 13px; }
+    .metric-line span:last-child { color: var(--muted); text-align: right; }
+    .control-bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin-bottom: 14px; }
+    .field { display: grid; gap: 5px; min-width: 190px; }
+    .field label { font-size: 12px; color: var(--muted); }
+    input, select { border: 1px solid var(--line-strong); background: #fff; color: var(--ink); padding: 9px 10px; min-height: 40px; }
+    .matrix-count { margin-left: auto; color: var(--muted); font-size: 13px; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); background: #fff; }
+    .feature-table-wrap { height: clamp(420px, 64vh, 720px); overflow: auto; overscroll-behavior: contain; position: relative; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 13px; }
+    th { position: sticky; top: 0; z-index: 2; background: #f6f3ed; color: #424d56; font-weight: 600; }
+    td:first-child { min-width: 240px; font-weight: 600; }
+    .category-cell { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .feature-overview { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 22px; }
+    .feature-product-card { background: #fff; border: 1px solid var(--line); border-top: 5px solid var(--line-strong); padding: 20px; min-width: 0; }
+    .feature-product-card[data-product="doubao"] { border-top-color: var(--db); }
+    .feature-product-card[data-product="workbuddy"] { border-top-color: var(--wb); }
+    .feature-product-card[data-product="qwen"] { border-top-color: var(--qw); }
+    .feature-product-card.is-active { box-shadow: var(--shadow); }
+    .feature-product-card h3 { margin: 3px 0 3px; font-size: 19px; }
+    .feature-product-card .company { color: var(--muted); font-size: 12px; }
+    .feature-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 16px 0; }
+    .feature-kpi { border-top: 1px solid var(--line); padding-top: 10px; }
+    .feature-kpi b { display: block; font-size: 23px; line-height: 1.1; }
+    .feature-kpi span { color: var(--muted); font-size: 11px; }
+    .feature-strengths { margin: 0 0 16px; padding-left: 18px; color: #4e5962; font-size: 12px; min-height: 58px; }
+    .feature-focus-action { width: 100%; border: 1px solid var(--line-strong); background: transparent; padding: 8px 10px; cursor: pointer; text-align: left; }
+    .feature-focus-action:hover { background: #f6f3ed; }
+    .feature-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: end; margin-bottom: 14px; }
+    .feature-legend { display: flex; flex-wrap: wrap; gap: 7px 16px; color: var(--muted); font-size: 12px; }
+    .feature-legend span { white-space: nowrap; }
+    .feature-legend b { font-weight: 700; margin-right: 4px; }
+    .feature-atlas { min-width: 860px; table-layout: fixed; }
+    .feature-atlas.single-product { min-width: 560px; }
+    .feature-atlas th, .feature-atlas td { padding: 10px 11px; }
+    .feature-atlas thead th { position: sticky; top: 0; z-index: 5; text-align: center; box-shadow: inset 0 -1px 0 var(--line-strong); }
+    .feature-atlas .category-head { width: 100px; }
+    .feature-atlas .feature-head { width: 180px; text-align: left; }
+    .feature-atlas .product-head { width: 190px; }
+    .feature-atlas .product-head[data-product-col="doubao"] { background: #eaf1fd; }
+    .feature-atlas .product-head[data-product-col="workbuddy"] { background: #e9f4ef; }
+    .feature-atlas .product-head[data-product-col="qwen"] { background: #fff0e5; }
+    .category-group { width: 100px; background: #f0f4f1; color: #177052; font-weight: 700; vertical-align: middle; }
+    .feature-name { width: 180px; font-weight: 600; background: #fbfaf7; }
+    .feature-state { width: 100%; min-height: 46px; border: 0; background: transparent; padding: 0; cursor: pointer; text-align: center; font-size: 27px; font-weight: 750; line-height: 1; }
+    .feature-state:hover, .feature-state:focus { background: #f6f3ed; outline: 1px solid var(--line-strong); outline-offset: -1px; }
+    .feature-state.covered { color: var(--good); }
+    .feature-state.uncovered { color: var(--bad); }
+    .profile { min-height: 100%; }
+    .profile.db { border-top: 5px solid var(--db); }
+    .profile.wb { border-top: 5px solid var(--wb); }
+    .profile.qw { border-top: 5px solid var(--qw); }
+    .profile .price { font-size: 22px; color: var(--ink); margin: 14px 0 3px; }
+    .profile .price-note { font-size: 12px; color: var(--muted); }
+    .diff-table td:first-child { min-width: 170px; }
+    .protocol-grid { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr); gap: 24px; margin-bottom: 24px; }
+    .protocol-card { background: #1f292f; color: #f6f3ec; padding: 24px; }
+    .protocol-card p, .protocol-card li { color: #cbd3d7; }
+    .protocol-card code { color: #fff; }
+    .weights { display: grid; gap: 11px; }
+    .weight-row { display: grid; grid-template-columns: 140px 1fr 46px; gap: 10px; align-items: center; font-size: 13px; }
+    .weight-track { height: 9px; background: #ddd8ce; }
+    .weight-bar { height: 100%; background: #303d45; }
+    .run-card { position: relative; }
+    .run-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 4px; background: var(--line-strong); }
+    .run-card[data-product="doubao"]::before { background: var(--db); }
+    .run-card[data-product="workbuddy"]::before { background: var(--wb); }
+    .run-card[data-product="qwen"]::before { background: var(--qw); }
+    .run-status { display: inline-block; margin: 4px 0 14px; padding: 4px 8px; background: var(--soft-gray); color: #625e58; font-size: 12px; }
+    .run-status.ready { background: var(--soft-green); color: var(--good); }
+    .run-status.deviation { background: var(--soft-orange); color: #94510f; }
+    .run-status.blocked { background: #f8e8e5; color: var(--bad); }
+    .rubric td:first-child { min-width: 140px; }
+    .heatmap td:first-child { min-width: 170px; }
+    .heat-button { width: 100%; border: 0; min-width: 92px; padding: 10px 8px; cursor: pointer; font-weight: 700; }
+    .heat-covered { background: #dff1e8; color: var(--good); }
+    .heat-uncovered { background: #f5e8e6; color: var(--bad); }
+    .heat-button:focus, .heat-button:hover { outline: 2px solid #26333a; outline-offset: -2px; }
+    .industry-detail { min-height: 45px; margin-top: 12px; color: #4e5962; font-size: 13px; }
+    .case-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .case-card { border-top: 1px solid var(--line-strong); padding: 16px 0 4px; }
+    .case-card h3 { margin-bottom: 3px; font-size: 17px; }
+    .case-meta { color: var(--muted); font-size: 12px; margin-bottom: 9px; }
+    .case-strength { display: inline-block; padding: 3px 7px; background: var(--soft-gray); color: #635f59; font-size: 11px; }
+    .value-chain { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 24px 0; }
+    .chain-step { background: #fff; padding: 18px 15px; min-height: 140px; }
+    .chain-step b { display: block; margin: 7px 0; }
+    .chain-step span { color: var(--muted); font-size: 12px; }
+    .chain-index { font-family: Georgia, serif; font-size: 25px; color: #8c8376; }
+    .opportunity { display: grid; grid-template-columns: 1fr 180px; gap: 18px; }
+    .opportunity aside { border-left: 1px solid var(--line); padding-left: 16px; color: var(--muted); font-size: 12px; }
+    .evidence-controls { margin-bottom: 14px; }
+    .evidence-list { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .evidence-row { display: grid; grid-template-columns: 88px minmax(190px, .8fr) minmax(260px, 1.4fr) 120px; gap: 14px; padding: 14px; background: #fff; align-items: start; }
+    .source-type { font-weight: 700; font-size: 12px; }
+    .evidence-row a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .evidence-row p { margin: 0; color: #55606a; font-size: 12px; }
+    .evidence-date { color: var(--muted); font-size: 12px; }
+    .method-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; }
+    .method-grid ol, .method-grid ul { padding-left: 20px; color: #4e5962; }
+    .footer { padding: 28px clamp(24px, 5vw, 72px) 50px; color: var(--muted); font-size: 12px; }
+    dialog { width: min(720px, calc(100vw - 32px)); border: 1px solid var(--line-strong); padding: 0; box-shadow: var(--shadow); }
+    dialog::backdrop { background: rgba(20, 28, 33, .48); }
+    .dialog-head { display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line); background: #f6f3ed; }
+    .dialog-head h3 { margin: 0; }
+    .dialog-close { border: 1px solid var(--line-strong); background: #fff; padding: 7px 10px; cursor: pointer; }
+    .dialog-body { padding: 20px; max-height: 70vh; overflow-y: auto; }
+    .dialog-evidence { border-bottom: 1px solid var(--line); padding: 0 0 17px; margin-bottom: 17px; }
+    .dialog-evidence:last-child { border-bottom: 0; margin-bottom: 0; }
+    .dialog-evidence h4 { margin: 5px 0 8px; }
+    .dialog-evidence p { color: #4e5962; }
+    .mono { font-family: "Cascadia Mono", Consolas, monospace; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @media (max-width: 1060px) {
+      .shell { grid-template-columns: 210px minmax(0, 1fr); }
+      .summary-grid, .leaders-grid, .profile-grid, .run-grid { grid-template-columns: 1fr; }
+      .section-head { grid-template-columns: 1fr; gap: 12px; }
+      .stage-strip { grid-template-columns: 1fr; }
+      .protocol-grid, .method-grid { grid-template-columns: 1fr; }
+      .value-chain { grid-template-columns: 1fr 1fr; }
+      .feature-overview { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .shell { display: block; }
+      .sidebar { position: static; height: auto; padding: 18px; gap: 14px; }
+      .nav { display: flex; overflow-x: auto; }
+      .nav a { white-space: nowrap; border-left: 0; border-bottom: 2px solid transparent; }
+      .nav a.active { border-left: 0; border-bottom-color: #f2b544; }
+      .sidebar-meta { display: none; }
+      .hero { padding-top: 44px; }
+      h1 { font-size: 36px; }
+      .opportunity-grid, .case-list { grid-template-columns: 1fr; }
+      .opportunity { grid-template-columns: 1fr; }
+      .opportunity aside { border-left: 0; border-top: 1px solid var(--line); padding: 12px 0 0; }
+      .value-chain { grid-template-columns: 1fr; }
+      .evidence-row { grid-template-columns: 70px 1fr; }
+      .evidence-row p, .evidence-date { grid-column: 2; }
+      .matrix-count { width: 100%; margin-left: 0; }
+      .field { min-width: min(100%, 220px); }
+      .feature-toolbar { grid-template-columns: 1fr; }
+      .feature-kpis { grid-template-columns: repeat(3, 1fr); }
+      .feature-table-wrap { height: 58vh; min-height: 390px; }
+    }
+    @media print {
+      body { background: #fff; }
+      .shell { display: block; }
+      .sidebar, .control-bar, dialog { display: none !important; }
+      .hero, section { padding: 26px 0; }
+      .hero-inner, .section-inner { max-width: none; }
+      .card, .table-wrap, .evidence-list { box-shadow: none; break-inside: avoid; }
+      th { position: static; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand-mark"><strong>Office Agent Review</strong><span>中国办公 Agent 生态调研</span></div>
+      <nav class="nav" aria-label="报告目录">
+        <a href="#executive" class="active">结论摘要</a>
+        <a href="#matrix">功能矩阵</a>
+        <a href="#profiles">产品画像</a>
+        <a href="#benchmark">统一测评</a>
+        <a href="#industries">行业覆盖</a>
+        <a href="#opportunities">商业机会</a>
+        <a href="#evidence">证据与方法</a>
+      </nav>
+      <div class="sidebar-meta">
+        <div>截至 2026-08-25</div>
+        <div>策略 / 产品管理版</div>
+        <button class="print-btn" id="print-report">打印或导出 PDF</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="hero">
+        <div class="hero-inner">
+          <div class="eyebrow">行业研究 · 证据优先</div>
+          <h1>中国办公 Agent 三强：从“会生成”走向“能办事”</h1>
+          <p class="hero-lead">飞书＋豆包工作、企业微信＋WorkBuddy、钉钉＋千问办公，正在把通讯入口、办公资产、浏览器和电脑操控接成一条完整链路。产品差距集中在执行可靠性、权限治理和行业复制能力。</p>
+          <div class="hero-meta">
+            <span>公开资料 + 桌面核验</span><span>功能、测评、行业、商业化</span><span>不设总冠军，只标维度领先</span>
+          </div>
+          <div class="stage-strip" aria-label="当前测评状态">
+            <article class="stage-item db"><div class="company">字节跳动</div><h3>飞书 + 豆包工作</h3><div class="stage-state">办公协同能力覆盖广；电脑操控需完成组件初始化后复核。</div></article>
+            <article class="stage-item wb"><div class="company">腾讯</div><h3>企业微信 + WorkBuddy</h3><div class="stage-state">浏览器与电脑控制已通过产品内连接测试；完整任务表现待独立验证。</div></article>
+            <article class="stage-item qw"><div class="company">阿里巴巴</div><h3>钉钉 + 千问办公</h3><div class="stage-state">浏览器与电脑操控连接正常；统一测评尚待完成。</div></article>
+          </div>
+        </div>
+      </header>
+
+      <section id="executive">
+        <div class="section-inner">
+          <div class="section-head"><div><div class="eyebrow">01 · 核心结论</div><h2>结构性结论</h2></div><p class="section-intro">现有证据足以比较功能、生态与商业路径；未形成完整运行结果的维度不作推断。</p></div>
+          <div class="summary-grid">
+            <article class="card"><div class="card-kicker">核心判断</div><h3>通讯入口承接需求，Computer Use 补上执行闭环</h3><p>消息把任务带进系统，文档和知识库提供上下文，浏览器与桌面操控完成跨系统执行。商业价值也因此从内容生成，延伸到真正的流程办理。</p></article>
+            <article class="card"><div class="card-kicker">主要瓶颈</div><h3>规模化取决于可靠性和治理</h3><p>代理配置、系统权限、界面变化、不可逆操作和人工接管都会影响交付。企业规模化要求稳定交付，并具备审计、恢复和复制能力。</p></article>
+            <article class="card"><div class="card-kicker">选型原则</div><h3>办公生态决定选型起点</h3><p>钉钉、微信/企业微信和飞书已经沉淀了不同的组织资产与工作习惯。对多数企业而言，迁移成本往往比单个新功能更重要。</p></article>
+          </div>
+          <h3 style="margin:32px 0 14px">基于现有证据的维度领先项</h3>
+          <div class="leaders-grid">
+            <article class="card leader db"><div class="card-kicker">飞书 + 豆包工作</div><h3>主动办公信号与企业确认机制</h3><ul><li>从消息、文档、会议、邮箱、审批、任务中主动识别工作信号</li><li>敏感操作人工确认、权限继承与全程留痕</li><li>教育、营销、内容生产模板密度高</li></ul></article>
+            <article class="card leader wb"><div class="card-kicker">企业微信 + WorkBuddy</div><h3>企业交付形态与命名客户覆盖</h3><ul><li>旗舰、VPC 专享、私有化三档部署最完整</li><li>公开命名客户横跨金融、制造、零售、物流和游戏</li><li>浏览器与电脑控制连接链路完整</li></ul></article>
+            <article class="card leader qw"><div class="card-kicker">钉钉 + 千问办公</div><h3>电脑操控文档与 Skill 开放度</h3><ul><li>明确披露后台操控、确认策略、验证码与精度限制</li><li>支持本地 SKILL.md、GitHub 获取、市场安装与团队分享</li><li>个人版价格与积分单价最透明</li></ul></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="matrix">
+        <div class="section-inner">
+          <div class="section-head"><div><div class="eyebrow">02 · 功能总览</div><h2>三家公司办公 Agent 能力总览</h2></div><div class="note">✓ 表示已有官方资料或桌面核验证据；× 表示当前证据不足，无法判断产品缺少该能力。通用文件处理不推断为特定格式能力。</div></div>
+          <div class="feature-overview" id="feature-overview" aria-label="三家公司产品能力摘要"></div>
+          <div class="feature-toolbar">
+            <div class="feature-legend" aria-label="能力状态图例"><span><b style="color:var(--good)">✓</b>有明确证据</span><span><b style="color:var(--bad)">×</b>待核验</span></div>
+            <div class="field"><label for="product-filter">产品视图</label><select id="product-filter"><option value="">全部产品横向对照</option><option value="doubao">只看飞书 + 豆包工作</option><option value="workbuddy">只看企业微信 + WorkBuddy</option><option value="qwen">只看钉钉 + 千问办公</option></select></div>
+          </div>
+          <div class="control-bar">
+            <div class="field"><label for="feature-search">搜索功能</label><input id="feature-search" type="search" placeholder="例如：浏览器、审批、私有化"></div>
+            <div class="field"><label for="category-filter">功能分类</label><select id="category-filter"><option value="">全部分类</option></select></div>
+            <div class="field"><label for="status-filter">证据筛选</label><select id="status-filter"><option value="">全部</option></select></div>
+            <div class="matrix-count" id="matrix-count" aria-live="polite"></div>
+          </div>
+          <div class="table-wrap feature-table-wrap">
+            <table class="feature-atlas" id="feature-atlas" aria-label="三款办公 Agent 分组能力对比">
+              <thead><tr><th class="category-head">能力大类</th><th class="feature-head">功能项</th><th class="product-head" data-product-col="doubao">字节跳动<br>飞书 + 豆包工作</th><th class="product-head" data-product-col="workbuddy">腾讯<br>企业微信 + WorkBuddy</th><th class="product-head" data-product-col="qwen">阿里巴巴<br>钉钉 + 千问办公</th></tr></thead>
+              <tbody id="feature-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="profiles">
+        <div class="section-inner">
+          <div class="section-head"><div><div class="eyebrow">03 · 产品路线</div><h2>三条不同的产品路线</h2></div><p class="section-intro">三家都在向平台化演进，但入口、资产沉淀、执行环境和商业包装各不相同。</p></div>
+          <div class="profile-grid">
+            <article class="card profile db"><div class="card-kicker">字节跳动</div><h3>飞书 + 豆包工作</h3><p>以飞书原生协同和主动办公为核心，云端助手与本地现场专家并存。</p><div class="price">¥9,900 / 年起</div><div class="price-note">飞书 AI 企业套餐，不限席位，按 AI 点数计量</div><ul><li>优势：办公信号覆盖完整，具备主动触发能力</li><li>优势：多 Agent 团队与行业模板形成清晰入口</li><li>风险：Computer Use 初始化依赖本地权限与组件状态，复杂任务验证尚不完整</li></ul></article>
+            <article class="card profile wb"><div class="card-kicker">腾讯</div><h3>企业微信 + WorkBuddy</h3><p>以独立桌面工作台、云端助理、专家市场和企业级多形态部署为核心。</p><div class="price">¥198 / 人 / 月起</div><div class="price-note">企业旗舰版；专享版 ¥316 / 人 / 月，私有化按需报价</div><ul><li>优势：命名客户和行业覆盖最丰富</li><li>优势：VPC、单租户、私有化与安全治理路径完整</li><li>风险：浏览器连接对代理配置较敏感；公开反馈提及偶发报错、重试与卡顿</li></ul></article>
+            <article class="card profile qw"><div class="card-kicker">阿里巴巴</div><h3>钉钉 + 千问办公</h3><p>以对话即交付、钉钉深度接入、开放 Skill 与桌面电脑操控为核心。</p><div class="price">¥78 / 月起</div><div class="price-note">个人标准版连续包月；高级版连续包月 ¥158</div><ul><li>优势：Skill 文件化并支持开源社区获取，扩展路径清晰</li><li>优势：Computer Use 的权限、限制与确认策略披露充分</li><li>风险：复杂任务结果与稳定性仍需统一测评验证</li></ul></article>
+          </div>
+          <div class="table-wrap" style="margin-top:22px">
+            <table class="diff-table"><thead><tr><th>差异维度</th><th>飞书 + 豆包工作</th><th>企业微信 + WorkBuddy</th><th>钉钉 + 千问办公</th></tr></thead><tbody>
+              <tr><td>生态锚点</td><td>飞书消息、文档、会议、邮箱、审批、任务</td><td>企业微信/微信远程入口 + 腾讯文档/网盘/乐享</td><td>钉钉深度接入 + 个人云盘 + IM 频道</td></tr>
+              <tr><td>Agent 形态</td><td>云端助手 + 本地现场专家 + Agent 团队</td><td>专家 + 云端助理 + 多 Agent 项目</td><td>桌面/网页/钉钉多端工作台 + Skill/连接器</td></tr>
+              <tr><td>电脑操控</td><td>官方披露本地安全接入；桌面验证受权限初始化影响</td><td>入口与连接测试已通过，完整任务表现仍待验证</td><td>帮助文档最完整，连接器已打开，完整任务表现仍待验证</td></tr>
+              <tr><td>扩展机制</td><td>伙伴、技能、框架与企业系统统一纳管</td><td>100+ 专家、7万+ Skills、企业共享</td><td>SKILL.md、GitHub、Skill 广场、团队分享</td></tr>
+              <tr><td>企业交付</td><td>飞书 AI 套餐与点数，不限席位</td><td>公有多租户、VPC 单租户、私有化</td><td>个人版价格最透明；官方资料未见明确企业版价格</td></tr>
+            </tbody></table>
+          </div>
+        </div>
+      </section>
+
+      <section id="benchmark">
+        <div class="section-inner">
+          <div class="section-head"><div><div class="eyebrow">04 · 统一测评</div><h2>任务执行 + 通信应用连通性</h2></div><div class="note">测评采用相同输入、独立输出目录和统一评分标准。任务执行占 75 分，通信应用连通性占 25 分；稳定性结论仅适用于单次运行。</div></div>
+          <div class="protocol-grid">
+            <article class="protocol-card"><h3>FieldPilot AI</h3><p>8 名 FDE、4 名平台工程师、3 名企业销售；12 个月预算 800 万元；90 天签 3 个付费试点并形成 500 万元有效管线。</p><ul><li>六个行业选两个优先行业</li><li>不少于 8 个公开来源</li><li>10 家目标企业清单</li><li>定价、产能、成本、毛利与 90 天 GTM</li><li>自我消息、个人待办、个人日历和个人文件空间</li><li>运行日志与通信连通日志</li></ul><p class="mono">相同核心任务 · 独立输出目录 · 最长 45 分钟</p></article>
+            <div><h3>评分维度与权重</h3><div class="weights" id="metric-weights"></div></div>
+          </div>
+          <div class="run-grid" id="run-grid"></div>
+          <div class="table-wrap" style="margin-top:22px"><table class="rubric"><thead><tr><th>维度</th><th>可验收标准</th><th>记录项</th></tr></thead><tbody>
+            <tr><td>任务交付（75）</td><td>核心文件与日志完整、格式正确、模型可追溯、管理层可直接使用</td><td>完成率、公式/格式错误、来源质量、首结果与总耗时</td></tr>
+            <tr><td>单次稳定性</td><td>错误可诊断、重试可恢复、不重复提交，45 分钟到时停止新增工作</td><td>报错、重试、卡顿、接管、断点恢复</td></tr>
+            <tr><td>资源与可观测</td><td>Credits、文件体积和工具路径有记录；不可观测项明确标注</td><td>积分前后、产物大小、浏览器/电脑/连接器实际使用</td></tr>
+            <tr><td>通信连通（25）</td><td>仅本人可见地完成自我消息、个人待办、个人日历和个人文件空间</td><td>动作耗时、成功依据、失败原因、权限提示、人工介入</td></tr>
+          </tbody></table></div>
+        </div>
+      </section>
+
+      <section id="industries">
+        <div class="section-inner">
+          <div class="section-head"><div><div class="eyebrow">05 · 行业覆盖</div><h2>行业覆盖</h2></div><p class="section-intro">官方行业场景或命名客户作为覆盖依据。点击结果可查看判断依据。</p></div>
+          <div class="table-wrap"><table class="heatmap" aria-label="三款产品行业覆盖对比"><thead><tr><th>行业</th><th>豆包工作</th><th>WorkBuddy</th><th>千问办公</th></tr></thead><tbody id="industry-body"></tbody></table></div>
+          <div class="industry-detail" id="industry-detail" aria-live="polite">点击覆盖结果查看依据。</div>
+          <div class="control-bar" style="margin-top:26px"><div class="field"><label for="case-filter">案例产品</label><select id="case-filter"><option value="">全部</option><option value="doubao">豆包工作</option><option value="workbuddy">WorkBuddy</option><option value="qwen">千问办公</option></select></div></div>
+          <div class="case-list" id="case-list"></div>
+          <div class="section-head" style="margin-top:38px"><div><div class="eyebrow">公开企业样本</div><h3>公开企业与业务品牌样本分类</h3></div><p class="section-intro" id="enterprise-landscape-summary"></p></div>
+          <div class="table-wrap"><table aria-label="WorkBuddy 官网公开企业与业务品牌样本分类"><thead><tr><th>行业组</th><th>样本数</th><th>企业或业务品牌</th><th>证据边界</th></tr></thead><tbody id="enterprise-landscape-body"></tbody></table></div>
+          <div class="case-list" id="enterprise-gap-list" style="margin-top:18px"></div>
+        </div>
+      </section>
+
+      <section id="opportunities">
+        <div class="section-inner">
+          <div class="section-head"><div><div class="eyebrow">06 · 商业机会</div><h2>浏览器与电脑操控打开执行型市场</h2></div><p class="section-intro">浏览器和电脑操控让办公 Agent 进入真实业务流程，也带来治理、评测、连接器和行业交付的新需求。</p></div>
+          <div class="value-chain" aria-label="办公 Agent 商业价值链">
+            <div class="chain-step"><div class="chain-index">01</div><b>通讯入口</b><span>IM、消息、会议、审批触发需求</span></div>
+            <div class="chain-step"><div class="chain-index">02</div><b>上下文与计划</b><span>文档、知识库、记忆与多 Agent 拆解</span></div>
+            <div class="chain-step"><div class="chain-index">03</div><b>执行路由</b><span>连接器/API 优先，浏览器与 GUI 补最后一公里</span></div>
+            <div class="chain-step"><div class="chain-index">04</div><b>治理与人审</b><span>权限、敏感操作确认、日志、重试与恢复</span></div>
+            <div class="chain-step"><div class="chain-index">05</div><b>交付与回写</b><span>文件、表格、PPT、待办、日历与业务系统</span></div>
+          </div>
+          <div class="opportunity-grid" id="opportunity-grid"></div>
+        </div>
+      </section>
+
+      <section id="evidence">
+        <div class="section-inner">
+          <div class="section-head"><div><div class="eyebrow">07 · 证据与方法</div><h2>证据优先，结论有边界</h2></div><p class="section-intro">官方资料用于判断“存在什么”；实际运行用于判断“能否在当前环境完成”；社区资料用于理解采用动因与痛点。</p></div>
+          <div class="method-grid">
+            <article class="card"><h3>证据层级</h3><ol><li><b>OBS</b>：桌面界面与实际操作记录</li><li><b>OFF</b>：官方产品页、帮助文档、定价与安全说明</li><li><b>CASE</b>：公开客户名录或客户披露</li><li><b>MED</b>：独立媒体与行业分析</li><li><b>SOC</b>：社区、视频与社交讨论</li></ol></article>
+            <article class="card"><h3>判断边界</h3><ul><li>× 表示本次未发现明确证据</li><li>产品内自测仅用于确认连接状态</li><li>命名客户仅用于确认行业覆盖</li><li>单次运行不外推长期稳定性</li><li>三款产品均使用各自可用配置完成测评</li></ul></article>
+          </div>
+          <div class="control-bar evidence-controls"><div class="field"><label for="evidence-type">证据类型</label><select id="evidence-type"><option value="">全部</option><option value="OBS">OBS</option><option value="OFF">OFF</option><option value="CASE">CASE</option><option value="MED">MED</option><option value="SOC">SOC</option></select></div><div class="field"><label for="evidence-search">检索证据</label><input id="evidence-search" type="search" placeholder="标题、产品或摘要"></div></div>
+          <div class="evidence-list" id="evidence-list"></div>
+        </div>
+      </section>
+
+      <footer class="footer"><div class="section-inner">报告更新时间：2026-08-25。公开资料、桌面核验与测评数据均保留独立来源标记；证据不足的维度不作推断。</div></footer>
+    </main>
+  </div>
+
+  <dialog id="evidence-dialog">
+    <div class="dialog-head"><h3>证据详情</h3><button class="dialog-close" id="dialog-close">关闭</button></div>
+    <div class="dialog-body" id="dialog-body"></div>
+  </dialog>
+
+  <script>
+    const DATA = {"features":{"updatedAt":"2026-08-25T23:40:00+08:00","statusLegend":["已实测完成","存在但未执行","官方宣称","第三方报告","本次未发现","环境或权限阻塞"],"products":[{"id":"doubao","name":"飞书 + 豆包工作","company":"字节跳动","color":"#1f6fff"},{"id":"workbuddy","name":"企业微信 + WorkBuddy","company":"腾讯","color":"#18a56b"},{"id":"qwen","name":"钉钉 + 千问办公","company":"阿里巴巴","color":"#ff6a00"}],"features":[{"id":"agent-nl","category":"Agent 核心","name":"自然语言下达任务","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"agent-plan","category":"Agent 核心","name":"复杂任务自动拆解与规划","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"agent-tool","category":"Agent 核心","name":"自主调用工具并执行","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"agent-verify","category":"Agent 核心","name":"步骤后校验与动态修正","doubao":{"status":"本次未发现","evidence":["OFF-DB-001"],"note":"官方页面披露多 Agent 分工与审核角色，未明确披露执行步骤后的动态校验机制"},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-004"]}},{"id":"agent-multi","category":"Agent 核心","name":"多 Agent 并行与汇总","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-001"],"note":"当前公开资料未形成明确证据"}},{"id":"agent-memory","category":"Agent 核心","name":"长期记忆与个性化","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"],"note":"官方产品页未明确披露长期记忆能力"},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"agent-skills","category":"Agent 核心","name":"可复用 Skill / 工作流","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-006"]}},{"id":"agent-custom","category":"Agent 核心","name":"自定义专家 / 工作伙伴","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-006"]}},{"id":"agent-schedule","category":"Agent 核心","name":"云端定时任务","doubao":{"status":"存在但未执行","evidence":["OBS-DB-001"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"],"note":"官方产品页披露云端长任务托管，未明确披露按时间触发的定时任务"},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"agent-project","category":"Agent 核心","name":"项目空间 / 共享上下文","doubao":{"status":"存在但未执行","evidence":["OBS-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-001"]}},{"id":"browser-read","category":"浏览器与电脑","name":"读取网页与信息采集","doubao":{"status":"环境或权限阻塞","evidence":["OBS-DB-001"]},"workbuddy":{"status":"存在但未执行","evidence":["OBS-WB-001"]},"qwen":{"status":"存在但未执行","evidence":["OBS-QW-001"]}},{"id":"browser-act","category":"浏览器与电脑","name":"网页点击、输入与表单操作","doubao":{"status":"环境或权限阻塞","evidence":["OBS-DB-001"]},"workbuddy":{"status":"存在但未执行","evidence":["OBS-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"browser-download","category":"浏览器与电脑","name":"浏览器下载与落盘","doubao":{"status":"环境或权限阻塞","evidence":["OBS-DB-001"]},"workbuddy":{"status":"本次未发现","evidence":["OBS-WB-001"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-001"]}},{"id":"computer-see","category":"浏览器与电脑","name":"识别桌面应用可见状态","doubao":{"status":"环境或权限阻塞","evidence":["OBS-DB-001"]},"workbuddy":{"status":"存在但未执行","evidence":["OBS-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-004"]}},{"id":"computer-act","category":"浏览器与电脑","name":"桌面点击、键入、滚动与拖拽","doubao":{"status":"环境或权限阻塞","evidence":["OBS-DB-001"]},"workbuddy":{"status":"存在但未执行","evidence":["OBS-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-004"]}},{"id":"computer-cross","category":"浏览器与电脑","name":"跨桌面应用编排","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"存在但未执行","evidence":["OBS-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-004"]}},{"id":"computer-background","category":"浏览器与电脑","name":"后台操控不抢前台焦点","doubao":{"status":"本次未发现","evidence":["OFF-DB-001"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-004"]}},{"id":"computer-confirm","category":"浏览器与电脑","name":"桌面操作确认策略","doubao":{"status":"官方宣称","evidence":["OFF-DB-002"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-003"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-004"]}},{"id":"mobile-remote","category":"浏览器与电脑","name":"手机或 IM 远程下达任务","doubao":{"status":"存在但未执行","evidence":["OBS-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-004"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"artifact-doc","category":"办公交付","name":"生成/编辑文档","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001","OFF-QW-006"]}},{"id":"artifact-sheet","category":"办公交付","name":"生成/编辑电子表格","doubao":{"status":"本次未发现","evidence":["OFF-DB-001"],"note":"官方页面披露数据整理与数据看板场景，未明确披露电子表格文件生成或编辑"},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001","OFF-QW-006"]}},{"id":"artifact-ppt","category":"办公交付","name":"生成/编辑 PPT","doubao":{"status":"本次未发现","evidence":["OFF-DB-001"],"note":"官方页面披露汇报与课件场景，未明确披露 PPT 文件生成或编辑"},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001","OFF-QW-006"]}},{"id":"artifact-web","category":"办公交付","name":"网页 / 应用生成","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"artifact-code","category":"办公交付","name":"代码生成与编辑","doubao":{"status":"本次未发现","evidence":["OFF-DB-001"],"note":"官方页面披露可交互工作台生成，未明确披露代码文件生成或编辑"},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"artifact-media","category":"办公交付","name":"图片/视频多媒体生成","doubao":{"status":"本次未发现","evidence":["OFF-DB-004"],"note":"官方场景目录披露短视频策划与脚本能力，未明确披露图片或视频文件生成"},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"artifact-pdf","category":"办公交付","name":"PDF 阅读、创建与编辑","doubao":{"status":"本次未发现","evidence":["OFF-DB-001"],"note":"官方页面提及本地文件查询、整理与报告产出，未明确披露 PDF 专项能力"},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"],"note":"官方页面提及文档解析、本地文件读写与文档生成，未明确披露 PDF 创建或编辑"},"qwen":{"status":"官方宣称","evidence":["OFF-QW-006"],"note":"官方内置 pdf Skill 明确支持阅读、创建、合并、拆分、旋转、水印、表单、加密、图片提取与 OCR"}},{"id":"file-read","category":"办公交付","name":"本地文件读取","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"file-write","category":"办公交付","name":"本地文件写入","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"file-batch","category":"办公交付","name":"文件夹批处理与整理","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-004"]}},{"id":"eco-im","category":"通讯与协同","name":"原生即时通讯入口","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-004"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"eco-doc","category":"通讯与协同","name":"原生文档/知识库协同","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-002"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-002"]}},{"id":"eco-meeting","category":"通讯与协同","name":"会议与纪要","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"eco-mail","category":"通讯与协同","name":"邮箱处理","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-001"]}},{"id":"eco-calendar","category":"通讯与协同","name":"日历/日程联动","doubao":{"status":"本次未发现","evidence":["OFF-DB-001"],"note":"官方页面未明确披露日历或日程联动"},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-001"],"note":"官方简介未明确披露日历或日程联动"}},{"id":"eco-todo","category":"通讯与协同","name":"待办/任务联动","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-001"],"note":"官方简介未明确披露钉钉待办联动"}},{"id":"eco-approval","category":"通讯与协同","name":"审批流程联动","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-001"],"note":"官方简介未明确披露钉钉审批联动"}},{"id":"eco-drive","category":"通讯与协同","name":"个人/企业云盘","doubao":{"status":"存在但未执行","evidence":["OBS-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-002"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"eco-proactive","category":"通讯与协同","name":"从办公信号主动触发建议","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-001"]}},{"id":"ent-identity","category":"企业治理","name":"统一身份与组织架构","doubao":{"status":"本次未发现","evidence":["OFF-DB-002"],"note":"官方安全说明披露用户隔离与权限继承，未明确披露统一身份或组织架构管理"},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-002"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-002"]}},{"id":"ent-permission","category":"企业治理","name":"权限继承与最小权限","doubao":{"status":"官方宣称","evidence":["OFF-DB-002"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-003"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-002"]}},{"id":"ent-isolation","category":"企业治理","name":"租户/网络/数据隔离","doubao":{"status":"官方宣称","evidence":["OFF-DB-002"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-003"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-002"]}},{"id":"ent-audit","category":"企业治理","name":"全程留痕与审计","doubao":{"status":"官方宣称","evidence":["OFF-DB-002"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-003"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-002"]}},{"id":"ent-vpc","category":"企业治理","name":"VPC / 单租户专享","doubao":{"status":"本次未发现","evidence":["OFF-DB-003"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-002"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-002"]}},{"id":"ent-private","category":"企业治理","name":"私有化部署 / 数据不出域","doubao":{"status":"本次未发现","evidence":["OFF-DB-003"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-002"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-002"]}},{"id":"ent-openapi","category":"企业治理","name":"OpenAPI 与行业系统连接","doubao":{"status":"官方宣称","evidence":["OFF-DB-001","OFF-DB-003"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-002"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-001"]}},{"id":"ent-shared-skill","category":"企业治理","name":"组织级 Skill / 专家共享","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-002"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-006"]}},{"id":"ent-usage","category":"企业治理","name":"席位、额度与成员用量控制","doubao":{"status":"官方宣称","evidence":["OFF-DB-003"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-002"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-002"]}},{"id":"market-price-personal","category":"商业可用性","name":"公开个人版定价","doubao":{"status":"本次未发现","evidence":["OFF-DB-003"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-003"]}},{"id":"market-price-enterprise","category":"商业可用性","name":"公开企业版定价","doubao":{"status":"官方宣称","evidence":["OFF-DB-003"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-002"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-002"]}},{"id":"market-free","category":"商业可用性","name":"免费版 / 免费体验","doubao":{"status":"官方宣称","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-003"]}},{"id":"market-catalog","category":"商业可用性","name":"大规模专家/Skill 市场","doubao":{"status":"官方宣称","evidence":["OFF-DB-004"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-006"]}},{"id":"market-cases","category":"商业可用性","name":"公开企业客户案例","doubao":{"status":"本次未发现","evidence":["OFF-DB-001"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-004","OFF-WB-005"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-001"]}},{"id":"control-progress","category":"可控与可观测","name":"任务步骤与进度可见","doubao":{"status":"已实测完成","evidence":["OBS-DB-001"]},"workbuddy":{"status":"已实测完成","evidence":["OBS-WB-001"]},"qwen":{"status":"已实测完成","evidence":["OBS-QW-001"]}},{"id":"control-artifact","category":"可控与可观测","name":"产物面板 / 文件定位","doubao":{"status":"存在但未执行","evidence":["OBS-DB-001"]},"workbuddy":{"status":"已实测完成","evidence":["OBS-WB-001"]},"qwen":{"status":"存在但未执行","evidence":["OBS-QW-001"]}},{"id":"control-credit","category":"可控与可观测","name":"积分/资源用量可查看","doubao":{"status":"官方宣称","evidence":["OFF-DB-003"]},"workbuddy":{"status":"官方宣称","evidence":["OFF-WB-002"]},"qwen":{"status":"已实测完成","evidence":["OBS-QW-001","OFF-QW-003"]}},{"id":"control-auto","category":"可控与可观测","name":"自动执行模式","doubao":{"status":"已实测完成","evidence":["OBS-DB-001"]},"workbuddy":{"status":"已实测完成","evidence":["OBS-WB-001"]},"qwen":{"status":"官方宣称","evidence":["OFF-QW-004"],"note":"官方电脑操控文档明确提供自动执行确认策略"}},{"id":"control-citations","category":"可控与可观测","name":"来源引用与可追溯输出","doubao":{"status":"官方宣称","evidence":["OFF-DB-004"]},"workbuddy":{"status":"本次未发现","evidence":["OFF-WB-001"]},"qwen":{"status":"本次未发现","evidence":["OFF-QW-001"]}}]},"evidence":{"updatedAt":"2026-08-25T23:40:00+08:00","methodology":"OBS 为桌面界面与操作记录；OFF 为官方资料；CASE 为官方或客户公开案例；MED 为媒体或独立分析；SOC 为社区内容。硬能力结论优先使用 OBS 与 OFF，社区内容仅用于补充采用动因与痛点。","items":[{"id":"OBS-DB-001","product":"doubao","type":"OBS","title":"豆包工作桌面环境连接状态与模式","url":"","observedAt":"2026-08-25","version":"147.0.7727.149","summary":"桌面端显示工作任务、连接器、定时任务、云盘和手机遥控电脑；浏览器与电脑操控仍停留在一次性“操作电脑屏幕”初始化阶段，完整验证依赖权限与组件状态。","supports":["automatic-execution","mobile-remote","computer-use-blocked","browser-control-pending"]},{"id":"OBS-WB-001","product":"workbuddy","type":"OBS","title":"WorkBuddy 桌面环境连接状态与模式","url":"","observedAt":"2026-08-25","version":"5.3.14","summary":"产品内连接测试记录称 agent-browser v0.27.0、Chrome 152.0.7977.54 与电脑控制可用；浏览器首次因代理尾部斜杠失败，清理代理参数后通过。该结论仍需在统一测评中独立复核。","supports":["automatic-execution","browser-control-present","computer-control-present","proxy-recovery","usage-observable"]},{"id":"OBS-QW-001","product":"qwen","type":"OBS","title":"千问办公桌面环境连接状态","url":"","observedAt":"2026-08-25","version":"1.0.0.26082211","summary":"连接器面板显示浏览器与 Computer Use 均为 Open，产品内自测记录称 Edge 扩展 v1.5.5 与 Computer Use v0.1.5 已连通；统一测评前仍需独立复核。","supports":["browser-control-present","computer-control-present","connectors"]},{"id":"OBS-QW-002","product":"qwen","type":"OBS","title":"千问办公的自动执行设置","url":"","observedAt":"2026-08-25","version":"1.0.0.26082211","summary":"模型菜单提供高级、基础、经济与 Qwen3.8-Max。统一测评使用当前可用配置。","supports":["automatic-execution-settings","basic-selected"]},{"id":"OFF-DB-001","product":"doubao","type":"OFF","title":"豆包工作伙伴官方首页","url":"https://aily.feishu.cn/","observedAt":"2026-08-25","version":"网页资料","summary":"官方定位为飞书上的 Agent 协作平台，披露风格、技能与记忆定制，多 Agent 自动拆解、并行推进与结果汇总，本地文件查询整理和报告产出，以及消息、文档、会议、邮箱、审批、任务等办公信号接入。","supports":["feishu-native","multi-agent","cloud-agent","local-computer","proactive-work"]},{"id":"OFF-DB-002","product":"doubao","type":"OFF","title":"豆包工作伙伴企业安全机制","url":"https://aily.feishu.cn/","observedAt":"2026-08-25","version":"网页资料","summary":"官方列出用户/Agent/网络三重隔离、继承企业权限、敏感操作人工确认和全流程留痕审计。","supports":["isolation","permission-inheritance","human-confirmation","audit"]},{"id":"OFF-DB-003","product":"doubao","type":"OFF","title":"飞书 AI 套餐与额度","url":"https://www.feishu.cn/service/ai?from=aily_home","observedAt":"2026-08-25","version":"网页资料","summary":"基础版 9900 元/年含 18 万点，企业版 9.9 万元/年含 200 万点，均不限席位；企业版 Plus 与旗舰版联系销售。豆包工作伙伴包含在飞书 AI 套餐中。","supports":["enterprise-pricing","credits","unlimited-seats"]},{"id":"OFF-DB-004","product":"doubao","type":"OFF","title":"豆包工作伙伴公开场景目录","url":"https://aily.feishu.cn/","observedAt":"2026-08-25","version":"网页资料","summary":"官方展示教育、金融研究、市场营销、内容创作、短视频与直播、商业研究等专家与场景模板。","supports":["education","finance","marketing","media","research"]},{"id":"OFF-WB-001","product":"workbuddy","type":"OFF","title":"WorkBuddy 官方产品页","url":"https://cloud.tencent.com/product/workbuddy","observedAt":"2026-08-25","version":"网页资料","summary":"官方定位为全场景 AI 办公工作台，明确披露自然语言理解、复杂任务拆解、工具调用、自我校验与修正，文字/图像/表格/代码的理解与生成，文档与图表解析，图片与视频产出，本地文件读写、文档生成与批处理，以及项目空间中的多 Agent 并行和流程复用。","supports":["planning","local-files","multimodal","experts","skills-market","cloud-hosting","multi-agent"]},{"id":"OFF-WB-002","product":"workbuddy","type":"OFF","title":"WorkBuddy Enterprise 定价与交付形态","url":"https://cloud.tencent.com/product/workbuddy-enterprise","observedAt":"2026-08-25","version":"网页资料","summary":"旗舰版 198 元/人/月、1 席位起；专享版 316 元/人/月、100 席位起并支持 VPC/单租户；私有化版 300 席位起、数据不出域、按需报价。","supports":["enterprise-pricing","vpc","single-tenant","private-deployment","data-locality"]},{"id":"OFF-WB-003","product":"workbuddy","type":"OFF","title":"WorkBuddy Enterprise 安全治理","url":"https://cloud.tencent.com/product/workbuddy-enterprise","observedAt":"2026-08-25","version":"网页资料","summary":"官方列出 Prompt 注入防护、五维数据隔离、全生命周期密文与审计、ISO/SOC/等保/数据安全法合规、MCP 授权校验和 AIGC 内容安全。","supports":["prompt-injection-defense","data-isolation","audit","compliance","mcp-security","content-safety"]},{"id":"OFF-WB-004","product":"workbuddy","type":"OFF","title":"WorkBuddy 公开客户与用户之声","url":"https://cloud.tencent.com/product/workbuddy","observedAt":"2026-08-25","version":"网页资料","summary":"官方页面展示腾讯、奔驰、捷顺科技、麦芽传媒、上海教软等公开反馈；其中麦芽传媒明确同时提到提效和偶发报错、重试、卡顿。","supports":["customer-cases","adoption","errors-retries-lag"]},{"id":"OFF-WB-005","product":"workbuddy","type":"CASE","title":"WorkBuddy Enterprise 客户名录","url":"https://cloud.tencent.com/product/workbuddy-enterprise","observedAt":"2026-08-25","version":"网页资料","summary":"官网列出金融、消费电子、制造、零售、游戏、物流、电信等行业客户或业务品牌，包括招商银行、微众银行、小米、美的、唯品会、圆通、德邦和中国联通等；页面未逐一披露量化成效。","supports":["finance","manufacturing","retail","gaming","logistics","telecom"]},{"id":"OFF-QW-001","product":"qwen","type":"OFF","title":"千问办公官方简介","url":"https://help.aliyun.com/zh/qwenwork/qwenwork-intro","observedAt":"2026-08-25","version":"文档更新 2026-08-25","summary":"官方称产品覆盖桌面、网页与钉钉，支持文档、表格、PPT、代码、网页和多媒体交付；具备个人云盘、IM、技能、连接器、云端定时任务和浏览器点击/输入/采集。","supports":["dingtalk-native","artifacts","cloud-drive","im","skills","connectors","scheduled-tasks","browser-automation"]},{"id":"OFF-QW-002","product":"qwen","type":"OFF","title":"千问办公隐私与安全","url":"https://help.aliyun.com/zh/qwenwork/qw-privacy-security","observedAt":"2026-08-25","version":"文档更新 2026-08-03","summary":"官方说明数据存储在中国大陆，支持 TLS 与静态加密、最小权限、多因素认证与审批、日志审计、组织空间隔离、席位/用量/连接器管理，并提示正式提交前人工复核。","supports":["china-data-residency","encryption","least-privilege","audit","org-isolation","usage-control"]},{"id":"OFF-QW-003","product":"qwen","type":"OFF","title":"千问办公个人版价格与积分","url":"https://help.aliyun.com/zh/qwenwork/qw-personal-benefits","observedAt":"2026-08-25","version":"文档更新 2026-08-03","summary":"个人免费版 0 元；标准版 98 元/月或连续包月 78 元/月；高级版 198 元/月或连续包月 158 元/月。积分包单价公开为 0.05 元/积分。","supports":["personal-pricing","free-tier","credits"]},{"id":"OFF-QW-004","product":"qwen","type":"OFF","title":"千问办公 Computer Use 文档","url":"https://help.aliyun.com/zh/qwenwork/computer-use","observedAt":"2026-08-25","version":"网页资料","summary":"官方描述屏幕感知、点击/拖拽/键入、后台执行、跨应用流程、前后截图校验、每次询问/自动执行/禁用三种策略，并披露验证码、速度和复杂界面精度限制。","supports":["screen-perception","mouse-keyboard","background-control","cross-app","verification","confirmation-modes","limitations"]},{"id":"OFF-QW-005","product":"qwen","type":"OFF","title":"千问办公模型档位","url":"https://help.aliyun.com/zh/qwenwork/qw-model-selection-desktop","observedAt":"2026-08-25","version":"网页资料","summary":"官方桌面端模型选择列出高级、基础、经济和 Qwen3.8-Max；高级用于重点项目决策和关键分析。","supports":["model-selection","automatic-execution-settings"]},{"id":"OFF-QW-006","product":"qwen","type":"OFF","title":"千问办公 Skill 开放机制","url":"https://help.aliyun.com/zh/qwenwork/skills","observedAt":"2026-08-25","version":"网页资料","summary":"支持内置 find-skill、Skill 广场、GitHub/开源社区安装、本地上传 SKILL.md、自动触发、团队分享和交互式 Skill UI。内置 pdf Skill 明确支持阅读、创建、合并、拆分、旋转、水印、表单、加密、图片提取与 OCR。","supports":["skills-market","open-skills","local-skill-files","team-sharing","office-artifacts"]},{"id":"SOC-001","product":"cross-product","type":"SOC","title":"Bilibili：WorkBuddy VS 千问办公","url":"https://www.bilibili.com/video/BV1Ny8G6dEJr/","observedAt":"2026-08-25","version":"发布于 2026-08-19","summary":"公开视频将两者按模型、专家/Skill、连接器、生态、浏览器/电脑控制和手机远程办公比较；作者结论是两者不存在单向碾压，选择高度取决于钉钉或微信/腾讯生态。此结论属于个人观点。","supports":["ecosystem-fit","social-comparison"]},{"id":"MED-001","product":"cross-product","type":"MED","title":"ChooseAI：三款国内 AI 办公工具对比","url":"https://www.chooseai.net/news/6180/","observedAt":"2026-08-25","version":"网页资料","summary":"独立工具媒体从产品形态、模型路线、办公交付和生态集成比较千问办公、WorkBuddy 与豆包工作；仅作为市场叙事参考，不替代官方或实测。","supports":["market-positioning","cross-product-comparison"]},{"id":"SOC-002","product":"cross-product","type":"SOC","title":"知乎：办公 Agent 的平台资产与可迁移性讨论","url":"https://zhuanlan.zhihu.com/p/2068432655528490857","observedAt":"2026-08-25","version":"网页资料","summary":"文章提出办公 Agent 可能带来数据、流程、技能与模板的平台锁定风险。作者披露其与开源低代码产品存在利益相关，因此本报告仅吸收“可迁移性应纳入选型”的问题意识，不采信其竞品优劣结论。","supports":["portability-risk","ecosystem-lock-in"]}]},"cases":{"updatedAt":"2026-08-25T23:40:00+08:00","industryScale":{"0":"未见明确证据","1":"能力可推断","2":"官方场景覆盖","3":"有命名客户/高密度场景"},"industries":[{"name":"制造","doubao":2,"workbuddy":3,"qwen":1,"notes":"飞书官网提供制造行业方案；WorkBuddy 有美的等命名客户；千问当前仅有通用能力。"},{"name":"汽车与硬件","doubao":2,"workbuddy":3,"qwen":1,"notes":"WorkBuddy 官方含奔驰、小米、荣耀、OPPO、Insta360。"},{"name":"零售与电商","doubao":2,"workbuddy":3,"qwen":2,"notes":"飞书有零售/消费品方案；WorkBuddy 含唯品会；千问官方明确电商场景。"},{"name":"金融","doubao":2,"workbuddy":3,"qwen":2,"notes":"豆包有股票分析师；WorkBuddy 有银行、证券、基金、保险客户；千问官方列金融用例。"},{"name":"医疗健康","doubao":2,"workbuddy":2,"qwen":1,"notes":"飞书有医疗行业方案；WorkBuddy 含腾讯健康；受监管数据边界需单列。"},{"name":"企业软件与 SaaS","doubao":2,"workbuddy":2,"qwen":2,"notes":"三家均具备连接器/Skill/网页或代码交付，适合软件型企业内部生产力。"},{"name":"专业服务与法务","doubao":1,"workbuddy":2,"qwen":2,"notes":"WorkBuddy 官方专家覆盖法务、投研；千问开放 Skill 适合沉淀专业流程。"},{"name":"教育","doubao":3,"workbuddy":2,"qwen":2,"notes":"豆包有教师、备课、出题批改等密集模板；WorkBuddy 有上海教软；千问官方列教育场景。"},{"name":"营销与媒体","doubao":3,"workbuddy":3,"qwen":2,"notes":"豆包模板最密集；WorkBuddy 有麦芽传媒并支持设计创意；千问官方列营销与多媒体。"},{"name":"游戏与互联网","doubao":2,"workbuddy":3,"qwen":1,"notes":"WorkBuddy 企业页列王者荣耀、和平精英、微信、QQ。"},{"name":"物流","doubao":1,"workbuddy":3,"qwen":1,"notes":"WorkBuddy 企业页列圆通、德邦。"},{"name":"政务与电信","doubao":1,"workbuddy":2,"qwen":1,"notes":"WorkBuddy 私有化交付与中国联通案例提高适配度；需要更强合规证据。"}],"cases":[{"product":"workbuddy","company":"奔驰公司","industry":"汽车","caseType":"公开用户反馈","summary":"公开反馈提到 CodeBuddy/WorkBuddy 与手机远程连接，并可通过微信/企业微信下达指令。","evidence":["OFF-WB-004"],"strength":"官方命名，缺少量化方法"},{"product":"workbuddy","company":"捷顺科技","industry":"企业服务/园区","caseType":"公开用户反馈","summary":"公开反馈称已向 15 个部门推广，并使用小程序端降低部署门槛。","evidence":["OFF-WB-004"],"strength":"官方命名，单方陈述"},{"product":"workbuddy","company":"麦芽传媒","industry":"营销与媒体","caseType":"公开用户反馈","summary":"公开反馈称 PPT、文档分析、图片设计环节提效，同时披露偶发报错、重试和卡顿。","evidence":["OFF-WB-004"],"strength":"同时包含收益与痛点"},{"product":"workbuddy","company":"上海教软","industry":"教育软件","caseType":"公开用户反馈","summary":"非开发人员借助内置专家在一周内完成 Web 应用。","evidence":["OFF-WB-004"],"strength":"官方命名，缺少基线对照"},{"product":"workbuddy","company":"招商银行等金融客户群","industry":"金融","caseType":"客户名录","summary":"企业版官网列出招商银行、招商证券、微众银行、易方达、中国太平等。","evidence":["OFF-WB-005"],"strength":"命名客户，未逐项说明使用范围"},{"product":"workbuddy","company":"美的/小米/荣耀/OPPO/Insta360","industry":"制造与硬件","caseType":"客户名录","summary":"企业版官网列出多家制造与消费电子客户。","evidence":["OFF-WB-005"],"strength":"命名客户，未逐项说明成效"},{"product":"workbuddy","company":"唯品会","industry":"零售电商","caseType":"客户名录","summary":"企业版官网客户名录包含唯品会。","evidence":["OFF-WB-005"],"strength":"命名客户，未披露成效"},{"product":"workbuddy","company":"圆通/德邦","industry":"物流","caseType":"客户名录","summary":"企业版官网客户名录包含圆通快递和德邦快递。","evidence":["OFF-WB-005"],"strength":"命名客户，未披露成效"},{"product":"doubao","company":"教育场景模板群","industry":"教育","caseType":"官方场景目录","summary":"教师教学、备课、出题批改等 Agent 模板密集；外部客户成效尚待公开证据。","evidence":["OFF-DB-004"],"strength":"官方场景证据"},{"product":"doubao","company":"金融研究与内容营销模板群","industry":"金融/营销","caseType":"官方场景目录","summary":"股票分析、短视频脚本、直播与营销等模板展示了行业意图；实际企业采用情况尚待公开证据。","evidence":["OFF-DB-004"],"strength":"官方场景证据"},{"product":"qwen","company":"官方资料未列出命名外部客户","industry":"多行业","caseType":"证据缺口","summary":"官方资料列出电商、教育、营销、金融等场景，但未见可核验的千问办公命名企业客户与量化效果。","evidence":["OFF-QW-001"],"strength":"明确证据缺口"}],"enterpriseLandscape":{"summary":"WorkBuddy Enterprise 官网客户案例区公开列出 25 个客户或业务品牌，覆盖 9 个行业组；其中包含腾讯内部产品品牌，外部付费客户数量仍需单独核验。豆包工作与千问办公的官方资料未提供同等级的命名企业客户清单，因此仅按场景覆盖记录。","rows":[{"industry":"金融","count":6,"entities":["招商银行","招商证券","WeBank 微众银行","易方达基金","中国太平保险","腾讯金融科技"],"evidence":["OFF-WB-005"]},{"industry":"消费电子与制造","count":5,"entities":["小米","荣耀","OPPO","Insta360","Midea 美的"],"evidence":["OFF-WB-005"]},{"industry":"协同办公与互联网","count":5,"entities":["腾讯文档","腾讯会议","微信","QQ","企业微信"],"evidence":["OFF-WB-005"]},{"industry":"游戏","count":2,"entities":["王者荣耀","和平精英"],"evidence":["OFF-WB-005"]},{"industry":"零售与汽车服务","count":2,"entities":["唯品会","易车"],"evidence":["OFF-WB-005"]},{"industry":"物流","count":2,"entities":["圆通快递","德邦快递"],"evidence":["OFF-WB-005"]},{"industry":"医疗健康","count":1,"entities":["腾讯健康"],"evidence":["OFF-WB-005"]},{"industry":"半导体与算力","count":1,"entities":["曦智科技"],"evidence":["OFF-WB-005"]},{"industry":"电信","count":1,"entities":["中国联通"],"evidence":["OFF-WB-005"]}],"evidenceGap":[{"product":"doubao","finding":"官方场景目录覆盖教育、金融研究、营销和内容生产，但未见可核验的命名外部企业清单或量化成效。","evidence":["OFF-DB-004"]},{"product":"qwen","finding":"官方资料覆盖电商、教育、营销、金融等场景，但未见可核验的命名企业客户与量化成效。","evidence":["OFF-QW-001"]}]},"opportunities":[{"name":"遗留系统 GUI 自动化服务","value":"在无 API 的 ERP、CRM、财务与行业客户端上，以 Computer Use 快速做 FDE 试点。","whyNow":"三家都在补浏览器/桌面操控，但可靠性与权限边界仍是空白。","buyer":"CIO、共享服务中心、业务运营","risk":"界面变动、权限、不可逆操作"},{"name":"跨生态连接器与编排层","value":"把飞书、企业微信、钉钉与行业系统连接，降低单一生态锁定。","whyNow":"企业选型高度依赖现有 IM，跨生态迁移成本正在上升。","buyer":"集团 IT、数字化部门","risk":"平台接口与商业合作限制"},{"name":"Agent 可观测与评测平台","value":"记录步骤、证据、重试、人工接管、时间、Credits 与交付质量。","whyNow":"产品普遍展示“做完”，企业真正缺少的是稳定性和可追责证据。","buyer":"AI CoE、内审、平台工程","risk":"需适配多产品日志格式"},{"name":"高风险操作审批中台","value":"在发送、删除、付款、审批、权限变更前统一做人审与策略控制。","whyNow":"电脑操控把对话模型升级为可以代表企业执行操作的系统。","buyer":"信息安全、法务、业务风控","risk":"流程摩擦与责任划分"},{"name":"行业 Skill 与 FDE 交付包","value":"将行业知识、数据连接、验收标准和 SOP 封装为可复制交付包。","whyNow":"三家都有 Skill/专家体系，但真实行业深度差异大。","buyer":"行业事业部、咨询公司、软件厂商","risk":"需要持续维护与领域责任"},{"name":"技能与记忆可迁移层","value":"导出提示、Skill、数据映射、评测集和操作日志，支持换平台。","whyNow":"社区已开始讨论数据、流程和技能的平台锁定。","buyer":"大型企业架构与采购","risk":"各平台格式不统一"},{"name":"Computer Use 成本优化与路由","value":"优先 API/连接器，只有无接口时才走 GUI；按任务动态选择模型和执行环境。","whyNow":"桌面操控慢且资源重，Credits 与本地资源成本将成为规模化瓶颈。","buyer":"平台运营、FinOps、AI CoE","risk":"需要精细任务分类"},{"name":"私有化浏览器/桌面执行节点","value":"在 VPC 或本地安全域运行浏览器与 GUI 执行，数据不出域。","whyNow":"金融、政务、医疗采用取决于数据驻留、审计和权限隔离。","buyer":"受监管行业 CIO/CISO","risk":"部署与运维成本高"}]},"runs":{"benchmarkId":"fde-commercialization-2026-08-25","protocol":{"samePrompt":true,"sameFiles":true,"maxMinutes":45,"runsPerProduct":1,"communicationScope":"仅个人空间、个人待办、个人日程和自我消息入口","files":["company-brief.md","financial-assumptions.xlsx","deliverable-spec.md"],"requiredOutputs":["00-run-log.md","01-industry-prioritization.xlsx","02-target-accounts.csv","03-fde-commercialization-plan.pptx","04-source-log.md","05-communication-check.md"]},"metrics":[{"id":"delivery","name":"交付完整性与格式","weight":20,"definition":"4 个核心文件与 2 个日志齐全，格式正确且可打开"},{"id":"quality","name":"分析质量与可用性","weight":20,"definition":"行业选择、财务模型、目标企业和管理层材料可直接使用"},{"id":"sources","name":"事实与来源","weight":10,"definition":"不少于 8 个公开来源，日期、用途与不确定性完整"},{"id":"time","name":"时效","weight":10,"definition":"首个可见结果、总耗时和 45 分钟截止是否清晰"},{"id":"stability","name":"单次运行稳定性","weight":10,"definition":"错误、重试、卡顿、恢复和人工接管；不外推长期稳定性"},{"id":"resources","name":"资源与可观测性","weight":5,"definition":"Credits、文件大小、工具使用和不可观测项均有记录"},{"id":"ecosystem","name":"通信应用连通性","weight":25,"definition":"自我消息、个人待办、个人日历、个人文件空间和连通日志"}],"runs":[{"product":"doubao","version":"147.0.7727.149","configuration":"输入与评分标准已固定；电脑操控需完成组件初始化","status":"prompt_ready_permission_blocked","start":null,"end":null,"results":{},"notes":["权限初始化受阻时计为环境限制，不据此推断其他能力。"]},{"product":"workbuddy","version":"5.3.14","configuration":"浏览器与电脑控制已通过产品内连接测试，等待独立复核","status":"ready_for_submission","start":null,"end":null,"results":{},"notes":["浏览器曾因本地代理 URL 尾部斜杠失败，清理后通过。"]},{"product":"qwen","version":"1.0.0.26082211","configuration":"浏览器与电脑操控连接正常，等待独立运行","status":"ready_for_submission","start":null,"end":null,"results":{},"notes":[]}]}};
+    const evidenceById = new Map(DATA.evidence.items.map(item => [item.id, item]));
+    const products = ["doubao", "workbuddy", "qwen"];
+    const productNames = {doubao: "飞书 + 豆包工作", workbuddy: "企业微信 + WorkBuddy", qwen: "钉钉 + 千问办公"};
+    const productMeta = {
+      doubao: {company: "字节跳动", strengths: ["飞书原生协同与主动办公", "多 Agent 团队与行业模板", "权限继承和敏感操作确认"], strengthIds: ["agent-multi", "eco-proactive", "eco-mail", "computer-confirm"]},
+      workbuddy: {company: "腾讯", strengths: ["旗舰、VPC 与私有化交付", "命名客户与行业覆盖密度", "企业级 Skill、专家与用量治理"], strengthIds: ["ent-vpc", "ent-private", "market-cases", "ent-usage"]},
+      qwen: {company: "阿里巴巴", strengths: ["Computer Use 文档与确认策略", "开放式 Skill 安装与分享", "个人版价格和积分透明度"], strengthIds: ["computer-background", "artifact-pdf", "market-price-personal", "agent-skills"]}
+    };
+    const isFeatureCovered = (cell) => cell.status !== "本次未发现";
+
+    const escapeHtml = (value) => String(value ?? "").replace(/[&<>\"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;","'":"&#039;"}[char]));
+    const linkFor = (item) => item.url ? '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noreferrer">打开来源</a>' : '<span>桌面核验</span>';
+    const featureStatusButton = (cell, product, featureId) => {
+      const covered = isFeatureCovered(cell);
+      const label = covered ? "有明确证据" : "待核验";
+      const decision = cell.note || (covered ? "已有官方资料或桌面核验证据" : "当前公开资料与桌面核验未形成明确证据");
+      return '<button class="feature-state ' + (covered ? 'covered' : 'uncovered') + '" data-evidence="' + escapeHtml((cell.evidence || []).join(",")) + '" data-decision="' + escapeHtml(decision) + '" aria-label="' + escapeHtml(productNames[product] + '，' + label + '，点击查看依据') + '">' + (covered ? '✓' : '×') + '</button>';
+    };
+
+    const categoryFilter = document.getElementById("category-filter");
+    const statusFilter = document.getElementById("status-filter");
+    const productFilter = document.getElementById("product-filter");
+    [...new Set(DATA.features.features.map(item => item.category))].forEach(category => categoryFilter.insertAdjacentHTML("beforeend", '<option value="' + escapeHtml(category) + '">' + escapeHtml(category) + '</option>'));
+    statusFilter.insertAdjacentHTML("beforeend", '<option value="covered">有明确证据</option><option value="uncovered">待核验</option>');
+
+    function renderFeatureOverview() {
+      const focus = productFilter.value;
+      document.getElementById("feature-overview").innerHTML = products.map(product => {
+        const cells = DATA.features.features.map(item => item[product]);
+        const covered = cells.filter(isFeatureCovered).length;
+        const uncovered = cells.length - covered;
+        const meta = productMeta[product];
+        return '<article class="feature-product-card' + (focus === product ? ' is-active' : '') + '" data-product="' + product + '"><div class="company">' + escapeHtml(meta.company) + '</div><h3>' + escapeHtml(productNames[product]) + '</h3><div class="feature-kpis"><div class="feature-kpi"><b>' + covered + '</b><span>有证据</span></div><div class="feature-kpi"><b>' + uncovered + '</b><span>待核验</span></div><div class="feature-kpi"><b>' + meta.strengthIds.length + '</b><span>优势项</span></div></div><ul class="feature-strengths">' + meta.strengths.map(item => '<li>' + escapeHtml(item) + '</li>').join("") + '</ul><button class="feature-focus-action" data-feature-focus="' + product + '">' + (focus === product ? '返回横向对照' : '查看该产品') + '</button></article>';
+      }).join("");
+    }
+
+    function renderFeatures() {
+      const search = document.getElementById("feature-search").value.trim().toLowerCase();
+      const category = categoryFilter.value;
+      const status = statusFilter.value;
+      const focus = productFilter.value;
+      const items = DATA.features.features.filter(item => {
+        const matchesText = !search || (item.name + " " + item.category).toLowerCase().includes(search);
+        const matchesCategory = !category || item.category === category;
+        const matchesCellStatus = cell => status === "covered" ? isFeatureCovered(cell) : !isFeatureCovered(cell);
+        const matchesStatus = !status || (focus ? matchesCellStatus(item[focus]) : products.some(product => matchesCellStatus(item[product])));
+        return matchesText && matchesCategory && matchesStatus;
+      });
+      const grouped = new Map();
+      items.forEach(item => {
+        if (!grouped.has(item.category)) grouped.set(item.category, []);
+        grouped.get(item.category).push(item);
+      });
+      document.getElementById("feature-body").innerHTML = [...grouped.entries()].map(([group, groupItems]) => groupItems.map((item, index) => '<tr>' + (index === 0 ? '<th class="category-group" scope="rowgroup" rowspan="' + groupItems.length + '">' + escapeHtml(group) + '</th>' : '') + '<td class="feature-name">' + escapeHtml(item.name) + '</td>' + products.map(product => '<td data-product-col="' + product + '">' + featureStatusButton(item[product], product, item.id) + '</td>').join("") + '</tr>').join("")).join("");
+      document.querySelectorAll("[data-product-col]").forEach(element => { element.hidden = Boolean(focus) && element.dataset.productCol !== focus; });
+      document.getElementById("feature-atlas").classList.toggle("single-product", Boolean(focus));
+      document.getElementById("matrix-count").textContent = '显示 ' + items.length + ' / ' + DATA.features.features.length + ' 项 · ' + grouped.size + ' 个能力大类';
+      renderFeatureOverview();
+    }
+    ["feature-search", "category-filter", "status-filter", "product-filter"].forEach(id => document.getElementById(id).addEventListener(id === "feature-search" ? "input" : "change", renderFeatures));
+    document.getElementById("feature-overview").addEventListener("click", event => {
+      const button = event.target.closest("[data-feature-focus]");
+      if (!button) return;
+      productFilter.value = productFilter.value === button.dataset.featureFocus ? "" : button.dataset.featureFocus;
+      renderFeatures();
+    });
+
+    function openEvidence(ids, decision = "") {
+      const items = ids.map(id => evidenceById.get(id)).filter(Boolean);
+      const decisionHtml = decision ? '<div class="note" style="margin-bottom:18px"><b>判定说明</b><br>' + escapeHtml(decision) + '</div>' : '';
+      document.getElementById("dialog-body").innerHTML = decisionHtml + (items.length ? items.map(item => '<article class="dialog-evidence"><div class="source-type">' + escapeHtml(item.id + ' · ' + item.type) + '</div><h4>' + escapeHtml(item.title) + '</h4><p>' + escapeHtml(item.summary) + '</p><div class="evidence-date">' + escapeHtml(item.version + ' · 观察 ' + item.observedAt) + ' · ' + linkFor(item) + '</div></article>').join("") : '<p>该状态暂未绑定详细证据。</p>');
+      document.getElementById("evidence-dialog").showModal();
+    }
+    document.addEventListener("click", event => {
+      const trigger = event.target.closest("[data-evidence]");
+      if (trigger) openEvidence(trigger.dataset.evidence.split(",").filter(Boolean), trigger.dataset.decision || "");
+    });
+    document.getElementById("dialog-close").addEventListener("click", () => document.getElementById("evidence-dialog").close());
+
+    document.getElementById("metric-weights").innerHTML = DATA.runs.metrics.map(metric => '<div class="weight-row"><span>' + escapeHtml(metric.name) + '</span><div class="weight-track"><div class="weight-bar" style="width:' + metric.weight + '%"></div></div><b>' + metric.weight + '%</b></div>').join("");
+    const runStatus = {
+      blocked_before_submission: ["权限验证受阻", "blocked"],
+      skipped_permission_blocked: ["权限验证受阻", "blocked"],
+      prompt_ready_permission_blocked: ["等待独立运行，权限初始化待验证", "blocked"],
+      ready_for_submission: ["等待独立运行", "ready"],
+      ready_with_mode_deviation: ["等待独立运行，存在模式差异", "deviation"],
+      running: ["运行中", "ready"],
+      completed: ["已完成", "ready"]
+    };
+    document.getElementById("run-grid").innerHTML = DATA.runs.runs.map(run => {
+      const state = runStatus[run.status] || [run.status, ""];
+      const results = Object.keys(run.results || {}).length ? Object.entries(run.results).map(([key,value]) => '<div class="metric-line"><span>' + escapeHtml(key) + '</span><span>' + escapeHtml(value) + '</span></div>').join("") : '<p>完整运行结果暂缺；本页不对交付质量、时效和稳定性作推断。</p>';
+      return '<article class="card run-card" data-product="' + run.product + '"><div class="card-kicker">' + escapeHtml(productNames[run.product]) + '</div><h3>' + escapeHtml(run.version) + '</h3><div class="run-status ' + state[1] + '">' + escapeHtml(state[0]) + '</div><div class="metric-line"><span>测试准备</span><span>' + escapeHtml(run.configuration) + '</span></div>' + results + '</article>';
+    }).join("");
+
+    const industryBody = document.getElementById("industry-body");
+    industryBody.innerHTML = DATA.cases.industries.map((item, index) => '<tr><td>' + escapeHtml(item.name) + '</td>' + products.map(product => { const covered = item[product] >= 2; const label = covered ? '覆盖' : '未覆盖'; return '<td><button class="heat-button ' + (covered ? 'heat-covered' : 'heat-uncovered') + '" data-industry="' + index + '" data-product="' + product + '" aria-label="' + escapeHtml(item.name + '，' + productNames[product] + '，' + label) + '">' + (covered ? '✓ 覆盖' : '× 未覆盖') + '</button></td>'; }).join("") + '</tr>').join("");
+    industryBody.addEventListener("click", event => {
+      const button = event.target.closest("[data-industry]");
+      if (!button) return;
+      const item = DATA.cases.industries[Number(button.dataset.industry)];
+      const covered = item[button.dataset.product] >= 2;
+      document.getElementById("industry-detail").textContent = item.name + ' · ' + productNames[button.dataset.product] + '：' + (covered ? '覆盖' : '未覆盖') + '。' + item.notes;
+    });
+
+    function renderCases() {
+      const product = document.getElementById("case-filter").value;
+      const items = DATA.cases.cases.filter(item => !product || item.product === product);
+      document.getElementById("case-list").innerHTML = items.map(item => '<article class="case-card"><div class="case-meta">' + escapeHtml(productNames[item.product] || item.product) + ' · ' + escapeHtml(item.industry) + ' · ' + escapeHtml(item.caseType) + '</div><h3>' + escapeHtml(item.company) + '</h3><p>' + escapeHtml(item.summary) + '</p><button class="case-strength" data-evidence="' + escapeHtml((item.evidence || []).join(",")) + '">' + escapeHtml(item.strength) + '</button></article>').join("");
+    }
+    document.getElementById("case-filter").addEventListener("change", renderCases);
+
+    document.getElementById("enterprise-landscape-summary").textContent = DATA.cases.enterpriseLandscape.summary;
+    document.getElementById("enterprise-landscape-body").innerHTML = DATA.cases.enterpriseLandscape.rows.map(item => '<tr><td>' + escapeHtml(item.industry) + '</td><td>' + escapeHtml(String(item.count)) + '</td><td>' + escapeHtml(item.entities.join('、')) + '</td><td><button class="case-strength" data-evidence="' + escapeHtml((item.evidence || []).join(",")) + '">官网命名，未逐项披露范围与成效</button></td></tr>').join("");
+    document.getElementById("enterprise-gap-list").innerHTML = DATA.cases.enterpriseLandscape.evidenceGap.map(item => '<article class="case-card"><div class="case-meta">' + escapeHtml(productNames[item.product]) + ' · 证据缺口</div><p>' + escapeHtml(item.finding) + '</p><button class="case-strength" data-evidence="' + escapeHtml((item.evidence || []).join(",")) + '">查看依据</button></article>').join("");
+
+    document.getElementById("opportunity-grid").innerHTML = DATA.cases.opportunities.map((item, index) => '<article class="card opportunity"><div><div class="card-kicker">机会 ' + String(index + 1).padStart(2, '0') + '</div><h3>' + escapeHtml(item.name) + '</h3><p>' + escapeHtml(item.value) + '</p><div class="metric-line"><span>现在为什么成立</span><span>' + escapeHtml(item.whyNow) + '</span></div><div class="metric-line"><span>核心买方</span><span>' + escapeHtml(item.buyer) + '</span></div></div><aside><b>主要风险</b><br>' + escapeHtml(item.risk) + '</aside></article>').join("");
+
+    function renderEvidenceList() {
+      const type = document.getElementById("evidence-type").value;
+      const search = document.getElementById("evidence-search").value.trim().toLowerCase();
+      const items = DATA.evidence.items.filter(item => (!type || item.type === type) && (!search || (item.title + ' ' + item.product + ' ' + item.summary).toLowerCase().includes(search)));
+      document.getElementById("evidence-list").innerHTML = items.map(item => '<article class="evidence-row"><div class="source-type">' + escapeHtml(item.id) + '</div><div><b>' + escapeHtml(item.title) + '</b><br>' + linkFor(item) + '</div><p>' + escapeHtml(item.summary) + '</p><div class="evidence-date">' + escapeHtml(item.observedAt) + '<br>' + escapeHtml(item.version) + '</div></article>').join("");
+    }
+    document.getElementById("evidence-type").addEventListener("change", renderEvidenceList);
+    document.getElementById("evidence-search").addEventListener("input", renderEvidenceList);
+
+    const navLinks = [...document.querySelectorAll(".nav a")];
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === '#' + entry.target.id));
+    }), {rootMargin: "-25% 0px -65% 0px"});
+    document.querySelectorAll("main section[id]").forEach(section => observer.observe(section));
+    document.getElementById("print-report").addEventListener("click", () => window.print());
+
+    renderFeatures();
+    renderCases();
+    renderEvidenceList();
+  </script>
+</body>
+</html>

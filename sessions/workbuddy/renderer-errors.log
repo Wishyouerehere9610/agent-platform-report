@@ -1,0 +1,2 @@
+{"timestamp":"2026-08-25T15:48:14.679Z","level":"error","scope":"renderer","message":["[renderer] Uncaught (in promise) TypeError: Failed to fetch (file:///C:/Program%20Files/WorkBuddy/resources/app.asar/renderer/assets/http-logger-BRAEwsxg.js:437)"]}
+{"timestamp":"2026-08-25T15:53:15.745Z","level":"error","scope":"renderer","message":["[renderer] Uncaught (in promise) TypeError: Failed to fetch (file:///C:/Program%20Files/WorkBuddy/resources/app.asar/renderer/assets/http-logger-BRAEwsxg.js:437)"]}

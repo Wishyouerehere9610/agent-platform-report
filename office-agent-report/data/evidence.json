@@ -1,0 +1,248 @@
+{
+  "updatedAt": "2026-08-25T23:40:00+08:00",
+  "methodology": "OBS 为桌面界面与操作记录；OFF 为官方资料；CASE 为官方或客户公开案例；MED 为媒体或独立分析；SOC 为社区内容。硬能力结论优先使用 OBS 与 OFF，社区内容仅用于补充采用动因与痛点。",
+  "items": [
+    {
+      "id": "OBS-DB-001",
+      "product": "doubao",
+      "type": "OBS",
+      "title": "豆包工作桌面环境连接状态与模式",
+      "url": "",
+      "observedAt": "2026-08-25",
+      "version": "147.0.7727.149",
+      "summary": "桌面端显示工作任务、连接器、定时任务、云盘和手机遥控电脑；浏览器与电脑操控仍停留在一次性“操作电脑屏幕”初始化阶段，完整验证依赖权限与组件状态。",
+      "supports": ["automatic-execution", "mobile-remote", "computer-use-blocked", "browser-control-pending"]
+    },
+    {
+      "id": "OBS-WB-001",
+      "product": "workbuddy",
+      "type": "OBS",
+      "title": "WorkBuddy 桌面环境连接状态与模式",
+      "url": "",
+      "observedAt": "2026-08-25",
+      "version": "5.3.14",
+      "summary": "产品内连接测试记录称 agent-browser v0.27.0、Chrome 152.0.7977.54 与电脑控制可用；浏览器首次因代理尾部斜杠失败，清理代理参数后通过。该结论仍需在统一测评中独立复核。",
+      "supports": ["automatic-execution", "browser-control-present", "computer-control-present", "proxy-recovery", "usage-observable"]
+    },
+    {
+      "id": "OBS-QW-001",
+      "product": "qwen",
+      "type": "OBS",
+      "title": "千问办公桌面环境连接状态",
+      "url": "",
+      "observedAt": "2026-08-25",
+      "version": "1.0.0.26082211",
+      "summary": "连接器面板显示浏览器与 Computer Use 均为 Open，产品内自测记录称 Edge 扩展 v1.5.5 与 Computer Use v0.1.5 已连通；统一测评前仍需独立复核。",
+      "supports": ["browser-control-present", "computer-control-present", "connectors"]
+    },
+    {
+      "id": "OBS-QW-002",
+      "product": "qwen",
+      "type": "OBS",
+      "title": "千问办公的自动执行设置",
+      "url": "",
+      "observedAt": "2026-08-25",
+      "version": "1.0.0.26082211",
+      "summary": "模型菜单提供高级、基础、经济与 Qwen3.8-Max。统一测评使用当前可用配置。",
+      "supports": ["automatic-execution-settings", "basic-selected"]
+    },
+    {
+      "id": "OFF-DB-001",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "豆包工作伙伴官方首页",
+      "url": "https://aily.feishu.cn/",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "官方定位为飞书上的 Agent 协作平台，披露风格、技能与记忆定制，多 Agent 自动拆解、并行推进与结果汇总，本地文件查询整理和报告产出，以及消息、文档、会议、邮箱、审批、任务等办公信号接入。",
+      "supports": ["feishu-native", "multi-agent", "cloud-agent", "local-computer", "proactive-work"]
+    },
+    {
+      "id": "OFF-DB-002",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "豆包工作伙伴企业安全机制",
+      "url": "https://aily.feishu.cn/",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "官方列出用户/Agent/网络三重隔离、继承企业权限、敏感操作人工确认和全流程留痕审计。",
+      "supports": ["isolation", "permission-inheritance", "human-confirmation", "audit"]
+    },
+    {
+      "id": "OFF-DB-003",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "飞书 AI 套餐与额度",
+      "url": "https://www.feishu.cn/service/ai?from=aily_home",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "基础版 9900 元/年含 18 万点，企业版 9.9 万元/年含 200 万点，均不限席位；企业版 Plus 与旗舰版联系销售。豆包工作伙伴包含在飞书 AI 套餐中。",
+      "supports": ["enterprise-pricing", "credits", "unlimited-seats"]
+    },
+    {
+      "id": "OFF-DB-004",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "豆包工作伙伴公开场景目录",
+      "url": "https://aily.feishu.cn/",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "官方展示教育、金融研究、市场营销、内容创作、短视频与直播、商业研究等专家与场景模板。",
+      "supports": ["education", "finance", "marketing", "media", "research"]
+    },
+    {
+      "id": "OFF-WB-001",
+      "product": "workbuddy",
+      "type": "OFF",
+      "title": "WorkBuddy 官方产品页",
+      "url": "https://cloud.tencent.com/product/workbuddy",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "官方定位为全场景 AI 办公工作台，明确披露自然语言理解、复杂任务拆解、工具调用、自我校验与修正，文字/图像/表格/代码的理解与生成，文档与图表解析，图片与视频产出，本地文件读写、文档生成与批处理，以及项目空间中的多 Agent 并行和流程复用。",
+      "supports": ["planning", "local-files", "multimodal", "experts", "skills-market", "cloud-hosting", "multi-agent"]
+    },
+    {
+      "id": "OFF-WB-002",
+      "product": "workbuddy",
+      "type": "OFF",
+      "title": "WorkBuddy Enterprise 定价与交付形态",
+      "url": "https://cloud.tencent.com/product/workbuddy-enterprise",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "旗舰版 198 元/人/月、1 席位起；专享版 316 元/人/月、100 席位起并支持 VPC/单租户；私有化版 300 席位起、数据不出域、按需报价。",
+      "supports": ["enterprise-pricing", "vpc", "single-tenant", "private-deployment", "data-locality"]
+    },
+    {
+      "id": "OFF-WB-003",
+      "product": "workbuddy",
+      "type": "OFF",
+      "title": "WorkBuddy Enterprise 安全治理",
+      "url": "https://cloud.tencent.com/product/workbuddy-enterprise",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "官方列出 Prompt 注入防护、五维数据隔离、全生命周期密文与审计、ISO/SOC/等保/数据安全法合规、MCP 授权校验和 AIGC 内容安全。",
+      "supports": ["prompt-injection-defense", "data-isolation", "audit", "compliance", "mcp-security", "content-safety"]
+    },
+    {
+      "id": "OFF-WB-004",
+      "product": "workbuddy",
+      "type": "OFF",
+      "title": "WorkBuddy 公开客户与用户之声",
+      "url": "https://cloud.tencent.com/product/workbuddy",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "官方页面展示腾讯、奔驰、捷顺科技、麦芽传媒、上海教软等公开反馈；其中麦芽传媒明确同时提到提效和偶发报错、重试、卡顿。",
+      "supports": ["customer-cases", "adoption", "errors-retries-lag"]
+    },
+    {
+      "id": "OFF-WB-005",
+      "product": "workbuddy",
+      "type": "CASE",
+      "title": "WorkBuddy Enterprise 客户名录",
+      "url": "https://cloud.tencent.com/product/workbuddy-enterprise",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "官网列出金融、消费电子、制造、零售、游戏、物流、电信等行业客户或业务品牌，包括招商银行、微众银行、小米、美的、唯品会、圆通、德邦和中国联通等；页面未逐一披露量化成效。",
+      "supports": ["finance", "manufacturing", "retail", "gaming", "logistics", "telecom"]
+    },
+    {
+      "id": "OFF-QW-001",
+      "product": "qwen",
+      "type": "OFF",
+      "title": "千问办公官方简介",
+      "url": "https://help.aliyun.com/zh/qwenwork/qwenwork-intro",
+      "observedAt": "2026-08-25",
+      "version": "文档更新 2026-08-25",
+      "summary": "官方称产品覆盖桌面、网页与钉钉，支持文档、表格、PPT、代码、网页和多媒体交付；具备个人云盘、IM、技能、连接器、云端定时任务和浏览器点击/输入/采集。",
+      "supports": ["dingtalk-native", "artifacts", "cloud-drive", "im", "skills", "connectors", "scheduled-tasks", "browser-automation"]
+    },
+    {
+      "id": "OFF-QW-002",
+      "product": "qwen",
+      "type": "OFF",
+      "title": "千问办公隐私与安全",
+      "url": "https://help.aliyun.com/zh/qwenwork/qw-privacy-security",
+      "observedAt": "2026-08-25",
+      "version": "文档更新 2026-08-03",
+      "summary": "官方说明数据存储在中国大陆，支持 TLS 与静态加密、最小权限、多因素认证与审批、日志审计、组织空间隔离、席位/用量/连接器管理，并提示正式提交前人工复核。",
+      "supports": ["china-data-residency", "encryption", "least-privilege", "audit", "org-isolation", "usage-control"]
+    },
+    {
+      "id": "OFF-QW-003",
+      "product": "qwen",
+      "type": "OFF",
+      "title": "千问办公个人版价格与积分",
+      "url": "https://help.aliyun.com/zh/qwenwork/qw-personal-benefits",
+      "observedAt": "2026-08-25",
+      "version": "文档更新 2026-08-03",
+      "summary": "个人免费版 0 元；标准版 98 元/月或连续包月 78 元/月；高级版 198 元/月或连续包月 158 元/月。积分包单价公开为 0.05 元/积分。",
+      "supports": ["personal-pricing", "free-tier", "credits"]
+    },
+    {
+      "id": "OFF-QW-004",
+      "product": "qwen",
+      "type": "OFF",
+      "title": "千问办公 Computer Use 文档",
+      "url": "https://help.aliyun.com/zh/qwenwork/computer-use",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "官方描述屏幕感知、点击/拖拽/键入、后台执行、跨应用流程、前后截图校验、每次询问/自动执行/禁用三种策略，并披露验证码、速度和复杂界面精度限制。",
+      "supports": ["screen-perception", "mouse-keyboard", "background-control", "cross-app", "verification", "confirmation-modes", "limitations"]
+    },
+    {
+      "id": "OFF-QW-005",
+      "product": "qwen",
+      "type": "OFF",
+      "title": "千问办公模型档位",
+      "url": "https://help.aliyun.com/zh/qwenwork/qw-model-selection-desktop",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "官方桌面端模型选择列出高级、基础、经济和 Qwen3.8-Max；高级用于重点项目决策和关键分析。",
+      "supports": ["model-selection", "automatic-execution-settings"]
+    },
+    {
+      "id": "OFF-QW-006",
+      "product": "qwen",
+      "type": "OFF",
+      "title": "千问办公 Skill 开放机制",
+      "url": "https://help.aliyun.com/zh/qwenwork/skills",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "支持内置 find-skill、Skill 广场、GitHub/开源社区安装、本地上传 SKILL.md、自动触发、团队分享和交互式 Skill UI。内置 pdf Skill 明确支持阅读、创建、合并、拆分、旋转、水印、表单、加密、图片提取与 OCR。",
+      "supports": ["skills-market", "open-skills", "local-skill-files", "team-sharing", "office-artifacts"]
+    },
+    {
+      "id": "SOC-001",
+      "product": "cross-product",
+      "type": "SOC",
+      "title": "Bilibili：WorkBuddy VS 千问办公",
+      "url": "https://www.bilibili.com/video/BV1Ny8G6dEJr/",
+      "observedAt": "2026-08-25",
+      "version": "发布于 2026-08-19",
+      "summary": "公开视频将两者按模型、专家/Skill、连接器、生态、浏览器/电脑控制和手机远程办公比较；作者结论是两者不存在单向碾压，选择高度取决于钉钉或微信/腾讯生态。此结论属于个人观点。",
+      "supports": ["ecosystem-fit", "social-comparison"]
+    },
+    {
+      "id": "MED-001",
+      "product": "cross-product",
+      "type": "MED",
+      "title": "ChooseAI：三款国内 AI 办公工具对比",
+      "url": "https://www.chooseai.net/news/6180/",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "独立工具媒体从产品形态、模型路线、办公交付和生态集成比较千问办公、WorkBuddy 与豆包工作；仅作为市场叙事参考，不替代官方或实测。",
+      "supports": ["market-positioning", "cross-product-comparison"]
+    },
+    {
+      "id": "SOC-002",
+      "product": "cross-product",
+      "type": "SOC",
+      "title": "知乎：办公 Agent 的平台资产与可迁移性讨论",
+      "url": "https://zhuanlan.zhihu.com/p/2068432655528490857",
+      "observedAt": "2026-08-25",
+      "version": "网页资料",
+      "summary": "文章提出办公 Agent 可能带来数据、流程、技能与模板的平台锁定风险。作者披露其与开源低代码产品存在利益相关，因此本报告仅吸收“可迁移性应纳入选型”的问题意识，不采信其竞品优劣结论。",
+      "supports": ["portability-risk", "ecosystem-lock-in"]
+    }
+  ]
+}
