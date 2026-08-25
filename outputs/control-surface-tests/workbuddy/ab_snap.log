@@ -1,0 +1,13 @@
+- heading "Agent Control Surface Test" [level=1, ref=e1]
+- textbox "测试代码" [ref=e7]
+- combobox "产品" [expanded=false, ref=e8]: 请选择
+  - option "请选择" [selected, ref=e10]
+  - option "飞书 + 豆包工作" [ref=e11]
+  - option "企业微信 + WorkBuddy" [ref=e12]
+  - option "钉钉 + 千问办公" [ref=e13]
+- checkbox "确认仅执行本地验证" [checked=false, ref=e9]
+- button "执行验证" [ref=e2]
+- button "保存会话标记" [ref=e3]
+- button "刷新并检查会话" [ref=e4]
+- button "下载结果" [ref=e5]
+- link "打开新标签页" [ref=e6]

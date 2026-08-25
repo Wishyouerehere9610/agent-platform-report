@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Control Surface Test</title>
+  <style>
+    :root { color-scheme: light; font-family: "Microsoft YaHei", system-ui, sans-serif; }
+    body { margin: 0; background: #f4f7fb; color: #172033; }
+    main { width: min(760px, calc(100% - 32px)); margin: 40px auto; }
+    section { background: #fff; border: 1px solid #dce4ef; border-radius: 16px; padding: 24px; box-shadow: 0 12px 32px rgba(26, 46, 79, .08); }
+    h1 { margin: 0 0 8px; font-size: 26px; }
+    p { line-height: 1.65; }
+    .grid { display: grid; gap: 16px; margin-top: 24px; }
+    label { display: grid; gap: 8px; font-weight: 600; }
+    input, select, button { box-sizing: border-box; min-height: 42px; border-radius: 10px; font: inherit; }
+    input, select { width: 100%; border: 1px solid #b8c5d8; padding: 8px 12px; }
+    .check { display: flex; align-items: center; gap: 10px; }
+    .check input { width: 18px; min-height: 18px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    button { border: 0; padding: 10px 16px; background: #2155d9; color: #fff; cursor: pointer; }
+    #result { margin-top: 16px; border-radius: 10px; padding: 12px; background: #eef2f7; font-family: Consolas, monospace; }
+    .pass { background: #e5f7ec !important; color: #116232; }
+    .fail { background: #fdeaea !important; color: #9a2020; }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <h1>Agent Control Surface Test</h1>
+      <p>这是本机测试页，不向外部服务发送任何数据。填写三项信息并执行验证即可。</p>
+
+      <div class="grid">
+        <label for="code">测试代码
+          <input id="code" autocomplete="off" placeholder="请输入测试代码">
+        </label>
+
+        <label for="product">产品
+          <select id="product">
+            <option value="">请选择</option>
+            <option value="doubao">飞书 + 豆包工作</option>
+            <option value="workbuddy">企业微信 + WorkBuddy</option>
+            <option value="qwen">钉钉 + 千问办公</option>
+          </select>
+        </label>
+
+        <label class="check" for="confirm">
+          <input id="confirm" type="checkbox">
+          <span>确认仅执行本地验证</span>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="verify" type="button">执行验证</button>
+      </div>
+
+      <div id="result" role="status">WAITING</div>
+    </section>
+  </main>
+
+  <script>
+    const expectedCode = "AGENT-CONTROL-20260826";
+    const codeInput = document.querySelector("#code");
+    const productSelect = document.querySelector("#product");
+    const confirmation = document.querySelector("#confirm");
+    const result = document.querySelector("#result");
+    document.querySelector("#verify").addEventListener("click", () => {
+      const product = productSelect.value;
+      const passed = codeInput.value === expectedCode && product && confirmation.checked;
+      result.textContent = passed ? `BROWSER_TEST_PASS:${product}:${expectedCode}` : "BROWSER_TEST_FAIL";
+      result.className = passed ? "pass" : "fail";
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+- main
+  - generic
+    - heading "Agent Control Surface Test" [level=1, ref=e1]
+    - paragraph
+      - StaticText "这是本机测试页，不向外部服务发送任何数据。请按评测指令完成输入、选择、勾选、验证、会话保存和下载。"
+    - LabelText
+      - StaticText "测试代码"
+      - textbox "测试代码" [ref=e7]: AGENT-CONTROL-20260826
+        - StaticText "AGENT-CONTROL-20260826"
+    - LabelText
+      - StaticText "产品"
+      - combobox "产品" [expanded=false, ref=e8]: 企业微信 + WorkBuddy
+        - MenuListPopup
+          - option "请选择" [ref=e10]
+          - option "飞书 + 豆包工作" [ref=e11]
+          - option "企业微信 + WorkBuddy" [selected, ref=e12]
+          - option "钉钉 + 千问办公" [ref=e13]
+    - LabelText
+      - checkbox "确认仅执行本地验证" [checked=true, ref=e9]
+      - StaticText "确认仅执行本地验证"
+    - button "执行验证" [ref=e2]
+    - button "保存会话标记" [ref=e3]
+    - button "刷新并检查会话" [ref=e4]
+    - button "下载结果" [ref=e5]
+    - link "打开新标签页" [ref=e6]
+    - status
+      - StaticText "BROWSER_TEST_FAIL"
+    - status
+      - StaticText "SESSION_EMPTY"

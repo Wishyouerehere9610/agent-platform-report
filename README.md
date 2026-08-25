@@ -19,6 +19,8 @@
 
 Computer Use、Browser Use 与 In-app Browser 的跨产品分析见 `office-agent-report/evidence/control-surface-analysis.md`，对应的呈现层数据见 `office-agent-report/data/control-surfaces.json`。
 
+三款产品的最小实测原始记录与统一判定见 `outputs/control-surface-tests/`。本轮只测试本机页面表单、可见记事本保存和客户端内页面标题读取。
+
 ## 数据说明
 
 - 三组产物均保留原始文件格式，包括 XLSX、CSV、PPTX 和 Markdown。

@@ -1,110 +1,123 @@
 {
-  "updatedAt": "2026-08-26T00:00:00+08:00",
-  "scope": "Computer Use、Browser Use 与 In-app Browser 的实现方式、实际工具路径和证据边界",
-  "definitions": [
-    {
-      "id": "computer-use",
-      "name": "Computer Use",
-      "definition": "根据屏幕状态操作桌面应用，包括点击、键入、滚动、拖拽和跨应用流程。",
-      "verificationRule": "至少完成一次屏幕识别、输入动作和结果校验；Python、Bash 和 CLI 单独统计。"
-    },
-    {
-      "id": "browser-use",
-      "name": "Browser Use",
-      "definition": "控制浏览器页面，包括导航、点击、输入、表单、下载和网页状态读取。",
-      "verificationRule": "至少完成一次真实网页交互；WebSearch、WebFetch 和 general_search 不计为浏览器 GUI。"
-    },
-    {
-      "id": "in-app-browser",
-      "name": "In-app Browser",
-      "definition": "由 Agent 客户端托管或嵌入的浏览器运行环境。",
-      "verificationRule": "确认页面在客户端内运行，并验证登录态、下载、弹窗、新标签页和会话复用。"
-    }
-  ],
+  "updatedAt": "2026-08-26T01:45:00+08:00",
+  "scope": "三款办公 Agent 的 Browser Use、Computer Use 与 In-app Browser 最小实测",
+  "statusLegend": {
+    "PASS": "最小动作完成，并有页面状态或文件结果可核验",
+    "PARTIAL": "入口或部分动作已验证，关键闭环仍缺失",
+    "BLOCKED": "入口存在，初始化或授权门槛阻断执行",
+    "UNAVAILABLE": "当前 Agent 工具面未发现符合定义的入口"
+  },
+  "testDefinition": {
+    "browserUse": "本机页面完成输入、选择、勾选、点击并读取 BROWSER_TEST_PASS",
+    "computerUse": "可见记事本输入指定文本并保存 computer-use.txt",
+    "inAppBrowser": "Agent 客户端内部打开本机页面并读取标题",
+    "excluded": [
+      "WebSearch",
+      "WebFetch",
+      "general_search",
+      "CLI",
+      "HTTP 请求",
+      "脚本",
+      "文件 API",
+      "办公连接器"
+    ]
+  },
   "products": [
     {
       "id": "doubao",
       "name": "飞书 + 豆包工作",
-      "orchestration": "Auto 高；多 Agent 拆解；MainAgent 与子 Agent 存在沙箱环境边界。",
-      "computerUse": {
-        "mechanism": "computer_env_init 启动 Agent 沙箱中的电脑控制环境",
-        "evidenceState": "环境或权限阻塞",
-        "actualRun": "调用 2 次，均因 PIP 初始化失败；没有完成视觉桌面操作。"
-      },
       "browserUse": {
-        "mechanism": "general_search 负责检索；GUI 浏览器依赖电脑环境",
-        "evidenceState": "检索已实测，GUI 阻塞",
-        "actualRun": "general_search 8 次；浏览器 GUI 0 次。"
+        "mechanism": "浏览器操作与桌面执行环境共用初始化和录制授权门槛",
+        "result": "BLOCKED",
+        "evidenceClass": "环境阻塞",
+        "actualRun": "任务已提交，桌面录制授权提示出现；未产生本机页面结果。",
+        "evidence": ["outputs/control-surface-tests/doubao/evaluator-normalized.md"]
+      },
+      "computerUse": {
+        "mechanism": "由电脑控制环境执行可见桌面动作",
+        "result": "BLOCKED",
+        "evidenceClass": "环境阻塞",
+        "actualRun": "录制授权提示阻断初始化，记事本输入与保存没有执行。",
+        "evidence": ["outputs/control-surface-tests/doubao/evaluator-normalized.md"]
       },
       "inAppBrowser": {
-        "mechanism": "产品内工作台和浏览器入口迹象",
-        "evidenceState": "未完成独立验证",
-        "actualRun": "未验证客户端内页面、登录态、下载和会话复用。"
+        "mechanism": "客户端右侧内嵌浏览器，具备标签页、地址栏和导航控件",
+        "result": "PARTIAL",
+        "evidenceClass": "人工确认入口",
+        "actualRun": "入口与控件已在可见界面确认；本轮未完成测试页标题读取。",
+        "evidence": ["outputs/control-surface-tests/doubao/evaluator-normalized.md", "OBS-DB-002"]
       },
-      "officeIntegration": "MainAgent 通过 lark-cli 完成飞书消息、待办、日历、文件夹和文件上传。",
-      "strengths": ["多 Agent 并行", "飞书原生信号接入", "沙箱隔离"],
-      "limitations": ["子 Agent 工具和认证上下文不完整", "Computer Use 初始化失败", "In-app Browser 缺少闭环"],
-      "evidence": ["OBS-DB-001", "OFF-DB-001", "OFF-DB-002", "outputs/doubao/00-run-log.md"]
+      "strengths": ["客户端内浏览器入口清晰", "多 Agent 编排", "飞书协同入口"],
+      "limitations": ["本轮受录制授权阻塞", "三项测试没有 Agent 结果文件", "客户端内页面读取未闭环"]
     },
     {
       "id": "workbuddy",
       "name": "企业微信 + WorkBuddy",
-      "orchestration": "Auto；支持项目空间、多 Agent、脚本和多种 CLI/MCP 工具。",
-      "computerUse": {
-        "mechanism": "独立电脑控制能力；产品内连接测试记录为可用",
-        "evidenceState": "存在但未执行",
-        "actualRun": "主要使用 Python 和 Bash；没有完成视觉桌面操作。"
-      },
       "browserUse": {
-        "mechanism": "agent-browser 0.27.0 + Chrome 152",
-        "evidenceState": "产品内连接测试通过，统一任务未独立复核",
-        "actualRun": "WebSearch 6 次；浏览器 GUI 0 次。"
+        "mechanism": "agent-browser 0.27.0 驱动独立 Chromium",
+        "result": "PASS",
+        "evidenceClass": "Agent 自主执行",
+        "actualRun": "完成表单操作并读取 BROWSER_TEST_PASS:workbuddy:AGENT-CONTROL-20260826。",
+        "evidence": ["outputs/control-surface-tests/workbuddy/result.md", "outputs/control-surface-tests/workbuddy/browser-use-evidence.png"]
+      },
+      "computerUse": {
+        "mechanism": "本次 Agent 工具面没有 Windows 原生桌面控制入口",
+        "result": "UNAVAILABLE",
+        "evidenceClass": "Agent 自主执行",
+        "actualRun": "没有合规操作路径，computer-use.txt 未生成。",
+        "evidence": ["outputs/control-surface-tests/workbuddy/result.md", "outputs/control-surface-tests/workbuddy/evaluator-normalized.md"]
       },
       "inAppBrowser": {
-        "mechanism": "可能由 agent-browser 托管浏览器运行时",
-        "evidenceState": "证据不足",
-        "actualRun": "未确认用户可见的内嵌页面、登录态复用、下载和会话延续。"
+        "mechanism": "客户端存在 WebView 组件，未发现 Agent 可控的通用客户端内浏览器",
+        "result": "UNAVAILABLE",
+        "evidenceClass": "Agent 自主执行与评估者归一化",
+        "actualRun": "未在客户端内打开测试页，未读取页面标题。",
+        "evidence": ["outputs/control-surface-tests/workbuddy/result.md", "outputs/control-surface-tests/workbuddy/evaluator-normalized.md"]
       },
-      "officeIntegration": "使用 lark-cli、wecom-cli 和 dws 探测办公生态；企业微信个人资源链路未打通。",
-      "strengths": ["工具接入面广", "脚本自动化", "多 Agent 和 MCP 扩展"],
-      "limitations": ["本次电脑操作口径混入脚本执行", "企业微信连接器与个人资源场景不匹配", "In-app Browser 形态未确认"],
-      "evidence": ["OBS-WB-001", "OFF-WB-001", "OFF-WB-003", "outputs/workbuddy/00-run-log.md"]
+      "strengths": ["浏览器动作链完整", "证据文件齐全", "独立运行时利于复现"],
+      "limitations": ["当前工具面缺少桌面 GUI 控制", "WebView 组件无法证明通用内嵌浏览器", "企业微信个人资源链路仍需单独验证"]
     },
     {
       "id": "qwen",
       "name": "钉钉 + 千问办公",
-      "orchestration": "本次使用基础模式；单 Agent 手动编排，无 Auto 规划器。",
-      "computerUse": {
-        "mechanism": "独立 Computer Use 0.1.5；官方披露屏幕感知、后台执行、跨应用和截图校验",
-        "evidenceState": "入口与官方机制明确，完整任务未执行",
-        "actualRun": "cmd start 2 次打开 OAuth 页面；没有完成视觉桌面长流程。"
-      },
       "browserUse": {
-        "mechanism": "Edge 扩展 1.5.5",
-        "evidenceState": "连接状态可见，统一任务未独立复核",
-        "actualRun": "WebSearch 6 次、WebFetch 5 次；浏览器 GUI 0 次。"
+        "mechanism": "内置浏览器 MCP 通过 Edge 扩展 1.5.5 操作页面",
+        "result": "PASS",
+        "evidenceClass": "Agent 自主执行",
+        "actualRun": "完成页面导航、表单填写、点击和结果读取，得到 BROWSER_TEST_PASS:qwen:AGENT-CONTROL-20260826。",
+        "evidence": ["outputs/control-surface-tests/qwen/result.md"]
+      },
+      "computerUse": {
+        "mechanism": "独立 Computer Use 0.1.5 连接器",
+        "result": "PARTIAL",
+        "evidenceClass": "Agent 自主执行",
+        "actualRun": "记事本启动、界面识别与指定文本输入成功；另存为阶段多次焦点漂移，computer-use.txt 未生成。",
+        "evidence": ["outputs/control-surface-tests/qwen/result.md", "outputs/control-surface-tests/qwen/evaluator-normalized.md"]
       },
       "inAppBrowser": {
-        "mechanism": "当前证据指向外部 Edge 扩展和系统默认浏览器",
-        "evidenceState": "本次未发现",
-        "actualRun": "OAuth 页面由默认浏览器打开；未发现独立内嵌浏览器闭环。"
+        "mechanism": "网页自动化走外部 Edge 扩展；当前客户端未发现通用内嵌浏览器",
+        "result": "UNAVAILABLE",
+        "evidenceClass": "Agent 自主执行",
+        "actualRun": "“我的网页”不满足任意 URL 导航要求，未形成客户端内页面结果。",
+        "evidence": ["outputs/control-surface-tests/qwen/result.md"]
       },
-      "officeIntegration": "通过 DWS MCP/连接器发起钉钉授权；授权未完成，四项动作未执行。",
-      "strengths": ["浏览器与桌面控制明确分离", "确认策略清晰", "官方披露后台和跨应用控制"],
-      "limitations": ["本次基础模式缺少 Auto 规划", "钉钉授权未完成", "视觉控制缺少完整实测"],
-      "evidence": ["OBS-QW-001", "OFF-QW-001", "OFF-QW-004", "outputs/qwen/00-run-log.md"]
+      "strengths": ["浏览器扩展交互完整", "桌面控制步骤可观察", "浏览器与桌面工具边界清晰"],
+      "limitations": ["多窗口焦点漂移", "文件保存未闭环", "当前客户端无合格 In-app Browser"]
     }
   ],
   "actualRunSummary": {
-    "visualBrowserRuns": 0,
+    "browserUse": {"PASS": 2, "PARTIAL": 0, "BLOCKED": 1, "UNAVAILABLE": 0},
+    "computerUse": {"PASS": 0, "PARTIAL": 1, "BLOCKED": 1, "UNAVAILABLE": 1},
+    "inAppBrowser": {"PASS": 0, "PARTIAL": 1, "BLOCKED": 0, "UNAVAILABLE": 2},
+    "completedVisualBrowserFlows": 2,
     "completedComputerUseFlows": 0,
-    "finding": "本次任务主要验证了搜索、网页抓取、脚本生成、文件处理和办公连接器；视觉 Browser Use、Computer Use 与 In-app Browser 仍需单独同题测评。"
+    "completedInAppTitleReads": 0,
+    "finding": "Browser Use 已出现两条可复核成功链路；Computer Use 与 In-app Browser 仍需解决权限、焦点和入口可控性。"
   },
-  "benchmarkRecommendations": [
-    "设置禁用搜索接口、CLI 和业务 API 的视觉控制专项测试。",
-    "Browser Use 统一测试导航、筛选、表单、下载、新标签页和错误恢复。",
-    "Computer Use 统一测试屏幕读取、跨应用复制、保存和结果校验。",
-    "In-app Browser 统一测试登录态复用、下载回传、弹窗和任务重启后的会话延续。",
-    "再开放全部工具执行同题，比较生产效率、稳定性和人工介入。"
+  "evidenceBoundary": [
+    "单次本机测试不外推长期稳定率",
+    "Agent 自述与评估者归一化分别保存",
+    "人工确认入口不等于 Agent 自主执行成功",
+    "授权阻塞不等于产品长期不可用"
   ]
 }

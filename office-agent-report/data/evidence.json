@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T23:40:00+08:00",
+  "updatedAt": "2026-08-26T01:45:00+08:00",
   "methodology": "OBS 为桌面界面与操作记录；OFF 为官方资料；CASE 为官方或客户公开案例；MED 为媒体或独立分析；SOC 为社区内容。硬能力结论优先使用 OBS 与 OFF，社区内容仅用于补充采用动因与痛点。",
   "items": [
     {
@@ -12,6 +12,17 @@
       "version": "147.0.7727.149",
       "summary": "桌面端显示工作任务、连接器、定时任务、云盘和手机遥控电脑；浏览器与电脑操控仍停留在一次性“操作电脑屏幕”初始化阶段，完整验证依赖权限与组件状态。",
       "supports": ["automatic-execution", "mobile-remote", "computer-use-blocked", "browser-control-pending"]
+    },
+    {
+      "id": "OBS-DB-002",
+      "product": "doubao",
+      "type": "OBS",
+      "title": "豆包工作客户端内浏览器入口",
+      "url": "",
+      "observedAt": "2026-08-26",
+      "version": "本机当前版本（版本号未展示）",
+      "summary": "客户端右侧内嵌浏览器在可见界面中展示标签页、地址栏、后退、前进、刷新和新窗口入口。本轮最小测试未完成本机页面标题读取，因此只确认入口与控件。",
+      "supports": ["in-app-browser-present", "browser-controls-visible", "in-app-title-unverified"]
     },
     {
       "id": "OBS-WB-001",
