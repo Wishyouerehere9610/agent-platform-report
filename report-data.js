@@ -4061,6 +4061,17 @@ window.REPORT_DATA = {
       {
         "id": "doubao",
         "route": "虚拟桌面 + 云电脑双模",
+        "scores": {
+          "browser": 8.5,
+          "computer": 9
+        },
+        "comparison": {
+          "apiBypass": "是",
+          "virtualDesktop": "Windows 虚拟桌面 + 云电脑",
+          "legacySystems": "可以",
+          "background": "云电脑后台与定时任务",
+          "trigger": "飞书侧边栏 / 手机遥控"
+        },
         "browser": {
           "summary": "在飞书 Web 视图或虚拟桌面浏览器中完成搜索、填表和结果写回。",
           "evidence": [
@@ -4121,6 +4132,17 @@ window.REPORT_DATA = {
       {
         "id": "workbuddy",
         "route": "本地/云端 Browser + OS 级视觉操控",
+        "scores": {
+          "browser": 8,
+          "computer": 9.5
+        },
+        "comparison": {
+          "apiBypass": "OS 级视觉，绕开应用 API",
+          "virtualDesktop": "本地沙箱 + 多 Agent 并行",
+          "legacySystems": "可以",
+          "background": "本地后台 + 云端托管",
+          "trigger": "微信 / 企业微信远程任务"
+        },
         "browser": {
           "summary": "本地模式复用登录态，云端模式适合批量网页任务和后台长任务。",
           "evidence": [
@@ -4179,6 +4201,17 @@ window.REPORT_DATA = {
       {
         "id": "qwen",
         "route": "桌面客户端 + 云端 Agent",
+        "scores": {
+          "browser": 8.5,
+          "computer": 6.5
+        },
+        "comparison": {
+          "apiBypass": "部分",
+          "virtualDesktop": "无独立虚拟桌面",
+          "legacySystems": "部分",
+          "background": "云端定时；无独立桌面挂机",
+          "trigger": "钉钉 / Web / 桌面"
+        },
         "browser": {
           "summary": "云端 Agent 执行网页采集和批处理，主要差异来自钉钉与阿里生态数据。",
           "evidence": [

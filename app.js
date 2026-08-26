@@ -21,16 +21,6 @@ const evidenceTypes = {
   RES: "补充调研"
 };
 
-const capabilityTone = {
-  "能": "yes",
-  "有": "yes",
-  "部分能": "partial",
-  "未完成": "blocked",
-  "未见入口": "no",
-  "✅ 支持": "yes",
-  "未见": "no"
-};
-
 const industryLabels = {
   0: "暂无证据",
   1: "能力可用",
@@ -47,7 +37,6 @@ const escapeHtml = (value = "") => String(value)
 
 const insights = report.insights;
 const runs = report.runs;
-const controls = report.controlSurfaces;
 const cases = report.cases;
 const evidence = report.evidence;
 
@@ -158,29 +147,14 @@ function renderControlConcepts() {
     </article>
   `).join("");
 
-  document.querySelector("#control-result").innerHTML = `
-    <strong>公开能力与本次结果分开看。</strong>
-    <p>${escapeHtml(controls.actualRunSummary.finding)} 本次失败只说明当前版本和测试环境，不能直接改写产品能力。</p>
-  `;
-
-  document.querySelector("#control-profile-list").innerHTML = insights.controlProfiles.map((profile) => {
+  document.querySelector("#control-product-stack").innerHTML = insights.controlProfiles.map((profile) => {
     const meta = productMeta[profile.id];
     return `
-      <article class="control-profile">
-        <div class="control-profile-title"><span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3><p>${escapeHtml(profile.route)}</p></div>
-        <div class="control-profile-capability"><span>Browser Use</span><p>${escapeHtml(profile.browser.summary)}</p></div>
-        <div class="control-profile-capability"><span>Computer Use</span><p>${escapeHtml(profile.computer.summary)}</p></div>
-        <div class="control-profile-fit"><span>适合</span><p>${escapeHtml(profile.bestFor)}</p></div>
-        <div class="control-profile-fit"><span>限制</span><p>${escapeHtml(profile.limit)}</p></div>
-      </article>
-    `;
-  }).join("");
-
-  document.querySelector("#control-deep-dives").innerHTML = insights.controlProfiles.map((profile) => {
-    const meta = productMeta[profile.id];
-    return `
-      <article class="control-deep-dive">
-        <header><div><span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3></div><strong>${escapeHtml(profile.route)}</strong></header>
+      <article class="control-product-card theme-${profile.id}">
+        <header>
+          <div><span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3><p>${escapeHtml(profile.route)}</p></div>
+          <div class="product-scores"><div><span>Browser Use</span><strong>${profile.scores.browser.toFixed(1)}</strong></div><div><span>Computer Use</span><strong>${profile.scores.computer.toFixed(1)}</strong></div></div>
+        </header>
         <div class="implementation-grid">
           <section><span>Browser Use 实现</span><p>${escapeHtml(profile.implementation.browser)}</p></section>
           <section><span>Computer Use 实现</span><p>${escapeHtml(profile.implementation.computer)}</p></section>
@@ -191,27 +165,30 @@ function renderControlConcepts() {
           <section><span>限制</span><ul>${profile.limitations.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
         </div>
         <ol class="product-timeline">${profile.timeline.map((item) => `<li><time>${escapeHtml(item.date)}</time><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></div></li>`).join("")}</ol>
+        <footer><span>本次实测</span><p>${escapeHtml(profile.currentRun)}</p></footer>
       </article>
     `;
   }).join("");
 
   document.querySelector("#practice-notes").innerHTML = insights.practiceNotes.map((item) => `<article><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.note)}</p></article>`).join("");
 
-  document.querySelector("#control-body").innerHTML = insights.controlProfiles.map((profile) => {
-    const meta = productMeta[profile.id];
-    return `
-      <tr>
-        <th scope="row">${escapeHtml(meta.name)}</th>
-        <td>${renderControlState("✅ 支持", profile.browser.summary)}</td>
-        <td>${renderControlState("✅ 支持", profile.computer.summary)}</td>
-        <td>${escapeHtml(profile.currentRun)}</td>
-      </tr>
-    `;
+  document.querySelector("#control-scoreboard").innerHTML = ["computer", "browser"].map((kind) => {
+    const label = kind === "computer" ? "Computer Use" : "Browser Use";
+    const profiles = [...insights.controlProfiles].sort((a, b) => b.scores[kind] - a.scores[kind]);
+    return `<section class="score-panel"><span>${label} · 补充调研评分</span>${profiles.map((profile) => `<div class="score-row theme-${profile.id}"><strong>${escapeHtml(productMeta[profile.id].short)}</strong><i><b style="width:${profile.scores[kind] * 10}%"></b></i><em>${profile.scores[kind].toFixed(1)}</em></div>`).join("")}</section>`;
   }).join("");
-}
 
-function renderControlState(label, note) {
-  return `<strong class="state ${capabilityTone[label] || "no"}">${escapeHtml(label)}</strong><span class="cell-note">${escapeHtml(note)}</span>`;
+  const dimensions = [
+    ["技术流派", (profile) => profile.route],
+    ["是否绕开 API", (profile) => profile.comparison.apiBypass],
+    ["虚拟桌面 / 云电脑", (profile) => profile.comparison.virtualDesktop],
+    ["可接管无 API 老系统", (profile) => profile.comparison.legacySystems],
+    ["后台运行", (profile) => profile.comparison.background],
+    ["典型触发方式", (profile) => profile.comparison.trigger],
+    ["Browser Use 综合", (profile) => profile.scores.browser.toFixed(1)],
+    ["Computer Use 综合", (profile) => profile.scores.computer.toFixed(1)]
+  ];
+  document.querySelector("#control-comparison-body").innerHTML = dimensions.map(([label, getter]) => `<tr><th scope="row">${escapeHtml(label)}</th>${insights.controlProfiles.map((profile) => `<td>${escapeHtml(getter(profile))}</td>`).join("")}</tr>`).join("");
 }
 
 function renderIndustries() {

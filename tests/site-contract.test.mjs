@@ -98,13 +98,20 @@ test("delivery test separates business outputs from trajectory observation", () 
   assert.match(html, /id=["']trajectory-artifacts["']/);
   assert.match(html, /id=["']delivery-assessment["']/);
   assert.match(app, /renderBenchmarkBrief/);
+  const assignment = html.match(/<article class="benchmark-assignment">[\s\S]*?<\/article>/)?.[0] || "";
+  assert.match(assignment, /id="trajectory-artifacts"/);
 });
 
-test("control tab includes product deep dives, timelines and practice notes without the test screenshot", () => {
+test("control tab introduces each product once and keeps one comparison matrix", () => {
   const html = read("index.html");
-  assert.match(html, /id=["']control-deep-dives["']/);
+  const app = read("app.js");
+  assert.match(html, /id=["']control-product-stack["']/);
+  assert.match(html, /id=["']control-scoreboard["']/);
+  assert.match(html, /id=["']control-comparison-body["']/);
   assert.match(html, /id=["']practice-notes["']/);
-  assert.doesNotMatch(html, /evidence-figure|browser-evidence-workbuddy/);
+  assert.doesNotMatch(html, /control-profile-list|control-deep-dives|control-body|evidence-figure|browser-evidence-workbuddy/);
+  assert.match(app, /theme-\$\{profile\.id\}/);
+  assert.match(app, /补充调研评分/);
 });
 
 test("public page uses the focused feature matrix without old checklist controls", () => {
