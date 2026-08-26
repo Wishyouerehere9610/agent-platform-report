@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="飞书与豆包工作、企业微信与 WorkBuddy、钉钉与千问办公的功能覆盖、单次实测、行业应用与商业机会。">
+  <meta name="theme-color" content="#f4f7f6">
+  <meta property="og:title" content="三款办公 Agent 产品组合">
+  <meta property="og:description" content="功能覆盖、单次实测、行业应用与商业机会。">
+  <meta property="og:type" content="website">
+  <title>三款办公 Agent 产品组合</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#overview" aria-label="返回报告开头">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>Office Agent Report</span>
+      </a>
+      <nav class="primary-nav" aria-label="报告章节">
+        <a href="#feature-matrix">功能</a>
+        <a href="#benchmark">办事测评</a>
+        <a href="#control-surfaces">操控测评</a>
+        <a href="#industries">行业</a>
+        <a href="#opportunities">机会</a>
+      </nav>
+      <div class="topbar-actions">
+        <a class="repo-link" href="https://github.com/Wishyouerehere9610/agent-platform-report" target="_blank" rel="noreferrer">GitHub</a>
+        <button class="theme-button" id="theme-button" type="button" title="切换明暗外观" aria-label="切换明暗外观">明暗</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="overview">
+      <div class="hero-main">
+        <p class="eyebrow">公开研究 · 2026-08-26</p>
+        <h1>三款办公 Agent<br>产品组合</h1>
+        <p class="hero-lead">功能覆盖、单次实测、行业应用与商业机会。每条结论都能回到来源或日志。</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#benchmark">看实测结果</a>
+          <a class="secondary-action" href="#feature-matrix">查功能矩阵</a>
+        </div>
+      </div>
+      <div class="hero-evidence" aria-label="研究范围">
+        <p class="hero-evidence-title">本次研究比较</p>
+        <ol>
+          <li><span>飞书</span><strong>豆包工作</strong></li>
+          <li><span>企业微信</span><strong>WorkBuddy</strong></li>
+          <li><span>钉钉</span><strong>千问办公</strong></li>
+        </ol>
+        <p class="hero-boundary">每款产品只运行一次。页面不把单次结果换算为长期成功率。</p>
+      </div>
+      <div class="hero-stats" id="hero-stats" aria-label="研究数据概览"></div>
+    </section>
+
+    <section class="section verdict-section" aria-labelledby="verdict-title">
+      <div class="section-heading compact-heading">
+        <h2 id="verdict-title">本次能确认什么</h2>
+      </div>
+      <div class="verdict-list" id="verdict-list"></div>
+    </section>
+
+    <section class="section product-section" aria-labelledby="product-title">
+      <div class="section-heading">
+        <h2 id="product-title">三组产品的当前路线</h2>
+        <p>产品定位来自官方资料，测试状态来自本地运行。两类证据分开显示。</p>
+      </div>
+      <div class="product-switcher" role="tablist" aria-label="选择产品" id="product-switcher"></div>
+      <div class="product-detail" id="product-detail" role="tabpanel" tabindex="0"></div>
+    </section>
+
+    <section class="section feature-section" id="feature-matrix" aria-labelledby="feature-title">
+      <div class="section-heading">
+        <h2 id="feature-title">功能矩阵</h2>
+        <p>点击状态可查看依据。官方宣称、已实测和本次未发现使用不同标记。</p>
+      </div>
+      <div class="matrix-toolbar">
+        <label class="search-field">
+          <span>查找功能</span>
+          <input id="feature-search" type="search" placeholder="例如：浏览器、审批、PPT" autocomplete="off">
+        </label>
+        <label class="select-field">
+          <span>模块</span>
+          <select id="feature-category"></select>
+        </label>
+        <p class="matrix-count" id="feature-count" aria-live="polite"></p>
+      </div>
+      <div class="legend" id="status-legend" aria-label="证据状态说明"></div>
+      <div class="matrix-frame" tabindex="0" aria-label="功能矩阵，可横向滚动">
+        <table class="feature-table">
+          <thead>
+            <tr>
+              <th scope="col">模块</th>
+              <th scope="col">功能</th>
+              <th scope="col">飞书 + 豆包工作</th>
+              <th scope="col">企业微信 + WorkBuddy</th>
+              <th scope="col">钉钉 + 千问办公</th>
+            </tr>
+          </thead>
+          <tbody id="feature-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section benchmark-section" id="benchmark" aria-labelledby="benchmark-title">
+      <div class="section-heading">
+        <h2 id="benchmark-title">测评 1：完成一个 FDE 商业化任务</h2>
+        <p>同一提示词、同一输入文件、一次运行。要求交付 XLSX、CSV、PPTX 和两份日志。</p>
+      </div>
+      <div class="benchmark-summary" id="benchmark-summary"></div>
+      <div class="benchmark-rows" id="benchmark-rows"></div>
+      <details class="method-disclosure">
+        <summary>查看衡量指标</summary>
+        <div class="metric-grid" id="metric-grid"></div>
+      </details>
+    </section>
+
+    <section class="section control-section" id="control-surfaces" aria-labelledby="control-title">
+      <div class="section-heading">
+        <h2 id="control-title">测评 2：浏览器与电脑操控</h2>
+        <p>这里只写最小测试是否完成。搜索、脚本、CLI 和文件 API 不算浏览器或电脑操控。</p>
+      </div>
+      <div class="control-callout" id="control-callout"></div>
+      <div class="control-table-wrap">
+        <table class="control-table">
+          <thead>
+            <tr>
+              <th scope="col">产品组合</th>
+              <th scope="col">浏览器操作</th>
+              <th scope="col">电脑操控</th>
+              <th scope="col">客户端内浏览器</th>
+            </tr>
+          </thead>
+          <tbody id="control-body"></tbody>
+        </table>
+      </div>
+      <figure class="evidence-figure">
+        <img src="assets/browser-evidence-workbuddy.png" alt="WorkBuddy 浏览器最小测试完成后的页面结果截图" width="1200" height="760" loading="lazy">
+        <figcaption>WorkBuddy 浏览器测试证据。页面完成输入、选择、勾选、点击和结果读取。</figcaption>
+      </figure>
+    </section>
+
+    <section class="section industry-section" id="industries" aria-labelledby="industry-title">
+      <div class="section-heading">
+        <h2 id="industry-title">行业覆盖</h2>
+        <p>命名客户、官方场景和能力推断分三级记录。飞书客户不直接等同于豆包工作客户。</p>
+      </div>
+      <div class="industry-legend" id="industry-legend"></div>
+      <div class="industry-frame" tabindex="0" aria-label="行业覆盖矩阵，可横向滚动">
+        <table class="industry-table">
+          <thead>
+            <tr>
+              <th scope="col">行业</th>
+              <th scope="col">飞书 + 豆包工作</th>
+              <th scope="col">企业微信 + WorkBuddy</th>
+              <th scope="col">钉钉 + 千问办公</th>
+              <th scope="col">证据说明</th>
+            </tr>
+          </thead>
+          <tbody id="industry-body"></tbody>
+        </table>
+      </div>
+      <div class="case-strip" id="case-strip"></div>
+    </section>
+
+    <section class="section opportunity-section" id="opportunities" aria-labelledby="opportunity-title">
+      <div class="section-heading">
+        <h2 id="opportunity-title">浏览器和电脑操控带来的商业机会</h2>
+        <p>机会是否成立，取决于可靠性、权限、审计和人工接管，不取决于演示是否顺利。</p>
+      </div>
+      <div class="opportunity-list" id="opportunity-list"></div>
+    </section>
+
+    <section class="section source-section" id="sources" aria-labelledby="source-title">
+      <div class="section-heading">
+        <h2 id="source-title">来源与证据边界</h2>
+        <p>官方资料说明产品能做什么，本地实测说明本次做成了什么，媒体内容补充真实使用场景。</p>
+      </div>
+      <div class="source-toolbar">
+        <label class="search-field">
+          <span>查找来源</span>
+          <input id="source-search" type="search" placeholder="产品、标题或证据类型" autocomplete="off">
+        </label>
+        <p class="source-count" id="source-count" aria-live="polite"></p>
+      </div>
+      <div class="source-list" id="source-list"></div>
+      <button class="source-more" id="source-more" type="button">显示全部来源</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>开源行业研究。更新时间：2026-08-26。产品能力、价格和客户信息会变化，引用前请复核原始来源。</p>
+    <a href="https://github.com/Wishyouerehere9610/agent-platform-report" target="_blank" rel="noreferrer">查看仓库与原始测评材料</a>
+  </footer>
+
+  <dialog class="evidence-dialog" id="evidence-dialog">
+    <div class="dialog-header">
+      <div>
+        <p>功能依据</p>
+        <h2 id="dialog-title">依据</h2>
+      </div>
+      <button type="button" id="dialog-close" aria-label="关闭依据窗口">关闭</button>
+    </div>
+    <div class="dialog-body" id="dialog-body"></div>
+  </dialog>
+
+  <noscript><p class="noscript">此页面需要 JavaScript 才能呈现筛选后的研究数据。</p></noscript>
+  <script src="report-data.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

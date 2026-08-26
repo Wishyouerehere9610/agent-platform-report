@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-08-26T01:45:00+08:00",
-  "methodology": "OBS 为桌面界面与操作记录；OFF 为官方资料；CASE 为官方或客户公开案例；MED 为媒体或独立分析；SOC 为社区内容。硬能力结论优先使用 OBS 与 OFF，社区内容仅用于补充采用动因与痛点。",
+  "updatedAt": "2026-08-26T12:00:00+08:00",
+  "methodology": "OBS 为桌面界面与操作记录；OFF 为官方资料；CASE 为官方或客户公开案例；MED 为媒体或独立分析；SOC 为社区内容。产品功能优先使用 OFF，实际结果优先使用 OBS。行业覆盖区分命名客户、官方场景和能力推断。媒体与社区只补充体验，不替代官方资料和本地实测。",
   "items": [
     {
       "id": "OBS-DB-001",
@@ -32,8 +32,8 @@
       "url": "",
       "observedAt": "2026-08-25",
       "version": "5.3.14",
-      "summary": "产品内连接测试记录称 agent-browser v0.27.0、Chrome 152.0.7977.54 与电脑控制可用；浏览器首次因代理尾部斜杠失败，清理代理参数后通过。该结论仍需在统一测评中独立复核。",
-      "supports": ["automatic-execution", "browser-control-present", "computer-control-present", "proxy-recovery", "usage-observable"]
+      "summary": "统一最小测试中，agent-browser v0.27.0 完成表单输入、选择、勾选、点击和结果读取。当前工具面没有合规的 Windows 原生桌面控制入口。",
+      "supports": ["automatic-execution", "browser-control-pass", "computer-control-unavailable", "usage-observable"]
     },
     {
       "id": "OBS-QW-001",
@@ -43,8 +43,8 @@
       "url": "",
       "observedAt": "2026-08-25",
       "version": "1.0.0.26082211",
-      "summary": "连接器面板显示浏览器与 Computer Use 均为 Open，产品内自测记录称 Edge 扩展 v1.5.5 与 Computer Use v0.1.5 已连通；统一测评前仍需独立复核。",
-      "supports": ["browser-control-present", "computer-control-present", "connectors"]
+      "summary": "统一最小测试中，Edge 扩展完成浏览器表单任务。Computer Use 启动记事本并输入文本，但另存为时多次焦点漂移，文件没有生成。",
+      "supports": ["browser-control-pass", "computer-control-partial", "connectors"]
     },
     {
       "id": "OBS-QW-002",
@@ -221,6 +221,138 @@
       "version": "网页资料",
       "summary": "支持内置 find-skill、Skill 广场、GitHub/开源社区安装、本地上传 SKILL.md、自动触发、团队分享和交互式 Skill UI。内置 pdf Skill 明确支持阅读、创建、合并、拆分、旋转、水印、表单、加密、图片提取与 OCR。",
       "supports": ["skills-market", "open-skills", "local-skill-files", "team-sharing", "office-artifacts"]
+    },
+    {
+      "id": "OFF-DB-005",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "豆包办公任务模式官方帮助说明",
+      "url": "https://lf9-cdn-tos.draftstatic.com/obj/ies-hotsoon-draft/grace_legal/doubao_member_copywrite_for_ai.html",
+      "observedAt": "2026-08-26",
+      "version": "豆包官方帮助中心 beta",
+      "summary": "官方说明办公任务模式支持操作本地电脑、使用浏览器、调用 Skill、定时任务、Office 套件、专业设计和网页应用生成。",
+      "supports": ["computer-use", "browser-use", "skills", "scheduled-tasks", "office-artifacts", "web-apps"]
+    },
+    {
+      "id": "OFF-DB-006",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "豆包 macOS App Store 功能说明",
+      "url": "https://apps.apple.com/cn/app/%E8%B1%86%E5%8C%85/id6683305962?mt=12",
+      "observedAt": "2026-08-26",
+      "version": "2026-08-26 页面",
+      "summary": "应用商店说明列出浏览器、Skill、定时任务、Office、多媒体、深度研究、在线应用和跨设备续接。",
+      "supports": ["browser-use", "skills", "scheduled-tasks", "multimedia", "research", "cross-device"]
+    },
+    {
+      "id": "OFF-FS-001",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "飞书客户案例行业目录",
+      "url": "https://www.feishu.cn/customers",
+      "observedAt": "2026-08-26",
+      "version": "网页资料",
+      "summary": "飞书客户页覆盖制造、互联网、零售、智能出行、医疗、媒体、餐饮、金融、物流、电商、教育、房地产、农牧、游戏和能源。该目录证明飞书生态覆盖，不等于豆包工作已在全部客户中使用。",
+      "supports": ["feishu-industry-coverage", "evidence-boundary"]
+    },
+    {
+      "id": "OFF-FS-002",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "飞书 2026 年功能变化路径",
+      "url": "https://www.feishu.cn/hc/zh-CN/articles/360043073734-%E9%A3%9E%E4%B9%A6%E5%8A%9F%E8%83%BD%E5%8F%98%E5%8C%96%E8%B7%AF%E5%BE%84",
+      "observedAt": "2026-08-26",
+      "version": "2026.03-2026.07 更新",
+      "summary": "近期更新包括 aily Agent、妙搭、多维表格 AI 搭建、权限配置、仪表盘生成、工作流 Agent 节点和多维表格智能体。",
+      "supports": ["aily-agent", "miaoda", "base-ai", "workflow-agent", "team-agent"]
+    },
+    {
+      "id": "MED-DB-001",
+      "product": "doubao",
+      "type": "MED",
+      "title": "量子位深度实测豆包工作与飞书",
+      "url": "https://mp.weixin.qq.com/s/3nM0tcqmCLSYoAV0kIawSg",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-25",
+      "summary": "媒体记录品牌素材生成、采购比选、视觉浏览器、云电脑、群聊与云文档整理，以及结果写回多维表格。文章观点不作为产品排名依据。",
+      "supports": ["media-test", "visual-browser", "cloud-computer", "feishu-context"]
+    },
+    {
+      "id": "MED-DB-002",
+      "product": "doubao",
+      "type": "MED",
+      "title": "差评实测豆包工作与飞书",
+      "url": "https://mp.weixin.qq.com/s/nxoZu1Dz967sNpamgYI9QA",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-26",
+      "summary": "媒体记录 14 页可编辑 PPT、云电脑网页采集、飞书周报、权限拒绝和审批页面 Computer Use。任务过程有编辑与加速，不替代统一测评。",
+      "supports": ["media-test", "editable-ppt", "cloud-computer", "computer-use", "permission-inheritance"]
+    },
+    {
+      "id": "OFF-WB-006",
+      "product": "workbuddy",
+      "type": "OFF",
+      "title": "WorkBuddy 接入企业微信指南",
+      "url": "https://www.workbuddy.cn/docs/workbuddy/Wecom-Guide",
+      "observedAt": "2026-08-26",
+      "version": "网页资料",
+      "summary": "官方说明企业微信作为远程任务入口，实际处理发生在安装 WorkBuddy 的电脑，使用本地文件、Shell、凭证、插件和工具。",
+      "supports": ["wecom", "remote-task", "local-environment", "execution-history"]
+    },
+    {
+      "id": "CASE-WB-006",
+      "product": "workbuddy",
+      "type": "CASE",
+      "title": "深圳港集团 WorkBuddy 案例",
+      "url": "https://developer.cloud.tencent.com.cn/article/2723207",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-10",
+      "summary": "腾讯云开发者社区案例称，报关字段抓取与映射把单次处理时间从 30 分钟缩短到 5 分钟，并描述私有化企业微信入口与企业内运行。",
+      "supports": ["logistics", "government-enterprise", "document-entry", "private-deployment"]
+    },
+    {
+      "id": "OFF-QW-007",
+      "product": "qwen",
+      "type": "OFF",
+      "title": "千问办公新版官方简介",
+      "url": "https://qwenwork.cn/docs/product-introduction",
+      "observedAt": "2026-08-26",
+      "version": "网页资料",
+      "summary": "官方说明桌面、网页与钉钉三种入口，桌面直连本地文件，支持网页、定时任务、浏览器自动化、云盘、IM、Skill 和连接器。",
+      "supports": ["desktop", "web", "dingtalk", "local-files", "browser-automation", "scheduled-tasks"]
+    },
+    {
+      "id": "OFF-QW-008",
+      "product": "qwen",
+      "type": "OFF",
+      "title": "千问办公专家套件目录",
+      "url": "https://qwenwork.cn/docs/desktop/expert-kits",
+      "observedAt": "2026-08-26",
+      "version": "网页资料",
+      "summary": "内置套件覆盖企业调研、产品、设计、开发、合同、法务、咨询、营销、教研、1688、财税、权益研究、投行、私募和财富管理等场景。",
+      "supports": ["expert-kits", "finance", "legal", "education", "ecommerce", "consulting"]
+    },
+    {
+      "id": "OFF-QW-009",
+      "product": "qwen",
+      "type": "OFF",
+      "title": "阿里巴巴发布千问办公",
+      "url": "https://ali-home.alibaba.com/document-2021039099929952256",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-03",
+      "summary": "阿里巴巴公告称千问办公整合 QoderWork、MuleRun 与悟空能力，提供云端、桌面与企业协作三种 Agent 形态。",
+      "supports": ["official-launch", "cloud-agent", "desktop-agent", "enterprise-agent"]
+    },
+    {
+      "id": "MED-CROSS-002",
+      "product": "cross-product",
+      "type": "MED",
+      "title": "八项真实办公任务横向体验",
+      "url": "https://www.aitntnews.com/newDetail.html?newId=27217",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-07",
+      "summary": "第三方体验称三款产品在电脑操控、浏览器路径选择和 IM 通知上表现不同。测试环境与版本和本仓库不同，只用于解释可能的路径差异。",
+      "supports": ["cross-product-media-test", "computer-use", "browser-use", "im-notification"]
     },
     {
       "id": "SOC-001",

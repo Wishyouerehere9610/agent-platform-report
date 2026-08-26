@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T23:40:00+08:00",
+  "updatedAt": "2026-08-26T12:00:00+08:00",
   "industryScale": {"0":"未见明确证据","1":"能力可推断","2":"官方场景覆盖","3":"有命名客户/高密度场景"},
   "industries": [
     {"name":"制造","doubao":2,"workbuddy":3,"qwen":1,"notes":"飞书官网提供制造行业方案；WorkBuddy 有美的等命名客户；千问当前仅有通用能力。"},
@@ -13,7 +13,11 @@
     {"name":"营销与媒体","doubao":3,"workbuddy":3,"qwen":2,"notes":"豆包模板最密集；WorkBuddy 有麦芽传媒并支持设计创意；千问官方列营销与多媒体。"},
     {"name":"游戏与互联网","doubao":2,"workbuddy":3,"qwen":1,"notes":"WorkBuddy 企业页列王者荣耀、和平精英、微信、QQ。"},
     {"name":"物流","doubao":1,"workbuddy":3,"qwen":1,"notes":"WorkBuddy 企业页列圆通、德邦。"},
-    {"name":"政务与电信","doubao":1,"workbuddy":2,"qwen":1,"notes":"WorkBuddy 私有化交付与中国联通案例提高适配度；需要更强合规证据。"}
+    {"name":"政务与电信","doubao":2,"workbuddy":3,"qwen":1,"notes":"飞书有央国企与通信客户基础；WorkBuddy 有中国联通和深圳港案例；千问办公暂未见命名客户。"},
+    {"name":"餐饮与酒店","doubao":2,"workbuddy":1,"qwen":1,"notes":"飞书客户页覆盖餐饮；当前不足以证明豆包工作已在这些客户中使用。"},
+    {"name":"房地产与建筑","doubao":2,"workbuddy":1,"qwen":1,"notes":"飞书客户页提供房地产分类；三款 Agent 均未见本行业的公开量化测评。"},
+    {"name":"能源与公用事业","doubao":2,"workbuddy":1,"qwen":1,"notes":"飞书客户页覆盖能源；WorkBuddy 和千问办公可从通用数据与流程能力推断适配。"},
+    {"name":"农牧与农业","doubao":2,"workbuddy":1,"qwen":1,"notes":"飞书客户页列出农牧业案例；当前是协同生态证据，不是豆包工作客户证据。"}
   ],
   "cases": [
     {"product":"workbuddy","company":"奔驰公司","industry":"汽车","caseType":"公开用户反馈","summary":"公开反馈提到 CodeBuddy/WorkBuddy 与手机远程连接，并可通过微信/企业微信下达指令。","evidence":["OFF-WB-004"],"strength":"官方命名，缺少量化方法"},
@@ -26,10 +30,13 @@
     {"product":"workbuddy","company":"圆通/德邦","industry":"物流","caseType":"客户名录","summary":"企业版官网客户名录包含圆通快递和德邦快递。","evidence":["OFF-WB-005"],"strength":"命名客户，未披露成效"},
     {"product":"doubao","company":"教育场景模板群","industry":"教育","caseType":"官方场景目录","summary":"教师教学、备课、出题批改等 Agent 模板密集；外部客户成效尚待公开证据。","evidence":["OFF-DB-004"],"strength":"官方场景证据"},
     {"product":"doubao","company":"金融研究与内容营销模板群","industry":"金融/营销","caseType":"官方场景目录","summary":"股票分析、短视频脚本、直播与营销等模板展示了行业意图；实际企业采用情况尚待公开证据。","evidence":["OFF-DB-004"],"strength":"官方场景证据"},
-    {"product":"qwen","company":"官方资料未列出命名外部客户","industry":"多行业","caseType":"证据缺口","summary":"官方资料列出电商、教育、营销、金融等场景，但未见可核验的千问办公命名企业客户与量化效果。","evidence":["OFF-QW-001"],"strength":"明确证据缺口"}
+    {"product":"qwen","company":"官方资料未列出命名外部客户","industry":"多行业","caseType":"证据缺口","summary":"官方资料列出电商、教育、营销、金融等场景，但未见可核验的千问办公命名企业客户与量化效果。","evidence":["OFF-QW-001"],"strength":"明确证据缺口"},
+    {"product":"workbuddy","company":"深圳港集团","industry":"物流与港口","caseType":"官方开发者社区案例","summary":"公开案例称报关单字段抓取与映射把单次处理时间从 30 分钟缩短到 5 分钟。","evidence":["CASE-WB-006"],"strength":"命名客户与量化场景，缺少独立复核"},
+    {"product":"qwen","company":"千问办公内置专家套件","industry":"金融、法务、教育、电商与咨询","caseType":"官方场景目录","summary":"官方列出财富管理、投行、权益研究、合同管理、企业法务、教研、1688 买卖家和咨询交付等套件。","evidence":["OFF-QW-008"],"strength":"场景覆盖清楚，未见命名客户成效"},
+    {"product":"doubao","company":"量子位与差评编辑部实测","industry":"媒体与内容生产","caseType":"媒体实测","summary":"两篇 2026 年 8 月 25-26 日文章记录品牌素材生成、采购比选、群聊整理、周报和审批界面操作。","evidence":["MED-DB-001","MED-DB-002"],"strength":"任务细节充分，属于媒体单次体验"}
   ],
   "enterpriseLandscape": {
-    "summary": "WorkBuddy Enterprise 官网客户案例区公开列出 25 个客户或业务品牌，覆盖 9 个行业组；其中包含腾讯内部产品品牌，外部付费客户数量仍需单独核验。豆包工作与千问办公的官方资料未提供同等级的命名企业客户清单，因此仅按场景覆盖记录。",
+    "summary": "WorkBuddy Enterprise 官网公开列出 25 个客户或业务品牌，覆盖 9 个行业组，其中包含腾讯内部产品品牌。飞书官网的行业客户很多，但不能直接视为豆包工作客户。千问办公公开的是专家套件与岗位场景，暂未见同等级的命名客户清单。",
     "rows": [
       {"industry":"金融","count":6,"entities":["招商银行","招商证券","WeBank 微众银行","易方达基金","中国太平保险","腾讯金融科技"],"evidence":["OFF-WB-005"]},
       {"industry":"消费电子与制造","count":5,"entities":["小米","荣耀","OPPO","Insta360","Midea 美的"],"evidence":["OFF-WB-005"]},
@@ -42,8 +49,8 @@
       {"industry":"电信","count":1,"entities":["中国联通"],"evidence":["OFF-WB-005"]}
     ],
     "evidenceGap": [
-      {"product":"doubao","finding":"官方场景目录覆盖教育、金融研究、营销和内容生产，但未见可核验的命名外部企业清单或量化成效。","evidence":["OFF-DB-004"]},
-      {"product":"qwen","finding":"官方资料覆盖电商、教育、营销、金融等场景，但未见可核验的命名企业客户与量化成效。","evidence":["OFF-QW-001"]}
+      {"product":"doubao","finding":"飞书有广泛行业客户基础，豆包工作也有场景目录与媒体实测，但两者不能自动合并为豆包工作命名客户。","evidence":["OFF-DB-004","OFF-FS-001","MED-DB-001","MED-DB-002"]},
+      {"product":"qwen","finding":"官方专家套件覆盖金融、法务、咨询、教育和电商等岗位，但未见可核验的命名企业客户与量化成效。","evidence":["OFF-QW-001","OFF-QW-008"]}
     ]
   },
   "opportunities": [

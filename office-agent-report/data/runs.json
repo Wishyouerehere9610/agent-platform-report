@@ -1,5 +1,6 @@
 {
   "benchmarkId": "fde-commercialization-2026-08-25",
+  "updatedAt": "2026-08-26T12:00:00+08:00",
   "protocol": {
     "samePrompt": true,
     "sameFiles": true,
@@ -10,17 +11,83 @@
     "requiredOutputs": ["00-run-log.md", "01-industry-prioritization.xlsx", "02-target-accounts.csv", "03-fde-commercialization-plan.pptx", "04-source-log.md", "05-communication-check.md"]
   },
   "metrics": [
-    {"id":"delivery","name":"交付完整性与格式","weight":20,"definition":"4 个核心文件与 2 个日志齐全，格式正确且可打开"},
-    {"id":"quality","name":"分析质量与可用性","weight":20,"definition":"行业选择、财务模型、目标企业和管理层材料可直接使用"},
-    {"id":"sources","name":"事实与来源","weight":10,"definition":"不少于 8 个公开来源，日期、用途与不确定性完整"},
-    {"id":"time","name":"时效","weight":10,"definition":"首个可见结果、总耗时和 45 分钟截止是否清晰"},
-    {"id":"stability","name":"单次运行稳定性","weight":10,"definition":"错误、重试、卡顿、恢复和人工接管；不外推长期稳定性"},
-    {"id":"resources","name":"资源与可观测性","weight":5,"definition":"Credits、文件大小、工具使用和不可观测项均有记录"},
-    {"id":"ecosystem","name":"通信应用连通性","weight":25,"definition":"自我消息、个人待办、个人日历、个人文件空间和连通日志"}
+    {"id":"delivery","name":"交付完整性","definition":"6 个要求文件是否齐全、可解析，页数和行数是否符合要求"},
+    {"id":"firstResult","name":"首个结果时间","definition":"从任务开始到第一个可见文件的分钟数"},
+    {"id":"coreTime","name":"核心任务耗时","definition":"从任务开始到 4 个核心交付物完成的分钟数"},
+    {"id":"quality","name":"业务可用性","definition":"结构、语言、视觉、数字一致性和是否需要明显返工"},
+    {"id":"sources","name":"来源质量","definition":"来源数量、可访问性、不确定性和一手来源占比"},
+    {"id":"stability","name":"单次执行稳定性","definition":"错误、依赖安装、重试、恢复和人工确认，只描述本次运行"},
+    {"id":"ecosystem","name":"生态任务","definition":"通信动作是否在指定产品组合内完成，替代通道单独标记"},
+    {"id":"observability","name":"可追溯性","definition":"时间、工具、文件、重试、授权和不可观测项是否有记录"}
   ],
   "runs": [
-    {"product":"doubao","version":"147.0.7727.149","configuration":"输入与评分标准已固定；电脑操控需完成组件初始化","status":"prompt_ready_permission_blocked","start":null,"end":null,"results":{},"notes":["权限初始化受阻时计为环境限制，不据此推断其他能力。"]},
-    {"product":"workbuddy","version":"5.3.14","configuration":"浏览器与电脑控制已通过产品内连接测试，等待独立复核","status":"ready_for_submission","start":null,"end":null,"results":{},"notes":["浏览器曾因本地代理 URL 尾部斜杠失败，清理后通过。"]},
-    {"product":"qwen","version":"1.0.0.26082211","configuration":"浏览器与电脑操控连接正常，等待独立运行","status":"ready_for_submission","start":null,"end":null,"results":{},"notes":[]}
-  ]
+    {
+      "product": "doubao",
+      "version": "客户端版本号未记录，运行日志记录 lark-cli 1.0.88",
+      "environment": ["豆包工作 Auto 高模式", "隔离 sandbox", "general_search", "Python 生成 XLSX 与 PPTX", "飞书 lark-cli 完成个人空间动作"],
+      "status": "completed",
+      "start": "2026-08-25T23:24:00+08:00",
+      "end": "2026-08-26T00:13:00+08:00",
+      "results": {
+        "deliverables": {"completed": 6, "required": 6, "parseable": true},
+        "firstVisibleMinutes": 2,
+        "coreCompletionMinutes": 7,
+        "totalElapsedMinutes": 49,
+        "sources": 12,
+        "targetAccounts": 10,
+        "pptPages": 12,
+        "deckCheck": "12 页无画布溢出。版式可读但偏文本化。PPT 与 XLSX 的两个行业分数不一致。",
+        "workbookCheck": "4 个工作表可解析，无公式错误字符串。核心数字为静态值，后续调整不自动联动。",
+        "communication": {"target":"飞书","actual":"飞书","successfulActions":4,"requiredActions":4,"comparisonStatus":"ALIGNED","note":"第一轮子环境初始化失败，第二轮在主 Agent 环境通过 lark-cli 完成。"}
+      },
+      "conclusion": "核心交付快，飞书个人空间动作最终完成。本次浏览器和桌面最小测试受录制授权阻塞，不能据此判断长期可用性。"
+    },
+    {
+      "product": "workbuddy",
+      "version": "5.3.14",
+      "environment": ["WorkBuddy Auto 模式", "本地文件系统", "Python 虚拟环境", "WebSearch", "飞书 lark-cli 作为替代通信通道"],
+      "status": "completed",
+      "start": "2026-08-25T23:18:00+08:00",
+      "end": "2026-08-26T00:08:00+08:00",
+      "results": {
+        "deliverables": {"completed": 6, "required": 6, "parseable": true},
+        "firstVisibleMinutes": 2,
+        "coreCompletionMinutes": 6,
+        "totalElapsedMinutes": 50,
+        "sources": 12,
+        "targetAccounts": 10,
+        "pptPages": 12,
+        "deckCheck": "12 页无画布溢出。三份 PPT 中信息组织最清楚，但部分经营预测仍是任务假设，不是市场结果。",
+        "workbookCheck": "5 个工作表可解析，无公式错误字符串。评分和财务结果为静态值。",
+        "communication": {"target":"企业微信","actual":"飞书","successfulActions":4,"requiredActions":4,"comparisonStatus":"PROTOCOL_DEVIATION","note":"飞书 4/4 是替代通道结果。企业微信用户级消息、待办、日历和云盘没有完成，不能计入企业微信成绩。"}
+      },
+      "conclusion": "核心交付最快，浏览器最小测试完成。企业微信动作未完成，飞书结果只保留为替代通道证据。"
+    },
+    {
+      "product": "qwen",
+      "version": "1.0.0.26082211",
+      "environment": ["千问办公基础模式", "手动编排", "WeCom 内嵌 Python 3.10 作为运行时", "WebSearch 与 WebFetch", "钉钉 DWS 连接器"],
+      "status": "completed",
+      "start": "2026-08-25T23:18:00+08:00",
+      "end": "2026-08-26T00:12:00+08:00",
+      "results": {
+        "deliverables": {"completed": 6, "required": 6, "parseable": true},
+        "firstVisibleMinutes": 19,
+        "coreCompletionMinutes": 25,
+        "totalElapsedMinutes": 54,
+        "sources": 10,
+        "targetAccounts": 10,
+        "pptPages": 12,
+        "deckCheck": "12 页，主体使用英文。第 6 页检测到画布溢出，对中文业务读者需要明显返工。",
+        "workbookCheck": "4 个工作表可解析，44 个公式，无错误字符串。模型可复算，但需要 Excel 或 WPS 计算缓存。",
+        "communication": {"target":"钉钉","actual":"钉钉","successfulActions":0,"requiredActions":4,"comparisonStatus":"BLOCKED","note":"DWS 已安装但 OAuth 未完成，两轮授权窗口过期，4 个动作没有执行。"}
+      },
+      "conclusion": "交付物齐全且财务模型可复算，但环境准备最耗时，PPT 需要中文化和版面修正，钉钉动作受授权阻塞。"
+    }
+  ],
+  "summary": {
+    "commonResult": "三家都生成了 6 个要求文件，结构校验均可解析。",
+    "mainDifference": "差异主要来自核心完成时间、产物返工量、授权恢复和指定生态动作是否完成。",
+    "boundary": "每个产品只运行一次。本页不把单次结果换算为长期成功率，也不合成一个总分。"
+  }
 }

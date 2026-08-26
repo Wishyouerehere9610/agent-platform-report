@@ -1,0 +1,21 @@
+{
+  "name": "agent-platform-report",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "description": "三款办公 Agent 产品组合的功能、单次测评与商业机会研究。",
+  "scripts": {
+    "build": "node scripts/build_report.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm run build && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wishyouerehere9610/agent-platform-report.git"
+  },
+  "homepage": "https://wishyouerehere9610.github.io/agent-platform-report/",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}

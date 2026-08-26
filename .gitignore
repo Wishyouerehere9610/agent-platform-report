@@ -23,3 +23,6 @@ Thumbs.db
 node_modules/
 __pycache__/
 *.pyc
+
+# Local research, renders and browser QA
+work/

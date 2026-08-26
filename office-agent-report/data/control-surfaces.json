@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-08-26T01:45:00+08:00",
+  "updatedAt": "2026-08-26T12:00:00+08:00",
   "scope": "三款办公 Agent 的 Browser Use、Computer Use 与 In-app Browser 最小实测",
   "statusLegend": {
     "PASS": "最小动作完成，并有页面状态或文件结果可核验",
-    "PARTIAL": "入口或部分动作已验证，关键闭环仍缺失",
+    "PARTIAL": "入口或部分动作已验证，关键步骤仍缺失",
     "BLOCKED": "入口存在，初始化或授权门槛阻断执行",
     "UNAVAILABLE": "当前 Agent 工具面未发现符合定义的入口"
   },
@@ -26,6 +26,8 @@
     {
       "id": "doubao",
       "name": "飞书 + 豆包工作",
+      "conclusion": "本次未跑通浏览器和电脑操控。客户端内浏览器入口存在，但没有完成页面读取。",
+      "businessMeaning": "当前证据不足以把 GUI 自动化作为可交付能力。正式试点前要先验证录制授权、浏览器结果和文件落盘。",
       "browserUse": {
         "mechanism": "浏览器操作与桌面执行环境共用初始化和录制授权门槛",
         "result": "BLOCKED",
@@ -48,11 +50,13 @@
         "evidence": ["outputs/control-surface-tests/doubao/evaluator-normalized.md", "OBS-DB-002"]
       },
       "strengths": ["客户端内浏览器入口清晰", "多 Agent 编排", "飞书协同入口"],
-      "limitations": ["本轮受录制授权阻塞", "三项测试没有 Agent 结果文件", "客户端内页面读取未闭环"]
+      "limitations": ["本轮受录制授权阻塞", "三项测试没有 Agent 结果文件", "客户端内页面读取没有完成"]
     },
     {
       "id": "workbuddy",
       "name": "企业微信 + WorkBuddy",
+      "conclusion": "浏览器操作完成。电脑桌面操控和客户端内浏览器在本次工具面中不可用。",
+      "businessMeaning": "适合先做网页采集和表单类任务。涉及 ERP 客户端、桌面软件或跨窗口保存时，需要另一条执行路径。",
       "browserUse": {
         "mechanism": "agent-browser 0.27.0 驱动独立 Chromium",
         "result": "PASS",
@@ -80,6 +84,8 @@
     {
       "id": "qwen",
       "name": "钉钉 + 千问办公",
+      "conclusion": "浏览器操作完成。电脑操控能识别界面并输入，但没有把文件保存下来。",
+      "businessMeaning": "可进入需要桌面操作的试点，但要把焦点漂移、保存校验和失败接管写进验收标准。",
       "browserUse": {
         "mechanism": "内置浏览器 MCP 通过 Edge 扩展 1.5.5 操作页面",
         "result": "PASS",
@@ -102,7 +108,7 @@
         "evidence": ["outputs/control-surface-tests/qwen/result.md"]
       },
       "strengths": ["浏览器扩展交互完整", "桌面控制步骤可观察", "浏览器与桌面工具边界清晰"],
-      "limitations": ["多窗口焦点漂移", "文件保存未闭环", "当前客户端无合格 In-app Browser"]
+      "limitations": ["多窗口焦点漂移", "文件保存没有完成", "当前客户端无合格 In-app Browser"]
     }
   ],
   "actualRunSummary": {
@@ -112,7 +118,7 @@
     "completedVisualBrowserFlows": 2,
     "completedComputerUseFlows": 0,
     "completedInAppTitleReads": 0,
-    "finding": "Browser Use 已出现两条可复核成功链路；Computer Use 与 In-app Browser 仍需解决权限、焦点和入口可控性。"
+    "finding": "WorkBuddy 和千问办公完成了浏览器最小任务。电脑操控三家都没有生成目标文件，暂不适合作为免人工的生产能力。"
   },
   "evidenceBoundary": [
     "单次本机测试不外推长期稳定率",
