@@ -54,11 +54,21 @@ const evidence = report.evidence;
 function renderProducts() {
   document.querySelector("#product-ledger").innerHTML = insights.productPositions.map((item) => {
     const meta = productMeta[item.id];
+    const coverage = cases.industries.reduce((counts, industry) => {
+      counts[industry[item.id]] += 1;
+      return counts;
+    }, { 0: 0, 1: 0, 2: 0, 3: 0 });
     return `
       <article class="product-row">
-        <div class="product-name"><span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3></div>
-        <div class="product-verdict"><strong>${escapeHtml(item.conclusion)}</strong><p>${escapeHtml(item.reason)}</p></div>
-        <div class="product-fit"><span>适合</span><p>${escapeHtml(item.bestFor)}</p></div>
+        <div class="product-name">
+          <span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3>
+          <div class="product-release"><strong>发布</strong><p>${escapeHtml(item.releaseStatus)}</p></div>
+        </div>
+        <div class="product-verdict">
+          <strong>${escapeHtml(item.conclusion)}</strong><p>${escapeHtml(item.reason)}</p>
+          <p class="coverage-stats">行业证据：${coverage[3]} 个明确覆盖，${coverage[2]} 个官方场景，${coverage[1]} 个能力可用。</p>
+        </div>
+        <div class="product-fit"><span>优先行业</span><div class="industry-tags">${item.industries.map((industry) => `<i>${escapeHtml(industry)}</i>`).join("")}</div></div>
       </article>
     `;
   }).join("");
@@ -204,6 +214,11 @@ function renderTrends() {
 }
 
 function renderOpportunities() {
+  const legacy = insights.legacySystemOpportunity;
+  document.querySelector("#legacy-opportunity").innerHTML = `
+    <div class="legacy-opportunity-copy"><span>老系统切入点</span><h3>${escapeHtml(legacy.title)}</h3><p>${escapeHtml(legacy.summary)}</p></div>
+    <dl>${legacy.points.map((point) => `<div><dt>${escapeHtml(point.label)}</dt><dd>${escapeHtml(point.value)}</dd></div>`).join("")}</dl>
+  `;
   document.querySelector("#opportunity-list").innerHTML = insights.opportunities.map((item) => `
     <article class="opportunity-row">
       <div class="opportunity-title"><h3>${escapeHtml(item.title)}</h3><span>${escapeHtml(item.model)}</span></div>
@@ -220,8 +235,8 @@ function renderOpportunities() {
 function renderSources() {
   const byId = new Map(evidence.items.map((item) => [item.id, item]));
   const groups = {
-    "reference-a": ["RUN-DB-001", "RUN-WB-001", "RUN-QW-001", "OBS-DB-001", "OBS-WB-001", "OBS-QW-001", "OFF-DB-005", "OFF-WB-002", "OFF-WB-005", "OFF-WB-006", "OFF-QW-007", "OFF-QW-008", "OFF-QW-009", "OFF-FS-001"],
-    "reference-b": ["RES-CONTROL-001", "MED-CROSS-003", "MED-DB-001", "MED-DB-002", "CASE-WB-006", "MED-CROSS-002"],
+    "reference-a": ["RUN-DB-001", "RUN-WB-001", "RUN-QW-001", "OBS-DB-001", "OBS-WB-001", "OBS-QW-001", "OFF-DB-005", "OFF-DB-007", "OFF-WB-002", "OFF-WB-005", "OFF-WB-006", "OFF-WB-007", "OFF-QW-007", "OFF-QW-008", "OFF-QW-009", "OFF-FS-001"],
+    "reference-b": ["RES-CONTROL-001", "MED-CROSS-003", "MED-DB-001", "MED-DB-002", "MED-DB-003", "CASE-WB-006", "MED-CROSS-002"],
     "reference-c": ["SOC-DB-001", "SOC-WB-001", "SOC-QW-001", "SOC-001", "SOC-002"]
   };
   Object.entries(groups).forEach(([containerId, ids]) => {
@@ -314,6 +329,17 @@ function setupSidebar() {
   sections.forEach((section) => observer.observe(section));
 }
 
+function setupFeatureMatrixWheel() {
+  const frame = document.querySelector(".feature-frame");
+  const appMain = document.querySelector(".app-main");
+  frame.addEventListener("wheel", (event) => {
+    const isVertical = Math.abs(event.deltaY) >= Math.abs(event.deltaX);
+    if (!isVertical || event.shiftKey) return;
+    appMain.scrollTop += event.deltaY;
+    event.preventDefault();
+  }, { passive: false });
+}
+
 function init() {
   renderProducts();
   renderPriorityFeatures();
@@ -325,6 +351,7 @@ function init() {
   renderOpportunities();
   renderSources();
   setupSidebar();
+  setupFeatureMatrixWheel();
 }
 
 init();

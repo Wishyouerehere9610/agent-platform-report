@@ -116,3 +116,31 @@ test("control profiles separate public routes from current run results", () => {
     assert.ok(profile.currentRun);
   }
 });
+
+test("commercial positions are based on industry coverage and release status", () => {
+  const insights = readJson("insights.json");
+  const evidence = readJson("evidence.json");
+  const evidenceIds = new Set(evidence.items.map((item) => item.id));
+  const expectedIndustries = {
+    doubao: /教育|营销|媒体/,
+    workbuddy: /制造|金融|物流/,
+    qwen: /金融|法务|电商/
+  };
+
+  for (const position of insights.productPositions) {
+    assert.ok(position.releaseStatus);
+    assert.ok(position.releaseEvidence.every((id) => evidenceIds.has(id)));
+    assert.ok(position.industries.length >= 3);
+    assert.match(position.industries.join("、"), expectedIndustries[position.id]);
+    assert.doesNotMatch(`${position.conclusion}${position.reason}`, /分钟|浏览器表单|GUI|个人空间|PPT/);
+  }
+});
+
+test("legacy system opportunity explains the commercial wedge", () => {
+  const insights = readJson("insights.json");
+  const opportunity = insights.legacySystemOpportunity;
+  assert.match(opportunity.title, /老系统|无 API/);
+  assert.match(opportunity.summary, /内置浏览器/);
+  assert.match(opportunity.summary, /Computer Use/);
+  assert.equal(opportunity.points.length, 4);
+});

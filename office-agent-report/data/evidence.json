@@ -465,6 +465,39 @@
       "supports": ["portability-risk", "ecosystem-lock-in"]
     },
     {
+      "id": "OFF-DB-007",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "豆包工作发布与入口说明",
+      "url": "https://www.feishu.cn/content/article/7677519271848610746",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-24",
+      "summary": "飞书官方说明豆包工作通过独立 PC、豆包工作入口和飞书内入口提供服务；飞书入口沿用企业身份，企业管理员控制开放范围。",
+      "supports": ["official-release", "pc", "doubao-entry", "feishu-entry", "enterprise-access-control"]
+    },
+    {
+      "id": "MED-DB-003",
+      "product": "doubao",
+      "type": "MED",
+      "title": "科技日报：豆包工作正式发布",
+      "url": "https://www.stdaily.com/web/gdxw/2026-08/25/content_569505.html",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-25",
+      "summary": "科技日报报道豆包工作于 2026 年 8 月 25 日正式发布，并确认产品与飞书企业上下文、权限体系和工作入口打通。",
+      "supports": ["release-date", "feishu-integration", "enterprise-context"]
+    },
+    {
+      "id": "OFF-WB-007",
+      "product": "workbuddy",
+      "type": "OFF",
+      "title": "WorkBuddy Enterprise 产品概述",
+      "url": "https://cloud.tencent.com/document/product/1831/134329",
+      "observedAt": "2026-08-26",
+      "version": "文档更新 2026-08-03",
+      "summary": "腾讯云官方文档将 WorkBuddy 定位为全场景职场 AI 智能体桌面工作台，并说明 WorkBuddy Enterprise 覆盖个人办公、企业治理和云端托管运行。",
+      "supports": ["enterprise-product", "desktop-workbench", "managed-agents", "commercial-availability"]
+    },
+    {
       "id": "RES-CONTROL-001",
       "product": "cross-product",
       "type": "RES",

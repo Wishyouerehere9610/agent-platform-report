@@ -64,6 +64,30 @@ test("commercial coverage omits the redundant product count summary", () => {
   assert.doesNotMatch(read("app.js"), /coverage-summary|coverage-row/);
 });
 
+test("feature matrix does not trap vertical wheel scrolling", () => {
+  const css = read("styles.css");
+  const app = read("app.js");
+  assert.doesNotMatch(css, /overscroll-behavior:\s*contain/);
+  assert.doesNotMatch(css, /\.feature-frame\s*\{[^}]*max-height/s);
+  assert.doesNotMatch(css, /\.app-main\s*\{[^}]*scroll-behavior:\s*smooth/s);
+  assert.match(app, /setupFeatureMatrixWheel/);
+  assert.match(app, /appMain\.scrollTop \+= event\.deltaY/);
+});
+
+test("commercial coverage presents release and industry analysis", () => {
+  const app = read("app.js");
+  assert.match(app, /product-release/);
+  assert.match(app, /优先行业/);
+  assert.match(app, /coverage-stats/);
+});
+
+test("commercial opportunity names both control surfaces and highlights legacy systems", () => {
+  const html = read("index.html");
+  assert.match(html, /Computer \/ Browser Use 商业化机会/);
+  assert.match(html, /id=["']legacy-opportunity["']/);
+  assert.doesNotMatch(html, />操控能力的商业化机会</);
+});
+
 test("task test introduces the prompt and six expected deliverables", () => {
   const html = read("index.html");
   const app = read("app.js");
