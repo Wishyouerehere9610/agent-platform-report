@@ -484,31 +484,6 @@ figure {
   white-space: nowrap;
 }
 
-.hero-summary {
-  display: grid;
-  grid-template-columns: 88px minmax(0, 1fr);
-  gap: 18px;
-  align-items: center;
-  padding-top: 16px;
-  border-top: 1px solid var(--soft-line);
-}
-
-.hero-summary span {
-  display: block;
-  margin: 0;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.hero-summary h2 {
-  max-width: none;
-  margin: 0;
-  font-size: 16px;
-  font-weight: 640;
-  line-height: 1.45;
-}
-
 .hero-route-rail {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1907,10 +1882,6 @@ body.sidebar-collapsed .sub-nav {
 
   .hero h1 {
     font-size: 20px;
-  }
-
-  .hero-summary {
-    padding-top: 14px;
   }
 
   .container {

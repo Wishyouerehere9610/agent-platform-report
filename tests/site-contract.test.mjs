@@ -47,7 +47,7 @@ test("visual tokens match the reference project", () => {
 test("hero uses an editorial masthead with author, route rail and GitHub icon", () => {
   const html = read("index.html");
   assert.match(html, /class=["'][^"']*hero-meta/);
-  const titleRow = html.slice(html.indexOf('<div class="hero-title-row">'), html.indexOf('<div class="hero-summary">'));
+  const titleRow = html.slice(html.indexOf('<div class="hero-title-row">'), html.indexOf('<div class="hero-route-rail"'));
   const credit = html.match(/<a class="hero-credit"[\s\S]*?<\/a>/)?.[0] || "";
   assert.match(titleRow, /Agent Platform Research&amp;Evaluation Report/);
   assert.match(titleRow, /class="hero-credit"/);
@@ -61,6 +61,12 @@ test("hero uses an editorial masthead with author, route rail and GitHub icon", 
   assert.doesNotMatch(html, /首页快速导航/);
   assert.doesNotMatch(html, /公开能力与本次实测分开记录/);
   assert.doesNotMatch(html, /比较三组产品的行业证据/);
+  assert.doesNotMatch(html, /class=["']hero-summary["']/);
+  assert.doesNotMatch(html, /研究结论/);
+  assert.doesNotMatch(html, /飞书团队优先试豆包工作/);
+  assert.doesNotMatch(html, /接管本地软件和老系统/);
+  assert.doesNotMatch(html, /钉钉团队以及金融、法务、电商场景/);
+  assert.doesNotMatch(html, /主要差异来自办公生态/);
   assert.doesNotMatch(html, /class=["'][^"']*hero-verdict/);
   assert.doesNotMatch(html, /class=["'][^"']*metric-strip/);
   assert.doesNotMatch(read("app.js"), /renderHero/);
