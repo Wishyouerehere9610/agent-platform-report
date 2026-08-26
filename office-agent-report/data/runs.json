@@ -10,6 +10,23 @@
     "files": ["company-brief.md", "financial-assumptions.xlsx", "deliverable-spec.md"],
     "requiredOutputs": ["00-run-log.md", "01-industry-prioritization.xlsx", "02-target-accounts.csv", "03-fde-commercialization-plan.pptx", "04-source-log.md", "05-communication-check.md"]
   },
+  "brief": {
+    "objective": "为虚构公司 FieldPilot AI 制定可供管理层决策的 FDE 商业化方案：从六个候选行业中选择两个优先行业，形成目标企业清单、试点服务包、定价与毛利模型、90 天 GTM，并完成本人可见范围内的办公协同测试。",
+    "constraints": [
+      "三款产品读取相同的公司简报、财务假设和交付要求。",
+      "单次运行最多 45 分钟，结论必须追溯到公开来源或输入假设。",
+      "协同动作只允许在本人可见范围执行，不联系真实同事、群聊、客户或外部联系人。",
+      "权限、登录或工具阻塞必须如实记录，不能把失败动作写成已完成。"
+    ],
+    "deliverables": [
+      {"file": "00-run-log.md", "name": "运行日志", "purpose": "记录模式、时间、工具、错误、重试和人工接管"},
+      {"file": "01-industry-prioritization.xlsx", "name": "行业优先级", "purpose": "六个行业评分、模型假设、产能和单位经济"},
+      {"file": "02-target-accounts.csv", "name": "目标企业清单", "purpose": "10 家目标企业、适配场景、风险和公开证据"},
+      {"file": "03-fde-commercialization-plan.pptx", "name": "管理层方案", "purpose": "8 至 12 页服务包、定价、GTM 和风险方案"},
+      {"file": "04-source-log.md", "name": "来源日志", "purpose": "记录公开来源、访问日期、用途和不确定性"},
+      {"file": "05-communication-check.md", "name": "协同测试日志", "purpose": "记录消息、待办、日历和文件空间动作"}
+    ]
+  },
   "metrics": [
     {"id":"delivery","name":"交付完整性","definition":"6 个要求文件是否齐全、可解析，页数和行数是否符合要求"},
     {"id":"firstResult","name":"首个结果时间","definition":"从任务开始到第一个可见文件的分钟数"},

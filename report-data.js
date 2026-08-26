@@ -2114,6 +2114,23 @@ window.REPORT_DATA = {
           "portability-risk",
           "ecosystem-lock-in"
         ]
+      },
+      {
+        "id": "RES-CONTROL-001",
+        "product": "cross-product",
+        "type": "RES",
+        "title": "三家办公 Agent 的 Browser Use 与 Computer Use 补充调研",
+        "url": "",
+        "observedAt": "2026-08-26",
+        "version": "用户提供的本地 HTML 调研稿",
+        "summary": "补充调研按产品路线比较千问办公、豆包工作和 WorkBuddy 的浏览器、桌面、后台任务与适用场景。本报告采用其中的产品路线和能力判断，不采用缺少逐条出处的 DAU、绝对排名、成功率和市场规模数字。",
+        "supports": [
+          "browser-use",
+          "computer-use",
+          "scheduled-tasks",
+          "product-route",
+          "commercial-pattern"
+        ]
       }
     ]
   },
@@ -2607,6 +2624,47 @@ window.REPORT_DATA = {
         "03-fde-commercialization-plan.pptx",
         "04-source-log.md",
         "05-communication-check.md"
+      ]
+    },
+    "brief": {
+      "objective": "为虚构公司 FieldPilot AI 制定可供管理层决策的 FDE 商业化方案：从六个候选行业中选择两个优先行业，形成目标企业清单、试点服务包、定价与毛利模型、90 天 GTM，并完成本人可见范围内的办公协同测试。",
+      "constraints": [
+        "三款产品读取相同的公司简报、财务假设和交付要求。",
+        "单次运行最多 45 分钟，结论必须追溯到公开来源或输入假设。",
+        "协同动作只允许在本人可见范围执行，不联系真实同事、群聊、客户或外部联系人。",
+        "权限、登录或工具阻塞必须如实记录，不能把失败动作写成已完成。"
+      ],
+      "deliverables": [
+        {
+          "file": "00-run-log.md",
+          "name": "运行日志",
+          "purpose": "记录模式、时间、工具、错误、重试和人工接管"
+        },
+        {
+          "file": "01-industry-prioritization.xlsx",
+          "name": "行业优先级",
+          "purpose": "六个行业评分、模型假设、产能和单位经济"
+        },
+        {
+          "file": "02-target-accounts.csv",
+          "name": "目标企业清单",
+          "purpose": "10 家目标企业、适配场景、风险和公开证据"
+        },
+        {
+          "file": "03-fde-commercialization-plan.pptx",
+          "name": "管理层方案",
+          "purpose": "8 至 12 页服务包、定价、GTM 和风险方案"
+        },
+        {
+          "file": "04-source-log.md",
+          "name": "来源日志",
+          "purpose": "记录公开来源、访问日期、用途和不确定性"
+        },
+        {
+          "file": "05-communication-check.md",
+          "name": "协同测试日志",
+          "purpose": "记录消息、待办、日历和文件空间动作"
+        }
       ]
     },
     "metrics": [
@@ -3448,10 +3506,10 @@ window.REPORT_DATA = {
             ]
           },
           "workbuddy": {
-            "state": "no",
-            "note": "社区只证实文件与连接器，未见系统级操控",
+            "state": "yes",
+            "note": "公开支持 OS 级视觉操控；本次工具面未见入口",
             "evidence": [
-              "SOC-WB-001",
+              "RES-CONTROL-001",
               "OBS-WB-001"
             ]
           },
@@ -3479,9 +3537,10 @@ window.REPORT_DATA = {
             ]
           },
           "workbuddy": {
-            "state": "no",
-            "note": "公开资料只确认云端长任务",
+            "state": "yes",
+            "note": "支持定时与后台长任务，本次未单独复测",
             "evidence": [
+              "RES-CONTROL-001",
               "OFF-WB-001"
             ]
           },
@@ -3731,6 +3790,72 @@ window.REPORT_DATA = {
         }
       }
     ],
+    "controlProfiles": [
+      {
+        "id": "doubao",
+        "route": "虚拟桌面 + 云电脑双模",
+        "browser": {
+          "summary": "在飞书 Web 视图或虚拟桌面浏览器中完成搜索、填表和结果写回。",
+          "evidence": [
+            "OFF-DB-005",
+            "RES-CONTROL-001"
+          ]
+        },
+        "computer": {
+          "summary": "本地和云电脑都能执行，支持远程触发、后台与定时任务。",
+          "evidence": [
+            "OFF-DB-005",
+            "SOC-DB-001",
+            "RES-CONTROL-001"
+          ]
+        },
+        "bestFor": "已使用飞书，需要后台长任务、跨设备接力，或要把生成结果写回飞书文档和多维表格的团队。",
+        "limit": "复杂 GUI、多表公式和模板填写仍需人工复核。",
+        "currentRun": "本次录制授权阻塞，没有进入浏览器或电脑操控测试。"
+      },
+      {
+        "id": "workbuddy",
+        "route": "本地/云端 Browser + OS 级视觉操控",
+        "browser": {
+          "summary": "本地模式复用登录态，云端模式适合批量网页任务和后台长任务。",
+          "evidence": [
+            "RES-CONTROL-001",
+            "OBS-WB-001"
+          ]
+        },
+        "computer": {
+          "summary": "通过截图识别和键鼠事件操作桌面，可覆盖没有 API 的老软件。",
+          "evidence": [
+            "RES-CONTROL-001"
+          ]
+        },
+        "bestFor": "个人生产力、中小企业和需要接管桌面软件或内网系统的团队。",
+        "limit": "连接器登录态、文件路径和版本更新会影响任务稳定性。",
+        "currentRun": "浏览器表单完成；本次工具面没有暴露电脑操控入口。"
+      },
+      {
+        "id": "qwen",
+        "route": "桌面客户端 + 云端 Agent",
+        "browser": {
+          "summary": "云端 Agent 执行网页采集和批处理，主要差异来自钉钉与阿里生态数据。",
+          "evidence": [
+            "OFF-QW-007",
+            "OFF-QW-009",
+            "RES-CONTROL-001"
+          ]
+        },
+        "computer": {
+          "summary": "桌面端支持屏幕感知、点击、拖拽和键入，但没有独立虚拟桌面。",
+          "evidence": [
+            "OFF-QW-004",
+            "RES-CONTROL-001"
+          ]
+        },
+        "bestFor": "钉钉深度用户、电商研究和需要桌面端处理本地文件的团队。",
+        "limit": "重 GUI 任务需要人工校验，后台长任务能力相对较弱。",
+        "currentRun": "浏览器表单完成；电脑完成输入，保存文件时失去焦点。"
+      }
+    ],
     "controlConcepts": [
       {
         "id": "browser",
@@ -3800,39 +3925,39 @@ window.REPORT_DATA = {
     "opportunities": [
       {
         "id": "browser-workflows",
-        "title": "浏览器流程包",
+        "title": "竞品情报与网页流程",
         "buyer": "市场、销售、运营和招聘团队",
-        "job": "竞品巡检、信息采集、表单和 SaaS 后台批处理",
-        "whyPay": "任务高频、规则清楚，部署周期短。",
+        "job": "竞品日更、跨站采集、CRM 录入和 SaaS 后台批处理",
+        "whyPay": "任务高频、规则清楚，可以按订阅或调用量采购。",
         "condition": "要稳定管理登录态、页面变化和结果校验。",
-        "model": "订阅或按调用量收费"
+        "model": "高频低价 · 调研估算 ¥50 至 500 / 月"
       },
       {
         "id": "legacy-automation",
-        "title": "遗留系统桌面自动化",
+        "title": "银行对账与老系统自动化",
         "buyer": "CIO、共享服务中心和业务运营",
-        "job": "ERP、财务客户端、内网系统和专业桌面软件",
-        "whyPay": "没有 API 也能启动试点，直接减少重复录入。",
+        "job": "ERP、财务客户端、内网系统和堡垒机内重复操作",
+        "whyPay": "没有 API 也能启动试点，可以把部分系统改造工作改成按月采购。",
         "condition": "必须提供私有执行环境、人工确认、回滚和运行证据。",
-        "model": "试点费、实施服务和年度订阅"
+        "model": "高价值深绑定 · 调研估算 ¥2000 至 5000 / 席位 / 月"
+      },
+      {
+        "id": "professional-desktop",
+        "title": "CAD 与专业软件批处理",
+        "buyer": "制造、设计和工程服务团队",
+        "job": "批量出图、格式转换、规范检查和重复编辑",
+        "whyPay": "专业软件席位和人工操作成本较高，单个稳定流程就有明确价值。",
+        "condition": "需要固定软件版本、模板、像素校验和人工抽检。",
+        "model": "场景实施费 + 专业席位订阅"
       },
       {
         "id": "execution-governance",
-        "title": "执行治理与审计",
+        "title": "执行治理与验收",
         "buyer": "信息安全、内审、法务和 AI 平台团队",
-        "job": "发送、删除、审批、付款和权限变更前的控制",
-        "whyPay": "Agent 能操作系统后，错误会直接变成业务动作。",
-        "condition": "需要统一审批、留痕、回放和人工接管。",
-        "model": "企业平台订阅"
-      },
-      {
-        "id": "industry-fde",
-        "title": "行业 Skill 与 FDE 交付包",
-        "buyer": "行业事业部、软件厂商和咨询交付团队",
-        "job": "把行业规则、连接器、任务样本和验收标准打包",
-        "whyPay": "通用 Agent 不理解企业流程，行业团队需要可复制的工作方案。",
-        "condition": "需要命名客户、持续维护和清楚的责任边界。",
-        "model": "试点、年度服务和资产授权"
+        "job": "控制发送、删除、审批、付款和权限变更等高风险动作",
+        "whyPay": "Computer Use 直接操作业务系统，错误会变成真实业务动作。",
+        "condition": "需要统一审批、留痕、回放、结果校验和人工接管。",
+        "model": "企业平台订阅 + 实施服务"
       }
     ]
   }

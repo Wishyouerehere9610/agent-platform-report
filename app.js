@@ -17,7 +17,8 @@ const evidenceTypes = {
   OFF: "官方",
   CASE: "案例",
   MED: "媒体",
-  SOC: "社区"
+  SOC: "社区",
+  RES: "补充调研"
 };
 
 const capabilityTone = {
@@ -26,14 +27,15 @@ const capabilityTone = {
   "部分能": "partial",
   "未完成": "blocked",
   "未见入口": "no",
+  "✅ 支持": "yes",
   "未见": "no"
 };
 
 const industryLabels = {
-  0: "未见",
-  1: "推断",
-  2: "场景",
-  3: "命名"
+  0: "暂无证据",
+  1: "能力可用",
+  2: "官方场景",
+  3: "明确覆盖"
 };
 
 const escapeHtml = (value = "") => String(value)
@@ -48,18 +50,6 @@ const runs = report.runs;
 const controls = report.controlSurfaces;
 const cases = report.cases;
 const evidence = report.evidence;
-
-function renderHero() {
-  const stats = [
-    ["3/3", "交付 6 个文件"],
-    ["2/3", "完成浏览器任务"],
-    ["0/3", "生成电脑测试文件"],
-    ["1/3", "完成指定协同生态"]
-  ];
-  document.querySelector("#hero-summary").innerHTML = stats.map(([value, label]) => `
-    <div class="hero-stat"><strong>${value}</strong><span>${escapeHtml(label)}</span></div>
-  `).join("");
-}
 
 function renderProducts() {
   document.querySelector("#product-ledger").innerHTML = insights.productPositions.map((item) => {
@@ -129,6 +119,18 @@ function renderBenchmark() {
   }).join("");
 }
 
+function renderBenchmarkBrief() {
+  const brief = runs.brief;
+  document.querySelector("#benchmark-objective").textContent = brief.objective;
+  document.querySelector("#benchmark-constraints").innerHTML = brief.constraints.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+  document.querySelector("#benchmark-deliverables").innerHTML = brief.deliverables.map((item) => `
+    <article class="deliverable-item">
+      <img src="assets/icons/file-text.svg" alt="">
+      <div><strong>${escapeHtml(item.name)}</strong><span>${escapeHtml(item.file)}</span><p>${escapeHtml(item.purpose)}</p></div>
+    </article>
+  `).join("");
+}
+
 function renderControlConcepts() {
   document.querySelector("#concept-pair").innerHTML = insights.controlConcepts.map((item) => `
     <article class="concept-block ${item.id}">
@@ -144,22 +146,31 @@ function renderControlConcepts() {
   `).join("");
 
   document.querySelector("#control-result").innerHTML = `
-    <strong>浏览器任务已经能做，电脑任务还不能免人工。</strong>
-    <p>${escapeHtml(controls.actualRunSummary.finding)}</p>
+    <strong>公开能力与本次结果分开看。</strong>
+    <p>${escapeHtml(controls.actualRunSummary.finding)} 本次失败只说明当前版本和测试环境，不能直接改写产品能力。</p>
   `;
 
-  const browserModule = insights.capabilityModules.find((item) => item.id === "browser-use");
-  const computerModule = insights.capabilityModules.find((item) => item.id === "computer-use");
-  document.querySelector("#control-body").innerHTML = controls.products.map((item) => {
-    const browser = browserModule.products[item.id];
-    const computer = computerModule.products[item.id];
-    const position = insights.productPositions.find((entry) => entry.id === item.id);
+  document.querySelector("#control-profile-list").innerHTML = insights.controlProfiles.map((profile) => {
+    const meta = productMeta[profile.id];
+    return `
+      <article class="control-profile">
+        <div class="control-profile-title"><span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3><p>${escapeHtml(profile.route)}</p></div>
+        <div class="control-profile-capability"><span>Browser Use</span><p>${escapeHtml(profile.browser.summary)}</p></div>
+        <div class="control-profile-capability"><span>Computer Use</span><p>${escapeHtml(profile.computer.summary)}</p></div>
+        <div class="control-profile-fit"><span>适合</span><p>${escapeHtml(profile.bestFor)}</p></div>
+        <div class="control-profile-fit"><span>限制</span><p>${escapeHtml(profile.limit)}</p></div>
+      </article>
+    `;
+  }).join("");
+
+  document.querySelector("#control-body").innerHTML = insights.controlProfiles.map((profile) => {
+    const meta = productMeta[profile.id];
     return `
       <tr>
-        <th scope="row">${escapeHtml(item.name)}</th>
-        <td>${renderControlState(browser.label, browser.note)}</td>
-        <td>${renderControlState(computer.label, computer.note)}</td>
-        <td>${escapeHtml(position.controlConclusion)}</td>
+        <th scope="row">${escapeHtml(meta.name)}</th>
+        <td>${renderControlState("✅ 支持", profile.browser.summary)}</td>
+        <td>${renderControlState("✅ 支持", profile.computer.summary)}</td>
+        <td>${escapeHtml(profile.currentRun)}</td>
       </tr>
     `;
   }).join("");
@@ -181,9 +192,9 @@ function renderIndustries() {
       <article class="coverage-row">
         <h3>${escapeHtml(productMeta[product].name)}</h3>
         <div class="coverage-numbers">
-          <span><strong>${count[3]}</strong> 命名或密集场景</span>
+          <span><strong>${count[3]}</strong> 明确覆盖</span>
           <span><strong>${count[2]}</strong> 官方场景</span>
-          <span><strong>${count[1]}</strong> 能力推断</span>
+          <span><strong>${count[1]}</strong> 能力可用</span>
         </div>
       </article>
     `;
@@ -229,7 +240,7 @@ function renderSources() {
   const byId = new Map(evidence.items.map((item) => [item.id, item]));
   const groups = {
     "reference-a": ["RUN-DB-001", "RUN-WB-001", "RUN-QW-001", "OBS-DB-001", "OBS-WB-001", "OBS-QW-001", "OFF-DB-005", "OFF-WB-002", "OFF-WB-005", "OFF-WB-006", "OFF-QW-007", "OFF-QW-008", "OFF-QW-009", "OFF-FS-001"],
-    "reference-b": ["MED-CROSS-003", "MED-DB-001", "MED-DB-002", "CASE-WB-006", "MED-CROSS-002"],
+    "reference-b": ["RES-CONTROL-001", "MED-CROSS-003", "MED-DB-001", "MED-DB-002", "CASE-WB-006", "MED-CROSS-002"],
     "reference-c": ["SOC-DB-001", "SOC-WB-001", "SOC-QW-001", "SOC-001", "SOC-002"]
   };
   Object.entries(groups).forEach(([containerId, ids]) => {
@@ -252,7 +263,7 @@ function setupSidebar() {
   const sidebarOpen = document.querySelector("[data-sidebar-open]");
   const sidebarClose = document.querySelector("[data-sidebar-close]");
   const mobileTitle = document.querySelector("#mobile-section-title");
-  const navLinks = [...document.querySelectorAll(".sub-nav a")];
+  const navLinks = [...document.querySelectorAll(".nav-link")];
   const mobileQuery = matchMedia("(max-width: 800px)");
 
   const setSidebarCollapsed = (collapsed) => {
@@ -309,9 +320,13 @@ function setupSidebar() {
       if (active) {
         link.setAttribute("aria-current", "location");
         const group = link.closest(".nav-group");
-        group.open = true;
         document.querySelectorAll(".nav-group").forEach((item) => item.classList.toggle("active", item === group));
-        mobileTitle.textContent = `${group.querySelector("summary strong").textContent} / ${link.textContent}`;
+        if (group) {
+          group.open = true;
+          mobileTitle.textContent = `${group.querySelector("summary strong").textContent} / ${link.textContent}`;
+        } else {
+          mobileTitle.textContent = link.dataset.navTitle;
+        }
       } else link.removeAttribute("aria-current");
     });
   }, { root: appMain, rootMargin: "-12% 0px -76% 0px", threshold: [0, 0.2, 0.6] });
@@ -319,9 +334,9 @@ function setupSidebar() {
 }
 
 function init() {
-  renderHero();
   renderProducts();
   renderPriorityFeatures();
+  renderBenchmarkBrief();
   renderBenchmark();
   renderControlConcepts();
   renderIndustries();

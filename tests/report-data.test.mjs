@@ -37,6 +37,21 @@ test("benchmark results describe the completed run and ecosystem deviation", () 
   assert.equal(workbuddy.results.communication.comparisonStatus, "PROTOCOL_DEVIATION");
 });
 
+test("benchmark brief states the assignment and six expected files", () => {
+  const data = readJson("runs.json");
+  assert.ok(data.brief.objective.includes("FieldPilot AI"));
+  assert.ok(data.brief.objective.includes("六个候选行业"));
+  assert.equal(data.brief.deliverables.length, 6);
+  assert.deepEqual(data.brief.deliverables.map((item) => item.file), [
+    "00-run-log.md",
+    "01-industry-prioritization.xlsx",
+    "02-target-accounts.csv",
+    "03-fde-commercialization-plan.pptx",
+    "04-source-log.md",
+    "05-communication-check.md"
+  ]);
+});
+
 test("control surface conclusions expose direct business language", () => {
   const data = readJson("control-surfaces.json");
   for (const product of data.products) {
@@ -76,5 +91,28 @@ test("priority feature matrix balances breadth with scanability", () => {
       assert.ok(["yes", "no"].includes(feature.products[product].state));
       assert.ok(feature.products[product].evidence.every((id) => evidenceIds.has(id)));
     }
+  }
+});
+
+test("WorkBuddy public capability includes computer use and scheduled tasks", () => {
+  const insights = readJson("insights.json");
+  const computer = insights.priorityFeatures.find((item) => item.name === "Computer Use");
+  const scheduled = insights.priorityFeatures.find((item) => item.name === "自动定时任务");
+  assert.equal(computer.products.workbuddy.state, "yes");
+  assert.match(computer.products.workbuddy.note, /本次.*未见入口/);
+  assert.equal(scheduled.products.workbuddy.state, "yes");
+  assert.match(scheduled.products.workbuddy.note, /定时|后台|长任务/);
+});
+
+test("control profiles separate public routes from current run results", () => {
+  const insights = readJson("insights.json");
+  assert.equal(insights.controlProfiles.length, 3);
+  for (const profile of insights.controlProfiles) {
+    assert.ok(profile.route);
+    assert.ok(profile.browser.summary);
+    assert.ok(profile.computer.summary);
+    assert.ok(profile.bestFor);
+    assert.ok(profile.limit);
+    assert.ok(profile.currentRun);
   }
 });

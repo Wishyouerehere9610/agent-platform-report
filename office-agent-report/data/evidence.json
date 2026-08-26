@@ -463,6 +463,17 @@
       "version": "网页资料",
       "summary": "文章提出办公 Agent 可能带来数据、流程、技能与模板的平台锁定风险。作者披露其与开源低代码产品存在利益相关，因此本报告仅吸收“可迁移性应纳入选型”的问题意识，不采信其竞品优劣结论。",
       "supports": ["portability-risk", "ecosystem-lock-in"]
+    },
+    {
+      "id": "RES-CONTROL-001",
+      "product": "cross-product",
+      "type": "RES",
+      "title": "三家办公 Agent 的 Browser Use 与 Computer Use 补充调研",
+      "url": "",
+      "observedAt": "2026-08-26",
+      "version": "用户提供的本地 HTML 调研稿",
+      "summary": "补充调研按产品路线比较千问办公、豆包工作和 WorkBuddy 的浏览器、桌面、后台任务与适用场景。本报告采用其中的产品路线和能力判断，不采用缺少逐条出处的 DAU、绝对排名、成功率和市场规模数字。",
+      "supports": ["browser-use", "computer-use", "scheduled-tasks", "product-route", "commercial-pattern"]
     }
   ]
 }

@@ -220,9 +220,22 @@ figure {
   overflow-y: auto;
 }
 
-.nav-group {
+.nav-group,
+.nav-primary {
   margin: 3px 0;
   border-radius: 9px;
+}
+
+.nav-primary {
+  display: grid;
+  min-height: 38px;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 8px;
+  color: var(--secondary);
+  transition: background-color 120ms ease, color 120ms ease, transform 100ms ease;
 }
 
 .nav-group summary {
@@ -243,27 +256,32 @@ figure {
   display: none;
 }
 
-.nav-group summary:hover {
+.nav-group summary:hover,
+.nav-primary:hover {
   background: #eeeef1;
   color: var(--ink);
 }
 
-.nav-group.active > summary {
+.nav-group.active > summary,
+.nav-primary.active {
   background: #f2f5fa;
   color: var(--ink);
 }
 
-.nav-group summary span {
+.nav-group summary span,
+.nav-primary span {
   color: var(--muted);
   font: 10px/1 ui-monospace, "SFMono-Regular", Menlo, monospace;
   text-align: center;
 }
 
-.nav-group.active summary span {
+.nav-group.active summary span,
+.nav-primary.active span {
   color: #3975b6;
 }
 
-.nav-group summary strong {
+.nav-group summary strong,
+.nav-primary strong {
   overflow: hidden;
   font-size: 13px;
   font-weight: 650;
@@ -478,34 +496,6 @@ figure {
 
 .text-link::after {
   content: "  ›";
-}
-
-.metric-strip {
-  min-height: 120px;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  background: #3a3a3c;
-}
-
-.hero-stat {
-  min-height: 120px;
-  padding: 25px max(24px, calc((100vw - 1200px) / 8));
-  background: var(--dark);
-  color: #ffffff;
-}
-
-.hero-stat strong {
-  display: block;
-  font-size: 30px;
-  line-height: 1.2;
-}
-
-.hero-stat span {
-  display: block;
-  margin-top: 6px;
-  color: #b6b6bb;
-  font-size: 13px;
 }
 
 .band {
@@ -756,6 +746,93 @@ tbody tr:last-child td {
   line-height: 1.45;
 }
 
+.benchmark-brief {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 46px;
+  margin-bottom: 24px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.benchmark-assignment > span,
+.benchmark-deliverables > span,
+.control-profile-title > span,
+.control-profile-capability > span,
+.control-profile-fit > span {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.benchmark-assignment h3,
+.benchmark-deliverables h3 {
+  margin: 7px 0 14px;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.benchmark-assignment p {
+  margin-bottom: 18px;
+  color: var(--secondary);
+  font-size: 14px;
+}
+
+.benchmark-assignment ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--secondary);
+  font-size: 12px;
+}
+
+.benchmark-assignment li + li {
+  margin-top: 6px;
+}
+
+.deliverable-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 22px;
+}
+
+.deliverable-item {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 10px;
+  padding: 11px 0;
+  border-top: 1px solid var(--soft-line);
+}
+
+.deliverable-item img {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  opacity: 0.68;
+}
+
+.deliverable-item strong,
+.deliverable-item span,
+.deliverable-item p {
+  display: block;
+}
+
+.deliverable-item strong {
+  font-size: 13px;
+}
+
+.deliverable-item span {
+  color: var(--muted);
+  font: 10px/1.4 ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+.deliverable-item p {
+  margin: 5px 0 0;
+  color: var(--secondary);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
 .benchmark-lead,
 .control-result {
   display: grid;
@@ -853,6 +930,57 @@ tbody tr:last-child td {
   margin: 0;
   color: var(--secondary);
   font-size: 13px;
+}
+
+.control-profile-list {
+  margin: 28px 0 24px;
+  border-top: 1px solid var(--line);
+}
+
+.control-profile {
+  display: grid;
+  grid-template-areas:
+    "title browser computer"
+    "title fit limit";
+  grid-template-columns: 210px minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px 26px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.control-profile-title {
+  grid-area: title;
+}
+
+.control-profile-title h3 {
+  margin: 5px 0 7px;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.control-profile-title p,
+.control-profile-capability p,
+.control-profile-fit p {
+  margin: 5px 0 0;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.control-profile-capability:nth-child(2) {
+  grid-area: browser;
+}
+
+.control-profile-capability:nth-child(3) {
+  grid-area: computer;
+}
+
+.control-profile-fit:nth-child(4) {
+  grid-area: fit;
+}
+
+.control-profile-fit:nth-child(5) {
+  grid-area: limit;
 }
 
 .evidence-figure {
@@ -1217,8 +1345,15 @@ body.sidebar-collapsed .nav-group summary {
   padding-inline: 0;
 }
 
+body.sidebar-collapsed .nav-primary {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  padding-inline: 0;
+}
+
 body.sidebar-collapsed .nav-group summary strong,
 body.sidebar-collapsed .nav-group summary i,
+body.sidebar-collapsed .nav-primary strong,
 body.sidebar-collapsed .sub-nav {
   display: none;
 }
@@ -1319,8 +1454,15 @@ body.sidebar-collapsed .sub-nav {
     padding-inline: 10px;
   }
 
+  body.sidebar-collapsed .nav-primary {
+    grid-template-columns: 30px minmax(0, 1fr);
+    justify-items: stretch;
+    padding-inline: 10px;
+  }
+
   body.sidebar-collapsed .nav-group summary strong,
-  body.sidebar-collapsed .nav-group summary i {
+  body.sidebar-collapsed .nav-group summary i,
+  body.sidebar-collapsed .nav-primary strong {
     display: block;
   }
 
@@ -1369,11 +1511,6 @@ body.sidebar-collapsed .sub-nav {
     border-left: 0;
   }
 
-  .metric-strip {
-    min-height: 240px;
-    grid-template-columns: 1fr 1fr;
-  }
-
   .container {
     width: min(100% - 44px, 1120px);
   }
@@ -1396,6 +1533,19 @@ body.sidebar-collapsed .sub-nav {
   .control-result {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .benchmark-brief {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .control-profile {
+    grid-template-areas:
+      "title title"
+      "browser computer"
+      "fit limit";
+    grid-template-columns: 1fr 1fr;
   }
 
   .trend-list,
@@ -1437,6 +1587,21 @@ body.sidebar-collapsed .sub-nav {
   .source-list,
   .reference-list {
     grid-template-columns: 1fr;
+  }
+
+  .deliverable-list,
+  .control-profile {
+    grid-template-columns: 1fr;
+  }
+
+  .control-profile {
+    grid-template-areas:
+      "title"
+      "browser"
+      "computer"
+      "fit"
+      "limit";
+    gap: 18px;
   }
 
   .concept-block {

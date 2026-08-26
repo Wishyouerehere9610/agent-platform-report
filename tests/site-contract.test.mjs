@@ -27,7 +27,11 @@ test("navigation follows the reference project shell", () => {
   assert.match(html, /class=["'][^"']*nav-group/);
   assert.match(html, /class=["'][^"']*sub-nav/);
   assert.doesNotMatch(html, /theme-button/);
-  assert.equal((html.match(/class=["']nav-group["']/g) || []).length, 6);
+  assert.equal((html.match(/class=["'][^"']*nav-primary[^"']*["']/g) || []).length, 5);
+  assert.equal((html.match(/class=["']nav-group["']/g) || []).length, 1);
+  assert.equal((html.match(/class=["']sub-nav["'][\s\S]*?<\/div>/g) || []).length, 1);
+  assert.equal((html.match(/class=["'][^"']*nav-child[^"']*["']/g) || []).length, 2);
+  assert.doesNotMatch(html, />4\.1\s*商业化机会</);
 });
 
 test("visual tokens match the reference project", () => {
@@ -40,10 +44,19 @@ test("visual tokens match the reference project", () => {
   assert.match(css, /--radius:\s*8px/);
 });
 
-test("hero uses a split verdict and a dark metric strip", () => {
+test("hero keeps the split verdict without duplicate metric blocks", () => {
   const html = read("index.html");
   assert.match(html, /class=["'][^"']*hero-verdict/);
-  assert.match(html, /class=["'][^"']*metric-strip/);
+  assert.doesNotMatch(html, /class=["'][^"']*metric-strip/);
+  assert.doesNotMatch(read("app.js"), /renderHero/);
+});
+
+test("task test introduces the prompt and six expected deliverables", () => {
+  const html = read("index.html");
+  const app = read("app.js");
+  assert.match(html, /id=["']benchmark-brief["']/);
+  assert.match(html, /id=["']benchmark-deliverables["']/);
+  assert.match(app, /renderBenchmarkBrief/);
 });
 
 test("public page uses the focused feature matrix without old checklist controls", () => {
