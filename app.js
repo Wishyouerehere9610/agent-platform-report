@@ -92,45 +92,56 @@ function renderPriorityFeatureCell(result) {
 }
 
 function renderBenchmark() {
-  document.querySelector("#benchmark-lead").innerHTML = `
-    <strong>${escapeHtml(runs.summary.commonResult)}</strong>
-    <p>${escapeHtml(runs.summary.mainDifference)}</p>
-  `;
+  const story = [
+    ["做了什么", runs.summary.whatWasTested],
+    ["为什么这样测", runs.summary.whyTested],
+    ["结果", runs.summary.result]
+  ];
+  document.querySelector("#benchmark-story").innerHTML = story.map(([title, body]) => `<article><span>${escapeHtml(title)}</span><p>${escapeHtml(body)}</p></article>`).join("");
 
   document.querySelector("#delivery-assessment").innerHTML = runs.runs.map((run) => {
     const meta = productMeta[run.product];
     const assessment = run.assessment;
+    const environment = run.testEnvironment;
     return `
-      <article class="delivery-row">
-        <header><span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3><p>${escapeHtml(assessment.trajectory)}</p></header>
-        ${renderDeliveryMetric("资源消耗", `${assessment.resource.coreMinutes} 分钟完成核心交付`, [`总耗时 ${assessment.resource.totalMinutes} 分钟`, `Credits：${assessment.resource.credits}`, assessment.resource.environment])}
-        ${renderDeliveryMetric("交付质量", assessment.quality.verdict, assessment.quality.details)}
-        ${renderDeliveryMetric("系统稳定性", assessment.stability.verdict, assessment.stability.details)}
+      <article class="delivery-run theme-${run.product}">
+        <header class="delivery-run-header"><div><span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3></div><p>${escapeHtml(run.conclusion)}</p></header>
+        <span class="run-section-label">测试环境</span>
+        <dl class="run-environment">
+          ${renderEnvironmentFact("版本", environment.version)}
+          ${renderEnvironmentFact("模式", environment.mode)}
+          ${renderEnvironmentFact("模型", environment.model)}
+          ${renderEnvironmentFact("思考档位", environment.reasoning)}
+          ${renderEnvironmentFact("运行环境", environment.runtime)}
+        </dl>
+        <div class="run-outcomes">
+          ${renderRunOutcome("资源消耗", `核心 ${assessment.resource.coreMinutes} 分钟`, `总耗时 ${assessment.resource.totalMinutes} 分钟；Credits ${assessment.resource.credits}`)}
+          ${renderRunOutcome("交付质量", assessment.quality.verdict, assessment.quality.details[1] || assessment.quality.details[0])}
+          ${renderRunOutcome("稳定性", assessment.stability.verdict, assessment.stability.details.at(-1))}
+        </div>
       </article>
     `;
   }).join("");
 }
 
-function renderDeliveryMetric(label, verdict, details) {
-  return `<section class="delivery-metric"><span>${escapeHtml(label)}</span><strong>${escapeHtml(verdict)}</strong><ul>${details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>`;
+function renderEnvironmentFact(label, value) {
+  return `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`;
+}
+
+function renderRunOutcome(label, verdict, detail) {
+  return `<section><span>${escapeHtml(label)}</span><strong>${escapeHtml(verdict)}</strong><p>${escapeHtml(detail)}</p></section>`;
 }
 
 function renderBenchmarkBrief() {
   const brief = runs.brief;
-  document.querySelector("#benchmark-objective").textContent = brief.objective;
-  document.querySelector("#benchmark-constraints").innerHTML = brief.constraints.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-  document.querySelector("#business-deliverables").innerHTML = brief.businessDeliverables.map((item) => `
-    <article class="deliverable-item">
-      <img src="assets/icons/file-text.svg" alt="">
-      <div><strong>${escapeHtml(item.name)}</strong><span>${escapeHtml(item.file)}</span><p>${escapeHtml(item.purpose)}</p></div>
-    </article>
-  `).join("");
-  document.querySelector("#trajectory-artifacts").innerHTML = brief.observationArtifacts.map((item) => `
-    <article class="deliverable-item">
-      <img src="assets/icons/file-text.svg" alt="">
-      <div><strong>${escapeHtml(item.name)}</strong><span>${escapeHtml(item.file)}</span><p>${escapeHtml(item.purpose)}</p></div>
-    </article>
-  `).join("");
+  document.querySelector("#benchmark-objective").textContent = brief.shortObjective;
+  document.querySelector("#business-deliverables").innerHTML = brief.businessDeliverables.map(renderCompactArtifact).join("");
+  document.querySelector("#trajectory-artifacts").innerHTML = brief.observationArtifacts.map(renderCompactArtifact).join("");
+}
+
+function renderCompactArtifact(item) {
+  const extension = item.file.split(".").at(-1).toUpperCase();
+  return `<div class="compact-artifact"><img src="assets/icons/file-text.svg" alt=""><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(extension)}</small></div>`;
 }
 
 function renderControlConcepts() {

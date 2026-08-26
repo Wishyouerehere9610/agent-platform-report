@@ -10,7 +10,7 @@ benchmark/workbuddy-prompt.md,3959,d786314e26dd93dafb028dc2de08c9b6db8f4b36c6ef8
 office-agent-report/data/cases.json,12522,3483cb53d5ae64f39883f304dccc6317c256863ffbcf15e46c52d8fb1dd1608c,yes,已复制；文本日志已脱敏
 office-agent-report/data/evidence.json,29673,a59cae34c6aec160b37a3a1a939d3e368d29e86ce18decf63d6de8ee1712534f,yes,已复制；补充控制面可见入口证据
 office-agent-report/data/features.json,18025,4f6030a785c8d3f96bb7e5c19b36409cc6c00009e62d88293529334ef5afa88e,yes,已复制；文本日志已脱敏
-office-agent-report/data/runs.json,2432,3bed42e7d3974e900ba0ede7fed2b5e25e01d63bc18c8f972eb243518707ddf9,yes,已复制；文本日志已脱敏
+office-agent-report/data/runs.json,11519,e6786fb5dbbf2462905f279fc20fa2fa86c21376f8185d6df4e6178b89a38fc1,yes,已复制；补充测试环境与交付结果摘要
 office-agent-report/evidence/methodology.md,2332,a2ffbf20e76d2fcbd43a13b14635b88dbfa0617390e197def4ae9024547d9971,yes,已复制；同步最小控制面测试口径
 office-agent-report/index.html,90722,3cd240937284ff5098d992c6dd7ac7c4e3ad14c3e9a44c7ec037c63c2f7e2157,yes,已复制；文本日志已脱敏
 outputs/doubao/00-run-log.md,8557,2e7563f52248aff2e0f47730f281eee05b424ca00e5d666f8644b31cfc373d57,yes,已复制；文本日志已脱敏

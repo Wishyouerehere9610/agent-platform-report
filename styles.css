@@ -857,179 +857,224 @@ tbody tr:last-child td {
   line-height: 1.45;
 }
 
-.benchmark-brief {
+.benchmark-strip {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 46px;
-  margin-bottom: 24px;
-  padding: 28px 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 20px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
-.benchmark-assignment > span,
-.deliverable-group > span {
+.benchmark-strip-item {
+  min-width: 0;
+  padding: 20px 22px;
+}
+
+.benchmark-strip-item + .benchmark-strip-item {
+  border-left: 1px solid var(--soft-line);
+}
+
+.benchmark-strip-item > span,
+.run-section-label,
+.benchmark-story span,
+.run-outcomes span,
+.implementation-grid span,
+.tradeoff-grid span {
   color: var(--blue);
   font-size: 11px;
   font-weight: 700;
 }
 
-.benchmark-assignment h3,
-.deliverable-group h3 {
-  margin: 7px 0 14px;
-  font-size: 20px;
-  line-height: 1.35;
+.benchmark-strip-item.deliverables > span {
+  color: var(--green);
 }
 
-.benchmark-assignment p {
-  margin-bottom: 18px;
-  color: var(--secondary);
-  font-size: 14px;
-}
-
-.benchmark-assignment ul {
-  margin: 0;
-  padding-left: 18px;
-  color: var(--secondary);
-  font-size: 12px;
-}
-
-.benchmark-assignment li + li {
-  margin-top: 6px;
-}
-
-.deliverable-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 22px;
-}
-
-.benchmark-deliverables {
-  display: grid;
-  gap: 24px;
-}
-
-.benchmark-deliverables .deliverable-list {
-  grid-template-columns: 1fr;
-}
-
-.trajectory-group {
-  margin-top: 34px;
-  padding-top: 22px;
-  border-top: 1px solid var(--line);
-}
-
-.trajectory-group > span {
+.benchmark-strip-item.trajectory > span {
   color: var(--amber);
 }
 
-.deliverable-item {
-  display: grid;
-  grid-template-columns: 24px minmax(0, 1fr);
-  gap: 10px;
-  padding: 11px 0;
-  border-top: 1px solid var(--soft-line);
-}
-
-.deliverable-item img {
-  width: 20px;
-  height: 20px;
-  margin-top: 2px;
-  opacity: 0.68;
-}
-
-.deliverable-item strong,
-.deliverable-item span,
-.deliverable-item p {
+.benchmark-strip-item > strong {
   display: block;
+  margin: 7px 0 8px;
+  font-size: 16px;
+  line-height: 1.35;
 }
 
-.deliverable-item strong {
-  font-size: 13px;
-}
-
-.deliverable-item span {
-  color: var(--muted);
-  font: 10px/1.4 ui-monospace, "SFMono-Regular", Menlo, monospace;
-}
-
-.deliverable-item p {
-  margin: 5px 0 0;
-  color: var(--secondary);
-  font-size: 11px;
-  line-height: 1.45;
-}
-
-.benchmark-lead {
-  display: grid;
-  grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr);
-  gap: 26px;
-  margin-bottom: 20px;
-  padding: 22px 24px;
-  border-radius: var(--radius);
-  background: var(--dark);
-  color: #ffffff;
-}
-
-.benchmark-lead strong {
-  font-size: 17px;
-}
-
-.benchmark-lead p {
-  margin: 0;
-  color: #c8c8cd;
-  font-size: 13px;
-}
-
-.delivery-assessment {
-  border-top: 1px solid var(--line);
-}
-
-.delivery-row {
-  display: grid;
-  grid-template-columns: 210px repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  padding: 25px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.delivery-row > header span {
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.delivery-row > header h3 {
-  margin: 4px 0 9px;
-  font-size: 17px;
-}
-
-.delivery-row > header p {
+.benchmark-strip-item > p {
   margin: 0;
   color: var(--secondary);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
-.delivery-metric {
-  padding-top: 2px;
+.compact-artifact-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.delivery-metric > span,
-.implementation-grid span,
-.tradeoff-grid span {
-  color: var(--product-accent, var(--blue));
+.compact-artifact {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 17px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.compact-artifact img {
+  width: 16px;
+  height: 16px;
+  opacity: 0.64;
+}
+
+.compact-artifact strong {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 620;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.compact-artifact small {
+  color: var(--muted);
+  font: 9px/1 ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+.benchmark-story {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--line);
+}
+
+.benchmark-story article {
+  padding: 0 22px 22px;
+}
+
+.benchmark-story article:first-child {
+  padding-left: 0;
+}
+
+.benchmark-story article + article {
+  border-left: 1px solid var(--soft-line);
+}
+
+.benchmark-story p {
+  margin: 7px 0 0;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.delivery-assessment {
+  display: grid;
+  gap: 16px;
+}
+
+.delivery-run {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--product-accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.delivery-run-header {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+  margin-bottom: 20px;
+}
+
+.delivery-run-header span {
+  color: var(--muted);
   font-size: 11px;
-  font-weight: 700;
 }
 
-.delivery-metric > strong {
+.delivery-run-header h3 {
+  margin: 4px 0 0;
+  font-size: 19px;
+}
+
+.delivery-run-header p {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.run-section-label {
   display: block;
-  margin: 7px 0 10px;
-  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--product-accent);
+}
+
+.run-environment {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  border-top: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.run-environment div {
+  min-width: 0;
+  padding: 12px 12px 12px 0;
+}
+
+.run-environment div + div {
+  padding-left: 12px;
+  border-left: 1px solid var(--soft-line);
+}
+
+.run-environment dt {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.run-environment dd {
+  margin: 5px 0 0;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 610;
   line-height: 1.45;
 }
 
-.delivery-metric ul,
+.run-outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.run-outcomes section {
+  min-width: 0;
+  padding-right: 18px;
+}
+
+.run-outcomes section + section {
+  padding-left: 18px;
+  border-left: 1px solid var(--soft-line);
+}
+
+.run-outcomes span {
+  color: var(--product-accent);
+}
+
+.run-outcomes strong {
+  display: block;
+  margin: 6px 0 5px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.run-outcomes p {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
 .tradeoff-grid ul {
   margin: 0;
   padding-left: 17px;
@@ -1037,7 +1082,6 @@ tbody tr:last-child td {
   font-size: 11px;
 }
 
-.delivery-metric li + li,
 .tradeoff-grid li + li {
   margin-top: 5px;
 }
@@ -1980,22 +2024,38 @@ body.sidebar-collapsed .sub-nav {
     grid-column: 1;
   }
 
-  .benchmark-lead {
+  .benchmark-strip,
+  .benchmark-story {
     grid-template-columns: 1fr;
-    gap: 8px;
   }
 
-  .benchmark-brief {
+  .benchmark-strip-item + .benchmark-strip-item,
+  .benchmark-story article + article {
+    border-top: 1px solid var(--soft-line);
+    border-left: 0;
+  }
+
+  .benchmark-story article,
+  .benchmark-story article:first-child {
+    padding: 16px 0;
+  }
+
+  .delivery-run-header {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 10px;
   }
 
-  .delivery-row {
-    grid-template-columns: 180px 1fr 1fr;
+  .run-environment {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .delivery-metric:last-child {
-    grid-column: 2 / -1;
+  .run-environment div:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .run-environment div:nth-child(n + 3) {
+    border-top: 1px solid var(--soft-line);
   }
 
   .trend-list,
@@ -2067,11 +2127,8 @@ body.sidebar-collapsed .sub-nav {
     grid-template-columns: 1fr;
   }
 
-  .deliverable-list {
-    grid-template-columns: 1fr;
-  }
-
-  .delivery-row,
+  .run-environment,
+  .run-outcomes,
   .implementation-grid,
   .tradeoff-grid,
   .product-timeline,
@@ -2079,8 +2136,24 @@ body.sidebar-collapsed .sub-nav {
     grid-template-columns: 1fr;
   }
 
-  .delivery-metric:last-child {
-    grid-column: auto;
+  .delivery-run {
+    padding: 20px;
+  }
+
+  .run-environment div,
+  .run-environment div + div {
+    padding: 11px 0;
+    border-top: 1px solid var(--soft-line);
+    border-left: 0;
+  }
+
+  .run-outcomes section {
+    padding: 14px 0;
+  }
+
+  .run-outcomes section + section {
+    border-top: 1px solid var(--soft-line);
+    border-left: 0;
   }
 
   .control-product-card > header {

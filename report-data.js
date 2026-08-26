@@ -2784,6 +2784,7 @@ window.REPORT_DATA = {
       ]
     },
     "brief": {
+      "shortObjective": "从 6 个行业中选 2 个，输出目标企业、试点、定价、毛利和 90 天 GTM。",
       "objective": "为虚构公司 FieldPilot AI 制定可供管理层决策的 FDE 商业化方案：从六个候选行业中选择两个优先行业，形成目标企业清单、试点服务包、定价与毛利模型、90 天 GTM，并完成本人可见范围内的办公协同测试。",
       "constraints": [
         "三款产品读取相同的公司简报、财务假设和交付要求。",
@@ -2872,6 +2873,13 @@ window.REPORT_DATA = {
       {
         "product": "doubao",
         "version": "客户端版本号未记录，运行日志记录 lark-cli 1.0.88",
+        "testEnvironment": {
+          "version": "客户端未记录；lark-cli 1.0.88",
+          "mode": "Auto 高",
+          "model": "未记录",
+          "reasoning": "未单独记录",
+          "runtime": "隔离 sandbox；Python；general_search；飞书 lark-cli"
+        },
         "environment": [
           "豆包工作 Auto 高模式",
           "隔离 sandbox",
@@ -2935,6 +2943,13 @@ window.REPORT_DATA = {
       {
         "product": "workbuddy",
         "version": "5.3.14",
+        "testEnvironment": {
+          "version": "5.3.14",
+          "mode": "Auto",
+          "model": "未记录",
+          "reasoning": "未单独记录",
+          "runtime": "本地文件系统；Python venv；WebSearch；飞书替代通道"
+        },
         "environment": [
           "WorkBuddy Auto 模式",
           "本地文件系统",
@@ -2998,6 +3013,13 @@ window.REPORT_DATA = {
       {
         "product": "qwen",
         "version": "1.0.0.26082211",
+        "testEnvironment": {
+          "version": "1.0.0.26082211",
+          "mode": "基础模式；手动编排",
+          "model": "未记录；会话标识 qwork-advanced",
+          "reasoning": "未单独记录",
+          "runtime": "Windows；WeCom Python 3.10；WebSearch/WebFetch；钉钉 DWS"
+        },
         "environment": [
           "千问办公基础模式",
           "手动编排",
@@ -3060,6 +3082,9 @@ window.REPORT_DATA = {
       }
     ],
     "summary": {
+      "whatWasTested": "给三款 Agent 相同的公司简报、财务假设和交付要求，每款只运行一次。",
+      "whyTested": "同时检查业务文件和运行轨迹，避免只凭“生成了文件”判断任务完成。",
+      "result": "三家都交付 3/3 业务文件；差异主要是核心耗时、返工量、环境准备和生态授权。",
       "commonResult": "三家都生成了 3 个业务交付物，工作簿、清单和演示文件均可解析。",
       "mainDifference": "差异主要来自资源消耗、产物返工量、环境准备、错误恢复和生态授权。",
       "boundary": "每个产品只运行一次。本页不把单次结果换算为长期成功率，也不合成一个总分。"

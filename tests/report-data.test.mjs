@@ -56,6 +56,9 @@ test("delivery brief separates business deliverables from trajectory evidence", 
 test("delivery assessment exposes resource, quality and stability metrics", () => {
   const data = readJson("runs.json");
   for (const run of data.runs) {
+    for (const key of ["version", "mode", "model", "reasoning", "runtime"]) {
+      assert.ok(run.testEnvironment?.[key], `${run.product}.testEnvironment.${key} is required`);
+    }
     assert.ok(run.assessment.resource.coreMinutes > 0);
     assert.ok(run.assessment.resource.totalMinutes > 0);
     assert.ok(run.assessment.resource.credits);
@@ -65,6 +68,14 @@ test("delivery assessment exposes resource, quality and stability metrics", () =
     assert.ok(run.assessment.stability.details.length >= 3);
     assert.ok(run.assessment.trajectory);
   }
+});
+
+test("delivery summary states what was tested, why and what happened", () => {
+  const data = readJson("runs.json");
+  assert.ok(data.summary.whatWasTested);
+  assert.ok(data.summary.whyTested);
+  assert.ok(data.summary.result);
+  assert.match(data.summary.result, /3\/3|三家/);
 });
 
 test("control surface conclusions expose direct business language", () => {

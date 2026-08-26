@@ -100,13 +100,19 @@ test("delivery test separates business outputs from trajectory observation", () 
   const app = read("app.js");
   assert.match(html, /任务交付测试/);
   assert.doesNotMatch(html, /同题任务测试/);
-  assert.match(html, /id=["']benchmark-brief["']/);
-  assert.match(html, /id=["']business-deliverables["']/);
-  assert.match(html, /id=["']trajectory-artifacts["']/);
+  assert.match(html, /id=["']benchmark-strip["']/);
+  assert.match(html, /id=["']benchmark-story["']/);
   assert.match(html, /id=["']delivery-assessment["']/);
   assert.match(app, /renderBenchmarkBrief/);
-  const assignment = html.match(/<article class="benchmark-assignment">[\s\S]*?<\/article>/)?.[0] || "";
-  assert.match(assignment, /id="trajectory-artifacts"/);
+  assert.match(app, /测试环境/);
+  assert.doesNotMatch(html, /三个文件，用于管理层决策|三份记录，用于分析执行过程/);
+  assert.doesNotMatch(html, /id=["']benchmark-lead["']/);
+});
+
+test("delivery setup stays in one compact desktop row", () => {
+  const css = read("styles.css");
+  assert.match(css, /\.benchmark-strip\s*\{[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/s);
+  assert.match(css, /\.run-environment\s*\{[^}]*grid-template-columns:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\)/s);
 });
 
 test("control tab introduces each product once and keeps one comparison matrix", () => {
