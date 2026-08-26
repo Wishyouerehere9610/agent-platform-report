@@ -1503,6 +1503,295 @@ tbody tr:last-child td {
   margin-bottom: 4px;
 }
 
+.doubao-deep-dive-band {
+  border-top: 1px solid var(--soft-line);
+}
+
+.doubao-verdict {
+  display: grid;
+  grid-template-columns: 138px minmax(0, 1fr);
+  gap: 26px;
+  align-items: center;
+  margin-bottom: 54px;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.doubao-verdict span {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.doubao-verdict p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.deep-dive-heading {
+  margin-bottom: 24px;
+}
+
+.deep-dive-heading h3 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.deep-dive-heading > p,
+.deep-dive-heading.split-intro > p {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 13px;
+}
+
+.doubao-history-section,
+.doubao-integration-section,
+.doubao-commercial-section,
+.doubao-win-section {
+  margin-top: 58px;
+}
+
+.doubao-history-scroll {
+  overflow-x: auto;
+  padding-top: 4px;
+}
+
+.doubao-history {
+  display: grid;
+  min-width: 1060px;
+  grid-template-columns: repeat(7, minmax(140px, 1fr));
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #8daed1;
+  list-style: none;
+}
+
+.doubao-history li {
+  position: relative;
+  padding: 20px 18px 0 0;
+}
+
+.doubao-history li::before {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 1px var(--blue);
+  content: "";
+}
+
+.doubao-history time {
+  color: var(--blue-dark);
+  font: 10px/1.4 ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+.doubao-history strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.doubao-history p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.doubao-architecture-figure {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.doubao-architecture-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
+.doubao-architecture-figure figcaption {
+  padding: 12px 16px;
+  border-top: 1px solid var(--soft-line);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.doubao-integration-ledger {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 34px;
+  margin-top: 32px;
+}
+
+.doubao-integration-ledger section > header {
+  margin-bottom: 4px;
+}
+
+.doubao-integration-ledger section > header span {
+  color: var(--blue);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.doubao-integration-ledger h4 {
+  margin: 4px 0 14px;
+  font-size: 17px;
+}
+
+.doubao-integration-ledger article {
+  padding: 14px 0;
+  border-top: 1px solid var(--soft-line);
+}
+
+.doubao-integration-ledger article > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.doubao-integration-ledger article strong {
+  font-size: 14px;
+}
+
+.doubao-integration-ledger article p {
+  margin: 7px 0 0;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.integration-status {
+  flex: 0 0 auto;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.integration-status.confirmed {
+  border-color: #9eb8d3;
+  color: var(--blue-dark);
+  background: #eef5fc;
+}
+
+.integration-status.integrating {
+  border-color: #d9b66a;
+  color: #865d06;
+  background: #fff8e9;
+}
+
+.integration-status.independent {
+  color: var(--secondary);
+  background: #f3f3f5;
+}
+
+.integration-status.commercial {
+  border-style: dashed;
+  border-color: #d9b66a;
+  color: #865d06;
+}
+
+.doubao-tradeoffs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px;
+  margin-top: 58px;
+}
+
+.doubao-analysis-list article {
+  padding: 15px 0;
+  border-top: 1px solid var(--soft-line);
+}
+
+.doubao-analysis-list strong {
+  font-size: 14px;
+}
+
+.doubao-analysis-list p {
+  margin: 6px 0 0;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.doubao-commercial-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+
+.doubao-commercial-list article {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 14px;
+  padding: 22px 24px 22px 0;
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.doubao-commercial-list article:nth-child(even) {
+  padding-left: 24px;
+  border-left: 1px solid var(--soft-line);
+}
+
+.doubao-commercial-list article > span {
+  color: var(--blue);
+  font: 10px/1.6 ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+.doubao-commercial-list strong {
+  font-size: 15px;
+}
+
+.doubao-commercial-list p {
+  margin: 6px 0 0;
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.doubao-win-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.doubao-win-grid article {
+  min-height: 158px;
+  padding: 24px;
+}
+
+.doubao-win-grid article + article {
+  border-left: 1px solid var(--soft-line);
+}
+
+.doubao-win-grid strong {
+  font-size: 17px;
+}
+
+.doubao-win-grid p {
+  margin: 14px 0 0;
+  color: var(--secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .source-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1938,8 +2227,15 @@ body.sidebar-collapsed .sub-nav {
 
   .trend-list,
   .opportunity-list,
-  .legacy-opportunity {
+  .legacy-opportunity,
+  .doubao-integration-ledger,
+  .doubao-tradeoffs {
     grid-template-columns: 1fr;
+  }
+
+  .doubao-integration-ledger,
+  .doubao-tradeoffs {
+    gap: 26px;
   }
 
   .implementation-grid,
@@ -2089,6 +2385,40 @@ body.sidebar-collapsed .sub-nav {
 
   .legacy-opportunity dl {
     grid-template-columns: 1fr;
+  }
+
+  .doubao-verdict {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .doubao-verdict p {
+    font-size: 17px;
+  }
+
+  .doubao-commercial-list,
+  .doubao-win-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doubao-commercial-list article,
+  .doubao-commercial-list article:nth-child(even) {
+    padding: 18px 0;
+    border-left: 0;
+  }
+
+  .doubao-win-grid article {
+    min-height: auto;
+    padding: 20px 0;
+  }
+
+  .doubao-win-grid article + article {
+    border-top: 1px solid var(--soft-line);
+    border-left: 0;
+  }
+
+  .doubao-integration-ledger article > div {
+    align-items: flex-start;
   }
 }
 

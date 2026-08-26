@@ -299,3 +299,49 @@ test("legacy system opportunity explains the commercial wedge", () => {
   assert.match(opportunity.summary, /Computer Use/);
   assert.equal(opportunity.points.length, 4);
 });
+
+test("Doubao deep dive keeps product history, integration and commercial judgment evidence linked", () => {
+  const insights = readJson("insights.json");
+  const evidence = readJson("evidence.json");
+  const evidenceIds = new Set(evidence.items.map((item) => item.id));
+  const deepDive = insights.doubaoDeepDive;
+  const sentence = /[。.!?]$/;
+
+  assert.ok(deepDive);
+  assert.match(deepDive.verdict, sentence);
+  assert.ok(deepDive.timeline.length >= 5);
+  assert.ok(deepDive.integratedModules.length >= 5);
+  assert.ok(deepDive.convergingProducts.length >= 3);
+  assert.ok(deepDive.strengths.length >= 3);
+  assert.ok(deepDive.weaknesses.length >= 3);
+  assert.ok(deepDive.commercialOpportunities.length >= 3);
+  assert.equal(deepDive.winChances.length, 3);
+
+  for (const item of [
+    ...deepDive.timeline,
+    ...deepDive.integratedModules,
+    ...deepDive.convergingProducts,
+    ...deepDive.strengths,
+    ...deepDive.weaknesses,
+    ...deepDive.commercialOpportunities,
+    ...deepDive.winChances
+  ]) {
+    assert.ok(item.title);
+    assert.match(item.detail || item.body, sentence);
+    assert.ok(item.evidence.every((id) => evidenceIds.has(id)), `${item.title} has unknown evidence`);
+  }
+
+  assert.match(JSON.stringify(deepDive), /Seed 2\.1/);
+  assert.match(JSON.stringify(deepDive), /Seedream 5\.0/);
+  assert.match(JSON.stringify(deepDive), /Seedance 2\.0/);
+  assert.match(JSON.stringify(deepDive), /飞书 Aily/);
+  assert.match(JSON.stringify(deepDive), /火山引擎/);
+  assert.match(JSON.stringify(deepDive), /TRAE Work/);
+  assert.match(JSON.stringify(deepDive), /扣子/);
+  assert.match(JSON.stringify(deepDive), /TRAE IDE\/CLI/);
+  assert.ok(deepDive.convergingProducts.some((item) => item.title === "TRAE Work" && item.status === "能力整合中"));
+  assert.ok(deepDive.convergingProducts.some((item) => item.title === "扣子" && item.status === "能力整合中"));
+  assert.ok(deepDive.convergingProducts.some((item) => item.title === "TRAE IDE/CLI" && item.status === "独立产品线"));
+  assert.ok(!deepDive.convergingProducts.some((item) => item.status === "已进入产品"));
+  assert.doesNotMatch(JSON.stringify(deepDive), /剪映.*已集成/);
+});

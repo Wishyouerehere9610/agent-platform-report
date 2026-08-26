@@ -6,7 +6,7 @@ const read = (name) => fs.readFileSync(new URL(`../${name}`, import.meta.url), "
 
 test("public page contains the required business-facing sections", () => {
   const html = read("index.html");
-  for (const id of ["overview", "commercial-coverage", "feature-matrix", "task-test", "computer-browser", "opportunities", "fde-thinking", "references"]) {
+  for (const id of ["overview", "commercial-coverage", "feature-matrix", "task-test", "computer-browser", "opportunities", "doubao-deep-dive", "fde-thinking", "references"]) {
     assert.match(html, new RegExp(`id=["']${id}["']`), `missing section ${id}`);
   }
 });
@@ -27,11 +27,27 @@ test("navigation follows the reference project shell", () => {
   assert.match(html, /class=["'][^"']*nav-group/);
   assert.match(html, /class=["'][^"']*sub-nav/);
   assert.doesNotMatch(html, /theme-button/);
-  assert.equal((html.match(/class=["'][^"']*nav-primary[^"']*["']/g) || []).length, 5);
+  assert.equal((html.match(/class=["'][^"']*nav-primary[^"']*["']/g) || []).length, 6);
   assert.equal((html.match(/class=["']nav-group["']/g) || []).length, 1);
   assert.equal((html.match(/class=["']sub-nav["'][\s\S]*?<\/div>/g) || []).length, 1);
   assert.equal((html.match(/class=["'][^"']*nav-child[^"']*["']/g) || []).length, 2);
   assert.doesNotMatch(html, />4\.1\s*商业化机会</);
+});
+
+test("Doubao deep dive is a standalone main tab with one explanatory image", () => {
+  const html = read("index.html");
+  const app = read("app.js");
+  assert.match(html, /href=["']#doubao-deep-dive["'][^>]*data-nav-title=["']豆包工作详解["']/);
+  assert.match(html, /id=["']doubao-deep-dive["']/);
+  assert.match(html, /id=["']doubao-history["']/);
+  assert.match(html, /id=["']doubao-integration["']/);
+  assert.match(html, /id=["']doubao-strengths["']/);
+  assert.match(html, /id=["']doubao-weaknesses["']/);
+  assert.match(html, /id=["']doubao-commercial["']/);
+  assert.match(html, /id=["']doubao-win-chances["']/);
+  assert.match(html, /assets\/doubao-work-integration-notion\.png/);
+  assert.match(app, /renderDoubaoDeepDive/);
+  assert.ok(fs.existsSync(new URL("../assets/doubao-work-integration-notion.png", import.meta.url)));
 });
 
 test("visual tokens match the reference project", () => {

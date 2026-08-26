@@ -234,6 +234,42 @@ function renderOpportunities() {
   `).join("");
 }
 
+function renderDoubaoDeepDive() {
+  const deepDive = insights.doubaoDeepDive;
+  document.querySelector("#doubao-verdict").textContent = deepDive.verdict;
+  document.querySelector("#doubao-history").innerHTML = deepDive.timeline.map((item) => `
+    <li><time>${escapeHtml(item.date)}</time><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></li>
+  `).join("");
+
+  const renderIntegrationItem = (item) => `
+    <article><div><strong>${escapeHtml(item.title)}</strong><span class="integration-status ${integrationStatusClass(item.status)}">${escapeHtml(item.status)}</span></div><p>${escapeHtml(item.detail)}</p></article>
+  `;
+  document.querySelector("#doubao-integration").innerHTML = `
+    <section><header><span>当前产品</span><h4>已确认能力与商业通道</h4></header>${deepDive.integratedModules.map(renderIntegrationItem).join("")}</section>
+    <section><header><span>产品线收拢</span><h4>整合状态</h4></header>${deepDive.convergingProducts.map(renderIntegrationItem).join("")}</section>
+  `;
+
+  document.querySelector("#doubao-strengths").innerHTML = deepDive.strengths.map(renderDeepDivePoint).join("");
+  document.querySelector("#doubao-weaknesses").innerHTML = deepDive.weaknesses.map(renderDeepDivePoint).join("");
+  document.querySelector("#doubao-commercial").innerHTML = deepDive.commercialOpportunities.map((item, index) => `
+    <article><span>${String(index + 1).padStart(2, "0")}</span><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.body)}</p></div></article>
+  `).join("");
+  document.querySelector("#doubao-win-chances").innerHTML = deepDive.winChances.map((item) => `
+    <article><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.body)}</p></article>
+  `).join("");
+}
+
+function integrationStatusClass(status) {
+  if (status === "已进入产品") return "confirmed";
+  if (status === "能力整合中") return "integrating";
+  if (status === "独立产品线") return "independent";
+  return "commercial";
+}
+
+function renderDeepDivePoint(item) {
+  return `<article><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.body)}</p></article>`;
+}
+
 function renderFdeThinking() {
   document.querySelector("#fde-principles").innerHTML = insights.fdeThinking.principles.map((item, index) => `
     <article><span>${String(index + 1).padStart(2, "0")}</span><div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.body)}</p></div></article>
@@ -246,8 +282,8 @@ function renderFdeThinking() {
 function renderSources() {
   const byId = new Map(evidence.items.map((item) => [item.id, item]));
   const groups = {
-    "reference-a": ["RUN-DB-001", "RUN-WB-001", "RUN-QW-001", "OBS-DB-001", "OBS-WB-001", "OBS-QW-001", "OBS-USER-002", "OFF-DB-005", "OFF-DB-007", "OFF-WB-002", "OFF-WB-005", "OFF-WB-006", "OFF-WB-007", "OFF-QW-007", "OFF-QW-008", "OFF-QW-009", "OFF-FS-001"],
-    "reference-b": ["RES-CONTROL-001", "MED-CROSS-003", "MED-DB-001", "MED-DB-002", "MED-DB-003", "MED-DB-004", "MED-DB-005", "CASE-WB-006", "MED-CROSS-002"],
+    "reference-a": ["RUN-DB-001", "RUN-WB-001", "RUN-QW-001", "OBS-DB-001", "OBS-WB-001", "OBS-QW-001", "OBS-USER-002", "OFF-DB-005", "OFF-DB-007", "OFF-TRAE-001", "OFF-COZE-001", "OFF-COZE-002", "OFF-VE-001", "OFF-WB-002", "OFF-WB-005", "OFF-WB-006", "OFF-WB-007", "OFF-QW-007", "OFF-QW-008", "OFF-QW-009", "OFF-FS-001"],
+    "reference-b": ["RES-CONTROL-001", "MED-CROSS-003", "MED-DB-001", "MED-DB-002", "MED-DB-003", "MED-DB-004", "MED-DB-005", "MED-DB-006", "MED-DB-007", "CASE-WB-006", "MED-CROSS-002"],
     "reference-c": ["SOC-DB-001", "SOC-WB-001", "SOC-WB-002", "SOC-WB-003", "SOC-QW-001", "SOC-001", "SOC-002"]
   };
   Object.entries(groups).forEach(([containerId, ids]) => {
@@ -360,6 +396,7 @@ function init() {
   renderIndustries();
   renderTrends();
   renderOpportunities();
+  renderDoubaoDeepDive();
   renderFdeThinking();
   renderSources();
   setupSidebar();

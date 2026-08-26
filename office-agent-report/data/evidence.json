@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-26T12:00:00+08:00",
+  "updatedAt": "2026-08-27T10:00:00+08:00",
   "methodology": "OBS 为桌面界面与操作记录；OFF 为官方资料；CASE 为官方或客户公开案例；MED 为媒体或独立分析；SOC 为社区内容。产品功能优先使用 OFF，实际结果优先使用 OBS。行业覆盖区分命名客户、官方场景和能力推断。媒体与社区只补充体验，不替代官方资料和本地实测。",
   "items": [
     {
@@ -472,8 +472,8 @@
       "url": "https://www.feishu.cn/content/article/7677519271848610746",
       "observedAt": "2026-08-26",
       "version": "发布于 2026-08-24",
-      "summary": "飞书官方说明豆包工作通过独立 PC、豆包工作入口和飞书内入口提供服务；飞书入口沿用企业身份，企业管理员控制开放范围。",
-      "supports": ["official-release", "pc", "doubao-entry", "feishu-entry", "enterprise-access-control"]
+      "summary": "飞书官方说明豆包工作整合 Seed 2.1、Seedream、Seedance、浏览器与电脑操作、定时任务、飞书企业上下文、技能、连接器和工作伙伴，并通过独立 PC、豆包和飞书入口提供服务。",
+      "supports": ["official-release", "pc", "doubao-entry", "feishu-entry", "enterprise-access-control", "seed-models", "image-video", "scheduled-tasks", "aily", "skills", "connectors"]
     },
     {
       "id": "MED-DB-003",
@@ -485,6 +485,72 @@
       "version": "发布于 2026-08-25",
       "summary": "科技日报报道豆包工作于 2026 年 8 月 25 日正式发布，并确认产品与飞书企业上下文、权限体系和工作入口打通。",
       "supports": ["release-date", "feishu-integration", "enterprise-context"]
+    },
+    {
+      "id": "MED-DB-006",
+      "product": "doubao",
+      "type": "MED",
+      "title": "字节豆包、飞书与火山引擎组织调整",
+      "url": "https://36kr.com/p/3917524888442499",
+      "observedAt": "2026-08-27",
+      "version": "发布于 2026-07-30",
+      "summary": "报道确认飞书产品团队并入豆包产品团队，飞书 GTM 与火山引擎整合，并指出豆包专业版已嵌入部分飞书能力。组织调整不等于所有字节产品都已集成进豆包工作。",
+      "supports": ["organization-integration", "feishu-product", "volcengine-gtm", "doubao-pro"]
+    },
+    {
+      "id": "OFF-VE-001",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "火山引擎 AI 云原生 Agent 套件",
+      "url": "https://www.volcengine.com/solutions/ai-cloud-native-agentkit",
+      "observedAt": "2026-08-27",
+      "version": "网页资料",
+      "summary": "火山引擎官方列出弹性算力、MCP、记忆管理、全链路观测、模型路由和工具调用等 Agent 基础设施。公开资料没有逐项确认豆包工作直接复用这些公开产品组件。",
+      "supports": ["agent-infrastructure", "elastic-compute", "mcp", "memory", "observability", "implementation-boundary"]
+    },
+    {
+      "id": "MED-DB-007",
+      "product": "doubao",
+      "type": "MED",
+      "title": "TRAE、扣子并入豆包体系",
+      "url": "https://m.36kr.com/p/3953230805876099",
+      "observedAt": "2026-08-27",
+      "version": "发布于 2026-08-24",
+      "summary": "36氪报道并经字节回应确认，TRAE 与扣子团队整体并入豆包体系；TRAE Work、扣子将整合工作场景能力，TRAE IDE/CLI 保持独立编程产品线。报道确认的是组织与能力整合方向，不等于所有能力已在豆包工作上线。",
+      "supports": ["trae-integration", "coze-integration", "trae-work", "trae-ide", "organization-integration", "product-boundary"]
+    },
+    {
+      "id": "OFF-TRAE-001",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "TRAE 产品与 TraeWork 能力概览",
+      "url": "https://docs.trae.cn/",
+      "observedAt": "2026-08-27",
+      "version": "网页资料",
+      "summary": "TRAE 官方说明 TraeWork 提供 Web、桌面和移动形态，包含 Work、Code、Design 三种模式，并支持文档、数据、演示稿、应用生成和云端智能体。",
+      "supports": ["trae-work", "office", "coding", "design", "cloud-agent", "multi-device"]
+    },
+    {
+      "id": "OFF-COZE-001",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "扣子工作流与插件文档",
+      "url": "https://docs.coze.cn/guides_agent_workflow",
+      "observedAt": "2026-08-27",
+      "version": "网页资料",
+      "summary": "扣子官方文档说明低代码工作流可以组合插件、模型和代码块，用于编排步骤较多且输出要求明确的业务流程。",
+      "supports": ["coze", "workflow", "plugins", "agent-builder"]
+    },
+    {
+      "id": "OFF-COZE-002",
+      "product": "doubao",
+      "type": "OFF",
+      "title": "扣子多 Agent 模式文档",
+      "url": "https://docs.coze.cn/guides_multiagent",
+      "observedAt": "2026-08-27",
+      "version": "网页资料",
+      "summary": "扣子官方文档说明多 Agent 模式支持多个 Agent 节点分工协作，并可为各节点配置独立提示词、插件和工作流。",
+      "supports": ["coze", "multi-agent", "agent-orchestration", "plugins", "workflow"]
     },
     {
       "id": "OFF-WB-007",

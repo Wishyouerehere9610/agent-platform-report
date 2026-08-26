@@ -1425,7 +1425,7 @@ window.REPORT_DATA = {
     ]
   },
   "evidence": {
-    "updatedAt": "2026-08-26T12:00:00+08:00",
+    "updatedAt": "2026-08-27T10:00:00+08:00",
     "methodology": "OBS 为桌面界面与操作记录；OFF 为官方资料；CASE 为官方或客户公开案例；MED 为媒体或独立分析；SOC 为社区内容。产品功能优先使用 OFF，实际结果优先使用 OBS。行业覆盖区分命名客户、官方场景和能力推断。媒体与社区只补充体验，不替代官方资料和本地实测。",
     "items": [
       {
@@ -2123,13 +2123,19 @@ window.REPORT_DATA = {
         "url": "https://www.feishu.cn/content/article/7677519271848610746",
         "observedAt": "2026-08-26",
         "version": "发布于 2026-08-24",
-        "summary": "飞书官方说明豆包工作通过独立 PC、豆包工作入口和飞书内入口提供服务；飞书入口沿用企业身份，企业管理员控制开放范围。",
+        "summary": "飞书官方说明豆包工作整合 Seed 2.1、Seedream、Seedance、浏览器与电脑操作、定时任务、飞书企业上下文、技能、连接器和工作伙伴，并通过独立 PC、豆包和飞书入口提供服务。",
         "supports": [
           "official-release",
           "pc",
           "doubao-entry",
           "feishu-entry",
-          "enterprise-access-control"
+          "enterprise-access-control",
+          "seed-models",
+          "image-video",
+          "scheduled-tasks",
+          "aily",
+          "skills",
+          "connectors"
         ]
       },
       {
@@ -2145,6 +2151,109 @@ window.REPORT_DATA = {
           "release-date",
           "feishu-integration",
           "enterprise-context"
+        ]
+      },
+      {
+        "id": "MED-DB-006",
+        "product": "doubao",
+        "type": "MED",
+        "title": "字节豆包、飞书与火山引擎组织调整",
+        "url": "https://36kr.com/p/3917524888442499",
+        "observedAt": "2026-08-27",
+        "version": "发布于 2026-07-30",
+        "summary": "报道确认飞书产品团队并入豆包产品团队，飞书 GTM 与火山引擎整合，并指出豆包专业版已嵌入部分飞书能力。组织调整不等于所有字节产品都已集成进豆包工作。",
+        "supports": [
+          "organization-integration",
+          "feishu-product",
+          "volcengine-gtm",
+          "doubao-pro"
+        ]
+      },
+      {
+        "id": "OFF-VE-001",
+        "product": "doubao",
+        "type": "OFF",
+        "title": "火山引擎 AI 云原生 Agent 套件",
+        "url": "https://www.volcengine.com/solutions/ai-cloud-native-agentkit",
+        "observedAt": "2026-08-27",
+        "version": "网页资料",
+        "summary": "火山引擎官方列出弹性算力、MCP、记忆管理、全链路观测、模型路由和工具调用等 Agent 基础设施。公开资料没有逐项确认豆包工作直接复用这些公开产品组件。",
+        "supports": [
+          "agent-infrastructure",
+          "elastic-compute",
+          "mcp",
+          "memory",
+          "observability",
+          "implementation-boundary"
+        ]
+      },
+      {
+        "id": "MED-DB-007",
+        "product": "doubao",
+        "type": "MED",
+        "title": "TRAE、扣子并入豆包体系",
+        "url": "https://m.36kr.com/p/3953230805876099",
+        "observedAt": "2026-08-27",
+        "version": "发布于 2026-08-24",
+        "summary": "36氪报道并经字节回应确认，TRAE 与扣子团队整体并入豆包体系；TRAE Work、扣子将整合工作场景能力，TRAE IDE/CLI 保持独立编程产品线。报道确认的是组织与能力整合方向，不等于所有能力已在豆包工作上线。",
+        "supports": [
+          "trae-integration",
+          "coze-integration",
+          "trae-work",
+          "trae-ide",
+          "organization-integration",
+          "product-boundary"
+        ]
+      },
+      {
+        "id": "OFF-TRAE-001",
+        "product": "doubao",
+        "type": "OFF",
+        "title": "TRAE 产品与 TraeWork 能力概览",
+        "url": "https://docs.trae.cn/",
+        "observedAt": "2026-08-27",
+        "version": "网页资料",
+        "summary": "TRAE 官方说明 TraeWork 提供 Web、桌面和移动形态，包含 Work、Code、Design 三种模式，并支持文档、数据、演示稿、应用生成和云端智能体。",
+        "supports": [
+          "trae-work",
+          "office",
+          "coding",
+          "design",
+          "cloud-agent",
+          "multi-device"
+        ]
+      },
+      {
+        "id": "OFF-COZE-001",
+        "product": "doubao",
+        "type": "OFF",
+        "title": "扣子工作流与插件文档",
+        "url": "https://docs.coze.cn/guides_agent_workflow",
+        "observedAt": "2026-08-27",
+        "version": "网页资料",
+        "summary": "扣子官方文档说明低代码工作流可以组合插件、模型和代码块，用于编排步骤较多且输出要求明确的业务流程。",
+        "supports": [
+          "coze",
+          "workflow",
+          "plugins",
+          "agent-builder"
+        ]
+      },
+      {
+        "id": "OFF-COZE-002",
+        "product": "doubao",
+        "type": "OFF",
+        "title": "扣子多 Agent 模式文档",
+        "url": "https://docs.coze.cn/guides_multiagent",
+        "observedAt": "2026-08-27",
+        "version": "网页资料",
+        "summary": "扣子官方文档说明多 Agent 模式支持多个 Agent 节点分工协作，并可为各节点配置独立提示词、插件和工作流。",
+        "supports": [
+          "coze",
+          "multi-agent",
+          "agent-orchestration",
+          "plugins",
+          "workflow"
         ]
       },
       {
@@ -3276,7 +3385,7 @@ window.REPORT_DATA = {
     ]
   },
   "insights": {
-    "updatedAt": "2026-08-26T16:00:00+08:00",
+    "updatedAt": "2026-08-27T10:00:00+08:00",
     "productPositions": [
       {
         "id": "doubao",
@@ -4291,6 +4400,284 @@ window.REPORT_DATA = {
         "note": "企业微信扫码进入 Bot 创建页面后持续提示参数不合法，原因没有完全确认；同一环境下改接飞书更快，也不需要再次扫码。"
       }
     ],
+    "doubaoDeepDive": {
+      "verdict": "豆包工作正在收拢字节的模型、飞书、执行环境和生产力产品线；飞书客户启动更快，跨产品打通程度仍需验证。",
+      "timeline": [
+        {
+          "date": "2026-06-24",
+          "title": "豆包专业版上线",
+          "detail": "工作任务开始承接复杂执行，并嵌入部分飞书能力。",
+          "evidence": [
+            "MED-DB-006"
+          ]
+        },
+        {
+          "date": "2026-07-30",
+          "title": "飞书产品并入豆包",
+          "detail": "产品团队合并，飞书 GTM 与火山引擎整合。",
+          "evidence": [
+            "MED-DB-006"
+          ]
+        },
+        {
+          "date": "2026-08-17",
+          "title": "手机远程控制电脑",
+          "detail": "用户离开工位后仍能下发任务并查看进度。",
+          "evidence": [
+            "RES-CONTROL-001",
+            "MED-DB-004"
+          ]
+        },
+        {
+          "date": "2026-08-18",
+          "title": "Windows 虚拟桌面",
+          "detail": "任务可以在独立桌面执行，不抢用户的鼠标和键盘。",
+          "evidence": [
+            "RES-CONTROL-001",
+            "MED-DB-005"
+          ]
+        },
+        {
+          "date": "2026-08-19",
+          "title": "本地与云电脑双模式",
+          "detail": "本地任务留在设备，长任务可以交给云电脑继续执行。",
+          "evidence": [
+            "RES-CONTROL-001",
+            "MED-DB-004"
+          ]
+        },
+        {
+          "date": "2026-08-24",
+          "title": "TRAE、扣子并入豆包",
+          "detail": "TRAE Work 和扣子宣布整合工作场景能力，TRAE IDE/CLI 保持独立。",
+          "evidence": [
+            "MED-DB-007"
+          ]
+        },
+        {
+          "date": "2026-08-25",
+          "title": "豆包工作正式发布",
+          "detail": "独立 PC、豆包入口和飞书入口形成统一产品。",
+          "evidence": [
+            "OFF-DB-007",
+            "MED-DB-003"
+          ]
+        }
+      ],
+      "integratedModules": [
+        {
+          "title": "Seed 模型体系",
+          "status": "已进入产品",
+          "detail": "Seed 2.1 负责任务理解和工具调用，Seedream 5.0 与 Seedance 2.0/2.5 负责图像和视频。",
+          "evidence": [
+            "OFF-DB-007"
+          ]
+        },
+        {
+          "title": "飞书企业上下文",
+          "status": "已进入产品",
+          "detail": "企业身份、权限、文档、表格、知识库、云盘和日历直接进入任务。",
+          "evidence": [
+            "OFF-DB-007"
+          ]
+        },
+        {
+          "title": "执行环境",
+          "status": "已进入产品",
+          "detail": "内置浏览器、本地电脑、虚拟桌面、云电脑和定时任务覆盖短任务与长任务。",
+          "evidence": [
+            "OFF-DB-007",
+            "RES-CONTROL-001"
+          ]
+        },
+        {
+          "title": "工作伙伴",
+          "status": "已进入产品",
+          "detail": "飞书 Aily 更名为豆包工作伙伴，继续提供专业角色和多 Agent 小队。",
+          "evidence": [
+            "OFF-DB-007"
+          ]
+        },
+        {
+          "title": "技能与连接器",
+          "status": "已进入产品",
+          "detail": "内置技能承接飞书能力，连接器继续接入飞书之外的系统和数据。",
+          "evidence": [
+            "OFF-DB-007"
+          ]
+        },
+        {
+          "title": "火山引擎商业化通道",
+          "status": "商业通道",
+          "detail": "飞书 GTM 与火山引擎整合，统一承接 MaaS、SaaS 的销售和客户服务。",
+          "evidence": [
+            "MED-DB-006",
+            "OFF-VE-001"
+          ]
+        }
+      ],
+      "convergingProducts": [
+        {
+          "title": "TRAE Work",
+          "status": "能力整合中",
+          "detail": "Work、Code 和 Design 模式积累了文档、数据、演示稿、应用生成和云端智能体能力。",
+          "evidence": [
+            "MED-DB-007",
+            "OFF-TRAE-001"
+          ]
+        },
+        {
+          "title": "扣子",
+          "status": "能力整合中",
+          "detail": "智能体搭建、插件、低代码工作流和多 Agent 编排经验将进入豆包工作场景。",
+          "evidence": [
+            "MED-DB-007",
+            "OFF-COZE-001",
+            "OFF-COZE-002"
+          ]
+        },
+        {
+          "title": "TRAE IDE/CLI",
+          "status": "独立产品线",
+          "detail": "编程产品继续独立发展并归入豆包品牌，不直接等同于豆包工作功能。",
+          "evidence": [
+            "MED-DB-007",
+            "OFF-TRAE-001"
+          ]
+        }
+      ],
+      "strengths": [
+        {
+          "title": "飞书客户启动更快",
+          "body": "企业身份、权限和知识已经存在，常用飞书能力无需逐项配置外部连接器。",
+          "evidence": [
+            "OFF-DB-007"
+          ]
+        },
+        {
+          "title": "任务链更短",
+          "body": "模型分析、浏览器与电脑操作、图片视频生成和办公交付可以在同一任务中衔接。",
+          "evidence": [
+            "OFF-DB-007"
+          ]
+        },
+        {
+          "title": "长任务不占前台",
+          "body": "虚拟桌面和云电脑可以承接定时、长周期和批量任务。",
+          "evidence": [
+            "OFF-DB-007",
+            "RES-CONTROL-001"
+          ]
+        },
+        {
+          "title": "成果可以继续协作",
+          "body": "文档和表格能够回到飞书，沿用组织权限继续评论、修改和复用。",
+          "evidence": [
+            "OFF-DB-007",
+            "MED-DB-004"
+          ]
+        }
+      ],
+      "weaknesses": [
+        {
+          "title": "优势依赖飞书",
+          "body": "离开飞书后，组织上下文和协作闭环都会减弱，其他办公生态仍要依赖连接器。",
+          "evidence": [
+            "OFF-DB-007",
+            "SOC-002"
+          ]
+        },
+        {
+          "title": "质量需要分项验收",
+          "body": "表格公式、PPT 排版和复杂 GUI 的完成质量仍不稳定，业务结果需要人工复核。",
+          "evidence": [
+            "RUN-DB-001",
+            "SOC-DB-001"
+          ]
+        },
+        {
+          "title": "产品整合尚未完成",
+          "body": "TRAE Work 和扣子已经宣布能力整合，但账号、文件、工作流和付费体系的实际打通仍需验证。",
+          "evidence": [
+            "MED-DB-007",
+            "OFF-DB-007"
+          ]
+        },
+        {
+          "title": "云端成本难忽略",
+          "body": "云电脑、长任务和多模态生成持续消耗算力，套餐和额度会影响使用频率。",
+          "evidence": [
+            "OFF-DB-003",
+            "MED-DB-004"
+          ]
+        }
+      ],
+      "commercialOpportunities": [
+        {
+          "title": "飞书 AI 加购",
+          "body": "飞书存量客户可以直接增加豆包工作和 AI 额度，销售成本低于重新引入一套办公平台。",
+          "evidence": [
+            "OFF-DB-003",
+            "MED-DB-006"
+          ]
+        },
+        {
+          "title": "统一工作入口",
+          "body": "TRAE Work 的办公、开发与设计经验和扣子的编排能力可以减少多产品切换。",
+          "evidence": [
+            "MED-DB-007",
+            "OFF-TRAE-001",
+            "OFF-COZE-001",
+            "OFF-COZE-002"
+          ]
+        },
+        {
+          "title": "营销内容生产",
+          "body": "Seedream 与 Seedance 让调研、文案、图片和视频进入同一条内容生产链。",
+          "evidence": [
+            "OFF-DB-007"
+          ]
+        },
+        {
+          "title": "企业 Agent 交付",
+          "body": "扣子工作流、飞书权限和云端执行可以组合成部门流程，收入来自订阅、实施和运行服务。",
+          "evidence": [
+            "MED-DB-007",
+            "OFF-COZE-001",
+            "OFF-VE-001"
+          ]
+        }
+      ],
+      "winChances": [
+        {
+          "title": "飞书存量客户",
+          "body": "豆包工作占优，原生身份、知识和协作入口减少了部署与培训成本。",
+          "evidence": [
+            "OFF-DB-007",
+            "MED-DB-006"
+          ]
+        },
+        {
+          "title": "生产力全栈",
+          "body": "TRAE Work 与扣子并入后，豆包覆盖办公、设计、开发和 Agent 编排的能力供给更完整。",
+          "evidence": [
+            "MED-DB-007",
+            "OFF-TRAE-001",
+            "OFF-COZE-001",
+            "OFF-COZE-002"
+          ]
+        },
+        {
+          "title": "跨生态与生产交付",
+          "body": "长期胜负仍取决于无 API 系统成功率、单任务成本、企业治理和可复核客户案例。",
+          "evidence": [
+            "RUN-DB-001",
+            "RES-CONTROL-001",
+            "OFF-VE-001"
+          ]
+        }
+      ]
+    },
     "fdeThinking": {
       "principles": [
         {
