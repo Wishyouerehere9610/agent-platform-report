@@ -47,7 +47,7 @@
       "testEnvironment": {
         "version": "客户端未记录；lark-cli 1.0.88",
         "mode": "Auto 高",
-        "model": "未记录",
+        "model": "豆包2.1 Pro",
         "runtime": "隔离 sandbox；Python；general_search；飞书 lark-cli"
       },
       "environment": ["豆包工作 Auto 高模式", "隔离 sandbox", "general_search", "Python 生成 XLSX 与 PPTX", "飞书 lark-cli 完成个人空间动作"],
@@ -80,7 +80,7 @@
       "testEnvironment": {
         "version": "5.3.14",
         "mode": "Auto",
-        "model": "未记录",
+        "model": "Hy3",
         "runtime": "本地文件系统；Python venv；WebSearch；飞书替代通道"
       },
       "environment": ["WorkBuddy Auto 模式", "本地文件系统", "Python 虚拟环境", "WebSearch", "飞书 lark-cli 作为替代通信通道"],

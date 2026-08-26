@@ -73,6 +73,14 @@ test("delivery assessment exposes resource, quality and stability metrics", () =
   }
 });
 
+test("delivery test records known model names for Doubao and WorkBuddy", () => {
+  const data = readJson("runs.json");
+  const byProduct = Object.fromEntries(data.runs.map((run) => [run.product, run]));
+
+  assert.equal(byProduct.doubao.testEnvironment.model, "豆包2.1 Pro");
+  assert.equal(byProduct.workbuddy.testEnvironment.model, "Hy3");
+});
+
 test("delivery summary states what was tested, why and what happened", () => {
   const data = readJson("runs.json");
   assert.ok(data.summary.whatWasTested);

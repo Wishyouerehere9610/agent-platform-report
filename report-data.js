@@ -2876,7 +2876,7 @@ window.REPORT_DATA = {
         "testEnvironment": {
           "version": "客户端未记录；lark-cli 1.0.88",
           "mode": "Auto 高",
-          "model": "未记录",
+          "model": "豆包2.1 Pro",
           "runtime": "隔离 sandbox；Python；general_search；飞书 lark-cli"
         },
         "environment": [
@@ -2944,7 +2944,7 @@ window.REPORT_DATA = {
         "testEnvironment": {
           "version": "5.3.14",
           "mode": "Auto",
-          "model": "未记录",
+          "model": "Hy3",
           "runtime": "本地文件系统；Python venv；WebSearch；飞书替代通道"
         },
         "environment": [
