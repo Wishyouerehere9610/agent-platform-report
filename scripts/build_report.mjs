@@ -12,7 +12,8 @@ const report = {
   evidence: readJson("evidence.json"),
   cases: readJson("cases.json"),
   runs: readJson("runs.json"),
-  controlSurfaces: readJson("control-surfaces.json")
+  controlSurfaces: readJson("control-surfaces.json"),
+  insights: readJson("insights.json")
 };
 
 const requiredProducts = new Set(["doubao", "workbuddy", "qwen"]);

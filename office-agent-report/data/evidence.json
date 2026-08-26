@@ -58,6 +58,39 @@
       "supports": ["automatic-execution-settings", "basic-selected"]
     },
     {
+      "id": "RUN-DB-001",
+      "product": "doubao",
+      "type": "OBS",
+      "title": "豆包工作统一命题运行结果",
+      "url": "",
+      "observedAt": "2026-08-25",
+      "version": "单次运行",
+      "summary": "核心产物 7 分钟完成，6 个要求文件齐全；飞书个人空间 4 项动作完成。PPT 与 XLSX 存在两个行业分数不一致。",
+      "supports": ["benchmark", "artifacts", "feishu-actions", "quality-gap"]
+    },
+    {
+      "id": "RUN-WB-001",
+      "product": "workbuddy",
+      "type": "OBS",
+      "title": "WorkBuddy 统一命题运行结果",
+      "url": "",
+      "observedAt": "2026-08-25",
+      "version": "5.3.14 单次运行",
+      "summary": "核心产物 6 分钟完成，6 个要求文件齐全，PPT 返工最少。企业微信个人资源动作未完成，飞书 4 项结果只作为替代通道。",
+      "supports": ["benchmark", "artifacts", "protocol-deviation", "quality"]
+    },
+    {
+      "id": "RUN-QW-001",
+      "product": "qwen",
+      "type": "OBS",
+      "title": "千问办公统一命题运行结果",
+      "url": "",
+      "observedAt": "2026-08-25",
+      "version": "1.0.0.26082211 单次运行",
+      "summary": "核心产物 25 分钟完成，6 个要求文件齐全。工作簿有 44 个公式，PPT 使用英文且第 6 页溢出，钉钉动作受 OAuth 阻塞。",
+      "supports": ["benchmark", "artifacts", "formula-workbook", "quality-gap", "dingtalk-blocked"]
+    },
+    {
       "id": "OFF-DB-001",
       "product": "doubao",
       "type": "OFF",

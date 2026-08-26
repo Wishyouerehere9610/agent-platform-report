@@ -1505,6 +1505,55 @@ window.REPORT_DATA = {
         ]
       },
       {
+        "id": "RUN-DB-001",
+        "product": "doubao",
+        "type": "OBS",
+        "title": "豆包工作统一命题运行结果",
+        "url": "",
+        "observedAt": "2026-08-25",
+        "version": "单次运行",
+        "summary": "核心产物 7 分钟完成，6 个要求文件齐全；飞书个人空间 4 项动作完成。PPT 与 XLSX 存在两个行业分数不一致。",
+        "supports": [
+          "benchmark",
+          "artifacts",
+          "feishu-actions",
+          "quality-gap"
+        ]
+      },
+      {
+        "id": "RUN-WB-001",
+        "product": "workbuddy",
+        "type": "OBS",
+        "title": "WorkBuddy 统一命题运行结果",
+        "url": "",
+        "observedAt": "2026-08-25",
+        "version": "5.3.14 单次运行",
+        "summary": "核心产物 6 分钟完成，6 个要求文件齐全，PPT 返工最少。企业微信个人资源动作未完成，飞书 4 项结果只作为替代通道。",
+        "supports": [
+          "benchmark",
+          "artifacts",
+          "protocol-deviation",
+          "quality"
+        ]
+      },
+      {
+        "id": "RUN-QW-001",
+        "product": "qwen",
+        "type": "OBS",
+        "title": "千问办公统一命题运行结果",
+        "url": "",
+        "observedAt": "2026-08-25",
+        "version": "1.0.0.26082211 单次运行",
+        "summary": "核心产物 25 分钟完成，6 个要求文件齐全。工作簿有 44 个公式，PPT 使用英文且第 6 页溢出，钉钉动作受 OAuth 阻塞。",
+        "supports": [
+          "benchmark",
+          "artifacts",
+          "formula-workbook",
+          "quality-gap",
+          "dingtalk-blocked"
+        ]
+      },
+      {
         "id": "OFF-DB-001",
         "product": "doubao",
         "type": "OFF",
@@ -2848,6 +2897,369 @@ window.REPORT_DATA = {
       "Agent 自述与评估者归一化分别保存",
       "人工确认入口不等于 Agent 自主执行成功",
       "授权阻塞不等于产品长期不可用"
+    ]
+  },
+  "insights": {
+    "updatedAt": "2026-08-26T16:00:00+08:00",
+    "productPositions": [
+      {
+        "id": "doubao",
+        "conclusion": "飞书协同完成，浏览器和电脑操控本次未完成。",
+        "reason": "核心产物 7 分钟生成，6 个文件齐全，飞书个人空间 4 项动作完成。GUI 测试停在桌面录制授权。",
+        "artifactConclusion": "文件齐全；PPT 和 XLSX 两处评分不一致。",
+        "controlConclusion": "本次没有足够证据进入 GUI 自动化试点。",
+        "bestFor": "已使用飞书，希望 Agent 读取组织信息并把结果写回协作空间的团队。"
+      },
+      {
+        "id": "workbuddy",
+        "conclusion": "核心交付最快，浏览器能操作，电脑操控本次没有入口。",
+        "reason": "核心产物 6 分钟生成，浏览器表单测试完成。企业微信个人资源动作没有完成，飞书结果不计入企业微信。",
+        "artifactConclusion": "文件齐全；三家中 PPT 返工最少。",
+        "controlConclusion": "适合网页与表单，桌面软件需要另一条执行路径。",
+        "bestFor": "需要浏览器自动化、本地文件和企业级部署选项的团队。"
+      },
+      {
+        "id": "qwen",
+        "conclusion": "浏览器能操作，电脑能输入但没有保存文件。",
+        "reason": "浏览器表单测试完成，Computer Use 完成记事本输入后在另存为阶段失去焦点。工作簿可复算，PPT 需要返工。",
+        "artifactConclusion": "文件齐全；PPT 使用英文且一页溢出。",
+        "controlConclusion": "可做桌面试点，必须校验保存结果和窗口焦点。",
+        "bestFor": "已使用钉钉，希望用专家套件处理金融、法务、电商和办公交付的团队。"
+      }
+    ],
+    "capabilityModules": [
+      {
+        "id": "agent-execution",
+        "name": "任务拆解与执行",
+        "question": "能否接收目标并交付文件",
+        "products": {
+          "doubao": {
+            "label": "能",
+            "note": "6 个文件完成",
+            "evidence": [
+              "RUN-DB-001"
+            ]
+          },
+          "workbuddy": {
+            "label": "能",
+            "note": "6 个文件完成",
+            "evidence": [
+              "RUN-WB-001"
+            ]
+          },
+          "qwen": {
+            "label": "能",
+            "note": "6 个文件完成",
+            "evidence": [
+              "RUN-QW-001"
+            ]
+          }
+        }
+      },
+      {
+        "id": "browser-use",
+        "name": "操作浏览器",
+        "question": "能否完成网页输入、选择和结果读取",
+        "products": {
+          "doubao": {
+            "label": "未完成",
+            "note": "录制授权阻塞",
+            "evidence": [
+              "OBS-DB-001"
+            ]
+          },
+          "workbuddy": {
+            "label": "能",
+            "note": "表单测试完成",
+            "evidence": [
+              "OBS-WB-001"
+            ]
+          },
+          "qwen": {
+            "label": "能",
+            "note": "表单测试完成",
+            "evidence": [
+              "OBS-QW-001"
+            ]
+          }
+        }
+      },
+      {
+        "id": "computer-use",
+        "name": "操作电脑",
+        "question": "能否操作桌面应用并生成目标文件",
+        "products": {
+          "doubao": {
+            "label": "未完成",
+            "note": "录制授权阻塞",
+            "evidence": [
+              "OBS-DB-001"
+            ]
+          },
+          "workbuddy": {
+            "label": "未见入口",
+            "note": "本次工具面未暴露",
+            "evidence": [
+              "OBS-WB-001"
+            ]
+          },
+          "qwen": {
+            "label": "部分能",
+            "note": "能输入，不能保存",
+            "evidence": [
+              "OBS-QW-001"
+            ]
+          }
+        }
+      },
+      {
+        "id": "office-artifacts",
+        "name": "办公文件交付",
+        "question": "能否生成表格、名单、PPT 和日志",
+        "products": {
+          "doubao": {
+            "label": "能",
+            "note": "PPT 有分数不一致",
+            "evidence": [
+              "RUN-DB-001"
+            ]
+          },
+          "workbuddy": {
+            "label": "能",
+            "note": "三家中返工最少",
+            "evidence": [
+              "RUN-WB-001"
+            ]
+          },
+          "qwen": {
+            "label": "能",
+            "note": "PPT 有英文和溢出",
+            "evidence": [
+              "RUN-QW-001"
+            ]
+          }
+        }
+      },
+      {
+        "id": "execution-environment",
+        "name": "本地与云端环境",
+        "question": "是否公开支持本地文件或云端长任务",
+        "products": {
+          "doubao": {
+            "label": "有",
+            "note": "本地电脑和云电脑",
+            "evidence": [
+              "OFF-DB-005"
+            ]
+          },
+          "workbuddy": {
+            "label": "有",
+            "note": "本地文件和云端托管",
+            "evidence": [
+              "OFF-WB-001"
+            ]
+          },
+          "qwen": {
+            "label": "有",
+            "note": "桌面、Web 和云端任务",
+            "evidence": [
+              "OFF-QW-007",
+              "OFF-QW-009"
+            ]
+          }
+        }
+      },
+      {
+        "id": "ecosystem-actions",
+        "name": "协同生态动作",
+        "question": "能否在指定协同平台完成个人空间动作",
+        "products": {
+          "doubao": {
+            "label": "能",
+            "note": "飞书 4/4",
+            "evidence": [
+              "RUN-DB-001"
+            ]
+          },
+          "workbuddy": {
+            "label": "未完成",
+            "note": "企业微信未完成",
+            "evidence": [
+              "RUN-WB-001"
+            ]
+          },
+          "qwen": {
+            "label": "未完成",
+            "note": "钉钉授权阻塞",
+            "evidence": [
+              "RUN-QW-001"
+            ]
+          }
+        }
+      },
+      {
+        "id": "enterprise-governance",
+        "name": "企业治理",
+        "question": "是否公开提供权限、审计或隔离能力",
+        "products": {
+          "doubao": {
+            "label": "有",
+            "note": "继承飞书权限",
+            "evidence": [
+              "OFF-DB-002"
+            ]
+          },
+          "workbuddy": {
+            "label": "有",
+            "note": "审计、VPC 和私有化",
+            "evidence": [
+              "OFF-WB-002",
+              "OFF-WB-003"
+            ]
+          },
+          "qwen": {
+            "label": "有",
+            "note": "组织、权限和用量管理",
+            "evidence": [
+              "OFF-QW-002"
+            ]
+          }
+        }
+      },
+      {
+        "id": "industry-assets",
+        "name": "行业资产",
+        "question": "是否有命名客户、官方场景或专家套件",
+        "products": {
+          "doubao": {
+            "label": "有",
+            "note": "12 个官方场景行业",
+            "evidence": [
+              "OFF-FS-001",
+              "OFF-DB-004"
+            ]
+          },
+          "workbuddy": {
+            "label": "有",
+            "note": "8 个行业有命名客户",
+            "evidence": [
+              "OFF-WB-005",
+              "CASE-WB-006"
+            ]
+          },
+          "qwen": {
+            "label": "有",
+            "note": "6 个行业有官方场景",
+            "evidence": [
+              "OFF-QW-008"
+            ]
+          }
+        }
+      }
+    ],
+    "controlConcepts": [
+      {
+        "id": "browser",
+        "name": "Browser Use",
+        "cnName": "操作浏览器",
+        "scope": "网页采集、表单、后台批量操作",
+        "value": "部署快，适合高频重复任务",
+        "limit": "只能覆盖 Web，容易受登录态和页面变化影响",
+        "businessModel": "订阅或按调用量收费"
+      },
+      {
+        "id": "computer",
+        "name": "Computer Use",
+        "cnName": "操作电脑",
+        "scope": "桌面软件、内网系统、跨应用流程",
+        "value": "能触达没有 API 的系统，更接近人工操作岗位",
+        "limit": "焦点、权限、保存和失败恢复决定是否可用",
+        "businessModel": "试点、实施服务和订阅组合"
+      }
+    ],
+    "trends": [
+      {
+        "id": "browser-standard",
+        "title": "Browser Use 会先变成基础能力",
+        "reason": "三家都公开支持浏览器操作，统一测试中两家完成了相同表单任务。",
+        "impact": "产品差异将更多来自登录态、独家数据和结果写回哪个办公生态。",
+        "evidence": [
+          "OFF-DB-005",
+          "OBS-WB-001",
+          "OBS-QW-001"
+        ]
+      },
+      {
+        "id": "computer-service",
+        "title": "Computer Use 会先以交付服务进入企业",
+        "reason": "本次没有一家完成目标文件落盘，问题集中在权限、工具入口和窗口焦点。",
+        "impact": "短期收入更可能来自试点、实施和托管运行，不是单纯卖一个软件席位。",
+        "evidence": [
+          "OBS-DB-001",
+          "OBS-WB-001",
+          "OBS-QW-001"
+        ]
+      },
+      {
+        "id": "ecosystem-fit",
+        "title": "办公生态决定采购顺序",
+        "reason": "飞书、企业微信和钉钉的身份、授权与资源范围直接改变了任务结果。",
+        "impact": "企业会先选能接住现有消息、文档、审批和权限体系的产品。",
+        "evidence": [
+          "RUN-DB-001",
+          "RUN-WB-001",
+          "RUN-QW-001"
+        ]
+      },
+      {
+        "id": "case-evidence",
+        "title": "行业案例会比功能数量更重要",
+        "reason": "WorkBuddy 的命名客户证据更广，豆包工作主要依靠飞书场景，千问办公主要依靠专家套件。",
+        "impact": "下一阶段竞争看真实任务、验收指标和可复制案例，不看功能列表长度。",
+        "evidence": [
+          "OFF-WB-005",
+          "OFF-FS-001",
+          "OFF-QW-008"
+        ]
+      }
+    ],
+    "opportunities": [
+      {
+        "id": "browser-workflows",
+        "title": "浏览器流程包",
+        "buyer": "市场、销售、运营和招聘团队",
+        "job": "竞品巡检、信息采集、表单和 SaaS 后台批处理",
+        "whyPay": "任务高频、规则清楚，部署周期短。",
+        "condition": "要稳定管理登录态、页面变化和结果校验。",
+        "model": "订阅或按调用量收费"
+      },
+      {
+        "id": "legacy-automation",
+        "title": "遗留系统桌面自动化",
+        "buyer": "CIO、共享服务中心和业务运营",
+        "job": "ERP、财务客户端、内网系统和专业桌面软件",
+        "whyPay": "没有 API 也能启动试点，直接减少重复录入。",
+        "condition": "必须提供私有执行环境、人工确认、回滚和运行证据。",
+        "model": "试点费、实施服务和年度订阅"
+      },
+      {
+        "id": "execution-governance",
+        "title": "执行治理与审计",
+        "buyer": "信息安全、内审、法务和 AI 平台团队",
+        "job": "发送、删除、审批、付款和权限变更前的控制",
+        "whyPay": "Agent 能操作系统后，错误会直接变成业务动作。",
+        "condition": "需要统一审批、留痕、回放和人工接管。",
+        "model": "企业平台订阅"
+      },
+      {
+        "id": "industry-fde",
+        "title": "行业 Skill 与 FDE 交付包",
+        "buyer": "行业事业部、软件厂商和咨询交付团队",
+        "job": "把行业规则、连接器、任务样本和验收标准打包",
+        "whyPay": "通用 Agent 不理解企业流程，行业团队需要可复制的工作方案。",
+        "condition": "需要命名客户、持续维护和清楚的责任边界。",
+        "model": "试点、年度服务和资产授权"
+      }
     ]
   }
 };

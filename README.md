@@ -4,7 +4,7 @@
 
 公开页面：[三款办公 Agent 产品组合](https://wishyouerehere9610.github.io/agent-platform-report/)
 
-页面面向非技术业务读者，先呈现结果，再按需展开功能矩阵、测评、行业覆盖、商业机会和来源。原始日志与 Agent 产物保持独立，便于复核。
+页面面向非技术业务读者，左侧目录固定，正文只呈现能力结论、测评结果、行业覆盖、趋势、商业机会和来源。59 项功能明细保留在结构化数据中，不在页面逐项展开。
 
 ## 目录
 
@@ -12,7 +12,7 @@
 - `outputs/`：三款 Agent 的表格、企业名单、PPT、来源记录与执行日志。
 - `sessions/`：从本机提取并脱敏的任务级会话与运行证据。
 - `index.html`、`styles.css`、`app.js`：GitHub Pages 呈现层。
-- `office-agent-report/`：结构化数据、证据和控制界面分析。
+- `office-agent-report/`：结构化数据、简化结论、证据和控制界面分析。
 - `scripts/`：报告与基准输入的生成脚本。
 - `SOURCE_MANIFEST.csv`：原始工作区文件清单、校验值与上传状态。
 

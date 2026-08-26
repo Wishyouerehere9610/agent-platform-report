@@ -44,3 +44,21 @@ test("control surface conclusions expose direct business language", () => {
     assert.ok(product.businessMeaning, `${product.id} needs a business meaning`);
   }
 });
+
+test("summary insights stay concise and evidence linked", () => {
+  const insights = readJson("insights.json");
+  const evidence = readJson("evidence.json");
+  const evidenceIds = new Set(evidence.items.map((item) => item.id));
+  const allowed = new Set(["能", "部分能", "未完成", "未见入口", "有", "未见"]);
+
+  assert.equal(insights.capabilityModules.length, 8);
+  assert.equal(insights.trends.length, 4);
+  assert.equal(insights.opportunities.length, 4);
+
+  for (const module of insights.capabilityModules) {
+    for (const product of ["doubao", "workbuddy", "qwen"]) {
+      assert.ok(allowed.has(module.products[product].label), `${module.id}.${product} must use a concise conclusion`);
+      assert.ok(module.products[product].evidence.every((id) => evidenceIds.has(id)), `${module.id}.${product} has unknown evidence`);
+    }
+  }
+});
