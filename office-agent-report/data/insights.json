@@ -290,7 +290,6 @@
     {
       "id": "doubao",
       "route": "虚拟桌面 + 云电脑双模",
-      "scores": {"browser": 8.5, "computer": 9.0},
       "comparison": {"apiBypass": "是", "virtualDesktop": "Windows 虚拟桌面 + 云电脑", "legacySystems": "可以", "background": "云电脑后台与定时任务", "trigger": "飞书侧边栏 / 手机遥控"},
       "browser": {
         "summary": "在飞书 Web 视图或虚拟桌面浏览器中完成搜索、填表和结果写回。",
@@ -320,7 +319,6 @@
     {
       "id": "workbuddy",
       "route": "本地/云端 Browser + OS 级视觉操控",
-      "scores": {"browser": 8.0, "computer": 9.5},
       "comparison": {"apiBypass": "OS 级视觉，绕开应用 API", "virtualDesktop": "本地沙箱 + 多 Agent 并行", "legacySystems": "可以", "background": "本地后台 + 云端托管", "trigger": "微信 / 企业微信远程任务"},
       "browser": {
         "summary": "本地模式复用登录态，云端模式适合批量网页任务和后台长任务。",
@@ -350,7 +348,6 @@
     {
       "id": "qwen",
       "route": "桌面客户端 + 云端 Agent",
-      "scores": {"browser": 8.5, "computer": 6.5},
       "comparison": {"apiBypass": "可以，直接操作无 API 应用", "virtualDesktop": "本地安全工作环境；未见云电脑形态", "legacySystems": "可以（官方文档）", "background": "Computer Use 后台执行 + 云端定时", "trigger": "钉钉 / Web / 桌面"},
       "browser": {
         "summary": "云端 Agent 执行网页采集和批处理，主要差异来自钉钉与阿里生态数据。",

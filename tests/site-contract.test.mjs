@@ -47,7 +47,10 @@ test("visual tokens match the reference project", () => {
 test("hero uses an editorial masthead with author, route rail and GitHub icon", () => {
   const html = read("index.html");
   assert.match(html, /class=["'][^"']*hero-meta/);
+  const titleRow = html.slice(html.indexOf('<div class="hero-title-row">'), html.indexOf('<div class="hero-summary">'));
   const credit = html.match(/<a class="hero-credit"[\s\S]*?<\/a>/)?.[0] || "";
+  assert.match(titleRow, /Agent Platform Research&amp;Evaluation Report/);
+  assert.match(titleRow, /class="hero-credit"/);
   assert.match(credit, /作者/);
   assert.match(credit, /董子铭/);
   assert.match(credit, /assets\/icons\/github\.svg/);
@@ -69,7 +72,7 @@ test("hero is compact and navigation typography stays readable", () => {
   assert.match(html, /<h1 id="page-title">Agent Platform Research&amp;Evaluation Report<\/h1>/);
   assert.doesNotMatch(html, /<h1[^>]*>[^<]*<br>/);
   assert.doesNotMatch(css, /\.hero\s*\{[^}]*min-height:\s*calc\(100svh - 120px\)/s);
-  assert.match(css, /\.hero h1\s*\{[^}]*font-size:\s*42px/s);
+  assert.match(css, /\.hero h1\s*\{[^}]*font-size:\s*36px/s);
   assert.match(css, /\.hero h1\s*\{[^}]*white-space:\s*nowrap/s);
   assert.match(css, /\.nav-primary strong\s*\{[^}]*font-size:\s*15px/s);
   assert.match(css, /\.sub-nav a\s*\{[^}]*font-size:\s*14px/s);
@@ -128,12 +131,14 @@ test("control tab introduces each product once and keeps one comparison matrix",
   const html = read("index.html");
   const app = read("app.js");
   assert.match(html, /id=["']control-product-stack["']/);
-  assert.match(html, /id=["']control-scoreboard["']/);
   assert.match(html, /id=["']control-comparison-body["']/);
   assert.match(html, /id=["']practice-notes["']/);
   assert.doesNotMatch(html, /control-profile-list|control-deep-dives|control-body|evidence-figure|browser-evidence-workbuddy/);
   assert.match(app, /theme-\$\{profile\.id\}/);
-  assert.match(app, /补充调研评分/);
+  assert.doesNotMatch(html, /control-scoreboard|score-methodology/);
+  assert.doesNotMatch(app, /scores\.|score-panel|score-row|补充调研判断值/);
+  assert.doesNotMatch(app, /class="product-scores"/);
+  assert.doesNotMatch(app, /Browser Use 综合|Computer Use 综合/);
 });
 
 test("public page uses the focused feature matrix without old checklist controls", () => {

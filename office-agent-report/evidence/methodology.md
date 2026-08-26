@@ -33,3 +33,9 @@
 - `Browser Use` 只统计真实浏览器页面中的导航、点击、输入、表单、下载和状态读取；WebSearch、WebFetch 与 general_search 属于搜索或抓取工具。
 - `In-app Browser` 指 Agent 客户端托管或嵌入的浏览器环境。本轮最小实测只要求客户端内打开本机页面并读取标题；登录态、下载、弹窗和会话延续留作生产级验证。
 - 产品内自测或连接器显示 Open 只能证明入口或环境可见，不能替代统一任务中的独立实测。
+
+## 补充调研分数处理
+
+- Browser Use 与 Computer Use 的小数分值来自用户提供的本地 HTML 调研稿，分母为 10 分。
+- 原稿没有给出子项分值、权重和计算公式，因此这组分数不可复算。展示页不发布这些分数，也不按它们排名。
+- GitHub 最小实测使用 `PASS / PARTIAL / BLOCKED / UNAVAILABLE` 四档状态，不参与上述 10 分制判断值。当前结果为 Browser Use `2/3 PASS`、Computer Use `0/3 PASS`。

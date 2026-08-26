@@ -2171,7 +2171,7 @@ window.REPORT_DATA = {
         "url": "",
         "observedAt": "2026-08-26",
         "version": "用户提供的本地 HTML 调研稿",
-        "summary": "补充调研按产品路线比较千问办公、豆包工作和 WorkBuddy 的浏览器、桌面、后台任务与适用场景。本报告采用其中的产品路线和能力判断，不采用缺少逐条出处的 DAU、绝对排名、成功率和市场规模数字。",
+        "summary": "补充调研按产品路线比较千问办公、豆包工作和 WorkBuddy 的浏览器、桌面、后台任务与适用场景。原稿包含 10 分制综合判断值，但没有公开子项、权重和计算公式，因此本报告不展示这组分数，也不用它排名。",
         "supports": [
           "browser-use",
           "computer-use",
@@ -4086,10 +4086,6 @@ window.REPORT_DATA = {
       {
         "id": "doubao",
         "route": "虚拟桌面 + 云电脑双模",
-        "scores": {
-          "browser": 8.5,
-          "computer": 9
-        },
         "comparison": {
           "apiBypass": "是",
           "virtualDesktop": "Windows 虚拟桌面 + 云电脑",
@@ -4157,10 +4153,6 @@ window.REPORT_DATA = {
       {
         "id": "workbuddy",
         "route": "本地/云端 Browser + OS 级视觉操控",
-        "scores": {
-          "browser": 8,
-          "computer": 9.5
-        },
         "comparison": {
           "apiBypass": "OS 级视觉，绕开应用 API",
           "virtualDesktop": "本地沙箱 + 多 Agent 并行",
@@ -4226,10 +4218,6 @@ window.REPORT_DATA = {
       {
         "id": "qwen",
         "route": "桌面客户端 + 云端 Agent",
-        "scores": {
-          "browser": 8.5,
-          "computer": 6.5
-        },
         "comparison": {
           "apiBypass": "可以，直接操作无 API 应用",
           "virtualDesktop": "本地安全工作环境；未见云电脑形态",

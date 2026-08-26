@@ -164,7 +164,6 @@ function renderControlConcepts() {
       <article class="control-product-card theme-${profile.id}">
         <header>
           <div><span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3><p>${escapeHtml(profile.route)}</p></div>
-          <div class="product-scores"><div><span>Browser Use</span><strong>${profile.scores.browser.toFixed(1)}</strong></div><div><span>Computer Use</span><strong>${profile.scores.computer.toFixed(1)}</strong></div></div>
         </header>
         <div class="implementation-grid">
           <section><span>Browser Use 实现</span><p>${escapeHtml(profile.implementation.browser)}</p></section>
@@ -183,21 +182,13 @@ function renderControlConcepts() {
 
   document.querySelector("#practice-notes").innerHTML = insights.practiceNotes.map((item) => `<article><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.note)}</p></article>`).join("");
 
-  document.querySelector("#control-scoreboard").innerHTML = ["computer", "browser"].map((kind) => {
-    const label = kind === "computer" ? "Computer Use" : "Browser Use";
-    const profiles = [...insights.controlProfiles].sort((a, b) => b.scores[kind] - a.scores[kind]);
-    return `<section class="score-panel"><span>${label} · 补充调研评分</span>${profiles.map((profile) => `<div class="score-row theme-${profile.id}"><strong>${escapeHtml(productMeta[profile.id].short)}</strong><i><b style="width:${profile.scores[kind] * 10}%"></b></i><em>${profile.scores[kind].toFixed(1)}</em></div>`).join("")}</section>`;
-  }).join("");
-
   const dimensions = [
     ["技术流派", (profile) => profile.route],
     ["是否绕开 API", (profile) => profile.comparison.apiBypass],
     ["虚拟桌面 / 云电脑", (profile) => profile.comparison.virtualDesktop],
     ["可接管无 API 老系统", (profile) => profile.comparison.legacySystems],
     ["后台运行", (profile) => profile.comparison.background],
-    ["典型触发方式", (profile) => profile.comparison.trigger],
-    ["Browser Use 综合", (profile) => profile.scores.browser.toFixed(1)],
-    ["Computer Use 综合", (profile) => profile.scores.computer.toFixed(1)]
+    ["典型触发方式", (profile) => profile.comparison.trigger]
   ];
   document.querySelector("#control-comparison-body").innerHTML = dimensions.map(([label, getter]) => `<tr><th scope="row">${escapeHtml(label)}</th>${insights.controlProfiles.map((profile) => `<td>${escapeHtml(getter(profile))}</td>`).join("")}</tr>`).join("");
 }

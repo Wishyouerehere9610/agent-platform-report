@@ -146,12 +146,16 @@ test("control profiles separate public routes from current run results", () => {
     assert.ok(profile.strengths.length >= 2);
     assert.ok(profile.limitations.length >= 2);
     assert.ok(profile.timeline.length >= 2);
-    assert.ok(profile.scores.browser >= 0 && profile.scores.browser <= 10);
-    assert.ok(profile.scores.computer >= 0 && profile.scores.computer <= 10);
     for (const key of ["apiBypass", "virtualDesktop", "legacySystems", "background", "trigger"]) {
       assert.ok(profile.comparison[key], `${profile.id}.${key} is required`);
     }
   }
+});
+
+test("unreproducible supplemental control scores are not published", () => {
+  const insights = readJson("insights.json");
+  assert.equal(insights.controlScoreMethodology, undefined);
+  assert.ok(insights.controlProfiles.every((profile) => profile.scores === undefined));
 });
 
 test("Qwen Computer Use reflects the current official capability boundary", () => {

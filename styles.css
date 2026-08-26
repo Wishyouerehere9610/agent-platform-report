@@ -394,8 +394,7 @@ figure {
 }
 
 .hero-meta {
-  justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
 }
 
 .hero-index {
@@ -412,13 +411,18 @@ figure {
 }
 
 .hero-credit {
-  gap: 10px;
-  color: var(--ink);
-  transition: color 140ms ease;
+  gap: 8px;
+  padding: 6px 8px 6px 10px;
+  border: 1px solid #bfd2e8;
+  border-radius: 6px;
+  background: #f2f7fc;
+  color: var(--blue-dark);
+  transition: background-color 140ms ease, border-color 140ms ease;
 }
 
 .hero-credit:hover {
-  color: var(--blue);
+  border-color: #8fb3dc;
+  background: #e8f1fb;
 }
 
 .hero-credit-copy {
@@ -428,7 +432,7 @@ figure {
 }
 
 .hero-credit-copy small {
-  color: var(--muted);
+  color: #597797;
   font-size: 10px;
 }
 
@@ -438,22 +442,27 @@ figure {
 }
 
 .hero-credit-icon {
-  width: 34px;
-  height: 34px;
+  width: 24px;
+  height: 24px;
   justify-content: center;
-  border: 1px solid var(--line);
-  border-radius: 50%;
 }
 
 .hero-credit-icon img {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
 }
 
 .hero-heading {
   display: grid;
   grid-template-columns: 1fr;
   gap: 18px;
+}
+
+.hero-title-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
 }
 
 .eyebrow {
@@ -468,7 +477,7 @@ figure {
 .hero h1 {
   max-width: none;
   margin: 0;
-  font-size: 42px;
+  font-size: 36px;
   font-weight: 680;
   line-height: 1.12;
   letter-spacing: 0;
@@ -1193,27 +1202,6 @@ tbody tr:last-child td {
   font-weight: 650;
 }
 
-.product-scores {
-  display: flex;
-  gap: 24px;
-}
-
-.product-scores div {
-  min-width: 84px;
-}
-
-.product-scores span {
-  display: block;
-  text-transform: uppercase;
-}
-
-.product-scores strong {
-  display: block;
-  margin-top: 5px;
-  color: var(--ink);
-  font-size: 26px;
-}
-
 .implementation-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1313,62 +1301,6 @@ tbody tr:last-child td {
 .control-comparison-section .section-intro h3 {
   margin: 0;
   font-size: 28px;
-}
-
-.control-scoreboard {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 18px;
-}
-
-.score-panel {
-  padding: 22px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-}
-
-.score-panel > span {
-  display: block;
-  margin-bottom: 15px;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.score-row {
-  display: grid;
-  grid-template-columns: 95px minmax(0, 1fr) 34px;
-  gap: 12px;
-  align-items: center;
-  margin-top: 11px;
-}
-
-.score-row > strong {
-  font-size: 12px;
-}
-
-.score-row > i {
-  height: 7px;
-  overflow: hidden;
-  border-radius: 4px;
-  background: #e5e5e8;
-}
-
-.score-row > i b {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: var(--product-accent);
-}
-
-.score-row > em {
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  text-align: right;
 }
 
 .control-comparison-table {
@@ -1843,7 +1775,7 @@ body.sidebar-collapsed .sub-nav {
 
 @media (max-width: 1120px) {
   .hero h1 {
-    font-size: 34px;
+    font-size: 24px;
   }
 
   .product-row {
@@ -1974,7 +1906,7 @@ body.sidebar-collapsed .sub-nav {
   }
 
   .hero h1 {
-    font-size: 25px;
+    font-size: 20px;
   }
 
   .hero-summary {
@@ -2057,7 +1989,7 @@ body.sidebar-collapsed .sub-nav {
   }
 
   .hero h1 {
-    font-size: 17px;
+    font-size: 12px;
   }
 
   .hero-meta {
@@ -2066,6 +1998,33 @@ body.sidebar-collapsed .sub-nav {
 
   .hero-index {
     gap: 4px 12px;
+  }
+
+  .hero-title-row {
+    gap: 8px;
+  }
+
+  .hero-credit {
+    gap: 5px;
+    padding: 5px 6px;
+  }
+
+  .hero-credit-copy small {
+    display: none;
+  }
+
+  .hero-credit-copy strong {
+    font-size: 11px;
+  }
+
+  .hero-credit-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .hero-credit-icon img {
+    width: 15px;
+    height: 15px;
   }
 
   .hero-route-rail {
@@ -2139,16 +2098,8 @@ body.sidebar-collapsed .sub-nav {
     display: block;
   }
 
-  .product-scores {
-    margin-top: 18px;
-  }
-
   .control-product-card {
     padding: 22px;
-  }
-
-  .control-scoreboard {
-    grid-template-columns: 1fr;
   }
 
   .concept-block {
