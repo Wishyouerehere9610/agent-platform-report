@@ -388,6 +388,50 @@
       "supports": ["cross-product-media-test", "computer-use", "browser-use", "im-notification"]
     },
     {
+      "id": "MED-CROSS-003",
+      "product": "cross-product",
+      "type": "MED",
+      "title": "IT之家三款办公 AI 选购实测",
+      "url": "https://www.ithome.com/0/991/030.htm",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-18",
+      "summary": "文章按交付物、办公生态和专业任务比较千问办公、WorkBuddy 与飞书豆包，并明确不同办公生态的集成深度会改变使用结果。",
+      "supports": ["artifacts", "ecosystem-fit", "professional-work"]
+    },
+    {
+      "id": "SOC-DB-001",
+      "product": "doubao",
+      "type": "SOC",
+      "title": "豆包工作公开使用体验",
+      "url": "https://www.woshipm.com/ai/6453952.html",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-25",
+      "summary": "公开体验记录本地电脑操作、云电脑、定时任务、跨设备接力和多 Agent 小队，同时提到复杂公式和 PPT 排版仍需人工复核。",
+      "supports": ["computer-use", "cloud-computer", "scheduled-tasks", "multi-agent", "quality-limit"]
+    },
+    {
+      "id": "SOC-WB-001",
+      "product": "workbuddy",
+      "type": "SOC",
+      "title": "WorkBuddy 三个月使用与避坑记录",
+      "url": "https://cloud.tencent.com/developer/article/2718832",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-07-31",
+      "summary": "社区作者记录本地文件、模式选择和连接器的实际使用，指出路径、上下文、登录态和版本更新会影响任务结果。",
+      "supports": ["local-files", "execution-modes", "connectors", "session-expiry", "operational-risk"]
+    },
+    {
+      "id": "SOC-QW-001",
+      "product": "qwen",
+      "type": "SOC",
+      "title": "千问办公公开使用体验汇总",
+      "url": "https://post.smzdm.com/zz/p/ado83l4p/",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-18",
+      "summary": "公开体验围绕 Word、PPT、钉钉协同和专业办公展开。页面抓取受验证码限制，本报告只采用搜索摘要支持的功能描述。",
+      "supports": ["office-artifacts", "dingtalk", "professional-work", "source-limited"]
+    },
+    {
       "id": "SOC-001",
       "product": "cross-product",
       "type": "SOC",

@@ -108,6 +108,178 @@
       }
     }
   ],
+  "priorityFeatures": [
+    {
+      "category": "产品形态",
+      "name": "多端入口",
+      "icon": "users-three",
+      "products": {
+        "doubao": {"state": "yes", "note": "桌面、飞书、手机", "evidence": ["OFF-DB-006", "SOC-DB-001"]},
+        "workbuddy": {"state": "yes", "note": "桌面、Web、企微远程", "evidence": ["OFF-WB-001", "OFF-WB-006"]},
+        "qwen": {"state": "yes", "note": "桌面、Web、钉钉", "evidence": ["OFF-QW-007"]}
+      }
+    },
+    {
+      "category": "产品形态",
+      "name": "本地与云端执行",
+      "icon": "arrow-right",
+      "products": {
+        "doubao": {"state": "yes", "note": "本地电脑和云电脑", "evidence": ["OFF-DB-005", "SOC-DB-001"]},
+        "workbuddy": {"state": "yes", "note": "本地文件和云端托管", "evidence": ["OFF-WB-001"]},
+        "qwen": {"state": "yes", "note": "桌面 Agent 和云端 Agent", "evidence": ["OFF-QW-009"]}
+      }
+    },
+    {
+      "category": "模型与扩展",
+      "name": "多模型选择",
+      "icon": "code",
+      "products": {
+        "doubao": {"state": "no", "note": "公开资料以豆包模型为主", "evidence": ["OFF-DB-005"]},
+        "workbuddy": {"state": "yes", "note": "企业版支持模型配置", "evidence": ["OFF-WB-002"]},
+        "qwen": {"state": "yes", "note": "提供多个模型档位", "evidence": ["OFF-QW-005"]}
+      }
+    },
+    {
+      "category": "模型与扩展",
+      "name": "Skill 与专家",
+      "icon": "check-circle",
+      "products": {
+        "doubao": {"state": "yes", "note": "Skill 和工作伙伴", "evidence": ["OFF-DB-001", "OFF-DB-004"]},
+        "workbuddy": {"state": "yes", "note": "专家、SkillHub 和团队共享", "evidence": ["OFF-WB-001"]},
+        "qwen": {"state": "yes", "note": "Skill、专家套件和团队分发", "evidence": ["OFF-QW-006", "OFF-QW-008"]}
+      }
+    },
+    {
+      "category": "模型与扩展",
+      "name": "连接器与 MCP",
+      "icon": "link",
+      "products": {
+        "doubao": {"state": "yes", "note": "飞书与外部系统连接", "evidence": ["OFF-DB-001"]},
+        "workbuddy": {"state": "yes", "note": "连接器、OpenAPI 和 MCP 管理", "evidence": ["OFF-WB-002", "OFF-WB-003"]},
+        "qwen": {"state": "yes", "note": "连接器和开放 Skill", "evidence": ["OFF-QW-007", "OFF-QW-006"]}
+      }
+    },
+    {
+      "category": "任务执行",
+      "name": "本地文件操作",
+      "icon": "file-text",
+      "products": {
+        "doubao": {"state": "yes", "note": "公开支持，本次交付 6 个文件", "evidence": ["OFF-DB-005", "RUN-DB-001"]},
+        "workbuddy": {"state": "yes", "note": "公开体验可用，本次交付 6 个文件", "evidence": ["OFF-WB-001", "SOC-WB-001", "RUN-WB-001"]},
+        "qwen": {"state": "yes", "note": "桌面端直连本地文件", "evidence": ["OFF-QW-007", "RUN-QW-001"]}
+      }
+    },
+    {
+      "category": "任务执行",
+      "name": "Browser Use",
+      "icon": "magnifying-glass",
+      "products": {
+        "doubao": {"state": "yes", "note": "公开支持，本次授权阻塞", "evidence": ["OFF-DB-005", "MED-DB-001", "OBS-DB-001"]},
+        "workbuddy": {"state": "yes", "note": "本次表单测试完成", "evidence": ["OBS-WB-001"]},
+        "qwen": {"state": "yes", "note": "本次表单测试完成", "evidence": ["OBS-QW-001", "OFF-QW-007"]}
+      }
+    },
+    {
+      "category": "任务执行",
+      "name": "Computer Use",
+      "icon": "code",
+      "products": {
+        "doubao": {"state": "yes", "note": "公开体验可用，本次授权阻塞", "evidence": ["OFF-DB-005", "SOC-DB-001", "OBS-DB-001"]},
+        "workbuddy": {"state": "no", "note": "社区只证实文件与连接器，未见系统级操控", "evidence": ["SOC-WB-001", "OBS-WB-001"]},
+        "qwen": {"state": "yes", "note": "能输入，本次未保存文件", "evidence": ["OFF-QW-004", "OBS-QW-001"]}
+      }
+    },
+    {
+      "category": "任务执行",
+      "name": "自动定时任务",
+      "icon": "chart-line",
+      "products": {
+        "doubao": {"state": "yes", "note": "公开支持定时任务", "evidence": ["OFF-DB-005", "SOC-DB-001"]},
+        "workbuddy": {"state": "no", "note": "公开资料只确认云端长任务", "evidence": ["OFF-WB-001"]},
+        "qwen": {"state": "yes", "note": "公开支持云端定时任务", "evidence": ["OFF-QW-007"]}
+      }
+    },
+    {
+      "category": "办公交付",
+      "name": "文档、表格与 PPT",
+      "icon": "file-text",
+      "products": {
+        "doubao": {"state": "yes", "note": "本次交付完成，存在分数不一致", "evidence": ["RUN-DB-001", "SOC-DB-001"]},
+        "workbuddy": {"state": "yes", "note": "本次交付完成，返工最少", "evidence": ["RUN-WB-001", "MED-CROSS-003"]},
+        "qwen": {"state": "yes", "note": "本次交付完成，PPT 需要返工", "evidence": ["RUN-QW-001", "SOC-QW-001"]}
+      }
+    },
+    {
+      "category": "办公交付",
+      "name": "网页与应用生成",
+      "icon": "code",
+      "products": {
+        "doubao": {"state": "yes", "note": "公开支持在线应用", "evidence": ["OFF-DB-005"]},
+        "workbuddy": {"state": "yes", "note": "专家覆盖页面与应用开发", "evidence": ["OFF-WB-001"]},
+        "qwen": {"state": "yes", "note": "公开支持网页制作和发布", "evidence": ["OFF-QW-007"]}
+      }
+    },
+    {
+      "category": "办公交付",
+      "name": "图片与视频生成",
+      "icon": "image",
+      "products": {
+        "doubao": {"state": "yes", "note": "图片与视频模型集成", "evidence": ["OFF-DB-006", "MED-DB-001"]},
+        "workbuddy": {"state": "yes", "note": "公开支持多模态成果", "evidence": ["OFF-WB-001"]},
+        "qwen": {"state": "yes", "note": "公开支持多媒体内容", "evidence": ["OFF-QW-007"]}
+      }
+    },
+    {
+      "category": "企业能力",
+      "name": "企业知识与权限",
+      "icon": "users-three",
+      "products": {
+        "doubao": {"state": "yes", "note": "继承飞书身份与权限", "evidence": ["OFF-DB-002", "MED-CROSS-003"]},
+        "workbuddy": {"state": "yes", "note": "组织、权限、审计与安全", "evidence": ["OFF-WB-002", "OFF-WB-003"]},
+        "qwen": {"state": "yes", "note": "组织、权限和用量管理", "evidence": ["OFF-QW-002", "MED-CROSS-003"]}
+      }
+    },
+    {
+      "category": "企业能力",
+      "name": "项目与团队资产共享",
+      "icon": "users-three",
+      "products": {
+        "doubao": {"state": "yes", "note": "项目空间和组织级工作伙伴", "evidence": ["OFF-DB-001"]},
+        "workbuddy": {"state": "yes", "note": "项目空间、企业 Skill 和专家", "evidence": ["OFF-WB-001", "OFF-WB-002"]},
+        "qwen": {"state": "yes", "note": "专家套件可分享和团队分发", "evidence": ["OFF-QW-008"]}
+      }
+    },
+    {
+      "category": "企业能力",
+      "name": "VPC 或私有化",
+      "icon": "link",
+      "products": {
+        "doubao": {"state": "no", "note": "当前公开资料未见", "evidence": ["OFF-DB-002", "OFF-DB-003"]},
+        "workbuddy": {"state": "yes", "note": "专享版和私有化版", "evidence": ["OFF-WB-002"]},
+        "qwen": {"state": "no", "note": "当前公开资料未见", "evidence": ["OFF-QW-002"]}
+      }
+    },
+    {
+      "category": "协同与团队",
+      "name": "IM 远程下达任务",
+      "icon": "link",
+      "products": {
+        "doubao": {"state": "yes", "note": "飞书与手机远程入口", "evidence": ["OFF-DB-006", "MED-DB-002"]},
+        "workbuddy": {"state": "yes", "note": "企业微信远程任务入口", "evidence": ["OFF-WB-006"]},
+        "qwen": {"state": "yes", "note": "钉钉和 IM 频道", "evidence": ["OFF-QW-007"]}
+      }
+    },
+    {
+      "category": "协同与团队",
+      "name": "多 Agent 协作",
+      "icon": "users-three",
+      "products": {
+        "doubao": {"state": "yes", "note": "工作伙伴小队", "evidence": ["OFF-DB-001", "SOC-DB-001"]},
+        "workbuddy": {"state": "yes", "note": "项目空间支持多 Agent", "evidence": ["OFF-WB-001"]},
+        "qwen": {"state": "no", "note": "当前公开资料未形成明确证据", "evidence": ["OFF-QW-007", "OFF-QW-008"]}
+      }
+    }
+  ],
   "controlConcepts": [
     {
       "id": "browser",

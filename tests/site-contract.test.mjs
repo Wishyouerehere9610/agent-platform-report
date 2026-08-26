@@ -6,7 +6,7 @@ const read = (name) => fs.readFileSync(new URL(`../${name}`, import.meta.url), "
 
 test("public page contains the required business-facing sections", () => {
   const html = read("index.html");
-  for (const id of ["overview", "products", "capabilities", "benchmark", "control-surfaces", "industries", "trends", "opportunities", "sources"]) {
+  for (const id of ["overview", "commercial-coverage", "feature-matrix", "task-test", "computer-browser", "opportunities", "fde-thinking", "references"]) {
     assert.match(html, new RegExp(`id=["']${id}["']`), `missing section ${id}`);
   }
 });
@@ -14,15 +14,52 @@ test("public page contains the required business-facing sections", () => {
 test("desktop navigation lives in a left sidebar", () => {
   const html = read("index.html");
   assert.match(html, /<aside[^>]+class=["'][^"']*sidebar/);
-  assert.match(html, /class=["'][^"']*sidebar-nav/);
+  assert.match(html, /class=["'][^"']*side-nav/);
   assert.ok(html.indexOf("class=\"sidebar") < html.indexOf("<main"), "sidebar must precede the report content");
   assert.doesNotMatch(html, /class=["'][^"']*topbar/);
 });
 
-test("public page presents summaries instead of a feature checklist", () => {
+test("navigation follows the reference project shell", () => {
   const html = read("index.html");
-  assert.doesNotMatch(html, /feature-search|feature-category|feature-body|feature-table|evidence-dialog/);
-  assert.match(html, /capability-body/);
+  assert.match(html, /data-sidebar-toggle/);
+  assert.match(html, /data-sidebar-open/);
+  assert.match(html, /class=["'][^"']*mobile-header/);
+  assert.match(html, /class=["'][^"']*nav-group/);
+  assert.match(html, /class=["'][^"']*sub-nav/);
+  assert.doesNotMatch(html, /theme-button/);
+  assert.equal((html.match(/class=["']nav-group["']/g) || []).length, 6);
+});
+
+test("visual tokens match the reference project", () => {
+  const css = read("styles.css");
+  assert.match(css, /--canvas:\s*#f5f5f7/);
+  assert.match(css, /--surface:\s*#ffffff/);
+  assert.match(css, /--ink:\s*#1d1d1f/);
+  assert.match(css, /--blue:\s*#0066cc/);
+  assert.match(css, /--sidebar-width:\s*292px/);
+  assert.match(css, /--radius:\s*8px/);
+});
+
+test("hero uses a split verdict and a dark metric strip", () => {
+  const html = read("index.html");
+  assert.match(html, /class=["'][^"']*hero-verdict/);
+  assert.match(html, /class=["'][^"']*metric-strip/);
+});
+
+test("public page uses the focused feature matrix without old checklist controls", () => {
+  const html = read("index.html");
+  assert.doesNotMatch(html, /id=["']feature-(?:search|category|body)["']|class=["']feature-table["']|evidence-dialog/);
+  assert.match(html, /priority-feature-body/);
+  assert.match(read("app.js"), /✅/);
+  assert.match(read("app.js"), /❌/);
+});
+
+test("FDE thinking stays intentionally blank and references are graded", () => {
+  const html = read("index.html");
+  assert.match(html, /id=["']fde-thinking["'][\s\S]*thinking-placeholder/);
+  assert.match(html, /id=["']reference-a["']/);
+  assert.match(html, /id=["']reference-b["']/);
+  assert.match(html, /id=["']reference-c["']/);
 });
 
 test("public page avoids the agreed AI writing tells", () => {
@@ -36,7 +73,7 @@ test("design includes accessible motion, transparency and theme fallbacks", () =
   const css = read("styles.css");
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
   assert.match(css, /prefers-reduced-transparency:\s*reduce/);
-  assert.match(css, /prefers-color-scheme:\s*dark/);
+  assert.match(read("index.html"), /<meta\s+name=["']color-scheme["']\s+content=["']light["']/);
 });
 
 test("generated data is available to the browser", () => {

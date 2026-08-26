@@ -62,3 +62,19 @@ test("summary insights stay concise and evidence linked", () => {
     }
   }
 });
+
+test("priority feature matrix balances breadth with scanability", () => {
+  const insights = readJson("insights.json");
+  const evidence = readJson("evidence.json");
+  const evidenceIds = new Set(evidence.items.map((item) => item.id));
+
+  assert.ok(insights.priorityFeatures.length >= 14);
+  assert.ok(insights.priorityFeatures.length <= 20);
+  for (const feature of insights.priorityFeatures) {
+    assert.ok(feature.category && feature.name && feature.icon);
+    for (const product of ["doubao", "workbuddy", "qwen"]) {
+      assert.ok(["yes", "no"].includes(feature.products[product].state));
+      assert.ok(feature.products[product].evidence.every((id) => evidenceIds.has(id)));
+    }
+  }
+});

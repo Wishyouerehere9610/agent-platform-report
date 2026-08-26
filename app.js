@@ -74,19 +74,32 @@ function renderProducts() {
   }).join("");
 }
 
-function renderCapabilities() {
-  document.querySelector("#capability-body").innerHTML = insights.capabilityModules.map((module) => `
-    <tr>
-      <th scope="row">${escapeHtml(module.name)}</th>
-      <td class="question-cell">${escapeHtml(module.question)}</td>
-      ${productOrder.map((product) => renderCapabilityCell(module.products[product])).join("")}
-    </tr>
-  `).join("");
+function renderPriorityFeatures() {
+  const features = insights.priorityFeatures;
+  const categoryCounts = features.reduce((counts, feature) => {
+    counts[feature.category] = (counts[feature.category] || 0) + 1;
+    return counts;
+  }, {});
+  let previousCategory = "";
+  document.querySelector("#priority-feature-body").innerHTML = features.map((feature) => {
+    const categoryCell = feature.category !== previousCategory
+      ? `<th class="matrix-category" rowspan="${categoryCounts[feature.category]}" scope="rowgroup"><img src="assets/icons/${feature.icon}.svg" alt=""><span>${escapeHtml(feature.category)}</span></th>`
+      : "";
+    previousCategory = feature.category;
+    return `
+      <tr>
+        ${categoryCell}
+        <th class="matrix-feature" scope="row">${escapeHtml(feature.name)}</th>
+        ${productOrder.map((product) => renderPriorityFeatureCell(feature.products[product])).join("")}
+      </tr>
+    `;
+  }).join("");
 }
 
-function renderCapabilityCell(result) {
-  const tone = capabilityTone[result.label] || "no";
-  return `<td><strong class="state ${tone}">${escapeHtml(result.label)}</strong><span class="cell-note">${escapeHtml(result.note)}</span></td>`;
+function renderPriorityFeatureCell(result) {
+  const supported = result.state === "yes";
+  const warning = /本次|公开体验/.test(result.note);
+  return `<td><strong class="support ${supported ? "supported" : "unsupported"}">${supported ? "✅ 支持" : "❌ 未见"}</strong><span class="matrix-note${warning ? " warning" : ""}">${escapeHtml(result.note)}</span></td>`;
 }
 
 function renderBenchmark() {
@@ -213,53 +226,78 @@ function renderOpportunities() {
 }
 
 function renderSources() {
-  const selectedIds = [
-    "RUN-DB-001", "RUN-WB-001", "RUN-QW-001",
-    "OBS-DB-001", "OBS-WB-001", "OBS-QW-001",
-    "OFF-DB-005", "OFF-WB-002", "OFF-WB-005",
-    "OFF-QW-007", "OFF-QW-008", "OFF-FS-001"
-  ];
   const byId = new Map(evidence.items.map((item) => [item.id, item]));
-  document.querySelector("#source-list").innerHTML = selectedIds.map((id) => byId.get(id)).filter(Boolean).map((item) => {
+  const groups = {
+    "reference-a": ["RUN-DB-001", "RUN-WB-001", "RUN-QW-001", "OBS-DB-001", "OBS-WB-001", "OBS-QW-001", "OFF-DB-005", "OFF-WB-002", "OFF-WB-005", "OFF-WB-006", "OFF-QW-007", "OFF-QW-008", "OFF-QW-009", "OFF-FS-001"],
+    "reference-b": ["MED-CROSS-003", "MED-DB-001", "MED-DB-002", "CASE-WB-006", "MED-CROSS-002"],
+    "reference-c": ["SOC-DB-001", "SOC-WB-001", "SOC-QW-001", "SOC-001", "SOC-002"]
+  };
+  Object.entries(groups).forEach(([containerId, ids]) => {
+    document.querySelector(`#${containerId} .reference-list`).innerHTML = ids.map((id) => byId.get(id)).filter(Boolean).map((item) => renderReference(item)).join("");
+  });
+}
+
+function renderReference(item) {
     const title = item.url
       ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a>`
       : `<span>${escapeHtml(item.title)}</span>`;
-    return `<article class="source-row"><strong>${escapeHtml(evidenceTypes[item.type] || item.type)}</strong><div>${title}<small>${escapeHtml(item.observedAt)}</small></div></article>`;
-  }).join("");
-}
-
-function setupTheme() {
-  const root = document.documentElement;
-  const stored = localStorage.getItem("agent-report-theme");
-  if (stored === "light" || stored === "dark") root.dataset.theme = stored;
-  document.querySelector("#theme-button").addEventListener("click", () => {
-    const current = root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    const next = current === "dark" ? "light" : "dark";
-    root.dataset.theme = next;
-    localStorage.setItem("agent-report-theme", next);
-  });
+  return `<article class="reference-row"><strong>${escapeHtml(evidenceTypes[item.type] || item.type)}</strong><div>${title}<p>${escapeHtml(item.summary)}</p><small>${escapeHtml(item.observedAt)}</small></div></article>`;
 }
 
 function setupSidebar() {
-  const sidebar = document.querySelector("#sidebar");
-  const toggle = document.querySelector("#menu-toggle");
-  const scrim = document.querySelector("#sidebar-scrim");
-  const navLinks = [...document.querySelectorAll(".sidebar-nav a")];
+  const body = document.body;
+  const sidebar = document.querySelector("#project-sidebar");
+  const appMain = document.querySelector(".app-main");
+  const sidebarToggle = document.querySelector("[data-sidebar-toggle]");
+  const sidebarOpen = document.querySelector("[data-sidebar-open]");
+  const sidebarClose = document.querySelector("[data-sidebar-close]");
+  const mobileTitle = document.querySelector("#mobile-section-title");
+  const navLinks = [...document.querySelectorAll(".sub-nav a")];
+  const mobileQuery = matchMedia("(max-width: 800px)");
 
-  const closeSidebar = () => {
-    sidebar.classList.remove("is-open");
-    toggle.setAttribute("aria-expanded", "false");
-    scrim.hidden = true;
+  const setSidebarCollapsed = (collapsed) => {
+    body.classList.toggle("sidebar-collapsed", collapsed);
+    sidebarToggle.setAttribute("aria-expanded", String(!collapsed));
+    sidebarToggle.setAttribute("aria-label", collapsed ? "展开目录" : "收起目录");
+    sidebarToggle.title = collapsed ? "展开目录" : "收起目录";
+    sidebarToggle.querySelector("span").textContent = collapsed ? "›" : "‹";
+    localStorage.setItem("agent-report-sidebar-collapsed", String(collapsed));
   };
 
-  toggle.addEventListener("click", () => {
-    const open = !sidebar.classList.contains("is-open");
-    sidebar.classList.toggle("is-open", open);
-    toggle.setAttribute("aria-expanded", String(open));
-    scrim.hidden = !open;
+  const closeMobileSidebar = () => {
+    body.classList.remove("sidebar-open");
+    sidebarOpen.setAttribute("aria-expanded", "false");
+    if (mobileQuery.matches) {
+      sidebar.inert = true;
+      sidebar.setAttribute("aria-hidden", "true");
+    }
+  };
+
+  const openMobileSidebar = () => {
+    body.classList.add("sidebar-open");
+    sidebarOpen.setAttribute("aria-expanded", "true");
+    sidebar.inert = false;
+    sidebar.removeAttribute("aria-hidden");
+  };
+
+  setSidebarCollapsed(localStorage.getItem("agent-report-sidebar-collapsed") === "true");
+  sidebarToggle.addEventListener("click", () => setSidebarCollapsed(!body.classList.contains("sidebar-collapsed")));
+  sidebarOpen.addEventListener("click", openMobileSidebar);
+  sidebarClose.addEventListener("click", closeMobileSidebar);
+  navLinks.forEach((link) => link.addEventListener("click", closeMobileSidebar));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && body.classList.contains("sidebar-open")) closeMobileSidebar();
   });
-  scrim.addEventListener("click", closeSidebar);
-  navLinks.forEach((link) => link.addEventListener("click", closeSidebar));
+
+  const syncMobileSidebar = () => {
+    if (mobileQuery.matches && !body.classList.contains("sidebar-open")) closeMobileSidebar();
+    else {
+      sidebar.inert = false;
+      sidebar.removeAttribute("aria-hidden");
+    }
+  };
+  mobileQuery.addEventListener("change", syncMobileSidebar);
+  syncMobileSidebar();
 
   const sections = navLinks.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
   const observer = new IntersectionObserver((entries) => {
@@ -267,24 +305,29 @@ function setupSidebar() {
     if (!current) return;
     navLinks.forEach((link) => {
       const active = link.getAttribute("href") === `#${current.target.id}`;
-      if (active) link.setAttribute("aria-current", "location");
-      else link.removeAttribute("aria-current");
+      link.classList.toggle("active", active);
+      if (active) {
+        link.setAttribute("aria-current", "location");
+        const group = link.closest(".nav-group");
+        group.open = true;
+        document.querySelectorAll(".nav-group").forEach((item) => item.classList.toggle("active", item === group));
+        mobileTitle.textContent = `${group.querySelector("summary strong").textContent} / ${link.textContent}`;
+      } else link.removeAttribute("aria-current");
     });
-  }, { rootMargin: "-15% 0px -72% 0px", threshold: [0, 0.2, 0.6] });
+  }, { root: appMain, rootMargin: "-12% 0px -76% 0px", threshold: [0, 0.2, 0.6] });
   sections.forEach((section) => observer.observe(section));
 }
 
 function init() {
   renderHero();
   renderProducts();
-  renderCapabilities();
+  renderPriorityFeatures();
   renderBenchmark();
   renderControlConcepts();
   renderIndustries();
   renderTrends();
   renderOpportunities();
   renderSources();
-  setupTheme();
   setupSidebar();
 }
 
