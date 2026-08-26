@@ -2877,7 +2877,6 @@ window.REPORT_DATA = {
           "version": "客户端未记录；lark-cli 1.0.88",
           "mode": "Auto 高",
           "model": "未记录",
-          "reasoning": "未单独记录",
           "runtime": "隔离 sandbox；Python；general_search；飞书 lark-cli"
         },
         "environment": [
@@ -2947,7 +2946,6 @@ window.REPORT_DATA = {
           "version": "5.3.14",
           "mode": "Auto",
           "model": "未记录",
-          "reasoning": "未单独记录",
           "runtime": "本地文件系统；Python venv；WebSearch；飞书替代通道"
         },
         "environment": [
@@ -3017,7 +3015,6 @@ window.REPORT_DATA = {
           "version": "1.0.0.26082211",
           "mode": "基础模式；手动编排",
           "model": "未记录；会话标识 qwork-advanced",
-          "reasoning": "未单独记录",
           "runtime": "Windows；WeCom Python 3.10；WebSearch/WebFetch；钉钉 DWS"
         },
         "environment": [
@@ -4308,10 +4305,6 @@ window.REPORT_DATA = {
         {
           "title": "Computer Use 更适合通过项目交付进入企业",
           "body": "ERP、财务客户端和没有 API 的老系统需要现场适配焦点、权限、保存和失败恢复。短期产品形态更接近试点、实施和运行服务。"
-        },
-        {
-          "title": "生成文件不等于完成业务",
-          "body": "文件需要进入正确系统，数字需要一致，结果需要能够复核，失败后还要能够恢复。FDE 应对端到端结果负责。"
         },
         {
           "title": "稳定性本身可以成为产品",

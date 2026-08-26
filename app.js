@@ -111,7 +111,6 @@ function renderBenchmark() {
           ${renderEnvironmentFact("版本", environment.version)}
           ${renderEnvironmentFact("模式", environment.mode)}
           ${renderEnvironmentFact("模型", environment.model)}
-          ${renderEnvironmentFact("思考档位", environment.reasoning)}
           ${renderEnvironmentFact("运行环境", environment.runtime)}
         </dl>
         <div class="run-outcomes">

@@ -56,9 +56,10 @@ test("delivery brief separates business deliverables from trajectory evidence", 
 test("delivery assessment exposes resource, quality and stability metrics", () => {
   const data = readJson("runs.json");
   for (const run of data.runs) {
-    for (const key of ["version", "mode", "model", "reasoning", "runtime"]) {
+    for (const key of ["version", "mode", "model", "runtime"]) {
       assert.ok(run.testEnvironment?.[key], `${run.product}.testEnvironment.${key} is required`);
     }
+    assert.equal(run.testEnvironment?.reasoning, undefined, `${run.product}.testEnvironment.reasoning should not be shown without data`);
     assert.ok(run.assessment.resource.coreMinutes > 0);
     assert.ok(run.assessment.resource.totalMinutes > 0);
     assert.ok(run.assessment.resource.credits);
@@ -186,7 +187,8 @@ test("practice notes and FDE thinking are explicit reader-facing data", () => {
   const insights = readJson("insights.json");
   assert.equal(insights.practiceNotes.length, 4);
   assert.ok(insights.practiceNotes.every((item) => item.title && item.note));
-  assert.equal(insights.fdeThinking.principles.length, 6);
+  assert.equal(insights.fdeThinking.principles.length, 5);
+  assert.ok(!insights.fdeThinking.principles.some((item) => item.title === "生成文件不等于完成业务"));
   assert.equal(insights.fdeThinking.opportunities.length, 5);
   assert.ok(insights.fdeThinking.opportunities.every((item) => item.buyer && item.delivery && item.acceptance));
 });

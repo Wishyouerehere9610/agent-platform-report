@@ -48,7 +48,6 @@
         "version": "客户端未记录；lark-cli 1.0.88",
         "mode": "Auto 高",
         "model": "未记录",
-        "reasoning": "未单独记录",
         "runtime": "隔离 sandbox；Python；general_search；飞书 lark-cli"
       },
       "environment": ["豆包工作 Auto 高模式", "隔离 sandbox", "general_search", "Python 生成 XLSX 与 PPTX", "飞书 lark-cli 完成个人空间动作"],
@@ -82,7 +81,6 @@
         "version": "5.3.14",
         "mode": "Auto",
         "model": "未记录",
-        "reasoning": "未单独记录",
         "runtime": "本地文件系统；Python venv；WebSearch；飞书替代通道"
       },
       "environment": ["WorkBuddy Auto 模式", "本地文件系统", "Python 虚拟环境", "WebSearch", "飞书 lark-cli 作为替代通信通道"],
@@ -116,7 +114,6 @@
         "version": "1.0.0.26082211",
         "mode": "基础模式；手动编排",
         "model": "未记录；会话标识 qwork-advanced",
-        "reasoning": "未单独记录",
         "runtime": "Windows；WeCom Python 3.10；WebSearch/WebFetch；钉钉 DWS"
       },
       "environment": ["千问办公基础模式", "手动编排", "WeCom 内嵌 Python 3.10 作为运行时", "WebSearch 与 WebFetch", "钉钉 DWS 连接器"],

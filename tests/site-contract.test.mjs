@@ -123,6 +123,7 @@ test("delivery test separates business outputs from trajectory observation", () 
   assert.match(html, /id=["']delivery-assessment["']/);
   assert.match(app, /renderBenchmarkBrief/);
   assert.match(app, /测试环境/);
+  assert.doesNotMatch(app, /思考档位/);
   assert.doesNotMatch(html, /三个文件，用于管理层决策|三份记录，用于分析执行过程/);
   assert.doesNotMatch(html, /id=["']benchmark-lead["']/);
 });
@@ -130,7 +131,7 @@ test("delivery test separates business outputs from trajectory observation", () 
 test("delivery setup stays in one compact desktop row", () => {
   const css = read("styles.css");
   assert.match(css, /\.benchmark-strip\s*\{[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/s);
-  assert.match(css, /\.run-environment\s*\{[^}]*grid-template-columns:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\)/s);
+  assert.match(css, /\.run-environment\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)/s);
 });
 
 test("control tab introduces each product once and keeps one comparison matrix", () => {
@@ -157,9 +158,13 @@ test("public page uses the focused feature matrix without old checklist controls
 
 test("FDE thinking and graded references are rendered", () => {
   const html = read("index.html");
+  const data = read("report-data.js");
   assert.match(html, /id=["']fde-principles["']/);
   assert.match(html, /id=["']fde-opportunities["']/);
   assert.doesNotMatch(html, /thinking-placeholder/);
+  assert.match(html, /五条判断/);
+  assert.doesNotMatch(html, /六条判断/);
+  assert.doesNotMatch(data, /生成文件不等于完成业务/);
   assert.match(html, /id=["']reference-a["']/);
   assert.match(html, /id=["']reference-b["']/);
   assert.match(html, /id=["']reference-c["']/);
@@ -186,6 +191,9 @@ test("design includes accessible motion, transparency and theme fallbacks", () =
 });
 
 test("generated data is available to the browser", () => {
+  const html = read("index.html");
   const data = read("report-data.js");
+  assert.match(html, /<script src=["']report-data\.js\?v=\d+["']><\/script>/);
+  assert.match(html, /<script src=["']app\.js\?v=\d+["'] defer><\/script>/);
   assert.match(data, /^window\.REPORT_DATA\s*=/);
 });
