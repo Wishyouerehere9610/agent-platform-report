@@ -133,24 +133,70 @@ test("WorkBuddy public capability includes computer use and scheduled tasks", ()
 
 test("control profiles separate public routes from current run results", () => {
   const insights = readJson("insights.json");
+  const sentence = /[。.!?]$/;
   assert.equal(insights.controlProfiles.length, 3);
   for (const profile of insights.controlProfiles) {
     assert.ok(profile.route);
-    assert.ok(profile.browser.summary);
-    assert.ok(profile.computer.summary);
-    assert.ok(profile.bestFor);
-    assert.ok(profile.limit);
-    assert.ok(profile.currentRun);
-    assert.ok(profile.implementation.browser);
-    assert.ok(profile.implementation.computer);
-    assert.ok(profile.implementation.environment);
+    for (const field of [
+      profile.browser.summary,
+      profile.computer.summary,
+      profile.bestFor,
+      profile.limit,
+      profile.currentRun,
+      profile.implementation.browser,
+      profile.implementation.computer,
+      profile.implementation.environment
+    ]) {
+      assert.match(field, sentence, `${profile.id} copy must read as a complete sentence`);
+    }
     assert.ok(profile.strengths.length >= 2);
     assert.ok(profile.limitations.length >= 2);
+    assert.ok(profile.strengths.every((item) => sentence.test(item)), `${profile.id} strengths must be complete sentences`);
+    assert.ok(profile.limitations.every((item) => sentence.test(item)), `${profile.id} limitations must be complete sentences`);
     assert.ok(profile.timeline.length >= 2);
     for (const key of ["apiBypass", "virtualDesktop", "legacySystems", "background", "trigger"]) {
       assert.ok(profile.comparison[key], `${profile.id}.${key} is required`);
     }
   }
+});
+
+test("control profiles preserve detailed product implementation from the local research HTML", () => {
+  const insights = readJson("insights.json");
+  const byId = Object.fromEntries(insights.controlProfiles.map((profile) => [profile.id, profile]));
+  const joined = (profile) => JSON.stringify(profile);
+
+  assert.match(joined(byId.qwen), /Night Plan/);
+  assert.match(joined(byId.qwen), /晚上 10 点到早上 8 点/);
+  assert.match(joined(byId.qwen), /淘宝/);
+  assert.match(joined(byId.qwen), /1688/);
+  assert.match(joined(byId.qwen), /闲鱼/);
+  assert.match(joined(byId.qwen), /小红书/);
+  assert.match(joined(byId.qwen), /Mac/);
+  assert.match(joined(byId.qwen), /Windows/);
+  assert.match(joined(byId.qwen), /鸿蒙/);
+  assert.match(joined(byId.qwen), /钉钉 25 项/);
+
+  assert.match(joined(byId.doubao), /飞书客户端的侧边栏/);
+  assert.match(joined(byId.doubao), /多维表格/);
+  assert.match(joined(byId.doubao), /不需要额外安装浏览器扩展/);
+  assert.match(joined(byId.doubao), /8 月 17 日/);
+  assert.match(joined(byId.doubao), /8 月 18 日/);
+  assert.match(joined(byId.doubao), /8 月 19 日/);
+  assert.match(joined(byId.doubao), /用户关机后/);
+  assert.match(joined(byId.doubao), /Seedream/);
+  assert.match(joined(byId.doubao), /额度/);
+
+  assert.match(joined(byId.workbuddy), /BrowserSkill/);
+  assert.match(joined(byId.workbuddy), /camofox-browser/);
+  assert.match(joined(byId.workbuddy), /Cookie/);
+  assert.match(joined(byId.workbuddy), /云端浏览器池/);
+  assert.match(joined(byId.workbuddy), /截图/);
+  assert.match(joined(byId.workbuddy), /键鼠/);
+  assert.match(joined(byId.workbuddy), /企业微信/);
+  assert.match(joined(byId.workbuddy), /金蝶/);
+  assert.match(joined(byId.workbuddy), /内网 ERP/);
+  assert.match(joined(byId.workbuddy), /13 个模型/);
+  assert.match(joined(byId.workbuddy), /微信一句话/);
 });
 
 test("unreproducible supplemental control scores are not published", () => {
