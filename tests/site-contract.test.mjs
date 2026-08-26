@@ -47,21 +47,30 @@ test("visual tokens match the reference project", () => {
 test("hero uses an editorial masthead with author, route rail and GitHub icon", () => {
   const html = read("index.html");
   assert.match(html, /class=["'][^"']*hero-meta/);
-  assert.match(html, /作者\s*董子铭/);
+  const credit = html.match(/<a class="hero-credit"[\s\S]*?<\/a>/)?.[0] || "";
+  assert.match(credit, /作者/);
+  assert.match(credit, /董子铭/);
+  assert.match(credit, /assets\/icons\/github\.svg/);
+  assert.match(credit, /aria-label="查看董子铭的 GitHub 项目"/);
   assert.match(html, /class=["'][^"']*hero-route-rail/);
   assert.equal((html.match(/class=["']hero-route theme-/g) || []).length, 3);
-  assert.match(html, /class=["'][^"']*github-icon-link/);
-  assert.match(html, /aria-label=["']在 GitHub 查看项目["']/);
-  assert.match(html, /assets\/icons\/github\.svg/);
+  assert.doesNotMatch(html, /class=["'][^"']*hero-footnote/);
+  assert.doesNotMatch(html, /首页快速导航/);
+  assert.doesNotMatch(html, /公开能力与本次实测分开记录/);
+  assert.doesNotMatch(html, /比较三组产品的行业证据/);
   assert.doesNotMatch(html, /class=["'][^"']*hero-verdict/);
   assert.doesNotMatch(html, /class=["'][^"']*metric-strip/);
   assert.doesNotMatch(read("app.js"), /renderHero/);
 });
 
 test("hero is compact and navigation typography stays readable", () => {
+  const html = read("index.html");
   const css = read("styles.css");
+  assert.match(html, /<h1 id="page-title">Agent Platform Research&amp;Evaluation Report<\/h1>/);
+  assert.doesNotMatch(html, /<h1[^>]*>[^<]*<br>/);
   assert.doesNotMatch(css, /\.hero\s*\{[^}]*min-height:\s*calc\(100svh - 120px\)/s);
-  assert.match(css, /\.hero h1\s*\{[^}]*font-size:\s*46px/s);
+  assert.match(css, /\.hero h1\s*\{[^}]*font-size:\s*42px/s);
+  assert.match(css, /\.hero h1\s*\{[^}]*white-space:\s*nowrap/s);
   assert.match(css, /\.nav-primary strong\s*\{[^}]*font-size:\s*15px/s);
   assert.match(css, /\.sub-nav a\s*\{[^}]*font-size:\s*14px/s);
 });

@@ -379,15 +379,16 @@ figure {
 
 .hero {
   display: grid;
-  gap: 32px;
-  padding: 40px clamp(28px, 4vw, 60px) 34px;
+  gap: 28px;
+  padding: 36px clamp(28px, 4vw, 60px) 32px;
   background: var(--surface);
 }
 
 .hero-meta,
-.hero-meta > div,
-.hero-footnote,
-.hero-footnote nav {
+.hero-index,
+.hero-credit,
+.hero-credit-copy,
+.hero-credit-icon {
   display: flex;
   align-items: center;
 }
@@ -397,49 +398,62 @@ figure {
   gap: 24px;
 }
 
-.hero-meta > div {
+.hero-index {
   flex-wrap: wrap;
-  gap: 8px 18px;
+  gap: 8px 16px;
   color: var(--muted);
   font-size: 12px;
 }
 
-.hero-meta strong {
+.hero-index strong {
   color: var(--ink);
   font-size: 12px;
   font-weight: 750;
 }
 
-.github-icon-link {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  flex: 0 0 38px;
-  place-items: center;
+.hero-credit {
+  gap: 10px;
+  color: var(--ink);
+  transition: color 140ms ease;
+}
+
+.hero-credit:hover {
+  color: var(--blue);
+}
+
+.hero-credit-copy {
+  align-items: flex-end;
+  gap: 7px;
+  line-height: 1;
+}
+
+.hero-credit-copy small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.hero-credit-copy strong {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.hero-credit-icon {
+  width: 34px;
+  height: 34px;
+  justify-content: center;
   border: 1px solid var(--line);
   border-radius: 50%;
-  color: var(--ink);
-  transition: background-color 140ms ease, transform 110ms ease;
 }
 
-.github-icon-link:hover {
-  background: #eeeef1;
-}
-
-.github-icon-link:active {
-  transform: scale(0.94);
-}
-
-.github-icon-link img {
+.hero-credit-icon img {
   width: 20px;
   height: 20px;
 }
 
 .hero-heading {
   display: grid;
-  grid-template-columns: minmax(420px, 1.18fr) minmax(300px, 0.82fr);
-  gap: 56px;
-  align-items: end;
+  grid-template-columns: 1fr;
+  gap: 18px;
 }
 
 .eyebrow {
@@ -452,37 +466,38 @@ figure {
 }
 
 .hero h1 {
-  max-width: 680px;
+  max-width: none;
   margin: 0;
-  font-size: 46px;
+  font-size: 42px;
   font-weight: 680;
-  line-height: 1.04;
+  line-height: 1.12;
   letter-spacing: 0;
+  white-space: nowrap;
 }
 
 .hero-summary {
-  padding-left: 28px;
-  border-left: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--soft-line);
 }
 
-.hero-summary p,
-.hero-summary strong {
+.hero-summary span {
   display: block;
   margin: 0;
-  color: var(--secondary);
-  font-size: 14px;
-  line-height: 1.55;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
 }
 
-.hero-summary strong {
-  margin-top: 16px;
-  color: var(--ink);
+.hero-summary h2 {
+  max-width: none;
+  margin: 0;
   font-size: 16px;
-  font-weight: 650;
-}
-
-.hero-summary .signal {
-  margin-right: 9px;
+  font-weight: 640;
+  line-height: 1.45;
 }
 
 .hero-route-rail {
@@ -495,7 +510,7 @@ figure {
 .hero-route {
   position: relative;
   min-width: 0;
-  padding: 20px 22px 19px;
+  padding: 18px 22px 17px;
 }
 
 .hero-route + .hero-route {
@@ -540,24 +555,6 @@ figure {
   margin: 0;
   color: var(--secondary);
   font-size: 12px;
-}
-
-.hero-footnote {
-  justify-content: space-between;
-  gap: 28px;
-}
-
-.hero-footnote > p {
-  max-width: 720px;
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.hero-footnote nav {
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 8px 20px;
 }
 
 .text-link {
@@ -1845,13 +1842,8 @@ body.sidebar-collapsed .sub-nav {
 }
 
 @media (max-width: 1120px) {
-  .hero-heading {
-    grid-template-columns: minmax(360px, 1fr) minmax(280px, 0.8fr);
-    gap: 36px;
-  }
-
   .hero h1 {
-    font-size: 42px;
+    font-size: 34px;
   }
 
   .product-row {
@@ -1982,28 +1974,11 @@ body.sidebar-collapsed .sub-nav {
   }
 
   .hero h1 {
-    font-size: 38px;
-  }
-
-  .hero-heading {
-    grid-template-columns: 1fr;
-    gap: 22px;
+    font-size: 25px;
   }
 
   .hero-summary {
-    padding: 20px 0 0;
-    border-top: 1px solid var(--soft-line);
-    border-left: 0;
-  }
-
-  .hero-footnote {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .hero-footnote nav {
-    justify-content: flex-start;
+    padding-top: 14px;
   }
 
   .container {
@@ -2082,10 +2057,14 @@ body.sidebar-collapsed .sub-nav {
   }
 
   .hero h1 {
-    font-size: 34px;
+    font-size: 17px;
   }
 
-  .hero-meta > div {
+  .hero-meta {
+    gap: 12px;
+  }
+
+  .hero-index {
     gap: 4px 12px;
   }
 
