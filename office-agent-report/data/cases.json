@@ -9,9 +9,9 @@
     {"name":"医疗健康","doubao":2,"workbuddy":2,"qwen":1,"notes":"飞书有医疗行业方案；WorkBuddy 含腾讯健康；受监管数据边界需单列。"},
     {"name":"企业软件与 SaaS","doubao":2,"workbuddy":2,"qwen":2,"notes":"三家均具备连接器/Skill/网页或代码交付，适合软件型企业内部生产力。"},
     {"name":"专业服务与法务","doubao":1,"workbuddy":2,"qwen":2,"notes":"WorkBuddy 官方专家覆盖法务、投研；千问开放 Skill 适合沉淀专业流程。"},
-    {"name":"教育","doubao":3,"workbuddy":2,"qwen":2,"notes":"豆包有教师、备课、出题批改等密集模板；WorkBuddy 有上海教软；千问官方列教育场景。"},
+    {"name":"教育","doubao":3,"workbuddy":3,"qwen":2,"notes":"豆包有教师、备课、出题批改等密集模板；WorkBuddy 有上海教软这一外部具名反馈；千问官方列教育场景。"},
     {"name":"营销与媒体","doubao":3,"workbuddy":3,"qwen":2,"notes":"豆包模板最密集；WorkBuddy 有麦芽传媒并支持设计创意；千问官方列营销与多媒体。"},
-    {"name":"游戏与互联网","doubao":2,"workbuddy":3,"qwen":1,"notes":"WorkBuddy 企业页列王者荣耀、和平精英、微信、QQ。"},
+    {"name":"游戏与互联网","doubao":2,"workbuddy":2,"qwen":1,"notes":"WorkBuddy 企业页列王者荣耀、和平精英、微信和 QQ，但这些属于腾讯内部品牌，按官方内部场景记录，不视为外部客户。"},
     {"name":"物流","doubao":1,"workbuddy":3,"qwen":1,"notes":"WorkBuddy 企业页列圆通、德邦。"},
     {"name":"政务与电信","doubao":2,"workbuddy":3,"qwen":1,"notes":"飞书有央国企与通信客户基础；WorkBuddy 有中国联通和深圳港案例；千问办公暂未见命名客户。"},
     {"name":"餐饮与酒店","doubao":2,"workbuddy":1,"qwen":1,"notes":"飞书客户页覆盖餐饮；当前不足以证明豆包工作已在这些客户中使用。"},
@@ -33,7 +33,9 @@
     {"product":"qwen","company":"官方资料未列出命名外部客户","industry":"多行业","caseType":"证据缺口","summary":"官方资料列出电商、教育、营销、金融等场景，但未见可核验的千问办公命名企业客户与量化效果。","evidence":["OFF-QW-001"],"strength":"明确证据缺口"},
     {"product":"workbuddy","company":"深圳港集团","industry":"物流与港口","caseType":"官方开发者社区案例","summary":"公开案例称报关单字段抓取与映射把单次处理时间从 30 分钟缩短到 5 分钟。","evidence":["CASE-WB-006"],"strength":"命名客户与量化场景，缺少独立复核"},
     {"product":"qwen","company":"千问办公内置专家套件","industry":"金融、法务、教育、电商与咨询","caseType":"官方场景目录","summary":"官方列出财富管理、投行、权益研究、合同管理、企业法务、教研、1688 买卖家和咨询交付等套件。","evidence":["OFF-QW-008"],"strength":"场景覆盖清楚，未见命名客户成效"},
-    {"product":"doubao","company":"量子位与差评编辑部实测","industry":"媒体与内容生产","caseType":"媒体实测","summary":"两篇 2026 年 8 月 25-26 日文章记录品牌素材生成、采购比选、群聊整理、周报和审批界面操作。","evidence":["MED-DB-001","MED-DB-002"],"strength":"任务细节充分，属于媒体单次体验"}
+    {"product":"doubao","company":"量子位与差评编辑部实测","industry":"媒体与内容生产","caseType":"媒体实测","summary":"两篇 2026 年 8 月 25-26 日文章记录品牌素材生成、采购比选、群聊整理、周报和审批界面操作。","evidence":["MED-DB-001","MED-DB-002"],"strength":"任务细节充分，属于媒体单次体验"},
+    {"product":"workbuddy","company":"匿名制造业 IT 负责人","industry":"制造与企业软件","caseType":"社区场景记录","summary":"社区文章记录供应商系统开发、多厂区库存数据合并和流程文档整理。","evidence":["SOC-WB-002"],"strength":"场景过程较具体，未披露可核验企业名称，不计入明确客户覆盖"},
+    {"product":"workbuddy","company":"匿名进出口供应链团队","industry":"物流与供应链","caseType":"社区场景记录","summary":"社区文章记录报关单检查、财务核对、业务报表和定时任务。","evidence":["SOC-WB-003"],"strength":"能够补充供应链场景，不计入具名客户或量化成效"}
   ],
   "enterpriseLandscape": {
     "summary": "WorkBuddy Enterprise 官网公开列出 25 个客户或业务品牌，覆盖 9 个行业组，其中包含腾讯内部产品品牌。飞书官网的行业客户很多，但不能直接视为豆包工作客户。千问办公公开的是专家套件与岗位场景，暂未见同等级的命名客户清单。",

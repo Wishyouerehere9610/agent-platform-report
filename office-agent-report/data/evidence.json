@@ -507,6 +507,61 @@
       "version": "用户提供的本地 HTML 调研稿",
       "summary": "补充调研按产品路线比较千问办公、豆包工作和 WorkBuddy 的浏览器、桌面、后台任务与适用场景。本报告采用其中的产品路线和能力判断，不采用缺少逐条出处的 DAU、绝对排名、成功率和市场规模数字。",
       "supports": ["browser-use", "computer-use", "scheduled-tasks", "product-route", "commercial-pattern"]
+    },
+    {
+      "id": "MED-DB-004",
+      "product": "doubao",
+      "type": "MED",
+      "title": "数字生命：豆包工作与飞书企业能力体验",
+      "url": "https://mp.weixin.qq.com/s/uyvvDhIwl17ESJN3Jre0iQ",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-25",
+      "summary": "文章记录飞书账号登录、企业权限与额度继承、本地和云电脑双模式、定时任务、Skill 共享、电脑操控和结果写回多维表格。",
+      "supports": ["feishu-login", "enterprise-context", "local-cloud-mode", "scheduled-tasks", "skill-sharing", "computer-use"]
+    },
+    {
+      "id": "MED-DB-005",
+      "product": "doubao",
+      "type": "MED",
+      "title": "APPSO：豆包工作与飞书实测",
+      "url": "https://mp.weixin.qq.com/s/dqvRKQoH45cXL2F8z0ZHYw",
+      "observedAt": "2026-08-26",
+      "version": "发布于 2026-08-25",
+      "summary": "文章记录飞书云文档协同、网页局部编辑、带数据库网页、多模态生成、手机遥控、权限继承、群聊与会议上下文和任务写回。",
+      "supports": ["cloud-docs", "local-editing", "web-app-database", "multimodal", "mobile-remote", "organization-context"]
+    },
+    {
+      "id": "SOC-WB-002",
+      "product": "workbuddy",
+      "type": "SOC",
+      "title": "制造业 IT 与流程管理使用记录",
+      "url": "https://developer.cloud.tencent.com/article/2679656",
+      "observedAt": "2026-08-26",
+      "version": "腾讯云开发者社区网页资料",
+      "summary": "匿名作者记录供应商系统开发、多厂区库存数据分析和流程文档处理。文章没有披露可核验企业名称，只作为制造场景补充。",
+      "supports": ["manufacturing", "inventory-analysis", "software-delivery", "source-limited"]
+    },
+    {
+      "id": "SOC-WB-003",
+      "product": "workbuddy",
+      "type": "SOC",
+      "title": "进出口供应链 AI 团队使用记录",
+      "url": "https://cloud.tencent.com/developer/article/2669314",
+      "observedAt": "2026-08-26",
+      "version": "腾讯云开发者社区网页资料",
+      "summary": "匿名作者记录报关单检查、财务核对、报表生成、自动化任务和多 Agent 分工，只作为供应链场景证据。",
+      "supports": ["supply-chain", "customs", "finance-check", "automation", "multi-agent", "source-limited"]
+    },
+    {
+      "id": "OBS-USER-002",
+      "product": "cross-product",
+      "type": "OBS",
+      "title": "三款办公 Agent 的本次个人使用记录",
+      "url": "",
+      "observedAt": "2026-08-26",
+      "version": "本机当前版本",
+      "summary": "本次记录包括豆包内置浏览器减少外部浏览器权限交接、WorkBuddy 功能面较完整、三款连接飞书较顺畅，以及 WorkBuddy 连接企业微信时报参数错误。",
+      "supports": ["in-app-browser", "product-completeness", "feishu-connectivity", "wecom-parameter-error", "single-run-boundary"]
     }
   ]
 }

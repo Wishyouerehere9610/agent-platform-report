@@ -108,32 +108,35 @@ function renderBenchmark() {
     <p>${escapeHtml(runs.summary.mainDifference)}</p>
   `;
 
-  document.querySelector("#benchmark-body").innerHTML = runs.runs.map((run) => {
+  document.querySelector("#delivery-assessment").innerHTML = runs.runs.map((run) => {
     const meta = productMeta[run.product];
-    const position = insights.productPositions.find((item) => item.id === run.product);
-    const communication = run.results.communication;
-    const ecosystem = communication.comparisonStatus === "ALIGNED"
-      ? `${communication.target} ${communication.successfulActions}/${communication.requiredActions}`
-      : communication.comparisonStatus === "PROTOCOL_DEVIATION"
-        ? `${communication.target} 未完成`
-        : `${communication.target} 授权阻塞`;
+    const assessment = run.assessment;
     return `
-      <tr>
-        <th scope="row"><span>${escapeHtml(meta.company)}</span>${escapeHtml(meta.name)}</th>
-        <td><strong>${run.results.coreCompletionMinutes} 分钟</strong></td>
-        <td><strong>${run.results.deliverables.completed}/${run.results.deliverables.required}</strong></td>
-        <td>${escapeHtml(position.artifactConclusion)}</td>
-        <td>${escapeHtml(ecosystem)}</td>
-      </tr>
+      <article class="delivery-row">
+        <header><span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3><p>${escapeHtml(assessment.trajectory)}</p></header>
+        ${renderDeliveryMetric("资源消耗", `${assessment.resource.coreMinutes} 分钟完成核心交付`, [`总耗时 ${assessment.resource.totalMinutes} 分钟`, `Credits：${assessment.resource.credits}`, assessment.resource.environment])}
+        ${renderDeliveryMetric("交付质量", assessment.quality.verdict, assessment.quality.details)}
+        ${renderDeliveryMetric("系统稳定性", assessment.stability.verdict, assessment.stability.details)}
+      </article>
     `;
   }).join("");
+}
+
+function renderDeliveryMetric(label, verdict, details) {
+  return `<section class="delivery-metric"><span>${escapeHtml(label)}</span><strong>${escapeHtml(verdict)}</strong><ul>${details.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>`;
 }
 
 function renderBenchmarkBrief() {
   const brief = runs.brief;
   document.querySelector("#benchmark-objective").textContent = brief.objective;
   document.querySelector("#benchmark-constraints").innerHTML = brief.constraints.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-  document.querySelector("#benchmark-deliverables").innerHTML = brief.deliverables.map((item) => `
+  document.querySelector("#business-deliverables").innerHTML = brief.businessDeliverables.map((item) => `
+    <article class="deliverable-item">
+      <img src="assets/icons/file-text.svg" alt="">
+      <div><strong>${escapeHtml(item.name)}</strong><span>${escapeHtml(item.file)}</span><p>${escapeHtml(item.purpose)}</p></div>
+    </article>
+  `).join("");
+  document.querySelector("#trajectory-artifacts").innerHTML = brief.observationArtifacts.map((item) => `
     <article class="deliverable-item">
       <img src="assets/icons/file-text.svg" alt="">
       <div><strong>${escapeHtml(item.name)}</strong><span>${escapeHtml(item.file)}</span><p>${escapeHtml(item.purpose)}</p></div>
@@ -172,6 +175,27 @@ function renderControlConcepts() {
       </article>
     `;
   }).join("");
+
+  document.querySelector("#control-deep-dives").innerHTML = insights.controlProfiles.map((profile) => {
+    const meta = productMeta[profile.id];
+    return `
+      <article class="control-deep-dive">
+        <header><div><span>${escapeHtml(meta.company)}</span><h3>${escapeHtml(meta.name)}</h3></div><strong>${escapeHtml(profile.route)}</strong></header>
+        <div class="implementation-grid">
+          <section><span>Browser Use 实现</span><p>${escapeHtml(profile.implementation.browser)}</p></section>
+          <section><span>Computer Use 实现</span><p>${escapeHtml(profile.implementation.computer)}</p></section>
+          <section><span>执行环境</span><p>${escapeHtml(profile.implementation.environment)}</p></section>
+        </div>
+        <div class="tradeoff-grid">
+          <section><span>优势</span><ul>${profile.strengths.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
+          <section><span>限制</span><ul>${profile.limitations.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
+        </div>
+        <ol class="product-timeline">${profile.timeline.map((item) => `<li><time>${escapeHtml(item.date)}</time><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></div></li>`).join("")}</ol>
+      </article>
+    `;
+  }).join("");
+
+  document.querySelector("#practice-notes").innerHTML = insights.practiceNotes.map((item) => `<article><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.note)}</p></article>`).join("");
 
   document.querySelector("#control-body").innerHTML = insights.controlProfiles.map((profile) => {
     const meta = productMeta[profile.id];
@@ -232,12 +256,21 @@ function renderOpportunities() {
   `).join("");
 }
 
+function renderFdeThinking() {
+  document.querySelector("#fde-principles").innerHTML = insights.fdeThinking.principles.map((item, index) => `
+    <article><span>${String(index + 1).padStart(2, "0")}</span><div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.body)}</p></div></article>
+  `).join("");
+  document.querySelector("#fde-opportunities").innerHTML = insights.fdeThinking.opportunities.map((item) => `
+    <tr><th scope="row">${escapeHtml(item.name)}</th><td>${escapeHtml(item.buyer)}</td><td>${escapeHtml(item.delivery)}</td><td>${escapeHtml(item.acceptance)}</td></tr>
+  `).join("");
+}
+
 function renderSources() {
   const byId = new Map(evidence.items.map((item) => [item.id, item]));
   const groups = {
-    "reference-a": ["RUN-DB-001", "RUN-WB-001", "RUN-QW-001", "OBS-DB-001", "OBS-WB-001", "OBS-QW-001", "OFF-DB-005", "OFF-DB-007", "OFF-WB-002", "OFF-WB-005", "OFF-WB-006", "OFF-WB-007", "OFF-QW-007", "OFF-QW-008", "OFF-QW-009", "OFF-FS-001"],
-    "reference-b": ["RES-CONTROL-001", "MED-CROSS-003", "MED-DB-001", "MED-DB-002", "MED-DB-003", "CASE-WB-006", "MED-CROSS-002"],
-    "reference-c": ["SOC-DB-001", "SOC-WB-001", "SOC-QW-001", "SOC-001", "SOC-002"]
+    "reference-a": ["RUN-DB-001", "RUN-WB-001", "RUN-QW-001", "OBS-DB-001", "OBS-WB-001", "OBS-QW-001", "OBS-USER-002", "OFF-DB-005", "OFF-DB-007", "OFF-WB-002", "OFF-WB-005", "OFF-WB-006", "OFF-WB-007", "OFF-QW-007", "OFF-QW-008", "OFF-QW-009", "OFF-FS-001"],
+    "reference-b": ["RES-CONTROL-001", "MED-CROSS-003", "MED-DB-001", "MED-DB-002", "MED-DB-003", "MED-DB-004", "MED-DB-005", "CASE-WB-006", "MED-CROSS-002"],
+    "reference-c": ["SOC-DB-001", "SOC-WB-001", "SOC-WB-002", "SOC-WB-003", "SOC-QW-001", "SOC-001", "SOC-002"]
   };
   Object.entries(groups).forEach(([containerId, ids]) => {
     document.querySelector(`#${containerId} .reference-list`).innerHTML = ids.map((id) => byId.get(id)).filter(Boolean).map((item) => renderReference(item)).join("");
@@ -349,6 +382,7 @@ function init() {
   renderIndustries();
   renderTrends();
   renderOpportunities();
+  renderFdeThinking();
   renderSources();
   setupSidebar();
   setupFeatureMatrixWheel();

@@ -88,12 +88,23 @@ test("commercial opportunity names both control surfaces and highlights legacy s
   assert.doesNotMatch(html, />操控能力的商业化机会</);
 });
 
-test("task test introduces the prompt and six expected deliverables", () => {
+test("delivery test separates business outputs from trajectory observation", () => {
   const html = read("index.html");
   const app = read("app.js");
+  assert.match(html, /任务交付测试/);
+  assert.doesNotMatch(html, /同题任务测试/);
   assert.match(html, /id=["']benchmark-brief["']/);
-  assert.match(html, /id=["']benchmark-deliverables["']/);
+  assert.match(html, /id=["']business-deliverables["']/);
+  assert.match(html, /id=["']trajectory-artifacts["']/);
+  assert.match(html, /id=["']delivery-assessment["']/);
   assert.match(app, /renderBenchmarkBrief/);
+});
+
+test("control tab includes product deep dives, timelines and practice notes without the test screenshot", () => {
+  const html = read("index.html");
+  assert.match(html, /id=["']control-deep-dives["']/);
+  assert.match(html, /id=["']practice-notes["']/);
+  assert.doesNotMatch(html, /evidence-figure|browser-evidence-workbuddy/);
 });
 
 test("public page uses the focused feature matrix without old checklist controls", () => {
@@ -104,12 +115,20 @@ test("public page uses the focused feature matrix without old checklist controls
   assert.match(read("app.js"), /❌/);
 });
 
-test("FDE thinking stays intentionally blank and references are graded", () => {
+test("FDE thinking and graded references are rendered", () => {
   const html = read("index.html");
-  assert.match(html, /id=["']fde-thinking["'][\s\S]*thinking-placeholder/);
+  assert.match(html, /id=["']fde-principles["']/);
+  assert.match(html, /id=["']fde-opportunities["']/);
+  assert.doesNotMatch(html, /thinking-placeholder/);
   assert.match(html, /id=["']reference-a["']/);
   assert.match(html, /id=["']reference-b["']/);
   assert.match(html, /id=["']reference-c["']/);
+});
+
+test("reference styling distinguishes links from plain titles", () => {
+  const css = read("styles.css");
+  assert.match(css, /\.reference-row a\s*\{[^}]*text-decoration:\s*underline/s);
+  assert.match(css, /\.reference-row div > span\s*\{[^}]*text-decoration:\s*none/s);
 });
 
 test("public page avoids the agreed AI writing tells", () => {

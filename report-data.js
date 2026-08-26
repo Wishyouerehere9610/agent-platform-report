@@ -2179,6 +2179,93 @@ window.REPORT_DATA = {
           "product-route",
           "commercial-pattern"
         ]
+      },
+      {
+        "id": "MED-DB-004",
+        "product": "doubao",
+        "type": "MED",
+        "title": "数字生命：豆包工作与飞书企业能力体验",
+        "url": "https://mp.weixin.qq.com/s/uyvvDhIwl17ESJN3Jre0iQ",
+        "observedAt": "2026-08-26",
+        "version": "发布于 2026-08-25",
+        "summary": "文章记录飞书账号登录、企业权限与额度继承、本地和云电脑双模式、定时任务、Skill 共享、电脑操控和结果写回多维表格。",
+        "supports": [
+          "feishu-login",
+          "enterprise-context",
+          "local-cloud-mode",
+          "scheduled-tasks",
+          "skill-sharing",
+          "computer-use"
+        ]
+      },
+      {
+        "id": "MED-DB-005",
+        "product": "doubao",
+        "type": "MED",
+        "title": "APPSO：豆包工作与飞书实测",
+        "url": "https://mp.weixin.qq.com/s/dqvRKQoH45cXL2F8z0ZHYw",
+        "observedAt": "2026-08-26",
+        "version": "发布于 2026-08-25",
+        "summary": "文章记录飞书云文档协同、网页局部编辑、带数据库网页、多模态生成、手机遥控、权限继承、群聊与会议上下文和任务写回。",
+        "supports": [
+          "cloud-docs",
+          "local-editing",
+          "web-app-database",
+          "multimodal",
+          "mobile-remote",
+          "organization-context"
+        ]
+      },
+      {
+        "id": "SOC-WB-002",
+        "product": "workbuddy",
+        "type": "SOC",
+        "title": "制造业 IT 与流程管理使用记录",
+        "url": "https://developer.cloud.tencent.com/article/2679656",
+        "observedAt": "2026-08-26",
+        "version": "腾讯云开发者社区网页资料",
+        "summary": "匿名作者记录供应商系统开发、多厂区库存数据分析和流程文档处理。文章没有披露可核验企业名称，只作为制造场景补充。",
+        "supports": [
+          "manufacturing",
+          "inventory-analysis",
+          "software-delivery",
+          "source-limited"
+        ]
+      },
+      {
+        "id": "SOC-WB-003",
+        "product": "workbuddy",
+        "type": "SOC",
+        "title": "进出口供应链 AI 团队使用记录",
+        "url": "https://cloud.tencent.com/developer/article/2669314",
+        "observedAt": "2026-08-26",
+        "version": "腾讯云开发者社区网页资料",
+        "summary": "匿名作者记录报关单检查、财务核对、报表生成、自动化任务和多 Agent 分工，只作为供应链场景证据。",
+        "supports": [
+          "supply-chain",
+          "customs",
+          "finance-check",
+          "automation",
+          "multi-agent",
+          "source-limited"
+        ]
+      },
+      {
+        "id": "OBS-USER-002",
+        "product": "cross-product",
+        "type": "OBS",
+        "title": "三款办公 Agent 的本次个人使用记录",
+        "url": "",
+        "observedAt": "2026-08-26",
+        "version": "本机当前版本",
+        "summary": "本次记录包括豆包内置浏览器减少外部浏览器权限交接、WorkBuddy 功能面较完整、三款连接飞书较顺畅，以及 WorkBuddy 连接企业微信时报参数错误。",
+        "supports": [
+          "in-app-browser",
+          "product-completeness",
+          "feishu-connectivity",
+          "wecom-parameter-error",
+          "single-run-boundary"
+        ]
       }
     ]
   },
@@ -2243,9 +2330,9 @@ window.REPORT_DATA = {
       {
         "name": "教育",
         "doubao": 3,
-        "workbuddy": 2,
+        "workbuddy": 3,
         "qwen": 2,
-        "notes": "豆包有教师、备课、出题批改等密集模板；WorkBuddy 有上海教软；千问官方列教育场景。"
+        "notes": "豆包有教师、备课、出题批改等密集模板；WorkBuddy 有上海教软这一外部具名反馈；千问官方列教育场景。"
       },
       {
         "name": "营销与媒体",
@@ -2257,9 +2344,9 @@ window.REPORT_DATA = {
       {
         "name": "游戏与互联网",
         "doubao": 2,
-        "workbuddy": 3,
+        "workbuddy": 2,
         "qwen": 1,
-        "notes": "WorkBuddy 企业页列王者荣耀、和平精英、微信、QQ。"
+        "notes": "WorkBuddy 企业页列王者荣耀、和平精英、微信和 QQ，但这些属于腾讯内部品牌，按官方内部场景记录，不视为外部客户。"
       },
       {
         "name": "物流",
@@ -2459,6 +2546,28 @@ window.REPORT_DATA = {
           "MED-DB-002"
         ],
         "strength": "任务细节充分，属于媒体单次体验"
+      },
+      {
+        "product": "workbuddy",
+        "company": "匿名制造业 IT 负责人",
+        "industry": "制造与企业软件",
+        "caseType": "社区场景记录",
+        "summary": "社区文章记录供应商系统开发、多厂区库存数据合并和流程文档整理。",
+        "evidence": [
+          "SOC-WB-002"
+        ],
+        "strength": "场景过程较具体，未披露可核验企业名称，不计入明确客户覆盖"
+      },
+      {
+        "product": "workbuddy",
+        "company": "匿名进出口供应链团队",
+        "industry": "物流与供应链",
+        "caseType": "社区场景记录",
+        "summary": "社区文章记录报关单检查、财务核对、业务报表和定时任务。",
+        "evidence": [
+          "SOC-WB-003"
+        ],
+        "strength": "能够补充供应链场景，不计入具名客户或量化成效"
       }
     ],
     "enterpriseLandscape": {
@@ -2682,12 +2791,7 @@ window.REPORT_DATA = {
         "协同动作只允许在本人可见范围执行，不联系真实同事、群聊、客户或外部联系人。",
         "权限、登录或工具阻塞必须如实记录，不能把失败动作写成已完成。"
       ],
-      "deliverables": [
-        {
-          "file": "00-run-log.md",
-          "name": "运行日志",
-          "purpose": "记录模式、时间、工具、错误、重试和人工接管"
-        },
+      "businessDeliverables": [
         {
           "file": "01-industry-prioritization.xlsx",
           "name": "行业优先级",
@@ -2702,6 +2806,13 @@ window.REPORT_DATA = {
           "file": "03-fde-commercialization-plan.pptx",
           "name": "管理层方案",
           "purpose": "8 至 12 页服务包、定价、GTM 和风险方案"
+        }
+      ],
+      "observationArtifacts": [
+        {
+          "file": "00-run-log.md",
+          "name": "运行轨迹",
+          "purpose": "记录模式、时间、工具、错误、重试和人工接管"
         },
         {
           "file": "04-source-log.md",
@@ -2717,9 +2828,9 @@ window.REPORT_DATA = {
     },
     "metrics": [
       {
-        "id": "delivery",
-        "name": "交付完整性",
-        "definition": "6 个要求文件是否齐全、可解析，页数和行数是否符合要求"
+        "id": "resource",
+        "name": "资源消耗",
+        "definition": "核心完成时间、总耗时、Credits 可见性和环境准备成本"
       },
       {
         "id": "firstResult",
@@ -2733,8 +2844,8 @@ window.REPORT_DATA = {
       },
       {
         "id": "quality",
-        "name": "业务可用性",
-        "definition": "结构、语言、视觉、数字一致性和是否需要明显返工"
+        "name": "交付质量",
+        "definition": "业务文件完整性、结构、语言、视觉、数字一致性和返工量"
       },
       {
         "id": "sources",
@@ -2743,8 +2854,8 @@ window.REPORT_DATA = {
       },
       {
         "id": "stability",
-        "name": "单次执行稳定性",
-        "definition": "错误、依赖安装、重试、恢复和人工确认，只描述本次运行"
+        "name": "系统稳定性",
+        "definition": "错误、依赖安装、重试、恢复、授权和人工确认，只描述本次运行"
       },
       {
         "id": "ecosystem",
@@ -2794,6 +2905,31 @@ window.REPORT_DATA = {
             "note": "第一轮子环境初始化失败，第二轮在主 Agent 环境通过 lark-cli 完成。"
           }
         },
+        "assessment": {
+          "resource": {
+            "coreMinutes": 7,
+            "totalMinutes": 49,
+            "credits": "不可观测",
+            "environment": "Auto 高模式；Python 生成文件；飞书 CLI 完成协同动作"
+          },
+          "quality": {
+            "verdict": "业务文件 3/3，仍需数字一致性复核",
+            "details": [
+              "12 个公开来源、10 家目标企业",
+              "PPT 与 XLSX 有两处行业评分不一致",
+              "工作簿为静态值，假设调整后不会自动联动"
+            ]
+          },
+          "stability": {
+            "verdict": "核心交付完成，电脑环境初始化失败",
+            "details": [
+              "出现命令语法、权限和工具参数错误",
+              "computer_env_init 重试后仍失败",
+              "核心交付无卡顿或超时，人工接管 0 次"
+            ]
+          },
+          "trajectory": "运行轨迹记录了工具切换、电脑环境失败、重试和主 Agent 恢复路径。"
+        },
         "conclusion": "核心交付快，飞书个人空间动作最终完成。本次浏览器和桌面最小测试受录制授权阻塞，不能据此判断长期可用性。"
       },
       {
@@ -2831,6 +2967,31 @@ window.REPORT_DATA = {
             "comparisonStatus": "PROTOCOL_DEVIATION",
             "note": "飞书 4/4 是替代通道结果。企业微信用户级消息、待办、日历和云盘没有完成，不能计入企业微信成绩。"
           }
+        },
+        "assessment": {
+          "resource": {
+            "coreMinutes": 6,
+            "totalMinutes": 50,
+            "credits": "不可观测",
+            "environment": "Auto 模式；本地文件系统；Python 虚拟环境；WebSearch"
+          },
+          "quality": {
+            "verdict": "业务文件 3/3，三家中 PPT 返工最少",
+            "details": [
+              "12 个公开来源、10 家目标企业",
+              "PPT 信息组织最清楚",
+              "工作簿评分和财务结果为静态值，经营预测仍需核实"
+            ]
+          },
+          "stability": {
+            "verdict": "核心交付稳定，生态连接与授权不稳定",
+            "details": [
+              "首次运行需要安装 openpyxl 和 python-pptx",
+              "飞书权限经过两轮授权后恢复",
+              "企业微信扫码进入 Bot 创建页并报参数不合法"
+            ]
+          },
+          "trajectory": "运行轨迹记录了依赖安装、飞书权限恢复、企业微信参数错误和替代通道结果。"
         },
         "conclusion": "核心交付最快，浏览器最小测试完成。企业微信动作未完成，飞书结果只保留为替代通道证据。"
       },
@@ -2870,12 +3031,37 @@ window.REPORT_DATA = {
             "note": "DWS 已安装但 OAuth 未完成，两轮授权窗口过期，4 个动作没有执行。"
           }
         },
+        "assessment": {
+          "resource": {
+            "coreMinutes": 25,
+            "totalMinutes": 54,
+            "credits": "不可观测",
+            "environment": "基础模式；手动编排；WeCom 内嵌 Python；WebSearch 与 DWS"
+          },
+          "quality": {
+            "verdict": "业务文件 3/3，工作簿可复算，PPT 返工最多",
+            "details": [
+              "10 个公开来源、10 家目标企业",
+              "工作簿含 44 个公式且无错误字符串",
+              "PPT 主体使用英文，第 6 页发生画布溢出"
+            ]
+          },
+          "stability": {
+            "verdict": "环境准备和授权成本最高",
+            "details": [
+              "环境准备约 17 分钟，pip 安装超时后重试",
+              "生成脚本语法错误修复后重新生成",
+              "钉钉 connect 两次超时，两次等待扫码，最终 0/4"
+            ]
+          },
+          "trajectory": "运行轨迹记录了环境安装、脚本修复、连接器状态、两轮授权和人工等待。"
+        },
         "conclusion": "交付物齐全且财务模型可复算，但环境准备最耗时，PPT 需要中文化和版面修正，钉钉动作受授权阻塞。"
       }
     ],
     "summary": {
-      "commonResult": "三家都生成了 6 个要求文件，结构校验均可解析。",
-      "mainDifference": "差异主要来自核心完成时间、产物返工量、授权恢复和指定生态动作是否完成。",
+      "commonResult": "三家都生成了 3 个业务交付物，工作簿、清单和演示文件均可解析。",
+      "mainDifference": "差异主要来自资源消耗、产物返工量、环境准备、错误恢复和生态授权。",
       "boundary": "每个产品只运行一次。本页不把单次结果换算为长期成功率，也不合成一个总分。"
     }
   },
@@ -3098,15 +3284,16 @@ window.REPORT_DATA = {
           "OFF-WB-002",
           "OFF-WB-007"
         ],
-        "conclusion": "制造与硬件、金融、零售电商、物流、电信和游戏的公开行业证据最完整。",
-        "reason": "16 个行业中有 8 个达到明确覆盖，公开资料包含银行、制造、零售、物流和电信客户；深圳港案例还披露了报关字段处理结果。",
+        "conclusion": "制造与硬件、金融、零售电商、物流、电信、教育软件和营销媒体的公开证据较完整。",
+        "reason": "16 个行业中有 8 个达到明确覆盖。外部客户证据集中在银行、制造、零售、物流、电信、教育软件和营销媒体；游戏主要是腾讯内部品牌。",
         "industries": [
           "制造与硬件",
           "金融",
           "零售与电商",
           "物流",
           "政务与电信",
-          "游戏与互联网"
+          "教育软件",
+          "营销与媒体"
         ],
         "artifactConclusion": "文件齐全；三家中 PPT 返工最少。",
         "controlConclusion": "适合网页与表单，桌面软件需要另一条执行路径。"
@@ -3889,6 +4076,44 @@ window.REPORT_DATA = {
             "RES-CONTROL-001"
           ]
         },
+        "implementation": {
+          "browser": "内置浏览器运行在产品和飞书工作区内，也可以拉起虚拟桌面浏览器；结果能够写回飞书文档和多维表格。",
+          "computer": "本地模式读取本机文件，云电脑模式通过截图和键鼠事件运行长任务、定时任务和批量任务。",
+          "environment": "独立 PC、豆包工作入口和飞书入口；本地电脑与云电脑可以按任务切换。"
+        },
+        "strengths": [
+          "In-app Browser Use 减少外部浏览器权限和登录交接",
+          "飞书身份、组织上下文和权限继承较完整",
+          "云电脑支持关机后继续执行",
+          "图片和视频生成能力较丰富"
+        ],
+        "limitations": [
+          "当前交互界面相对简单",
+          "复杂 GUI、多表公式和模板填写仍需复核",
+          "飞书之外的组织上下文优势会减弱"
+        ],
+        "timeline": [
+          {
+            "date": "2026-08-17",
+            "title": "手机远程控制电脑",
+            "detail": "补充移动端触发和远程取回文件路径。"
+          },
+          {
+            "date": "2026-08-18",
+            "title": "Windows 虚拟桌面",
+            "detail": "使用截图与键鼠事件执行，不依赖目标软件开放 API。"
+          },
+          {
+            "date": "2026-08-19",
+            "title": "本地与云电脑双模式",
+            "detail": "本地文件任务留在本机，后台长任务可以交给云电脑。"
+          },
+          {
+            "date": "2026-08-25",
+            "title": "豆包工作正式发布",
+            "detail": "独立客户端、豆包入口和飞书入口对外提供服务。"
+          }
+        ],
         "bestFor": "已使用飞书，需要后台长任务、跨设备接力，或要把生成结果写回飞书文档和多维表格的团队。",
         "limit": "复杂 GUI、多表公式和模板填写仍需人工复核。",
         "currentRun": "本次录制授权阻塞，没有进入浏览器或电脑操控测试。"
@@ -3909,6 +4134,44 @@ window.REPORT_DATA = {
             "RES-CONTROL-001"
           ]
         },
+        "implementation": {
+          "browser": "本地 Browser 复用用户现有 Chromium 登录态和 Cookie，云端 Browser 池处理批量采集和长任务。",
+          "computer": "OS 级视觉识别屏幕并发送键鼠事件，可以操作企业微信、ERP 和其他没有 API 的桌面软件。",
+          "environment": "本地文件与沙箱负责桌面任务，Managed Agents 提供云端托管、多 Agent 和持续运行环境。"
+        },
+        "strengths": [
+          "三款中当前功能面最完整",
+          "Computer Use 可以覆盖没有 API 的老软件",
+          "模型、Skill、连接器和多 Agent 选择较多",
+          "企业版提供 VPC、单租户和私有化"
+        ],
+        "limitations": [
+          "连接器登录态、文件路径和版本更新会影响任务",
+          "本次企业微信扫码进入 Bot 创建页并报参数错误",
+          "复杂任务积分消耗不容易预估"
+        ],
+        "timeline": [
+          {
+            "date": "2026-06-05",
+            "title": "WorkBuddy Enterprise 发布",
+            "detail": "增加专家数字员工、团队协作和企业管理能力。"
+          },
+          {
+            "date": "2026-07-09",
+            "title": "企业方案开放采购",
+            "detail": "提供 SaaS、专享 VPC 和私有化交付方式。"
+          },
+          {
+            "date": "2026-08-03",
+            "title": "企业产品文档更新",
+            "detail": "明确 WorkBuddy、CodeBuddy 和 Managed Agents 的产品分工。"
+          },
+          {
+            "date": "2026-08-26",
+            "title": "企业微信远程入口文档确认",
+            "detail": "企业微信负责下达任务，实际执行发生在安装 WorkBuddy 的电脑。"
+          }
+        ],
         "bestFor": "个人生产力、中小企业和需要接管桌面软件或内网系统的团队。",
         "limit": "连接器登录态、文件路径和版本更新会影响任务稳定性。",
         "currentRun": "浏览器表单完成；本次工具面没有暴露电脑操控入口。"
@@ -3931,11 +4194,121 @@ window.REPORT_DATA = {
             "RES-CONTROL-001"
           ]
         },
+        "implementation": {
+          "browser": "Browser Use 内置在云端 Agent 中，支持网页采集、点击、输入和定时批处理，主要数据优势来自阿里与钉钉生态。",
+          "computer": "桌面客户端通过屏幕感知、点击、拖拽和键入操作本机环境；当前没有独立虚拟桌面。",
+          "environment": "网页端、桌面客户端和钉钉入口并行，桌面端直接连接本地文件。"
+        },
+        "strengths": [
+          "金融、法务、电商和咨询专家套件较完整",
+          "钉钉身份和协同入口适合既有钉钉组织",
+          "网页、桌面与云端 Agent 形态完整"
+        ],
+        "limitations": [
+          "没有独立虚拟桌面",
+          "重 GUI 和后台长任务需要额外校验",
+          "当前公开资料缺少同等级的具名外部客户"
+        ],
+        "timeline": [
+          {
+            "date": "2026-08-03",
+            "title": "千问办公开放公测",
+            "detail": "网页端和桌面客户端开放，钉钉入口开始逐步接入。"
+          },
+          {
+            "date": "2026-08-25",
+            "title": "Computer Use 文档确认",
+            "detail": "公开屏幕感知、键鼠操作、后台执行、截图校验和确认策略。"
+          },
+          {
+            "date": "2026-08-26",
+            "title": "新版产品说明",
+            "detail": "明确桌面、网页、钉钉、定时任务、浏览器自动化和连接器能力。"
+          }
+        ],
         "bestFor": "钉钉深度用户、电商研究和需要桌面端处理本地文件的团队。",
         "limit": "重 GUI 任务需要人工校验，后台长任务能力相对较弱。",
         "currentRun": "浏览器表单完成；电脑完成输入，保存文件时失去焦点。"
       }
     ],
+    "practiceNotes": [
+      {
+        "title": "豆包的内置浏览器减少权限交接",
+        "note": "本次使用中，In-app Browser Use 不需要把任务交给外部浏览器，避免了额外的扩展、登录态和录制权限切换。"
+      },
+      {
+        "title": "WorkBuddy 当前功能面更完整",
+        "note": "豆包工作交互相对简单；WorkBuddy 在模型、Skill、连接器、本地文件、项目空间和企业部署上的控制项更多。"
+      },
+      {
+        "title": "三款 Agent 连接飞书都较顺畅",
+        "note": "本次配置中，豆包工作、WorkBuddy 和千问办公都能较快接入飞书，说明飞书的开放能力和通用连接方式较成熟。"
+      },
+      {
+        "title": "WorkBuddy 连接企业微信出现参数错误",
+        "note": "企业微信扫码进入 Bot 创建页面后持续提示参数不合法，原因没有完全确认；同一环境下改接飞书更快，也不需要再次扫码。"
+      }
+    ],
+    "fdeThinking": {
+      "principles": [
+        {
+          "title": "先选办公生态，再选 Agent",
+          "body": "飞书、企业微信和钉钉决定身份、权限、文档、审批和结果写回。模型能力接近以后，生态匹配会直接影响交付结果。"
+        },
+        {
+          "title": "Browser Use 会成为基础能力",
+          "body": "三款产品都能覆盖网页采集、填表和后台操作。后续差异主要来自登录态稳定性、独家数据、内网访问和结果写回位置。"
+        },
+        {
+          "title": "Computer Use 更适合通过项目交付进入企业",
+          "body": "ERP、财务客户端和没有 API 的老系统需要现场适配焦点、权限、保存和失败恢复。短期产品形态更接近试点、实施和运行服务。"
+        },
+        {
+          "title": "生成文件不等于完成业务",
+          "body": "文件需要进入正确系统，数字需要一致，结果需要能够复核，失败后还要能够恢复。FDE 应对端到端结果负责。"
+        },
+        {
+          "title": "稳定性本身可以成为产品",
+          "body": "企业会为审批、审计、运行记录、失败重试、人工接管和回滚付费。通用 Agent 提供执行能力，FDE 补齐生产控制。"
+        },
+        {
+          "title": "每个项目都要留下可复用资产",
+          "body": "项目至少要沉淀场景模板、评测集、连接器配置、权限清单、失败分类和验收标准。项目增加但交付周期没有下降，说明团队只是在增加人力。"
+        }
+      ],
+      "opportunities": [
+        {
+          "name": "浏览器流程包",
+          "buyer": "市场、销售、运营",
+          "delivery": "竞品监控、CRM 录入、后台批处理",
+          "acceptance": "完成率、异常率、周期、单次成本"
+        },
+        {
+          "name": "老系统自动化",
+          "buyer": "CIO、共享服务中心",
+          "delivery": "ERP、财务客户端、内网系统操作",
+          "acceptance": "人工接管率、恢复时间、结果准确性"
+        },
+        {
+          "name": "执行治理平台",
+          "buyer": "安全、内审、法务",
+          "delivery": "审批、审计、回放、回滚、权限控制",
+          "acceptance": "高风险动作覆盖率、证据完整性"
+        },
+        {
+          "name": "办公生态交付包",
+          "buyer": "飞书、企微、钉钉客户",
+          "delivery": "身份、权限、文档、消息和审批接入",
+          "acceptance": "上线周期、授权成功率、结果写回率"
+        },
+        {
+          "name": "行业 Skill 与评测包",
+          "buyer": "金融、制造、电商事业部",
+          "delivery": "行业规则、样本集、连接器和验收标准",
+          "acceptance": "新客户上线周期、资产复用率、坏例回归结果"
+        }
+      ]
+    },
     "controlConcepts": [
       {
         "id": "browser",

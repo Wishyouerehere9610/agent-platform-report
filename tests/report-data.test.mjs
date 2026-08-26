@@ -37,19 +37,34 @@ test("benchmark results describe the completed run and ecosystem deviation", () 
   assert.equal(workbuddy.results.communication.comparisonStatus, "PROTOCOL_DEVIATION");
 });
 
-test("benchmark brief states the assignment and six expected files", () => {
+test("delivery brief separates business deliverables from trajectory evidence", () => {
   const data = readJson("runs.json");
   assert.ok(data.brief.objective.includes("FieldPilot AI"));
   assert.ok(data.brief.objective.includes("六个候选行业"));
-  assert.equal(data.brief.deliverables.length, 6);
-  assert.deepEqual(data.brief.deliverables.map((item) => item.file), [
-    "00-run-log.md",
+  assert.deepEqual(data.brief.businessDeliverables.map((item) => item.file), [
     "01-industry-prioritization.xlsx",
     "02-target-accounts.csv",
-    "03-fde-commercialization-plan.pptx",
+    "03-fde-commercialization-plan.pptx"
+  ]);
+  assert.deepEqual(data.brief.observationArtifacts.map((item) => item.file), [
+    "00-run-log.md",
     "04-source-log.md",
     "05-communication-check.md"
   ]);
+});
+
+test("delivery assessment exposes resource, quality and stability metrics", () => {
+  const data = readJson("runs.json");
+  for (const run of data.runs) {
+    assert.ok(run.assessment.resource.coreMinutes > 0);
+    assert.ok(run.assessment.resource.totalMinutes > 0);
+    assert.ok(run.assessment.resource.credits);
+    assert.ok(run.assessment.quality.verdict);
+    assert.ok(run.assessment.quality.details.length >= 3);
+    assert.ok(run.assessment.stability.verdict);
+    assert.ok(run.assessment.stability.details.length >= 3);
+    assert.ok(run.assessment.trajectory);
+  }
 });
 
 test("control surface conclusions expose direct business language", () => {
@@ -114,6 +129,44 @@ test("control profiles separate public routes from current run results", () => {
     assert.ok(profile.bestFor);
     assert.ok(profile.limit);
     assert.ok(profile.currentRun);
+    assert.ok(profile.implementation.browser);
+    assert.ok(profile.implementation.computer);
+    assert.ok(profile.implementation.environment);
+    assert.ok(profile.strengths.length >= 2);
+    assert.ok(profile.limitations.length >= 2);
+    assert.ok(profile.timeline.length >= 2);
+  }
+});
+
+test("practice notes and FDE thinking are explicit reader-facing data", () => {
+  const insights = readJson("insights.json");
+  assert.equal(insights.practiceNotes.length, 4);
+  assert.ok(insights.practiceNotes.every((item) => item.title && item.note));
+  assert.equal(insights.fdeThinking.principles.length, 6);
+  assert.equal(insights.fdeThinking.opportunities.length, 5);
+  assert.ok(insights.fdeThinking.opportunities.every((item) => item.buyer && item.delivery && item.acceptance));
+});
+
+test("WorkBuddy industry evidence distinguishes external and internal coverage", () => {
+  const cases = readJson("cases.json");
+  const education = cases.industries.find((item) => item.name === "教育");
+  const gaming = cases.industries.find((item) => item.name === "游戏与互联网");
+  assert.equal(education.workbuddy, 3);
+  assert.equal(gaming.workbuddy, 2);
+  assert.match(gaming.notes, /内部/);
+  assert.ok(cases.cases.some((item) => item.product === "workbuddy" && item.caseType === "社区场景记录"));
+});
+
+test("new Doubao references are present once without duplicating existing links", () => {
+  const evidence = readJson("evidence.json");
+  const urls = evidence.items.map((item) => item.url).filter(Boolean);
+  for (const url of [
+    "https://mp.weixin.qq.com/s/uyvvDhIwl17ESJN3Jre0iQ",
+    "https://mp.weixin.qq.com/s/dqvRKQoH45cXL2F8z0ZHYw",
+    "https://mp.weixin.qq.com/s/nxoZu1Dz967sNpamgYI9QA",
+    "https://mp.weixin.qq.com/s/3nM0tcqmCLSYoAV0kIawSg"
+  ]) {
+    assert.equal(urls.filter((item) => item === url).length, 1, `${url} must appear exactly once`);
   }
 });
 
