@@ -2831,7 +2831,7 @@ window.REPORT_DATA = {
       {
         "id": "resource",
         "name": "资源消耗",
-        "definition": "核心完成时间、总耗时、Credits 可见性和环境准备成本"
+        "definition": "核心完成时间、总耗时和环境准备成本"
       },
       {
         "id": "firstResult",
@@ -2916,7 +2916,6 @@ window.REPORT_DATA = {
           "resource": {
             "coreMinutes": 7,
             "totalMinutes": 49,
-            "credits": "不可观测",
             "environment": "Auto 高模式；Python 生成文件；飞书 CLI 完成协同动作"
           },
           "quality": {
@@ -2985,7 +2984,6 @@ window.REPORT_DATA = {
           "resource": {
             "coreMinutes": 6,
             "totalMinutes": 50,
-            "credits": "不可观测",
             "environment": "Auto 模式；本地文件系统；Python 虚拟环境；WebSearch"
           },
           "quality": {
@@ -3054,7 +3052,6 @@ window.REPORT_DATA = {
           "resource": {
             "coreMinutes": 25,
             "totalMinutes": 54,
-            "credits": "不可观测",
             "environment": "基础模式；手动编排；WeCom 内嵌 Python；WebSearch 与 DWS"
           },
           "quality": {

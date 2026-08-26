@@ -114,7 +114,7 @@ function renderBenchmark() {
           ${renderEnvironmentFact("运行环境", environment.runtime)}
         </dl>
         <div class="run-outcomes">
-          ${renderRunOutcome("资源消耗", `核心 ${assessment.resource.coreMinutes} 分钟`, `总耗时 ${assessment.resource.totalMinutes} 分钟；Credits ${assessment.resource.credits}`)}
+          ${renderRunOutcome("资源消耗", `核心 ${assessment.resource.coreMinutes} 分钟`, `总耗时 ${assessment.resource.totalMinutes} 分钟；${assessment.resource.environment}`)}
           ${renderRunOutcome("交付质量", assessment.quality.verdict, assessment.quality.details[1] || assessment.quality.details[0])}
           ${renderRunOutcome("稳定性", assessment.stability.verdict, assessment.stability.details.at(-1))}
         </div>

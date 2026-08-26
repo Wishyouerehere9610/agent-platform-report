@@ -55,6 +55,8 @@ test("delivery brief separates business deliverables from trajectory evidence", 
 
 test("delivery assessment exposes resource, quality and stability metrics", () => {
   const data = readJson("runs.json");
+  const resourceMetric = data.metrics.find((metric) => metric.id === "resource");
+  assert.doesNotMatch(resourceMetric.definition, /Credits|积分/);
   for (const run of data.runs) {
     for (const key of ["version", "mode", "model", "runtime"]) {
       assert.ok(run.testEnvironment?.[key], `${run.product}.testEnvironment.${key} is required`);
@@ -62,7 +64,7 @@ test("delivery assessment exposes resource, quality and stability metrics", () =
     assert.equal(run.testEnvironment?.reasoning, undefined, `${run.product}.testEnvironment.reasoning should not be shown without data`);
     assert.ok(run.assessment.resource.coreMinutes > 0);
     assert.ok(run.assessment.resource.totalMinutes > 0);
-    assert.ok(run.assessment.resource.credits);
+    assert.equal(run.assessment.resource.credits, undefined, `${run.product}.assessment.resource.credits should not be shown when unavailable for all products`);
     assert.ok(run.assessment.quality.verdict);
     assert.ok(run.assessment.quality.details.length >= 3);
     assert.ok(run.assessment.stability.verdict);

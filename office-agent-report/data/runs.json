@@ -31,7 +31,7 @@
     ]
   },
   "metrics": [
-    {"id":"resource","name":"资源消耗","definition":"核心完成时间、总耗时、Credits 可见性和环境准备成本"},
+    {"id":"resource","name":"资源消耗","definition":"核心完成时间、总耗时和环境准备成本"},
     {"id":"firstResult","name":"首个结果时间","definition":"从任务开始到第一个可见文件的分钟数"},
     {"id":"coreTime","name":"核心任务耗时","definition":"从任务开始到 4 个核心交付物完成的分钟数"},
     {"id":"quality","name":"交付质量","definition":"业务文件完整性、结构、语言、视觉、数字一致性和返工量"},
@@ -67,7 +67,7 @@
         "communication": {"target":"飞书","actual":"飞书","successfulActions":4,"requiredActions":4,"comparisonStatus":"ALIGNED","note":"第一轮子环境初始化失败，第二轮在主 Agent 环境通过 lark-cli 完成。"}
       },
       "assessment": {
-        "resource": {"coreMinutes": 7, "totalMinutes": 49, "credits": "不可观测", "environment": "Auto 高模式；Python 生成文件；飞书 CLI 完成协同动作"},
+        "resource": {"coreMinutes": 7, "totalMinutes": 49, "environment": "Auto 高模式；Python 生成文件；飞书 CLI 完成协同动作"},
         "quality": {"verdict": "业务文件 3/3，仍需数字一致性复核", "details": ["12 个公开来源、10 家目标企业", "PPT 与 XLSX 有两处行业评分不一致", "工作簿为静态值，假设调整后不会自动联动"]},
         "stability": {"verdict": "核心交付完成，电脑环境初始化失败", "details": ["出现命令语法、权限和工具参数错误", "computer_env_init 重试后仍失败", "核心交付无卡顿或超时，人工接管 0 次"]},
         "trajectory": "运行轨迹记录了工具切换、电脑环境失败、重试和主 Agent 恢复路径。"
@@ -100,7 +100,7 @@
         "communication": {"target":"企业微信","actual":"飞书","successfulActions":4,"requiredActions":4,"comparisonStatus":"PROTOCOL_DEVIATION","note":"飞书 4/4 是替代通道结果。企业微信用户级消息、待办、日历和云盘没有完成，不能计入企业微信成绩。"}
       },
       "assessment": {
-        "resource": {"coreMinutes": 6, "totalMinutes": 50, "credits": "不可观测", "environment": "Auto 模式；本地文件系统；Python 虚拟环境；WebSearch"},
+        "resource": {"coreMinutes": 6, "totalMinutes": 50, "environment": "Auto 模式；本地文件系统；Python 虚拟环境；WebSearch"},
         "quality": {"verdict": "业务文件 3/3，三家中 PPT 返工最少", "details": ["12 个公开来源、10 家目标企业", "PPT 信息组织最清楚", "工作簿评分和财务结果为静态值，经营预测仍需核实"]},
         "stability": {"verdict": "核心交付稳定，生态连接与授权不稳定", "details": ["首次运行需要安装 openpyxl 和 python-pptx", "飞书权限经过两轮授权后恢复", "企业微信扫码进入 Bot 创建页并报参数不合法"]},
         "trajectory": "运行轨迹记录了依赖安装、飞书权限恢复、企业微信参数错误和替代通道结果。"
@@ -133,7 +133,7 @@
         "communication": {"target":"钉钉","actual":"钉钉","successfulActions":0,"requiredActions":4,"comparisonStatus":"BLOCKED","note":"DWS 已安装但 OAuth 未完成，两轮授权窗口过期，4 个动作没有执行。"}
       },
       "assessment": {
-        "resource": {"coreMinutes": 25, "totalMinutes": 54, "credits": "不可观测", "environment": "基础模式；手动编排；WeCom 内嵌 Python；WebSearch 与 DWS"},
+        "resource": {"coreMinutes": 25, "totalMinutes": 54, "environment": "基础模式；手动编排；WeCom 内嵌 Python；WebSearch 与 DWS"},
         "quality": {"verdict": "业务文件 3/3，工作簿可复算，PPT 返工最多", "details": ["10 个公开来源、10 家目标企业", "工作簿含 44 个公式且无错误字符串", "PPT 主体使用英文，第 6 页发生画布溢出"]},
         "stability": {"verdict": "环境准备和授权成本最高", "details": ["环境准备约 17 分钟，pip 安装超时后重试", "生成脚本语法错误修复后重新生成", "钉钉 connect 两次超时，两次等待扫码，最终 0/4"]},
         "trajectory": "运行轨迹记录了环境安装、脚本修复、连接器状态、两轮授权和人工等待。"

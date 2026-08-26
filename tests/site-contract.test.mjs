@@ -124,6 +124,7 @@ test("delivery test separates business outputs from trajectory observation", () 
   assert.match(app, /renderBenchmarkBrief/);
   assert.match(app, /测试环境/);
   assert.doesNotMatch(app, /思考档位/);
+  assert.doesNotMatch(app, /Credits/);
   assert.doesNotMatch(html, /三个文件，用于管理层决策|三份记录，用于分析执行过程/);
   assert.doesNotMatch(html, /id=["']benchmark-lead["']/);
 });
