@@ -140,14 +140,14 @@ figure {
 
 .brand-copy strong {
   overflow: hidden;
-  font-size: 13px;
+  font-size: 14px;
   text-overflow: ellipsis;
 }
 
 .brand-copy small {
   margin-top: 3px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
 }
 
@@ -190,14 +190,14 @@ figure {
   align-items: center;
   gap: 7px;
   color: var(--blue-dark);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
 }
 
 .sidebar-summary p {
   margin: 7px 0 0;
   color: #45596f;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -228,7 +228,7 @@ figure {
 
 .nav-primary {
   display: grid;
-  min-height: 38px;
+  min-height: 42px;
   grid-template-columns: 30px minmax(0, 1fr);
   gap: 8px;
   align-items: center;
@@ -240,7 +240,7 @@ figure {
 
 .nav-group summary {
   display: grid;
-  min-height: 38px;
+  min-height: 42px;
   grid-template-columns: 30px minmax(0, 1fr) 18px;
   gap: 8px;
   align-items: center;
@@ -283,7 +283,7 @@ figure {
 .nav-group summary strong,
 .nav-primary strong {
   overflow: hidden;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 650;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -309,12 +309,12 @@ figure {
 .sub-nav a {
   position: relative;
   display: flex;
-  min-height: 30px;
+  min-height: 34px;
   align-items: center;
   padding: 5px 10px;
   border-radius: 7px;
   color: var(--secondary);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 560;
   transition: background-color 120ms ease, color 120ms ease, transform 100ms ease;
 }
@@ -379,11 +379,10 @@ figure {
 
 .hero {
   display: grid;
-  min-height: calc(100svh - 120px);
   grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.8fr);
   gap: 48px;
   align-items: center;
-  padding: 58px clamp(28px, 4vw, 60px);
+  padding: 72px clamp(28px, 4vw, 60px) 64px;
   background: var(--surface);
 }
 
@@ -403,7 +402,7 @@ figure {
 .hero h1 {
   max-width: 760px;
   margin: 0;
-  font-size: 56px;
+  font-size: 48px;
   font-weight: 680;
   line-height: 1.04;
   letter-spacing: 0;
@@ -413,7 +412,7 @@ figure {
   max-width: 680px;
   margin: 24px 0 30px;
   color: var(--secondary);
-  font-size: 19px;
+  font-size: 17px;
   line-height: 1.55;
 }
 
@@ -477,7 +476,7 @@ figure {
 
 .hero-verdict h2 {
   margin: 0;
-  font-size: 27px;
+  font-size: 23px;
   font-weight: 680;
   line-height: 1.26;
 }
@@ -518,7 +517,7 @@ figure {
 .section-intro h2 {
   max-width: 720px;
   margin: 0;
-  font-size: 38px;
+  font-size: 34px;
   font-weight: 680;
   line-height: 1.14;
   letter-spacing: 0;
@@ -1003,45 +1002,6 @@ tbody tr:last-child td {
   font-size: 11px;
 }
 
-.coverage-summary {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  margin-bottom: 24px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--line);
-}
-
-.coverage-row {
-  min-height: 150px;
-  padding: 22px;
-  background: var(--surface);
-}
-
-.coverage-row h3 {
-  margin: 0 0 18px;
-  font-size: 16px;
-}
-
-.coverage-numbers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.coverage-numbers span {
-  color: var(--muted);
-  font-size: 10px;
-}
-
-.coverage-numbers strong {
-  display: block;
-  color: var(--ink);
-  font-size: 22px;
-}
-
 .industry-table {
   min-width: 760px;
 }
@@ -1365,7 +1325,7 @@ body.sidebar-collapsed .sub-nav {
   }
 
   .hero h1 {
-    font-size: 50px;
+    font-size: 44px;
   }
 
   .product-row {
@@ -1376,9 +1336,6 @@ body.sidebar-collapsed .sub-nav {
     grid-column: 2;
   }
 
-  .coverage-summary {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 800px) {
@@ -1500,7 +1457,7 @@ body.sidebar-collapsed .sub-nav {
   }
 
   .hero h1 {
-    font-size: 44px;
+    font-size: 38px;
   }
 
   .hero-verdict {
@@ -1516,7 +1473,7 @@ body.sidebar-collapsed .sub-nav {
   }
 
   .section-intro h2 {
-    font-size: 34px;
+    font-size: 30px;
   }
 
   .split-intro,
@@ -1564,11 +1521,11 @@ body.sidebar-collapsed .sub-nav {
   }
 
   .hero h1 {
-    font-size: 40px;
+    font-size: 36px;
   }
 
   .lede {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .band {
@@ -1580,7 +1537,7 @@ body.sidebar-collapsed .sub-nav {
   }
 
   .section-intro h2 {
-    font-size: 30px;
+    font-size: 28px;
   }
 
   .concept-pair,

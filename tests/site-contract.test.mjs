@@ -51,6 +51,19 @@ test("hero keeps the split verdict without duplicate metric blocks", () => {
   assert.doesNotMatch(read("app.js"), /renderHero/);
 });
 
+test("hero is compact and navigation typography stays readable", () => {
+  const css = read("styles.css");
+  assert.doesNotMatch(css, /\.hero\s*\{[^}]*min-height:\s*calc\(100svh - 120px\)/s);
+  assert.match(css, /\.hero h1\s*\{[^}]*font-size:\s*48px/s);
+  assert.match(css, /\.nav-primary strong\s*\{[^}]*font-size:\s*15px/s);
+  assert.match(css, /\.sub-nav a\s*\{[^}]*font-size:\s*14px/s);
+});
+
+test("commercial coverage omits the redundant product count summary", () => {
+  assert.doesNotMatch(read("index.html"), /coverage-summary/);
+  assert.doesNotMatch(read("app.js"), /coverage-summary|coverage-row/);
+});
+
 test("task test introduces the prompt and six expected deliverables", () => {
   const html = read("index.html");
   const app = read("app.js");

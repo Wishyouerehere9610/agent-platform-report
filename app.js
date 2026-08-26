@@ -181,25 +181,6 @@ function renderControlState(label, note) {
 }
 
 function renderIndustries() {
-  const counts = Object.fromEntries(productOrder.map((product) => [product, { 0: 0, 1: 0, 2: 0, 3: 0 }]));
-  for (const industry of cases.industries) {
-    for (const product of productOrder) counts[product][industry[product]] += 1;
-  }
-
-  document.querySelector("#coverage-summary").innerHTML = productOrder.map((product) => {
-    const count = counts[product];
-    return `
-      <article class="coverage-row">
-        <h3>${escapeHtml(productMeta[product].name)}</h3>
-        <div class="coverage-numbers">
-          <span><strong>${count[3]}</strong> 明确覆盖</span>
-          <span><strong>${count[2]}</strong> 官方场景</span>
-          <span><strong>${count[1]}</strong> 能力可用</span>
-        </div>
-      </article>
-    `;
-  }).join("");
-
   document.querySelector("#industry-body").innerHTML = cases.industries.map((industry) => `
     <tr>
       <th scope="row">${escapeHtml(industry.name)}</th>
