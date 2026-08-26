@@ -1763,7 +1763,7 @@ window.REPORT_DATA = {
         "product": "qwen",
         "type": "OFF",
         "title": "千问办公 Computer Use 文档",
-        "url": "https://help.aliyun.com/zh/qwenwork/computer-use",
+        "url": "https://help.aliyun.com/zh/qwenwork/qw-computer-use",
         "observedAt": "2026-08-25",
         "version": "网页资料",
         "summary": "官方描述屏幕感知、点击/拖拽/键入、后台执行、跨应用流程、前后截图校验、每次询问/自动执行/禁用三种策略，并披露验证码、速度和复杂界面精度限制。",
@@ -2719,7 +2719,7 @@ window.REPORT_DATA = {
       {
         "name": "Agent 可观测与评测平台",
         "value": "记录步骤、证据、重试、人工接管、时间、Credits 与交付质量。",
-        "whyNow": "产品普遍展示“做完”，企业真正缺少的是稳定性和可追责证据。",
+        "whyNow": "产品常展示最终结果，企业还需要稳定性数据和可追责证据。",
         "buyer": "AI CoE、内审、平台工程",
         "risk": "需适配多产品日志格式"
       },
@@ -3782,7 +3782,7 @@ window.REPORT_DATA = {
           },
           "qwen": {
             "state": "yes",
-            "note": "能输入，本次未保存文件",
+            "note": "官方支持后台执行；本次输入后未保存文件",
             "evidence": [
               "OFF-QW-004",
               "OBS-QW-001"
@@ -4162,7 +4162,7 @@ window.REPORT_DATA = {
           "environment": "本地文件与沙箱负责桌面任务，Managed Agents 提供云端托管、多 Agent 和持续运行环境。"
         },
         "strengths": [
-          "三款中当前功能面最完整",
+          "本次查看的功能控制项最多",
           "Computer Use 可以覆盖没有 API 的老软件",
           "模型、Skill、连接器和多 Agent 选择较多",
           "企业版提供 VPC、单租户和私有化"
@@ -4206,10 +4206,10 @@ window.REPORT_DATA = {
           "computer": 6.5
         },
         "comparison": {
-          "apiBypass": "部分",
-          "virtualDesktop": "无独立虚拟桌面",
-          "legacySystems": "部分",
-          "background": "云端定时；无独立桌面挂机",
+          "apiBypass": "可以，直接操作无 API 应用",
+          "virtualDesktop": "本地安全工作环境；未见云电脑形态",
+          "legacySystems": "可以（官方文档）",
+          "background": "Computer Use 后台执行 + 云端定时",
           "trigger": "钉钉 / Web / 桌面"
         },
         "browser": {
@@ -4221,7 +4221,7 @@ window.REPORT_DATA = {
           ]
         },
         "computer": {
-          "summary": "桌面端支持屏幕感知、点击、拖拽和键入，但没有独立虚拟桌面。",
+          "summary": "桌面端支持屏幕感知、完整键鼠操作、跨应用流程和后台执行。",
           "evidence": [
             "OFF-QW-004",
             "RES-CONTROL-001"
@@ -4229,17 +4229,17 @@ window.REPORT_DATA = {
         },
         "implementation": {
           "browser": "Browser Use 内置在云端 Agent 中，支持网页采集、点击、输入和定时批处理，主要数据优势来自阿里与钉钉生态。",
-          "computer": "桌面客户端通过屏幕感知、点击、拖拽和键入操作本机环境；当前没有独立虚拟桌面。",
-          "environment": "网页端、桌面客户端和钉钉入口并行，桌面端直接连接本地文件。"
+          "computer": "桌面客户端通过屏幕感知和完整键鼠操作本机应用，可在后台执行而不抢占前台焦点。",
+          "environment": "网页端、桌面客户端和钉钉入口并行；桌面端使用本地安全工作环境访问文件和应用。"
         },
         "strengths": [
           "金融、法务、电商和咨询专家套件较完整",
-          "钉钉身份和协同入口适合既有钉钉组织",
-          "网页、桌面与云端 Agent 形态完整"
+          "Computer Use 可后台执行并串联多个桌面应用",
+          "钉钉身份和协同入口适合既有钉钉组织"
         ],
         "limitations": [
-          "没有独立虚拟桌面",
-          "重 GUI 和后台长任务需要额外校验",
+          "未见独立云电脑或远程虚拟桌面产品形态",
+          "复杂界面、验证码和高风险动作需要人工复核",
           "当前公开资料缺少同等级的具名外部客户"
         ],
         "timeline": [
@@ -4260,7 +4260,7 @@ window.REPORT_DATA = {
           }
         ],
         "bestFor": "钉钉深度用户、电商研究和需要桌面端处理本地文件的团队。",
-        "limit": "重 GUI 任务需要人工校验，后台长任务能力相对较弱。",
+        "limit": "复杂界面、验证码和高风险动作需要人工复核；当前未见独立云电脑形态。",
         "currentRun": "浏览器表单完成；电脑完成输入，保存文件时失去焦点。"
       }
     ],
@@ -4270,8 +4270,8 @@ window.REPORT_DATA = {
         "note": "本次使用中，In-app Browser Use 不需要把任务交给外部浏览器，避免了额外的扩展、登录态和录制权限切换。"
       },
       {
-        "title": "WorkBuddy 当前功能面更完整",
-        "note": "豆包工作交互相对简单；WorkBuddy 在模型、Skill、连接器、本地文件、项目空间和企业部署上的控制项更多。"
+        "title": "WorkBuddy 提供的控制项更多",
+        "note": "豆包工作交互相对简单；WorkBuddy 可选模型、Skill、连接器、本地文件、项目空间和企业部署等设置。"
       },
       {
         "title": "三款 Agent 连接飞书都较顺畅",
@@ -4378,7 +4378,7 @@ window.REPORT_DATA = {
         "id": "computer-service",
         "title": "Computer Use 会先以交付服务进入企业",
         "reason": "本次没有一家完成目标文件落盘，问题集中在权限、工具入口和窗口焦点。",
-        "impact": "短期收入更可能来自试点、实施和托管运行，不是单纯卖一个软件席位。",
+        "impact": "短期收入更可能来自试点、实施和托管运行；软件席位只是其中一项。",
         "evidence": [
           "OBS-DB-001",
           "OBS-WB-001",
@@ -4400,7 +4400,7 @@ window.REPORT_DATA = {
         "id": "case-evidence",
         "title": "行业案例会比功能数量更重要",
         "reason": "WorkBuddy 的命名客户证据更广，豆包工作主要依靠飞书场景，千问办公主要依靠专家套件。",
-        "impact": "下一阶段竞争看真实任务、验收指标和可复制案例，不看功能列表长度。",
+        "impact": "下一阶段的采购判断会更看重真实任务、验收指标和可复制案例。",
         "evidence": [
           "OFF-WB-005",
           "OFF-FS-001",

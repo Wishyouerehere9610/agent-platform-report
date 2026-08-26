@@ -44,9 +44,16 @@ test("visual tokens match the reference project", () => {
   assert.match(css, /--radius:\s*8px/);
 });
 
-test("hero keeps the split verdict without duplicate metric blocks", () => {
+test("hero uses an editorial masthead with author, route rail and GitHub icon", () => {
   const html = read("index.html");
-  assert.match(html, /class=["'][^"']*hero-verdict/);
+  assert.match(html, /class=["'][^"']*hero-meta/);
+  assert.match(html, /作者\s*董子铭/);
+  assert.match(html, /class=["'][^"']*hero-route-rail/);
+  assert.equal((html.match(/class=["']hero-route theme-/g) || []).length, 3);
+  assert.match(html, /class=["'][^"']*github-icon-link/);
+  assert.match(html, /aria-label=["']在 GitHub 查看项目["']/);
+  assert.match(html, /assets\/icons\/github\.svg/);
+  assert.doesNotMatch(html, /class=["'][^"']*hero-verdict/);
   assert.doesNotMatch(html, /class=["'][^"']*metric-strip/);
   assert.doesNotMatch(read("app.js"), /renderHero/);
 });
@@ -54,7 +61,7 @@ test("hero keeps the split verdict without duplicate metric blocks", () => {
 test("hero is compact and navigation typography stays readable", () => {
   const css = read("styles.css");
   assert.doesNotMatch(css, /\.hero\s*\{[^}]*min-height:\s*calc\(100svh - 120px\)/s);
-  assert.match(css, /\.hero h1\s*\{[^}]*font-size:\s*48px/s);
+  assert.match(css, /\.hero h1\s*\{[^}]*font-size:\s*46px/s);
   assert.match(css, /\.nav-primary strong\s*\{[^}]*font-size:\s*15px/s);
   assert.match(css, /\.sub-nav a\s*\{[^}]*font-size:\s*14px/s);
 });

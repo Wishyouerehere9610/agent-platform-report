@@ -143,6 +143,30 @@ test("control profiles separate public routes from current run results", () => {
   }
 });
 
+test("Qwen Computer Use reflects the current official capability boundary", () => {
+  const insights = readJson("insights.json");
+  const evidence = readJson("evidence.json");
+  const qwen = insights.controlProfiles.find((profile) => profile.id === "qwen");
+  const source = evidence.items.find((item) => item.id === "OFF-QW-004");
+
+  assert.match(qwen.comparison.apiBypass, /无 API/);
+  assert.match(qwen.comparison.legacySystems, /可以/);
+  assert.match(qwen.comparison.background, /后台/);
+  assert.match(qwen.implementation.computer, /不抢占前台焦点|后台/);
+  assert.doesNotMatch(qwen.limit, /后台长任务能力相对较弱/);
+  assert.equal(source.url, "https://help.aliyun.com/zh/qwenwork/qw-computer-use");
+});
+
+test("WorkBuddy logs do not misclassify Feishu as Tencent's office ecosystem", () => {
+  const runLog = fs.readFileSync(new URL("../outputs/workbuddy/00-run-log.md", import.meta.url), "utf8");
+  const communicationLog = fs.readFileSync(new URL("../outputs/workbuddy/05-communication-check.md", import.meta.url), "utf8");
+  const logs = `${runLog}\n${communicationLog}`;
+
+  assert.doesNotMatch(logs, /飞书（(?:Feishu \/ )?Lark\s*\/\s*腾讯办公生态|飞书 Lark.*属腾讯办公生态|飞书.*腾讯自研企业协作平台/);
+  assert.doesNotMatch(logs, /企业微信.*结构性不可行|WeCom 结构性不可行/);
+  assert.match(logs, /飞书.*?替代通道/);
+});
+
 test("practice notes and FDE thinking are explicit reader-facing data", () => {
   const insights = readJson("insights.json");
   assert.equal(insights.practiceNotes.length, 4);
