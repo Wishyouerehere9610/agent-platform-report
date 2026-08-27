@@ -105,7 +105,7 @@ test("summary insights stay concise and evidence linked", () => {
 
   assert.equal(insights.capabilityModules.length, 8);
   assert.equal(insights.trends.length, 4);
-  assert.equal(insights.opportunities.length, 4);
+  assert.equal(insights.opportunities.length, 3);
 
   for (const module of insights.capabilityModules) {
     for (const product of ["doubao", "workbuddy", "qwen"]) {
@@ -294,10 +294,11 @@ test("commercial positions are based on industry coverage and release status", (
 test("legacy system opportunity explains the commercial wedge", () => {
   const insights = readJson("insights.json");
   const opportunity = insights.legacySystemOpportunity;
-  assert.match(opportunity.title, /老系统|无 API/);
+  assert.match(opportunity.title, /银行对账与无 API 老系统自动化/);
   assert.match(opportunity.summary, /内置浏览器/);
   assert.match(opportunity.summary, /Computer Use/);
   assert.equal(opportunity.points.length, 4);
+  assert.ok(insights.opportunities.every((item) => item.id !== "legacy-automation"));
 });
 
 test("Doubao deep dive keeps product history, integration and commercial judgment evidence linked", () => {
