@@ -4646,9 +4646,7 @@ window.REPORT_DATA = {
             "OFF-COZE-001",
             "OFF-VE-001"
           ]
-        }
-      ],
-      "winChances": [
+        },
         {
           "title": "飞书存量客户",
           "body": "豆包工作占优，原生身份、知识和协作入口减少了部署与培训成本。",

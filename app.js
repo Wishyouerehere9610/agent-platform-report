@@ -254,9 +254,6 @@ function renderDoubaoDeepDive() {
   document.querySelector("#doubao-commercial").innerHTML = deepDive.commercialOpportunities.map((item, index) => `
     <article><span>${String(index + 1).padStart(2, "0")}</span><div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.body)}</p></div></article>
   `).join("");
-  document.querySelector("#doubao-win-chances").innerHTML = deepDive.winChances.map((item) => `
-    <article><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.body)}</p></article>
-  `).join("");
 }
 
 function integrationStatusClass(status) {

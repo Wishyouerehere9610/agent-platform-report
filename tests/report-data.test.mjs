@@ -314,8 +314,8 @@ test("Doubao deep dive keeps product history, integration and commercial judgmen
   assert.ok(deepDive.convergingProducts.length >= 3);
   assert.ok(deepDive.strengths.length >= 3);
   assert.ok(deepDive.weaknesses.length >= 3);
-  assert.ok(deepDive.commercialOpportunities.length >= 3);
-  assert.equal(deepDive.winChances.length, 3);
+  assert.equal(deepDive.commercialOpportunities.length, 7);
+  assert.equal(deepDive.winChances, undefined);
 
   for (const item of [
     ...deepDive.timeline,
@@ -323,8 +323,7 @@ test("Doubao deep dive keeps product history, integration and commercial judgmen
     ...deepDive.convergingProducts,
     ...deepDive.strengths,
     ...deepDive.weaknesses,
-    ...deepDive.commercialOpportunities,
-    ...deepDive.winChances
+    ...deepDive.commercialOpportunities
   ]) {
     assert.ok(item.title);
     assert.match(item.detail || item.body, sentence);
@@ -342,6 +341,8 @@ test("Doubao deep dive keeps product history, integration and commercial judgmen
   assert.ok(deepDive.convergingProducts.some((item) => item.title === "TRAE Work" && item.status === "能力整合中"));
   assert.ok(deepDive.convergingProducts.some((item) => item.title === "扣子" && item.status === "能力整合中"));
   assert.ok(deepDive.convergingProducts.some((item) => item.title === "TRAE IDE/CLI" && item.status === "独立产品线"));
+  assert.ok(deepDive.commercialOpportunities.some((item) => item.title === "飞书存量客户"));
+  assert.ok(deepDive.commercialOpportunities.some((item) => item.title === "跨生态与生产交付"));
   assert.ok(!deepDive.convergingProducts.some((item) => item.status === "已进入产品"));
   assert.doesNotMatch(JSON.stringify(deepDive), /剪映.*已集成/);
 });

@@ -44,7 +44,9 @@ test("Doubao deep dive is a standalone main tab with one explanatory image", () 
   assert.match(html, /id=["']doubao-strengths["']/);
   assert.match(html, /id=["']doubao-weaknesses["']/);
   assert.match(html, /id=["']doubao-commercial["']/);
-  assert.match(html, /id=["']doubao-win-chances["']/);
+  assert.doesNotMatch(html, /<figcaption>/);
+  assert.doesNotMatch(html, /id=["']doubao-win-chances["']|class=["'][^"']*doubao-win-section/);
+  assert.doesNotMatch(html, />赢面</);
   assert.match(html, /assets\/doubao-work-integration-notion\.png/);
   assert.match(app, /renderDoubaoDeepDive/);
   assert.ok(fs.existsSync(new URL("../assets/doubao-work-integration-notion.png", import.meta.url)));
