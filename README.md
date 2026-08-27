@@ -29,16 +29,6 @@ Agent Platform Report 是一份面向业务同学、FDE 和办公 Agent 产品�
 | Browser / Computer Use | 公开能力路线与本机最小操控测试 | 表单、桌面保存、权限和工具入口记录 |
 | FDE 商业机会 | 标准流程、老系统自动化和执行治理 | 买方、交付内容、验收条件和证据边界 |
 
-## 真实证据
-
-下面是 WorkBuddy 完成本地浏览器表单测试后的证据截图。它只证明这一次测试中的输入、选择、勾选、点击和结果读取，不代表所有网页任务都能稳定完成。
-
-<p align="center">
-  <img src="./assets/browser-evidence-workbuddy.png" width="100%" alt="WorkBuddy 完成本地浏览器表单输入、选择、勾选、点击和结果读取">
-</p>
-
-更多原始记录见 [`outputs/control-surface-tests/`](./outputs/control-surface-tests/) 和 [`sessions/`](./sessions/README.md)。
-
 ## 统一测评怎么做
 
 <p align="center">
