@@ -205,16 +205,6 @@ function renderIndustryState(level) {
   return `<td><span class="coverage-mark level-${level}" aria-hidden="true"><i></i><i></i><i></i></span><strong>${escapeHtml(industryLabels[level])}</strong></td>`;
 }
 
-function renderTrends() {
-  document.querySelector("#trend-list").innerHTML = insights.trends.map((item) => `
-    <article class="trend-row">
-      <h3>${escapeHtml(item.title)}</h3>
-      <div><span>原因</span><p>${escapeHtml(item.reason)}</p></div>
-      <div><span>影响</span><p>${escapeHtml(item.impact)}</p></div>
-    </article>
-  `).join("");
-}
-
 function renderOpportunities() {
   const legacy = insights.legacySystemOpportunity;
   document.querySelector("#legacy-opportunity").innerHTML = `
@@ -391,7 +381,6 @@ function init() {
   renderBenchmark();
   renderControlConcepts();
   renderIndustries();
-  renderTrends();
   renderOpportunities();
   renderDoubaoDeepDive();
   renderFdeThinking();

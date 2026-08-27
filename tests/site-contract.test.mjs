@@ -9,6 +9,7 @@ test("public page contains the required business-facing sections", () => {
   for (const id of ["overview", "commercial-coverage", "feature-matrix", "task-test", "computer-browser", "opportunities", "doubao-deep-dive", "fde-thinking", "references"]) {
     assert.match(html, new RegExp(`id=["']${id}["']`), `missing section ${id}`);
   }
+  assert.doesNotMatch(html, /id=["']trend-list["']/);
 });
 
 test("desktop navigation lives in a left sidebar", () => {

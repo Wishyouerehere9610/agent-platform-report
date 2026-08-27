@@ -104,7 +104,6 @@ test("summary insights stay concise and evidence linked", () => {
   const allowed = new Set(["能", "部分能", "未完成", "未见入口", "有", "未见"]);
 
   assert.equal(insights.capabilityModules.length, 8);
-  assert.equal(insights.trends.length, 4);
   assert.equal(insights.opportunities.length, 3);
 
   for (const module of insights.capabilityModules) {
