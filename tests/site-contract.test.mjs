@@ -17,6 +17,7 @@ test("desktop navigation lives in a left sidebar", () => {
   assert.match(html, /class=["'][^"']*side-nav/);
   assert.ok(html.indexOf("class=\"sidebar") < html.indexOf("<main"), "sidebar must precede the report content");
   assert.doesNotMatch(html, /class=["'][^"']*topbar/);
+  assert.doesNotMatch(html, /<span class="brand-copy"><strong>Agent Platform Report<\/strong><small>三款办公 Agent<\/small><\/span>/);
 });
 
 test("navigation follows the reference project shell", () => {
@@ -32,7 +33,7 @@ test("navigation follows the reference project shell", () => {
   assert.equal((html.match(/class=["']sub-nav["'][\s\S]*?<\/div>/g) || []).length, 1);
   assert.equal((html.match(/class=["'][^"']*nav-child[^"']*["']/g) || []).length, 2);
   assert.doesNotMatch(html, />4\.1\s*商业化机会</);
-  assert.match(html, /<div class="sidebar-summary">[\s\S]*?<p>产品能力与商业化发展。<\/p>/);
+  assert.match(html, /<div class="sidebar-summary">[\s\S]*?<p>三款办公Agent产品能力与商业化发展。<\/p>/);
   assert.doesNotMatch(html, /公开能力、分级来源与两组实测结果/);
 });
 
