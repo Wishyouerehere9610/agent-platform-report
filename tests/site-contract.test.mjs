@@ -187,6 +187,7 @@ test("FDE thinking and graded references are rendered", () => {
   assert.match(html, /id=["']reference-a["']/);
   assert.match(html, /id=["']reference-b["']/);
   assert.match(html, /id=["']reference-c["']/);
+  assert.doesNotMatch(html, /查看完整结构化数据|office-agent-report\/data/);
 });
 
 test("reference styling distinguishes links from plain titles", () => {
