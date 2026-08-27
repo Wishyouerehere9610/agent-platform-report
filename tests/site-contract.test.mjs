@@ -32,6 +32,8 @@ test("navigation follows the reference project shell", () => {
   assert.equal((html.match(/class=["']sub-nav["'][\s\S]*?<\/div>/g) || []).length, 1);
   assert.equal((html.match(/class=["'][^"']*nav-child[^"']*["']/g) || []).length, 2);
   assert.doesNotMatch(html, />4\.1\s*商业化机会</);
+  assert.match(html, /<div class="sidebar-summary">[\s\S]*?<p>产品能力与商业化发展。<\/p>/);
+  assert.doesNotMatch(html, /公开能力、分级来源与两组实测结果/);
 });
 
 test("Doubao deep dive is a standalone main tab with one explanatory image", () => {
@@ -165,6 +167,8 @@ test("control tab introduces each product once and keeps one comparison matrix",
   assert.doesNotMatch(app, /scores\.|score-panel|score-row|补充调研判断值/);
   assert.doesNotMatch(app, /class="product-scores"/);
   assert.doesNotMatch(app, /Browser Use 综合|Computer Use 综合/);
+  assert.match(app, /profile\.timeline\.map/);
+  assert.doesNotMatch(app, /function renderControlTimeline/);
 });
 
 test("public page uses the focused feature matrix without old checklist controls", () => {

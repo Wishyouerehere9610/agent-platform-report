@@ -4614,16 +4614,17 @@ window.REPORT_DATA = {
       ],
       "commercialOpportunities": [
         {
-          "title": "飞书 AI 加购",
-          "body": "飞书存量客户可以直接增加豆包工作和 AI 额度，销售成本低于重新引入一套办公平台。",
+          "title": "飞书存量客户",
+          "body": "飞书客户可以直接加购豆包工作和 AI 额度，原生身份、知识和协作入口也减少部署与培训成本。",
           "evidence": [
             "OFF-DB-003",
+            "OFF-DB-007",
             "MED-DB-006"
           ]
         },
         {
           "title": "统一工作入口",
-          "body": "TRAE Work 的办公、开发与设计经验和扣子的编排能力可以减少多产品切换。",
+          "body": "TRAE Work 与扣子并入后，豆包覆盖办公、设计、开发和 Agent 编排，也减少多产品切换。",
           "evidence": [
             "MED-DB-007",
             "OFF-TRAE-001",
@@ -4640,38 +4641,13 @@ window.REPORT_DATA = {
         },
         {
           "title": "企业 Agent 交付",
-          "body": "扣子工作流、飞书权限和云端执行可以组合成部门流程，收入来自订阅、实施和运行服务。",
+          "body": "扣子工作流、飞书权限和云端执行可以组合成部门流程。跨生态扩展仍取决于无 API 系统成功率、成本和企业治理。",
           "evidence": [
             "MED-DB-007",
             "OFF-COZE-001",
-            "OFF-VE-001"
-          ]
-        },
-        {
-          "title": "飞书存量客户",
-          "body": "豆包工作占优，原生身份、知识和协作入口减少了部署与培训成本。",
-          "evidence": [
-            "OFF-DB-007",
-            "MED-DB-006"
-          ]
-        },
-        {
-          "title": "生产力全栈",
-          "body": "TRAE Work 与扣子并入后，豆包覆盖办公、设计、开发和 Agent 编排的能力供给更完整。",
-          "evidence": [
-            "MED-DB-007",
-            "OFF-TRAE-001",
-            "OFF-COZE-001",
-            "OFF-COZE-002"
-          ]
-        },
-        {
-          "title": "跨生态与生产交付",
-          "body": "长期胜负仍取决于无 API 系统成功率、单任务成本、企业治理和可复核客户案例。",
-          "evidence": [
+            "OFF-VE-001",
             "RUN-DB-001",
-            "RES-CONTROL-001",
-            "OFF-VE-001"
+            "RES-CONTROL-001"
           ]
         }
       ]
